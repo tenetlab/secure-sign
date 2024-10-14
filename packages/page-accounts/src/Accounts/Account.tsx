@@ -585,7 +585,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               onClose={toggleUndelegate}
             />
           )}
-          <div className='absolute'>
+          {/* <div className='absolute'>
             {meta.genesisHash
               ? <Badge color='transparent' />
               : isDevelopment
@@ -684,7 +684,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
                 onClick={toggleProxyOverview}
               />
             )}
-          </div>
+          </div> */}
         </td>
         <td className='actions button'>
           <Button.Group>
@@ -708,7 +708,10 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         </td>
         <Table.Column.Expand
           isExpanded={isExpanded}
-          toggle={toggleIsExpanded}
+          toggle={
+            // toggleIsExpanded
+            () => {}
+          }
         />
       </StyledTr>
       <StyledTr className={`${className} isExpanded ${isExpanded ? '' : 'isLast'} packedTop`}>

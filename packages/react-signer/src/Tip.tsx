@@ -27,7 +27,7 @@ function Tip ({ className, onChange }: Props): React.ReactElement<Props> | null 
   return (
     <Modal.Columns
       className={className}
-      hint={t('Adding an optional tip to the transaction could allow for higher priority, especially when the chain is busy.')}
+      // hint={t('Adding an optional tip to the transaction could allow for higher priority, especially when the chain is busy.')}
     >
       <Toggle
         className='tipToggle'

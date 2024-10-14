@@ -476,7 +476,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   </Modal.Columns>
                 )}
                 {isSubmit && innerHash && (
-                  <Modal.Columns hint={t('The call hash as calculated for this transaction')}>
+                  <Modal.Columns>
                     <Output
                       isDisabled
                       isTrimmed

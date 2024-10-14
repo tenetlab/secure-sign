@@ -262,7 +262,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
 
   return (
     <>
-      <Modal.Columns hint={t('The sending account that will be used to send this transaction. Any applicable fees will be paid by this account.')}>
+      <Modal.Columns >
         <InputAddress
           className='full'
           defaultValue={requestAddress}

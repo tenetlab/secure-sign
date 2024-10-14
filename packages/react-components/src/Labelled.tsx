@@ -75,7 +75,7 @@ const StyledDiv = styled.div`
     }
 
     &:not(.isSmall) {
-      padding-left: 2rem;
+      // padding-left: 2rem;
 
       &:not(.isOuter) {
         > label,
@@ -87,7 +87,7 @@ const StyledDiv = styled.div`
         }
 
         > label {
-          left: 3.55rem;
+          left: 1.5rem;
           right: 0;
           text-align: left;
         }
