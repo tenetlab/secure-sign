@@ -30,24 +30,47 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
   }
 
   return (
-    <StyledLi className={`${className} ${isActive ? 'isActive' : ''}`}>
-      <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
+    <>
+      {/* <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
         <span className='smallHide'>{name}</span>
         <Icon
           className='smallShow'
           icon={routes[0].icon}
         />
         <Icon icon='caret-down' />
-      </div>
-      <ul className='groupMenu'>
+      </div> */}
+      {/* <ul className='groupMenu'> */}
         {routes.map((route): React.ReactNode => (
           <Item
+        className={isActive ? 'isActive' : ''}
+        classNameText='smallHide'
+        isToplevel
+
             key={route.name}
             route={route}
           />
         ))}
-      </ul>
-    </StyledLi>
+      {/* </ul> */}
+    </>
+    // <StyledLi className={`${className} ${isActive ? 'isActive' : ''}`}>
+    //   <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
+    //     <span className='smallHide'>{name}</span>
+    //     <Icon
+    //       className='smallShow'
+    //       icon={routes[0].icon}
+    //     />
+    //     <Icon icon='caret-down' />
+    //   </div>
+    //   <ul className='groupMenu'>
+    //     {routes.map((route): React.ReactNode => (
+    //       <Item
+    //         key={route.name}
+    //         route={route}
+    //       />
+    //     ))}
+    //   </ul>
+    // </StyledLi>
+    
   );
 }
 
