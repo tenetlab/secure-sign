@@ -25,7 +25,7 @@ function getHighlight (uiHighlight: string | undefined): string {
 }
 
 function countBrightness (uiHighlight: string | undefined): number {
-  const hc = getHighlight(uiHighlight).replace('#', '').toLowerCase();
+  const hc = getHighlight(uiHighlight).replace('#', '')?.toLowerCase();
 
   return PARTS.reduce((b, p, index) => b + (parseInt(hc.substring(p, p + 2), 16) * FACTORS[index]), 0);
 }

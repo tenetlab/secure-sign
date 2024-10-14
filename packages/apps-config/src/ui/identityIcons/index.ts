@@ -11,7 +11,7 @@ export const identityNodes: Record<string, string> = [
   ['parity-polkadot', 'polkadot']
 ].reduce((icons, [node, icon]): Record<string, string> => ({
   ...icons,
-  [node.toLowerCase().replace(/-/g, ' ')]: icon
+  [node?.toLowerCase().replace(/-/g, ' ')]: icon
 }), {});
 
 export const identitySpec: Record<string, string> = [
@@ -22,5 +22,5 @@ export const identitySpec: Record<string, string> = [
   ['paseo', 'polkadot']
 ].reduce((icons, [spec, icon]): Record<string, string> => ({
   ...icons,
-  [spec.toLowerCase().replace(/-/g, ' ')]: icon
+  [spec?.toLowerCase().replace(/-/g, ' ')]: icon
 }), {});

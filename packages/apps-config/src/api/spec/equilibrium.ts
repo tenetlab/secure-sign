@@ -21,7 +21,7 @@ export interface SignedBalance extends Enum {
 }
 
 export const u64FromCurrency = (currency: string): bigint => {
-  const buf = Buffer.from(currency.toLowerCase());
+  const buf = Buffer.from(currency?.toLowerCase());
   const size = buf.length;
 
   return buf.reduce((val, digit, i) => {

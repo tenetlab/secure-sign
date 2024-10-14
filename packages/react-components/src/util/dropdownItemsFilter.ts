@@ -4,5 +4,5 @@
 import type { DropdownItemProps } from 'semantic-ui-react';
 
 export const filterDropdownItems = (items: DropdownItemProps[], query: string) => {
-  return items.filter((item) => item.value?.toString().toLowerCase().includes(query.toLowerCase()));
+  return items.filter((item) => item.value?.toString()?.toLowerCase().includes(query?.toLowerCase()));
 };
