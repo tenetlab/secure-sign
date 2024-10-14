@@ -3,7 +3,6 @@
 
 import { detect } from 'detect-browser';
 import React, { useRef } from 'react';
-import { Trans } from 'react-i18next';
 
 import useExtensionCounter from '@polkadot/app-settings/useCounter';
 import { availableExtensions } from '@polkadot/apps-config';
@@ -37,19 +36,6 @@ function BannerExtension (): React.ReactElement | null {
       if (!upgradableCount) {
         return null;
       }
-
-      return (
-        <Banner type='warning'>
-          <p>
-            {upgradableCount === 1
-              ? t('You have 1 extension that needs to be updated with the latest chain properties in order to display the correct information for the chain you are connected to and to use a Ledger device.')
-              : t('You have {{upgradableCount}} extensions that need to be updated with the latest chain properties in order to display the correct information for the chain you are connected to and to use a Ledger device.', { replace: { upgradableCount } })
-            }
-            {t(' This update includes chain metadata and chain properties.')}
-          </p>
-          <p><Trans key='extensionUpgrade'>Visit your <a href='#/settings/metadata'>settings page</a> to apply the updates to the injected extensions.</Trans></p>
-        </Banner>
-      );
     }
 
     return (
