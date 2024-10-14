@@ -359,11 +359,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
               />
             </>
           )}
-          <Button
-            icon='qrcode'
-            label={t('From Qr')}
-            onClick={toggleQr}
-          />
+          
           {isLedgerEnabled && (
             <Button
               icon='project-diagram'
@@ -378,13 +374,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
                   icon='plus'
                   label={t('Multisig')}
                   onClick={toggleMultisig}
-                />
-              )}
-              {hasPalletProxy && (
-                <Button
-                  icon='plus'
-                  label={t('Proxied')}
-                  onClick={toggleProxy}
                 />
               )}
             </>

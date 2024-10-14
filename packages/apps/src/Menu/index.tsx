@@ -18,7 +18,6 @@ import { useTranslation } from '../translate.js';
 import ChainInfo from './ChainInfo.js';
 import Grouping from './Grouping.js';
 import Item from './Item.js';
-import NodeInfo from './NodeInfo.js';
 
 interface Props {
   className?: string;
@@ -94,15 +93,12 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
   const sudoKey = useCall<AccountId>(apiProps.isApiReady && apiProps.api.query.sudo?.key);
   const location = useLocation();
 
-  const externalRef = useRef(createExternals(t));
   const routeRef = useRef(createRoutes(t));
 
   const groupRef = useRef({
     accounts: t('Accounts'),
     developer: t('Developer'),
     files: t('Files'),
-    governance: t('Governance'),
-    network: t('Network'),
     settings: t('Settings')
   });
 
@@ -139,19 +135,6 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
             ))}
           </ul>
         </div>
-        <div className='menuSection media--1200'>
-          <ul className='menuItems'>
-            {externalRef.current.map((route): React.ReactNode => (
-              <Item
-                isLink
-                isToplevel
-                key={route.name}
-                route={route}
-              />
-            ))}
-          </ul>
-        </div>
-        <NodeInfo className='media--1400' />
       </div>
     </StyledDiv>
   );
