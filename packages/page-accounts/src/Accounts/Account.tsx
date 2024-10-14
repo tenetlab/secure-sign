@@ -89,11 +89,11 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
     return true;
   }
 
-  const _filter = filter.toLowerCase();
+  const _filter = filter?.toLowerCase();
 
   return tags.reduce((result: boolean, tag: string): boolean => {
-    return result || tag.toLowerCase().includes(_filter);
-  }, name.toLowerCase().includes(_filter));
+    return result || tag?.toLowerCase().includes(_filter);
+  }, name?.toLowerCase().includes(_filter));
 }
 
 function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
