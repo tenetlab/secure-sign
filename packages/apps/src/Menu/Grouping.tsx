@@ -14,6 +14,9 @@ interface Props extends Group {
 }
 
 function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
+  console.log("---------------this is classname", className);
+  console.log("---------------this is name ", name);
+  
   if (routes.length === 1 && routes[0].group === 'settings') {
     return (
       <Item
