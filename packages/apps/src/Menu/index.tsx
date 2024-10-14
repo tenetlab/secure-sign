@@ -4,7 +4,7 @@
 import type { Route, Routes } from '@polkadot/apps-routing/types';
 import type { ApiProps } from '@polkadot/react-api/types';
 import type { AccountId } from '@polkadot/types/interfaces';
-import type { Group, Groups, ItemRoute } from './types.js';
+import type { Group, Groups } from './types.js';
 
 import React, { useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -17,28 +17,11 @@ import { findMissingApis } from '../endpoint.js';
 import { useTranslation } from '../translate.js';
 import ChainInfo from './ChainInfo.js';
 import Grouping from './Grouping.js';
-import Item from './Item.js';
 
 interface Props {
   className?: string;
 }
 
-function createExternals (t: (key: string, optionsOrText?: string | { replace: Record<string, unknown> }, options?: { ns: string }) => string): ItemRoute[] {
-  return [
-    {
-      href: 'https://github.com/polkadot-js/apps',
-      icon: 'code-branch',
-      name: 'github',
-      text: t('nav.github', 'GitHub', { ns: 'apps-routing' })
-    },
-    {
-      href: 'https://wiki.polkadot.network',
-      icon: 'book',
-      name: 'wiki',
-      text: t('nav.wiki', 'Wiki', { ns: 'apps-routing' })
-    }
-  ];
-}
 
 function checkVisible ({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
   if (isHidden) {
@@ -98,7 +81,6 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
   const groupRef = useRef({
     accounts: t('Accounts'),
     developer: t('Developer'),
-    files: t('Files'),
     settings: t('Settings')
   });
 
