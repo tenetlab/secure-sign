@@ -106,16 +106,13 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [balances, setBalances] = useState<Balances>({ accounts: {} });
-  const [filterOn, setFilter] = useState<string>('');
+  const [filterOn] = useState<string>('');
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
-  const [{ sortBy, sortFromMax }, setSortBy] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
+  const [{ sortBy, sortFromMax }] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
 
-  console.log("setFilter", setFilter);
-  console.log("setSortBy", setSortBy);
-  
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>
       setBalances(({ accounts }: Balances): Balances => {
