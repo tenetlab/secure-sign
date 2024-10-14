@@ -4,8 +4,8 @@
 import type { TFunction, TOptions } from '../types.js';
 import type { LinkOption } from './types.js';
 
-import { createCustom, createOwn } from './development.js';
-import { prodChains } from './production.js';
+import { createCustom, createDev, createOwn } from './development.js';
+import { prodChains, prodRelayPolkadot } from './production.js';
 import { testRelayWestend } from './testing.js';
 import { expandEndpoints } from './util.js';
 
@@ -24,7 +24,6 @@ function defaultT (keyOrText: string, text?: string | TOptions, options?: TOptio
 export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, withSort = true): LinkOption[] {
   return [
     ...createCustom(t),
-    
     {
       isDisabled: false,
       isHeader: true,
@@ -39,13 +38,24 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
+      text: t('rpc.header.polkadot.relay', 'Polkadot & parachains', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, [prodRelayPolkadot], firstOnly, withSort),
+    
+    {
+      isDisabled: false,
+      isHeader: true,
+      isSpaced: true,
       text: t('rpc.header.live', 'Live networks', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
       value: ''
     },
     ...expandEndpoints(t, prodChains, firstOnly, withSort),
-    // ...createDev(t),
+    ...createDev(t),
     ...createOwn(t)
   ].filter(({ isDisabled }) => !isDisabled);
 }

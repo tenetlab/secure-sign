@@ -316,7 +316,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerClaims />
       <Summary balance={balances.summary} />
       <SummaryBox className='header-box'>
-        
         <Button.Group>
           {canStoreAccounts && (
             <>
