@@ -277,7 +277,7 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
       className={className}
       offset={offset}
       onClose={onClose}
-      position='left'
+      position='right'
       sidebarRef={sidebarRef}
     >
       {groups.map((group, index): React.ReactNode => (
