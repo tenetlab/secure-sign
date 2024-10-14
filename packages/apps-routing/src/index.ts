@@ -20,13 +20,11 @@ import gilt from './gilt.js';
 import membership from './membership.js';
 import nfts from './nfts.js';
 import nis from './nis.js';
-import parachains from './parachains.js';
 import poll from './poll.js';
 import ranked from './ranked.js';
-import referenda from './referenda.js';
 // import settings from './settings.js';
 import society from './society.js';
-import staking from './staking.js';
+// import staking from './staking.js';
 import staking2 from './staking2.js';
 import stakingLegacy from './stakingLegacy.js';
 import sudo from './sudo.js';
@@ -34,7 +32,6 @@ import techcomm from './techcomm.js';
 import teleport from './teleport.js';
 import transfer from './transfer.js';
 import treasury from './treasury.js';
-import whitelist from './whitelist.js';
 
 export default function create (t: TFunction): Routes {
   return [
@@ -43,20 +40,18 @@ export default function create (t: TFunction): Routes {
     poll(t),
     transfer(t),
     teleport(t),
-    staking(t),
+    // staking(t),
     staking2(t),
     // Legacy staking Pre v14 pallet version.
     stakingLegacy(t),
     collator(t),
     broker(t),
     // governance v2
-    referenda(t),
     membership(t),
     alliance(t),
     ambassador(t),
     fellowship(t),
     ranked(t),
-    whitelist(t),
     // old v1 governance
     democracy(t),
     council(t),
@@ -65,7 +60,6 @@ export default function create (t: TFunction): Routes {
     treasury(t),
     bounties(t),
     // others
-    parachains(t),
     assets(t),
     nfts(t),
     society(t),
