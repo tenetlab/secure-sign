@@ -5,7 +5,6 @@ import type { Group } from './types.js';
 
 import React from 'react';
 
-import { Icon, styled } from '@polkadot/react-components';
 
 import Item from './Item.js';
 
@@ -13,9 +12,6 @@ interface Props extends Group {
   className?: string;
   isActive: boolean;
 }
-
-const SHA_COL = 'rgba(34, 36, 38, 0.12)';
-const SHA_OFF = '5px';
 
 function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
   if (routes.length === 1 && routes[0].group === 'settings') {
@@ -31,15 +27,6 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
 
   return (
     <>
-      {/* <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
-        <span className='smallHide'>{name}</span>
-        <Icon
-          className='smallShow'
-          icon={routes[0].icon}
-        />
-        <Icon icon='caret-down' />
-      </div> */}
-      {/* <ul className='groupMenu'> */}
         {routes.map((route): React.ReactNode => (
           <Item
         className={isActive ? 'isActive' : ''}
@@ -50,27 +37,7 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
             route={route}
           />
         ))}
-      {/* </ul> */}
     </>
-    // <StyledLi className={`${className} ${isActive ? 'isActive' : ''}`}>
-    //   <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
-    //     <span className='smallHide'>{name}</span>
-    //     <Icon
-    //       className='smallShow'
-    //       icon={routes[0].icon}
-    //     />
-    //     <Icon icon='caret-down' />
-    //   </div>
-    //   <ul className='groupMenu'>
-    //     {routes.map((route): React.ReactNode => (
-    //       <Item
-    //         key={route.name}
-    //         route={route}
-    //       />
-    //     ))}
-    //   </ul>
-    // </StyledLi>
-    
   );
 }
 
