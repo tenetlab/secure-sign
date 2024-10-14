@@ -29,7 +29,6 @@ import staking2 from './staking2.js';
 import stakingLegacy from './stakingLegacy.js';
 import sudo from './sudo.js';
 import techcomm from './techcomm.js';
-import teleport from './teleport.js';
 import transfer from './transfer.js';
 import treasury from './treasury.js';
 
@@ -39,7 +38,6 @@ export default function create (t: TFunction): Routes {
     claims(t),
     poll(t),
     transfer(t),
-    teleport(t),
     // staking(t),
     staking2(t),
     // Legacy staking Pre v14 pallet version.
