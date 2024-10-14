@@ -316,7 +316,29 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerClaims />
       <Summary balance={balances.summary} />
       <SummaryBox className='header-box'>
-        
+        {/* <section
+          className='dropdown-section media--1300'
+          data-testid='sort-by-section'
+        >
+          <SortDropdown
+            className='media--1500'
+            defaultValue={sortBy}
+            label={t('sort by')}
+            onChange={onSortChange}
+            onClick={onSortDirectionChange}
+            options={sortOptions.current}
+            sortDirection={
+              sortFromMax
+                ? 'ascending'
+                : 'descending'
+            }
+          />
+          <FilterInput
+            filterOn={filterOn}
+            label={t('filter by name or tags')}
+            setFilter={setFilter}
+          />
+        </section> */}
         <Button.Group>
           {canStoreAccounts && (
             <>
