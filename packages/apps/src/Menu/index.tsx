@@ -105,11 +105,11 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''} highlight--bg`}>
       <div className='menuContainer'>
         <div className='menuSection'>
-          
+          <ChainInfo />
           <ul className='menuItems'>
             {visibleGroups.map(({ name, routes }): React.ReactNode => (
               <Grouping
-                isActive={!!activeRoute && activeRoute.group === name?.toLowerCase()}
+                isActive={!!activeRoute && activeRoute.group === name.toLowerCase()}
                 key={name}
                 name={name}
                 routes={routes}
@@ -117,8 +117,6 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
             ))}
           </ul>
         </div>
-        <ChainInfo className='media--1400' />
-
       </div>
     </StyledDiv>
   );
