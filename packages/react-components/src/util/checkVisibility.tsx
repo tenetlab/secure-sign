@@ -9,7 +9,7 @@ import { isFunction } from '@polkadot/util';
 
 export function checkVisibility (api: ApiPromise, address: string, accountInfo: DeriveAccountInfo, filterName = '', onlyNamed = false): boolean {
   let isVisible = false;
-  const filterLower = filterName.toLowerCase();
+  const filterLower = filterName?.toLowerCase();
 
   if (filterLower || onlyNamed) {
     if (accountInfo) {
@@ -21,11 +21,11 @@ export function checkVisibility (api: ApiPromise, address: string, accountInfo: 
       } else if (isFunction(api.query.identity?.identityOf)) {
         isVisible = !!identity && (!!identity.display || !!identity.displayParent) && (
           hasAddressMatch ||
-          (!!identity.display && identity.display.toLowerCase().includes(filterLower)) ||
-          (!!identity.displayParent && identity.displayParent.toLowerCase().includes(filterLower))
+          (!!identity.display && identity.display?.toLowerCase().includes(filterLower)) ||
+          (!!identity.displayParent && identity.displayParent?.toLowerCase().includes(filterLower))
         );
       } else if (nickname) {
-        isVisible = nickname.toLowerCase().includes(filterLower);
+        isVisible = nickname?.toLowerCase().includes(filterLower);
       }
     }
 
@@ -33,7 +33,7 @@ export function checkVisibility (api: ApiPromise, address: string, accountInfo: 
       const account = keyring.getAddress(address);
 
       isVisible = account?.meta?.name
-        ? account.meta.name.toLowerCase().includes(filterLower)
+        ? account.meta.name?.toLowerCase().includes(filterLower)
         : false;
     }
   } else {
