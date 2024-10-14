@@ -109,7 +109,7 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
           <ul className='menuItems'>
             {visibleGroups.map(({ name, routes }): React.ReactNode => (
               <Grouping
-                isActive={!!activeRoute && activeRoute.group === name.toLowerCase()}
+                isActive={!!activeRoute && activeRoute.group === name?.toLowerCase()}
                 key={name}
                 name={name}
                 routes={routes}
