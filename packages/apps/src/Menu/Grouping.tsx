@@ -13,10 +13,10 @@ interface Props extends Group {
   isActive: boolean;
 }
 
-function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
+function Grouping({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
   console.log("---------------this is classname", className);
   console.log("---------------this is name ", name);
-  
+
   if (routes.length === 1 && routes[0].group === 'settings') {
     return (
       <Item
@@ -30,16 +30,16 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
 
   return (
     <>
-        {routes.map((route): React.ReactNode => (
-          <Item
-        className={isActive ? 'isActive' : ''}
-        classNameText='smallHide'
-        isToplevel
+      {routes.map((route): React.ReactNode => (
+        <Item
+          className={isActive ? '' : ''}
+          classNameText='smallHide'
+          isToplevel
 
-            key={route.name}
-            route={route}
-          />
-        ))}
+          key={route.name}
+          route={route}
+        />
+      ))}
     </>
   );
 }

@@ -33,7 +33,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Acala',
     ui: {
-      color: '#645AFF',
+      color: '#4964a8',
       logo: chainsAcalaSVG
     }
   },
@@ -50,7 +50,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ajuna Network',
     ui: {
-      color: '#161212',
+      color: '#4964a8',
       logo: nodesAjunaPNG
     }
   },
@@ -63,7 +63,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ares Odyssey',
     ui: {
-      color: '#1295F0',
+      color: '#4964a8',
       logo: nodesAresOdysseySVG
     }
   },
@@ -82,7 +82,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Astar',
     ui: {
-      color: '#1b6dc1d9',
+      color: '#4964a8',
       logo: nodesAstarPNG
     }
   },
@@ -95,7 +95,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Aventus',
     ui: {
-      color: '#1d2733',
+      color: '#4964a8',
       logo: nodesAventusSVG
     }
   },
@@ -114,7 +114,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bifrost',
     ui: {
-      color: '#5a25f0',
+      color: '#4964a8',
       logo: nodesBifrostSVG
     }
   },
@@ -128,7 +128,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bitgreen',
     ui: {
-      color: '#224851',
+      color: '#4964a8',
       logo: chainsBitgreenPNG
     }
   },
@@ -144,7 +144,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Centrifuge',
     ui: {
-      color: '#fcc367',
+      color: '#4964a8',
       logo: nodesCentrifugePNG
     }
   },
@@ -171,7 +171,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Coinversation',
     ui: {
-      color: '#e6017a',
+      color: '#4964a8',
       logo: nodesCoinversationPNG
     }
   },
@@ -186,7 +186,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Composable Finance',
     ui: {
-      color: '#C90E8A',
+      color: '#4964a8',
       logo: chainsComposableFinancePNG
     }
   },
@@ -230,7 +230,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Darwinia',
     ui: {
-      color: '#FF0083',
+      color: '#4964a8',
       logo: nodesDarwiniaSVG
     }
   },
@@ -249,7 +249,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Efinity',
     ui: {
-      color: '#496ddb',
+      color: '#4964a8',
       logo: nodesEfinitySVG
     }
   },
@@ -262,7 +262,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Energy Web X',
     ui: {
-      color: '#53B1FF',
+      color: '#4964a8',
       logo: nodesEwxSVG
     }
   },
@@ -277,7 +277,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Equilibrium',
     ui: {
-      color: '#1792ff',
+      color: '#4964a8',
       logo: chainsEquilibriumSVG
     }
   },
@@ -293,7 +293,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Frequency',
     ui: {
-      color: '#00b6af',
+      color: '#4964a8',
       logo: chainsFrequencySVG
     }
   },
@@ -321,7 +321,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hashed Network',
     ui: {
-      color: '#9199A9',
+      color: '#4964a8',
       logo: nodesHashedPNG
     }
   },
@@ -340,7 +340,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hydration',
     ui: {
-      color: '#240E32',
+      color: '#4964a8',
       logo: chainsHydrationSVG
     }
   },
@@ -355,7 +355,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hyperbridge (Nexus)',
     ui: {
-      color: '#ED6FF1',
+      color: '#4964a8',
       logo: nodesHyperbridgePNG
     }
   },
@@ -369,7 +369,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network',
     ui: {
-      color: '#658ea9',
+      color: '#4964a8',
       logo: nodesIntegriteeSVG
     }
   },
@@ -383,7 +383,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network',
     ui: {
-      color: '#2e154b',
+      color: '#4964a8',
       logo: nodesIntegriteeSVG
     }
   },
@@ -399,7 +399,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Interlay',
     ui: {
-      color: '#3E96FF',
+      color: '#4964a8',
       logo: nodesInterlaySVG
     }
   },
@@ -443,7 +443,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'KILT Spiritnet',
     ui: {
-      color: '#8c145a',
+      color: '#4964a8',
       logo: nodesKiltPNG
     }
   },
@@ -456,7 +456,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Kylin',
     ui: {
-      color: '#ed007e',
+      color: '#4964a8',
       logo: nodesKylinPNG
     }
   },
@@ -485,7 +485,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Litentry',
     ui: {
-      color: '#15B786',
+      color: '#4964a8',
       logo: nodesLitentryPNG
     }
   },
@@ -513,7 +513,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Manta',
     ui: {
-      color: '#2070a6',
+      color: '#4964a8',
       logo: nodesMantaPNG
     }
   },
@@ -535,7 +535,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Moonbeam',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesMoonbeamSVG
     }
   },
@@ -548,7 +548,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Moonsama',
     ui: {
-      color: '#1a202c',
+      color: '#4964a8',
       logo: nodesMoonsamaSVG
     }
   },
@@ -561,7 +561,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Mythos',
     ui: {
-      color: '#262528',
+      color: '#4964a8',
       logo: nodesMythosPNG
     }
   },
@@ -575,7 +575,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'NeuroWeb',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: chainsNeurowebPNG
     }
   },
@@ -589,7 +589,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Nodle',
     ui: {
-      color: '#1ab394',
+      color: '#4964a8',
       logo: nodesNodleSVG
     }
   },
@@ -603,7 +603,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'OAK Network',
     ui: {
-      color: '#A8278C',
+      color: '#4964a8',
       logo: chainsOakPNG
     }
   },
@@ -617,7 +617,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'OmniBTC',
     ui: {
-      color: '#6759E9',
+      color: '#4964a8',
       logo: nodesOmnibtcSVG
     }
   },
@@ -632,7 +632,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Parallel',
     ui: {
-      color: '#ef18ac',
+      color: '#4964a8',
       logo: nodesParallelSVG
     }
   },
@@ -645,7 +645,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'peaq',
     ui: {
-      color: '#281C66',
+      color: '#4964a8',
       logo: chainsPeaqPNG
     }
   },
@@ -659,7 +659,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Pendulum',
     ui: {
-      color: '#49E2FD',
+      color: '#4964a8',
       logo: chainsPendulumSVG
     }
   },
@@ -677,7 +677,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Phala Network',
     ui: {
-      color: '#c6fa4c',
+      color: '#4964a8',
       logo: nodesPhalaSVG
     }
   },
@@ -694,7 +694,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Polimec',
     ui: {
-      color: '#25311C',
+      color: '#4964a8',
       logo: nodesPolimecSVG
     }
   },
@@ -709,7 +709,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Polkadex',
     ui: {
-      color: '#7C30DD',
+      color: '#4964a8',
       logo: nodesPolkadexSVG
     }
   },
@@ -724,7 +724,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Polkadex',
     ui: {
-      color: '#7C30DD',
+      color: '#4964a8',
       logo: nodesPolkadexSVG
     }
   },
@@ -737,7 +737,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Robonomics',
     ui: {
-      color: '#e6007a',
+      color: '#4964a8',
       logo: nodesRobonomicsSVG
     }
   },
@@ -750,7 +750,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SORA',
     ui: {
-      color: '#2D2926',
+      color: '#4964a8',
       logo: nodesSoraSubstrateSVG
     }
   },
@@ -777,7 +777,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SubGame Gamma',
     ui: {
-      color: '#EB027D',
+      color: '#4964a8',
       logo: nodesSubgameSVG
     }
   },
@@ -792,7 +792,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subsocial',
     ui: {
-      color: '#b9018c',
+      color: '#4964a8',
       logo: nodesSubsocialSVG
     }
   },
@@ -805,7 +805,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 't3rn',
     ui: {
-      color: '#6f3bb2',
+      color: '#4964a8',
       logo: nodesT3rnPNG
     }
   },
@@ -825,7 +825,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Unique Network',
     ui: {
-      color: '#40BCFF',
+      color: '#4964a8',
       logo: nodesUniqueSVG
     }
   },
@@ -838,7 +838,7 @@ export const prodParasPolkadot: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Watr Network',
     ui: {
-      color: '#373b39',
+      color: '#4964a8',
       logo: chainsWatrPNG
     }
   },
@@ -878,7 +878,7 @@ export const prodParasPolkadotCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'AssetHub',
     ui: {
-      color: '#86e62a',
+      color: '#4964a8',
       logo: nodesAssetHubSVG
     }
   },
@@ -923,7 +923,7 @@ export const prodParasPolkadotCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Collectives',
     ui: {
-      color: '#e6777a',
+      color: '#4964a8',
       logo: 'fa;people-group'
     }
   },
@@ -956,7 +956,7 @@ export const prodParasPolkadotCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'People',
     ui: {
-      color: '#e84366',
+      color: '#4964a8',
       logo: chainsPeoplePolkadotSVG
     }
   }

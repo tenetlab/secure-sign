@@ -23,7 +23,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: '3DPass Testnet',
     ui: {
-      color: '#323232',
+      color: '#4964a8',
       logo: chains3dpassSVG
     }
   },
@@ -36,7 +36,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Aleph Zero Testnet',
     ui: {
-      color: '#00CCAB',
+      color: '#4964a8',
       logo: chainsAlephSVG
     }
   },
@@ -48,7 +48,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Analog Testnet',
     ui: {
-      color: '#5d3ef8',
+      color: '#4964a8',
       identityIcon: 'beachball',
       logo: chainsAnalogSVG
     }
@@ -60,7 +60,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Arcadia',
     ui: {
-      color: '#1ab394',
+      color: '#4964a8',
       logo: nodesNodleSVG
     }
   },
@@ -81,7 +81,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ares Gladios',
     ui: {
-      color: '#1295F0',
+      color: '#4964a8',
       logo: nodesAresGladiosSVG
     }
   },
@@ -92,7 +92,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Argon Testnet',
     ui: {
-      color: '#a428b3',
+      color: '#4964a8',
       logo: chainsArgonSVG
     }
   },
@@ -103,7 +103,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Artio Testnet',
     ui: {
-      color: '#121212',
+      color: '#4964a8',
       logo: nodesJazPNG
     }
   },
@@ -135,7 +135,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bifrost Testnet',
     ui: {
-      color: '#FF474C',
+      color: '#4964a8',
       logo: nodesThebifrostPNG
     }
   },
@@ -146,7 +146,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'CC Enterprise Testnet',
     ui: {
-      color: '#9cffaa',
+      color: '#4964a8',
       logo: chainsCreditcoinTestPNG
     }
   },
@@ -158,7 +158,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Cere Network Testnet',
     ui: {
-      color: '#B7AEFF',
+      color: '#4964a8',
       logo: nodesCereSVG
     }
   },
@@ -169,7 +169,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'CESS Testnet',
     ui: {
-      color: '#2269a9',
+      color: '#4964a8',
       logo: nodesCessPNG
     }
   },
@@ -180,7 +180,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Chainflip Testnet',
     ui: {
-      color: '#111111',
+      color: '#4964a8',
       logo: chainsChainflipPNG
     }
   },
@@ -202,7 +202,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Creditcoin Testnet',
     ui: {
-      color: '#9cffaa',
+      color: '#4964a8',
       logo: chainsCreditcoinTestPNG
     }
   },
@@ -214,7 +214,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Crust Maxwell',
     ui: {
-      color: '#2E333B',
+      color: '#4964a8',
       logo: nodesCrustMaxwellSVG
     }
   },
@@ -235,7 +235,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Dancebox',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesDanceboxSVG
     }
   },
@@ -258,7 +258,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'DeBio Testnet',
     ui: {
-      color: '#FF56E0',
+      color: '#4964a8',
       logo: chainsDebioSVG
     }
   },
@@ -279,7 +279,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Dolphin Testnet',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesDolphinSVG
     }
   },
@@ -290,7 +290,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'DOTMog',
     ui: {
-      color: '#020609',
+      color: '#4964a8',
       logo: nodesDotmogSVG
     }
   },
@@ -301,7 +301,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Encointer Gesell',
     ui: {
-      color: '#0000cc',
+      color: '#4964a8',
       logo: nodesEncointerBlueSVG
     }
   },
@@ -312,7 +312,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Equilibrium',
     ui: {
-      color: '#1792ff',
+      color: '#4964a8',
       logo: chainsEquilibriumSVG
     }
   },
@@ -323,7 +323,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Fantour',
     ui: {
-      color: '#5a189a',
+      color: '#4964a8',
       logo: nodesFantourPNG
     }
   },
@@ -334,7 +334,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ferrum Testnet',
     ui: {
-      color: '#b37700',
+      color: '#4964a8',
       logo: chainsFerrumPNG
     }
   },
@@ -355,7 +355,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Fragnova Testnet',
     ui: {
-      color: '#6b35a8',
+      color: '#4964a8',
       logo: chainsFragnovaPNG
     }
   },
@@ -366,7 +366,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Galital PC2',
     ui: {
-      color: '#00063F',
+      color: '#4964a8',
       logo: nodesGalitalLogoPNG
     }
   },
@@ -378,7 +378,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Galois',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesMathSVG
     }
   },
@@ -389,7 +389,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'GamePower',
     ui: {
-      color: '#5d21a5',
+      color: '#4964a8',
       logo: nodesGamepowerSVG
     }
   },
@@ -400,7 +400,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'GeekCash',
     ui: {
-      color: '#4f46e5',
+      color: '#4964a8',
       logo: nodesGeekSVG
     }
   },
@@ -411,7 +411,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Halongbay Testnet',
     ui: {
-      color: '#ff527c',
+      color: '#4964a8',
       logo: nodesPolkafoundrySVG
     }
   },
@@ -422,7 +422,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Harmonie Testnet',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: chainsAllfeatSVG
     }
   },
@@ -443,7 +443,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'InvArch Brainstorm Testnet',
     ui: {
-      color: '#161616',
+      color: '#4964a8',
       logo: chainsBrainstormPNG
     }
   },
@@ -457,7 +457,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'IPSE',
     ui: {
-      color: '#08a1e8',
+      color: '#4964a8',
       logo: nodesIpsePNG
     }
   },
@@ -468,7 +468,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Jupiter',
     ui: {
-      color: '#7143ff',
+      color: '#4964a8',
       logo: nodesJupiterSVG
     }
   },
@@ -479,7 +479,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Jur Testnet',
     ui: {
-      color: '#203050',
+      color: '#4964a8',
       logo: chainsJurPNG
     }
   },
@@ -490,7 +490,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Karmachain Testnet',
     ui: {
-      color: '#44259D',
+      color: '#4964a8',
       logo: nodesKarmachainSVG
     }
   },
@@ -501,7 +501,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Khala (Para 3)',
     ui: {
-      color: '#03f3f3',
+      color: '#4964a8',
       logo: nodesKhalaSVG
     }
   },
@@ -512,7 +512,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Kintsugi Testnet',
     ui: {
-      color: '#1a0a2d',
+      color: '#4964a8',
       logo: chainsKintsugiPNG
     }
   },
@@ -523,7 +523,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Klug Dossier',
     ui: {
-      color: '#663399',
+      color: '#4964a8',
       logo: nodesKlugPNG
     }
   },
@@ -588,7 +588,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Manta Testnet',
     ui: {
-      color: '#2070a6',
+      color: '#4964a8',
       logo: nodesMantaPNG
     }
   },
@@ -599,7 +599,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'MiniX Testnet',
     ui: {
-      color: '#5152f7',
+      color: '#4964a8',
       logo: nodesMinixPNG
     }
   },
@@ -615,7 +615,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Moonbase Alpha',
     ui: {
-      color: '#2B1D3C',
+      color: '#4964a8',
       logo: nodesMoonbaseAlphaSVG
     }
   },
@@ -626,7 +626,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'mybank.network',
     ui: {
-      color: '#282736',
+      color: '#4964a8',
       logo: nodesMybankPNG
     }
   },
@@ -638,7 +638,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Myriad Testnet',
     ui: {
-      color: '#7342CC',
+      color: '#4964a8',
       logo: chainsMyriadPNG
     }
   },
@@ -650,7 +650,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'NFTMart',
     ui: {
-      color: '#307182',
+      color: '#4964a8',
       logo: nodesNftmartPNG
     }
   },
@@ -664,7 +664,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'OPAL by UNIQUE',
     ui: {
-      color: '#3B9C9D',
+      color: '#4964a8',
       logo: nodesOpalLogoPNG
     }
   },
@@ -675,7 +675,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Opportunity',
     ui: {
-      color: '#6143bc',
+      color: '#4964a8',
       logo: nodesOpportunityPNG
     }
   },
@@ -696,7 +696,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Phoenix Mashnet',
     ui: {
-      color: '#d42181',
+      color: '#4964a8',
       logo: nodesPhoenixPNG
     }
   },
@@ -707,7 +707,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Phyken Network Testnet',
     ui: {
-      color: '#48B96C',
+      color: '#4964a8',
       logo: nodesPhykenNetworkPNG
     }
   },
@@ -728,7 +728,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Polkadex',
     ui: {
-      color: '#7C30DD',
+      color: '#4964a8',
       logo: nodesPolkadexSVG
     }
   },
@@ -739,7 +739,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Polymesh Testnet',
     ui: {
-      color: '#43195B',
+      color: '#4964a8',
       logo: nodesPolymeshSVG
     }
   },
@@ -750,7 +750,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Pontem',
     ui: {
-      color: '#A92FAC',
+      color: '#4964a8',
       logo: nodesPontemSVG
     }
   },
@@ -772,7 +772,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Realis.Network',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesRealisPNG
     }
   },
@@ -783,7 +783,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'RioChain',
     ui: {
-      color: '#4d87f6',
+      color: '#4964a8',
       logo: nodesRiochainSVG
     }
   },
@@ -794,7 +794,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Sherpax Testnet',
     ui: {
-      color: '#6bbee8',
+      color: '#4964a8',
       logo: nodesSherpaxPNG
     }
   },
@@ -806,7 +806,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Shibuya',
     ui: {
-      color: '#1b6dc1d9',
+      color: '#4964a8',
       logo: chainsShidenPNG
     }
   },
@@ -817,7 +817,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SkyeKiwi Testnet',
     ui: {
-      color: '#6667ab',
+      color: '#4964a8',
       logo: chainsSkyekiwiPNG
     }
   },
@@ -829,7 +829,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SORA-staging',
     ui: {
-      color: '#2D2926',
+      color: '#4964a8',
       logo: nodesSoraSubstrateSVG
     }
   },
@@ -851,7 +851,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SubGame Staging',
     ui: {
-      color: '#EB027D',
+      color: '#4964a8',
       logo: nodesSubgameSVG
     }
   },
@@ -862,7 +862,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Farmnet',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -873,7 +873,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 1',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -884,7 +884,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 2a',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -896,7 +896,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 3f',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -908,7 +908,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 3g',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -919,7 +919,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 3g Nova',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -931,7 +931,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 3h',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -943,7 +943,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Gemini 3h Nova',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -954,7 +954,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Subspace Testnet',
     ui: {
-      color: '#562b8e',
+      color: '#4964a8',
       logo: nodesSubspacePNG
     }
   },
@@ -965,7 +965,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Tangle',
     ui: {
-      color: '#7578fb',
+      color: '#4964a8',
       logo: chainsTanglePNG
     }
   },
@@ -986,7 +986,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ternoa Testnet',
     ui: {
-      color: '#d622ff',
+      color: '#4964a8',
       logo: nodesTernoaSVG
     }
   },
@@ -1007,7 +1007,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Turbulence',
     ui: {
-      color: '#004FFF',
+      color: '#4964a8',
       logo: nodesLaminarCircleSVG
     }
   },
@@ -1028,7 +1028,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Unique',
     ui: {
-      color: '#40BCFF',
+      color: '#4964a8',
       logo: nodesUniqueSVG
     }
   },
@@ -1039,7 +1039,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Unit Network',
     ui: {
-      color: '#1452F0',
+      color: '#4964a8',
       logo: nodesUnitnetworkPNG
     }
   },
@@ -1050,7 +1050,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Vara Testnet',
     ui: {
-      color: '#202022',
+      color: '#4964a8',
       logo: chainsVaraTestnetPNG
     }
   },
@@ -1069,7 +1069,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Web3Games',
     ui: {
-      color: '#000000',
+      color: '#4964a8',
       logo: nodesWeb3gamesSVG
     }
   },
@@ -1102,7 +1102,7 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'ZERO Alphaville',
     ui: {
-      color: '#00ffcc',
+      color: '#4964a8',
       logo: nodesZeroSVG
     }
   }
