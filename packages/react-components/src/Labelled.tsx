@@ -112,7 +112,7 @@ const StyledDiv = styled.div`
 
       .labelExtra {
         color: var(--color-label);
-        font-size: var(--font-size-h1);
+        font-size: var(--font-size-normal);
         font-weight: var(--font-weight-bold);
         position: absolute;
         right: 1.25rem;

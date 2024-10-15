@@ -135,12 +135,10 @@ const StyledSpan = styled.span`
 
   .ui--FormatBalance-value {
     text-align: center;
-    font-size: var(--font-size-h3);
 
     > .ui--FormatBalance-postfix {
       font-weight: lighter;
       vertical-align: baseline;
-      font-size: var(--font-size-h3);
     }
   }
 
