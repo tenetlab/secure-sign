@@ -9,7 +9,7 @@ import type { SortCategory } from '../util.js';
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Button, FilterInput, SortDropdown, styled, SummaryBox, Table } from '@polkadot/react-components';
+import { Button, styled, SummaryBox, Table } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
 import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useLedger, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
@@ -24,7 +24,7 @@ import Multisig from '../modals/MultisigCreate.js';
 import Proxy from '../modals/ProxiedAdd.js';
 import Qr from '../modals/Qr.js';
 import { useTranslation } from '../translate.js';
-import { SORT_CATEGORY, sortAccounts } from '../util.js';
+import { sortAccounts } from '../util.js';
 import Account from './Account.js';
 import BannerClaims from './BannerClaims.js';
 import BannerExtension from './BannerExtension.js';
@@ -122,8 +122,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     () => setSortBy(({ sortBy, sortFromMax }) => ({ sortBy, sortFromMax: !sortFromMax })),
     []
   );
-
-  const sortOptions = useRef(SORT_CATEGORY.map((text) => ({ text, value: text })));
 
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>

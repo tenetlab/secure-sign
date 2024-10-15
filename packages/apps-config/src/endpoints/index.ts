@@ -4,7 +4,7 @@
 import type { TFunction, TOptions } from '../types.js';
 import type { LinkOption } from './types.js';
 
-import { createCustom, createDev, createOwn } from './development.js';
+import { createCustom, createOwn } from './development.js';
 import { prodChains, prodRelayPolkadot } from './production.js';
 import { testRelayWestend } from './testing.js';
 import { expandEndpoints } from './util.js';

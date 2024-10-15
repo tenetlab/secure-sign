@@ -24,7 +24,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bittensor',
     ui: {
-      color: '#252525',
+      color: '#4964a8',
       logo: chainsBittensorPNG
     }
   },
@@ -36,7 +36,7 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Commune AI',
     ui: {
-      color: '#060606',
+      color: '#4964a8',
       logo: chainsCommuneaiPNG
     }
   },

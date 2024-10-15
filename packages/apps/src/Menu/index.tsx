@@ -17,6 +17,7 @@ import { findMissingApis } from '../endpoint.js';
 import { useTranslation } from '../translate.js';
 import ChainInfo from './ChainInfo.js';
 import Grouping from './Grouping.js';
+import LogoInfo from './LogoInfo.js';
 
 interface Props {
   className?: string;
@@ -105,7 +106,7 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''} highlight--bg`}>
       <div className='menuContainer'>
         <div className='menuSection'>
-          <div></div>
+          <LogoInfo/>
           <ul className='menuItems'>
             {visibleGroups.map(({ name, routes }): React.ReactNode => (
               <Grouping
@@ -117,7 +118,7 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
             ))}
           </ul>
         </div>
-        <ChainInfo className='media--1400' />
+        <ChainInfo className='' />
       </div>
     </StyledDiv>
   );
@@ -128,7 +129,6 @@ const StyledDiv = styled.div`
   padding: 0;
   z-index: 220;
   position: relative;
-
   .smallShow {
     display: none;
   }
