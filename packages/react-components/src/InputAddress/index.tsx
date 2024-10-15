@@ -302,11 +302,11 @@ class InputAddress extends React.PureComponent<Props, State> {
   private onSearch = (filteredOptions: DropdownItemProps[], _query: string): DropdownItemProps[] => {
     const { isInput = true } = this.props;
     const query = _query.trim();
-    const queryLower = query.toLowerCase();
+    const queryLower = query?.toLowerCase();
     const matches = filteredOptions.filter((item): boolean =>
       !!item.value && typeof item.name === 'string' && (
-        (item.name.toLowerCase?.().includes(queryLower)) ||
-        item.value.toString().toLowerCase().includes(queryLower)
+        (item.name?.toLowerCase?.().includes(queryLower)) ||
+        item.value.toString()?.toLowerCase().includes(queryLower)
       )
     );
 

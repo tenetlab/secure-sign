@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-import Icon from '../../Icon.js';
+// import Icon from '../../Icon.js';
 import { styled } from '../../styled.js';
 
 export interface Props {
@@ -14,7 +14,7 @@ export interface Props {
   toggle: () => void;
 }
 
-function Expand ({ className = '', colSpan, isExpanded, rowSpan, toggle }: Props): React.ReactElement<Props> {
+function Expand ({ className = '', colSpan, rowSpan, toggle }: Props): React.ReactElement<Props> {
   return (
     <StyledTd
       className={`${className} ui--Table-Column-Expand`}
@@ -23,13 +23,13 @@ function Expand ({ className = '', colSpan, isExpanded, rowSpan, toggle }: Props
       rowSpan={rowSpan}
     >
       <div>
-        <Icon
+        {/* <Icon
           icon={
             isExpanded
               ? 'caret-up'
               : 'caret-down'
           }
-        />
+        /> */}
       </div>
     </StyledTd>
   );
@@ -38,21 +38,21 @@ function Expand ({ className = '', colSpan, isExpanded, rowSpan, toggle }: Props
 const StyledTd = styled.td`
   && {
     box-sizing: content-box;
-    cursor: pointer;
-    min-width: 1.7rem;
+    // cursor: pointer;
+    min-width: 0.1rem;
     padding-left: 0;
-    text-align: left;
-    width: 1.7rem;
+    // text-align: left;
+    width: 0.1rem;
 
     > div {
-      align-items: center;
-      border: 1px solid var(--border-table);
-      border-radius: 4px;
+      // align-items: center;
+      // border: 1px solid var(--border-table);
+      // border-radius: 4px;
       box-sizing: border-box;
-      display: inline-flex;
+      // display: inline-flex;
       height: 1.7rem;
-      justify-content: center;
-      width: 1.7rem;
+      // justify-content: center;
+      width: 0.1rem;
     }
   }
 `;

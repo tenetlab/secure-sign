@@ -9,7 +9,7 @@ import type { SortCategory } from '../util.js';
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Button, FilterInput, SortDropdown, styled, SummaryBox, Table } from '@polkadot/react-components';
+import { Button, styled, SummaryBox, Table } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
 import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useLedger, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
@@ -24,7 +24,7 @@ import Multisig from '../modals/MultisigCreate.js';
 import Proxy from '../modals/ProxiedAdd.js';
 import Qr from '../modals/Qr.js';
 import { useTranslation } from '../translate.js';
-import { SORT_CATEGORY, sortAccounts } from '../util.js';
+import { sortAccounts } from '../util.js';
 import Account from './Account.js';
 import BannerClaims from './BannerClaims.js';
 import BannerExtension from './BannerExtension.js';
@@ -123,8 +123,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     []
   );
 
-  const sortOptions = useRef(SORT_CATEGORY.map((text) => ({ text, value: text })));
-
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>
       setBalances(({ accounts }: Balances): Balances => {
@@ -166,11 +164,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     [api]
   );
 
-  // proxy support
-  const hasPalletProxy = useMemo(
-    () => isFunction(api.tx.proxy?.addProxy),
-    [api]
-  );
 
   const accountsMap = useMemo(
     () => allAccounts
@@ -321,29 +314,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <BannerClaims />
       <Summary balance={balances.summary} />
       <SummaryBox className='header-box'>
-        <section
-          className='dropdown-section media--1300'
-          data-testid='sort-by-section'
-        >
-          <SortDropdown
-            className='media--1500'
-            defaultValue={sortBy}
-            label={t('sort by')}
-            onChange={onSortChange}
-            onClick={onSortDirectionChange}
-            options={sortOptions.current}
-            sortDirection={
-              sortFromMax
-                ? 'ascending'
-                : 'descending'
-            }
-          />
-          <FilterInput
-            filterOn={filterOn}
-            label={t('filter by name or tags')}
-            setFilter={setFilter}
-          />
-        </section>
         <Button.Group>
           {canStoreAccounts && (
             <>
@@ -359,11 +329,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
               />
             </>
           )}
-          <Button
-            icon='qrcode'
-            label={t('From Qr')}
-            onClick={toggleQr}
-          />
+          
           {isLedgerEnabled && (
             <Button
               icon='project-diagram'
@@ -378,13 +344,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
                   icon='plus'
                   label={t('Multisig')}
                   onClick={toggleMultisig}
-                />
-              )}
-              {hasPalletProxy && (
-                <Button
-                  icon='plus'
-                  label={t('Proxied')}
-                  onClick={toggleProxy}
                 />
               )}
             </>

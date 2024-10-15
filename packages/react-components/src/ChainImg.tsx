@@ -64,10 +64,10 @@ const STYLE = `
 
   &.isInline {
     display: inline-block;
-    height: 24px;
+    height: 18px;
     margin-right: 0.75rem;
     vertical-align: middle;
-    width: 24px;
+    width: 18px;
   }
 `;
 

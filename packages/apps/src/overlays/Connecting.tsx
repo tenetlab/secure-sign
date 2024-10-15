@@ -34,19 +34,7 @@ function Connecting ({ className }: Props): React.ReactElement<Props> | null {
     );
   } else if (!isApiReady) {
     return (
-      <BaseOverlay
-        className={className}
-        icon='globe'
-        type='info'
-      >
-        <div>
-          {
-            isApiConnected
-              ? t('Waiting to complete metadata retrieval from remote endpoint.')
-              : t('Waiting to establish a connection with the remote endpoint.')
-          }
-        </div>
-      </BaseOverlay>
+      <></>
     );
   } else if (isWaitingInjected) {
     return (

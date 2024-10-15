@@ -40,7 +40,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ajuna Network (Paseo)',
     ui: {
-      color: '#161212',
+      color: '#4964a8',
       logo: nodesAjunaPNG
     }
   },
@@ -52,7 +52,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Amplitude testnet (Foucoco)',
     ui: {
-      color: '#5DEFA7',
+      color: '#4964a8',
       logo: chainsAmplitudeSVG
     }
   },
@@ -65,7 +65,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Aventus',
     ui: {
-      color: '#E6E6FA',
+      color: '#4964a8',
       logo: nodesAventusSVG
     }
   },
@@ -78,7 +78,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bajun Network (Paseo)',
     ui: {
-      color: '#161212',
+      color: '#4964a8',
       logo: nodesBajunPNG
     }
   },
@@ -91,7 +91,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bifrost',
     ui: {
-      color: '#5a25f0',
+      color: '#4964a8',
       logo: nodesBifrostSVG
     }
   },
@@ -104,7 +104,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Darwinia Koi',
     ui: {
-      color: '#FF0083',
+      color: '#4964a8',
       logo: nodesDarwiniaKoiSVG
     }
   },
@@ -117,7 +117,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Frequency',
     ui: {
-      color: '#19455E',
+      color: '#4964a8',
       logo: chainsFrequencyPaseoSVG
     }
   },
@@ -130,7 +130,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hydration (Paseo)',
     ui: {
-      color: '#b3d7fa',
+      color: '#4964a8',
       logo: chainsHydrationPaseoSVG
     }
   },
@@ -143,7 +143,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hyperbridge (Gargantua)',
     ui: {
-      color: '#ED6FF1',
+      color: '#4964a8',
       logo: nodesHyperbridgePNG
     }
   },
@@ -169,7 +169,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network (Paseo)',
     ui: {
-      color: '#658ea9',
+      color: '#4964a8',
       logo: nodesIntegriteeSVG
     }
   },
@@ -194,7 +194,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Laos Sigma',
     ui: {
-      color: '#363435',
+      color: '#4964a8',
       logo: chainsLaosSigmaPNG
     }
   },
@@ -206,7 +206,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Muse network',
     ui: {
-      color: '#110ff9',
+      color: '#4964a8',
       logo: nodesMusePNG
     }
   },
@@ -219,7 +219,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Myriad Social Testnet',
     ui: {
-      color: '#d5e3e4',
+      color: '#4964a8',
       logo: nodesMyriadPaseoSVG
     }
   },
@@ -233,7 +233,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Niskala',
     ui: {
-      color: '#0036ac',
+      color: '#4964a8',
       logo: nodesMandalaPNG
     }
   },
@@ -246,7 +246,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Nodle',
     ui: {
-      color: '#1ab394',
+      color: '#4964a8',
       logo: nodesNodleSVG
     }
   },
@@ -258,7 +258,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'PEX',
     ui: {
-      color: '#452E66',
+      color: '#4964a8',
       logo: nodesRexSVG
     }
   },
@@ -285,7 +285,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'RegionX(Paseo)',
     ui: {
-      color: '#0CC184',
+      color: '#4964a8',
       logo: nodesRegionxPNG
     }
   },
@@ -298,7 +298,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Xcavate',
     ui: {
-      color: '#FF0083',
+      color: '#4964a8',
       logo: chainsMyxcavPNG
     }
   },
@@ -333,7 +333,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'AssetHub',
     ui: {
-      color: '#77bb77',
+      color: '#4964a8',
       logo: nodesAssetHubSVG
     }
   },
@@ -349,7 +349,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'BridgeHub',
     ui: {
-      color: '#AAADD7',
+      color: '#4964a8',
       logo: nodesBridgeHubSVG
     }
   },
@@ -365,7 +365,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Coretime',
     ui: {
-      color: '#113911',
+      color: '#4964a8',
       logo: chainsCoretimeKusamaSVG
     }
   },
@@ -382,7 +382,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'People',
     ui: {
-      color: '#e84366',
+      color: '#4964a8',
       logo: chainsPeoplePolkadotSVG
     }
   }
