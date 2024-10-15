@@ -18,11 +18,11 @@ import type { AccountBalance, Delegation } from '../types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
-import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
+import { AddressInfo, AddressSmall, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useLedger, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
-import { BN, BN_ZERO, formatBalance, formatNumber, isFunction } from '@polkadot/util';
+import { BN, BN_ZERO, isFunction } from '@polkadot/util';
 
 import Backup from '../modals/Backup.js';
 import ChangePass from '../modals/ChangePass.js';
@@ -38,7 +38,6 @@ import UndelegateModal from '../modals/Undelegate.js';
 import { useTranslation } from '../translate.js';
 import { createMenuGroup } from '../util.js';
 import useMultisigApprovals from './useMultisigApprovals.js';
-import useProxies from './useProxies.js';
 
 interface Props {
   account: KeyringAddress;
@@ -159,7 +158,7 @@ const transformRecovery = {
 
 function Account ({ account: { address, meta }, className = '', delegation, filter, isFavorite, proxy, setBalance, toggleFavorite }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  const [isExpanded, toggleIsExpanded] = useToggle(false);
+  // const [isExpanded, toggleIsExpanded] = useToggle(false);
   const { queueExtrinsic } = useQueue();
   const { api, apiIdentity, enableIdentity, isDevelopment: isDevelopmentApiProps, isEthereum: isEthereumApiProps } = useApi();
   const { getLedger } = useLedger();
@@ -169,8 +168,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const democracyLocks = useCall<DeriveDemocracyLock[]>(api.derive.democracy?.locks, [address]);
   const recoveryInfo = useCall<RecoveryConfig | null>(api.query.recovery?.recoverable, [address], transformRecovery);
   const multiInfos = useMultisigApprovals(address);
-  const proxyInfo = useProxies(address);
-  const { flags: { isDevelopment, isEditable, isEthereum, isExternal, isHardware, isInjected, isMultisig, isProxied }, genesisHash, identity, name: accName, onSetGenesisHash, tags } = useAccountInfo(address);
+  const { flags: { isDevelopment, isEditable, isEthereum, isExternal, isHardware, isInjected, isMultisig }, genesisHash, identity, name: accName, onSetGenesisHash, tags } = useAccountInfo(address);
   const convictionLocks = useAccountLocks('referenda', 'convictionVoting', address);
   const [{ democracyUnlockTx }, setDemocracyUnlock] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
   const [{ referendaUnlockTx }, setReferandaUnlock] = useState<ReferendaUnlockable>({ ids: [], referendaUnlockTx: null });
@@ -707,14 +705,14 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
           </Button.Group>
         </td>
         <Table.Column.Expand
-          isExpanded={isExpanded}
+          isExpanded={false}
           toggle={
             // toggleIsExpanded
             () => {}
           }
         />
       </StyledTr>
-      <StyledTr className={`${className} isExpanded ${isExpanded ? '' : 'isLast'} packedTop`}>
+      <StyledTr className={`${className} isExpanded ${false ? '' : 'isLast'} packedTop`}>
         <td />
         <td
           className='balance all'
@@ -728,7 +726,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         </td>
         <td />
       </StyledTr>
-      <StyledTr className={`${className} ${isExpanded ? 'isExpanded isLast' : 'isCollapsed'} packedTop`}>
+      <StyledTr className={`${className} ${false ? 'isExpanded isLast' : 'isCollapsed'} packedTop`}>
         <td />
         <td
           className='balance columar'
