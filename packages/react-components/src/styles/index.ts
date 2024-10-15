@@ -536,7 +536,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   // we treat h5 and label as equivalents
   label, h5 {
     color: var(--color-label);
-    font-size: var(--font-size-h1);
+    font-size: var(--font-size-normal);
     font-style: normal;
     font-weight: var(--font-weight-bold);
     line-height: 1rem;
