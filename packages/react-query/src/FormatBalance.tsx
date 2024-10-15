@@ -125,34 +125,36 @@ const StyledSpan = styled.span`
   > label,
   > .label {
     display: inline-block;
-    margin-right: 0.25rem;
+    // margin-right: 0.25rem;
     vertical-align: baseline;
   }
 
   .ui--FormatBalance-unit {
-    font-size: var(--font-percent-tiny);
+    font-size: var(--font-size-h3);
   }
 
   .ui--FormatBalance-value {
-    text-align: right;
+    text-align: center;
+    font-size: var(--font-size-h3);
 
     > .ui--FormatBalance-postfix {
       font-weight: lighter;
       vertical-align: baseline;
+      font-size: var(--font-size-h3);
     }
   }
 
   > .ui--Button {
-    margin-left: 0.25rem;
+    // margin-left: 0.25rem;
   }
 
   .ui--Icon {
-    margin-bottom: -0.25rem;
-    margin-top: 0.25rem;
+    // margin-bottom: -0.25rem;
+    // margin-top: 0.25rem;
   }
 
   .ui--Icon+.ui--FormatBalance-value {
-    margin-left: 0.375rem;
+    // margin-left: 0.375rem;
   }
 `;
 

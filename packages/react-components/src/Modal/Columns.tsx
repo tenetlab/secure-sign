@@ -56,8 +56,8 @@ const StyledDiv = styled.div`
     @media only screen and (min-width: 1024px) {
       &:nth-child(1),
       &:only-child {
-        flex: 0 65%;
-        max-width: 65%;
+        // flex: 0 65%;
+        // max-width: 65%;
       }
 
       &:nth-child(2) {
