@@ -145,7 +145,7 @@ const StyledDiv = styled.div`
   }
 
   &.isLoading {
-    background: #999 !important;
+    background: #4964a8 !important;
 
     .menuActive {
       background: var(--bg-page);
