@@ -35,7 +35,7 @@ export const testParasWestend: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network',
     ui: {
-      color: '#658ea9',
+      color: '#4964a8',
       logo: nodesIntegriteeSVG
     }
   },
@@ -58,7 +58,7 @@ export const testParasWestend: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Moonshadow',
     ui: {
-      color: '#53cbc9',
+      color: '#4964a8',
       logo: nodesMoonshadowPNG
     }
   },
@@ -104,7 +104,7 @@ export const testParasWestend: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Whala',
     ui: {
-      color: '#03f3f3',
+      color: '#4964a8',
       logo: nodesKhalaSVG
     }
   }
@@ -128,7 +128,7 @@ export const testParasWestendCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'AssetHub',
     ui: {
-      color: '#77bb77',
+      color: '#4964a8',
       logo: nodesAssetHubSVG
     }
   },
@@ -165,7 +165,7 @@ export const testParasWestendCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Collectives',
     ui: {
-      color: '#e6777a',
+      color: '#4964a8',
       logo: 'fa;people-group'
     }
   },
@@ -183,7 +183,7 @@ export const testParasWestendCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Coretime',
     ui: {
-      color: '#f19135'
+      color: '#4964a8'
     }
   },
   {
@@ -201,7 +201,7 @@ export const testParasWestendCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'People',
     ui: {
-      color: '#ec03fc',
+      color: '#4964a8',
       logo: chainsPeoplePolkadotSVG
     }
   }
@@ -232,7 +232,7 @@ export const testRelayWestend: EndpointOption = {
   teleport: getTeleports(testParasWestendCommon),
   text: 'Westend',
   ui: {
-    color: '#da68a7',
+    color: '#4964a8',
     identityIcon: 'polkadot',
     logo: nodesWestendColourSVG
   }
