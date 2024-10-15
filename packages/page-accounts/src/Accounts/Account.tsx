@@ -18,11 +18,11 @@ import type { AccountBalance, Delegation } from '../types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
-import { AddressInfo, AddressSmall, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
+import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Columar, CryptoType, Forget, LinkExternal, Menu, Popup, styled, Table, Tags, TransferModal } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useLedger, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
-import { BN, BN_ZERO, isFunction } from '@polkadot/util';
+import { BN, BN_ZERO, isFunction, formatNumber, formatBalance } from '@polkadot/util';
 
 import Backup from '../modals/Backup.js';
 import ChangePass from '../modals/ChangePass.js';
@@ -38,6 +38,7 @@ import UndelegateModal from '../modals/Undelegate.js';
 import { useTranslation } from '../translate.js';
 import { createMenuGroup } from '../util.js';
 import useMultisigApprovals from './useMultisigApprovals.js';
+import useProxies from './useProxies.js';
 
 interface Props {
   account: KeyringAddress;
@@ -168,7 +169,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const democracyLocks = useCall<DeriveDemocracyLock[]>(api.derive.democracy?.locks, [address]);
   const recoveryInfo = useCall<RecoveryConfig | null>(api.query.recovery?.recoverable, [address], transformRecovery);
   const multiInfos = useMultisigApprovals(address);
-  const { flags: { isDevelopment, isEditable, isEthereum, isExternal, isHardware, isInjected, isMultisig }, genesisHash, identity, name: accName, onSetGenesisHash, tags } = useAccountInfo(address);
+  const proxyInfo = useProxies(address);
+  const { flags: { isDevelopment, isEditable, isEthereum, isExternal, isHardware, isInjected, isMultisig, isProxied }, genesisHash, identity, name: accName, onSetGenesisHash, tags } = useAccountInfo(address);
   const convictionLocks = useAccountLocks('referenda', 'convictionVoting', address);
   const [{ democracyUnlockTx }, setDemocracyUnlock] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
   const [{ referendaUnlockTx }, setReferandaUnlock] = useState<ReferendaUnlockable>({ ids: [], referendaUnlockTx: null });
@@ -583,7 +585,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               onClose={toggleUndelegate}
             />
           )}
-          {/* <div className='absolute'>
+          <div className='absolute'>
             {meta.genesisHash
               ? <Badge color='transparent' />
               : isDevelopment
@@ -682,7 +684,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
                 onClick={toggleProxyOverview}
               />
             )}
-          </div> */}
+          </div>
         </td>
         <td className='actions button'>
           <Button.Group>
