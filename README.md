@@ -5,12 +5,12 @@
 
 A Multisig (multiple signature) wallet requires multiple signers to approve transactions, offering enhanced security and collective management over funds. This is useful for organizations or groups looking to share control of a wallet among multiple parties.      
 
-This Comsig wallet allows users to securely create and manage wallets with multiple signers on Polkadot chains. Designed with enhanced security and collaboration in mind, users can easily set up wallets that require the approval of multiple parties for transactions and wallet management, ensuring transparency and protection for all stakeholders.
+This multisig wallet allows users to securely create and manage wallets with multiple signers on Polkadot chains. Designed with enhanced security and collaboration in mind, users can easily set up wallets that require the approval of multiple parties for transactions and wallet management, ensuring transparency and protection for all stakeholders.
 
 In addition to standard multisig functionality, users can:
 
-- Stake/Unstake tokens: Seamlessly stake or unstake their assets to a subnet of Bittensor or Commune AI.
-- Subnet Management: Register new subnets and participate in the dynamic ecosystem of Bittensor and Commune AI
+- Stake/Unstake tokens: Seamlessly stake or unstake their assets to a subnet.
+- Subnet Management: Register new subnets and participate in some dynamic ecosystems
 
 This multisig wallet is built to streamline asset management, staking, and network participation, offering a user-friendly experience within the Polkadot ecosystem.
 
