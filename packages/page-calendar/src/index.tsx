@@ -3,13 +3,12 @@
 
 import type { DateState } from './types.js';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { styled, Tabs } from '@polkadot/react-components';
+import { styled } from '@polkadot/react-components';
 
 import Day from './Day.js';
 import Month from './Month.js';
-import { useTranslation } from './translate.js';
 import UpcomingEvents from './UpcomingEvents.js';
 import useScheduled from './useScheduled.js';
 import { getDateState, nextMonth, prevMonth } from './util.js';
@@ -21,18 +20,11 @@ interface Props {
 
 const NOW_INC = 30 * 1000;
 
-function CalendarApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
+function CalendarApp ({ className }: Props): React.ReactElement<Props> {
   const scheduled = useScheduled();
   const [now, setNow] = useState(() => new Date());
   const [dateState, setDateState] = useState(() => getDateState(now, now));
   const [allEventsView, setAllEventsView] = useState(false);
-
-  const itemsRef = useRef([{
-    isRoot: true,
-    name: 'view',
-    text: t('Upcoming events')
-  }]);
 
   useEffect((): () => void => {
     const intervalId = setInterval(() => setNow(new Date()), NOW_INC);
@@ -115,10 +107,6 @@ function CalendarApp ({ basePath, className }: Props): React.ReactElement<Props>
 
   return (
     <StyledMain className={className}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <div className='calendarFlex'>
         <Month
           hasNextMonth={hasNextMonth}

@@ -3,30 +3,15 @@
 
 import type { AppProps as Props } from '@polkadot/react-components/types';
 
-import React, { useRef } from 'react';
+import React from 'react';
 
-import { Tabs } from '@polkadot/react-components';
 
 import Contracts from './Contracts/index.js';
-import { useTranslation } from './translate.js';
 
-function ContractsApp ({ basePath, className = '' }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'contracts',
-      text: t('Contracts')
-    }
-  ]);
+function ContractsApp ({ className = '' }: Props): React.ReactElement<Props> {
 
   return (
     <main className={`${className} contracts--App`}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <Contracts />
     </main>
   );

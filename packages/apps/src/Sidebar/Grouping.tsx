@@ -5,8 +5,7 @@ import type { Group } from './types.js';
 
 import React from 'react';
 
-import { Icon, styled } from '@polkadot/react-components';
-import { Icon, styled } from '@polkadot/react-components';
+import { styled } from '@polkadot/react-components';
 
 import Item from './Item.js';
 
@@ -17,53 +16,29 @@ interface Props extends Group {
 
 const SHA_COL = 'rgba(34, 36, 38, 0.12)';
 const SHA_OFF = '5px';
-const SHA_COL = 'rgba(34, 36, 38, 0.12)';
-const SHA_OFF = '5px';
 
-function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
-function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
-  if (routes.length === 1 && routes[0].group === 'settings') {
-    return (
-      <Item
-        className={isActive ? 'isActive' : ''}
-        classNameText='smallHide'
-        isToplevel
-        route={routes[0]}
-      />
-    );
-  }
+function Grouping ({ routes }: Props): React.ReactElement<Props> {
 
   return (
-    <StyledLi className={`${className} ${isActive ? 'isActive' : ''}`}>
-      <div className={`groupHdr ${''}`}>
-        <span className='smallHide'>{name}</span>
-        <Icon
-          className='smallShow'
-          icon={routes[0].icon}
-        />
-        <Icon icon='caret-down' />
-      </div>
-      <ul className='groupMenu'>
+    <StyledLi>
         {routes.map((route): React.ReactNode => (
           <Item
             key={route.name}
             route={route}
           />
         ))}
-      </ul>
-    </StyledLi>
+      </StyledLi>
   );
 }
 
 const StyledLi = styled.li`
   cursor: pointer;
-  position: relative;
-line-height: .214rem;
+  line-height: 3.214rem;
   .groupHdr {
     border-radius: 0.25rem;
     padding: 0.857rem 1.375rem;
     font-weight: var(--font-weight-normal);
-    line-height: 1.214rem;
+    
 
     > .ui--Icon {
       margin-left: 0.75rem;

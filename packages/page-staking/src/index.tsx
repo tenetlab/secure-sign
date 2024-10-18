@@ -90,56 +90,8 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
     []
   );
 
-  const items = useMemo(() => [
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      name: 'actions',
-      text: t('Accounts')
-    },
-    hasStashes && isFunction(api.query.staking.activeEra) && {
-      name: 'payout',
-      text: t('Payouts')
-    },
-    isFunction(api.query.nominationPools?.minCreateBond) && {
-      name: 'pools',
-      text: t('Pools')
-    },
-    {
-      alias: 'returns',
-      name: 'targets',
-      text: t('Targets')
-    },
-    hasStashes && isFunction((api.query.voterBagsList || api.query.bagsList || api.query.voterList)?.counterForListNodes) && {
-      name: 'bags',
-      text: t('Bags')
-    },
-    {
-      count: slashes.reduce((count, [, unapplied]) => count + unapplied.length, 0),
-      name: 'slashes',
-      text: t('Slashes')
-    },
-    {
-      hasParams: true,
-      name: 'query',
-      text: t('Validator stats')
-    }
-  ].filter((q): q is { name: string; text: string } => !!q), [api, hasStashes, slashes, t]);
-
   return (
     <StyledMain className={`${className} staking--App`}>
-      <Tabs
-        basePath={basePath}
-        hidden={
-          areAccountsLoaded && !hasAccounts
-            ? HIDDEN_ACC
-            : undefined
-        }
-        items={items}
-      />
       <MarkPoolsWarning />
       <Routes>
         <Route path={basePath}>

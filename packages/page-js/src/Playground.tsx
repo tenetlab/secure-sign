@@ -9,7 +9,7 @@ import type { Log, LogType, Snippet } from './types.js';
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Button, Dropdown, Editor, styled, Tabs } from '@polkadot/react-components';
+import { Button, Dropdown, Editor, styled } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 import * as types from '@polkadot/types';
 import uiKeyring from '@polkadot/ui-keyring';
@@ -71,7 +71,7 @@ function setupInjected ({ api, isDevelopment }: ApiProps, setIsRunning: (isRunni
 }
 
 // FIXME This... ladies & gentlemen, is a mess that should be untangled
-function Playground ({ basePath, className = '' }: Props): React.ReactElement<Props> {
+function Playground ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const apiProps = useApi();
   const injectedRef = useRef<Injected | null>(null);
@@ -84,13 +84,6 @@ function Playground ({ basePath, className = '' }: Props): React.ReactElement<Pr
   const [options, setOptions] = useState<Snippet[]>([]);
   const [selected, setSelected] = useState(snippets[0]);
 
-  const tabsRef = useRef([
-    {
-      isRoot: true,
-      name: 'playground',
-      text: t('Console')
-    }
-  ]);
 
   // initialize all options
   useEffect((): void => {
@@ -236,10 +229,6 @@ function Playground ({ basePath, className = '' }: Props): React.ReactElement<Pr
 
   return (
     <StyledMain className={`${className} js--App`}>
-      <Tabs
-        basePath={basePath}
-        items={tabsRef.current}
-      />
       <section className='js--Selection'>
         <Dropdown
           className='js--Dropdown'

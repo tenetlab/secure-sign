@@ -37,11 +37,6 @@ function AccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<P
 
   return (
     <main className='accounts--App'>
-      <Tabs
-        basePath={basePath}
-        hidden={(hasAccounts && !isIpfs) ? undefined : HIDDEN_ACC}
-        items={tabsRef.current}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

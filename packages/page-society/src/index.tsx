@@ -7,14 +7,12 @@ import type { MapMember } from './types.js';
 import React, { useMemo } from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Tabs } from '@polkadot/react-components';
 import { useApi, useCall } from '@polkadot/react-hooks';
 import { BN, BN_THREE, BN_TWO } from '@polkadot/util';
 
 import Candidates from './Candidates/index.js';
 import Overview from './Overview/index.js';
 import Suspended from './Suspended/index.js';
-import { useTranslation } from './translate.js';
 import useCounter from './useCounter.js';
 import useMembers from './useMembers.js';
 import useVoters from './useVoters.js';
@@ -80,9 +78,7 @@ function getMapMembers (members: DeriveSocietyMember[], skeptics: string[], vote
 }
 
 function SocietyApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const { api } = useApi();
-  const candidateCount = useCounter();
   const { allMembers, isMember, ownMembers } = useMembers();
   const info = useCall<DeriveSociety>(api.derive.society.info);
   const members = useCall<DeriveSocietyMember[]>(api.derive.society.members);
@@ -95,29 +91,8 @@ function SocietyApp ({ basePath, className }: Props): React.ReactElement<Props> 
     [api, info, members, skeptics, voters]
   );
 
-  const items = useMemo(() => [
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      count: candidateCount,
-      name: 'candidates',
-      text: t('Candidates')
-    },
-    {
-      name: 'suspended',
-      text: t('Suspended')
-    }
-  ], [candidateCount, t]);
-
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={items}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

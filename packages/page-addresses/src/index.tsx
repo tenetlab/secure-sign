@@ -3,31 +3,16 @@
 
 import type { AppProps as Props } from '@polkadot/react-components/types';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Tabs } from '@polkadot/react-components';
 
 import Contacts from './Contacts/index.js';
-import { useTranslation } from './translate.js';
 
 function AddressesApp ({ basePath, onStatusChange }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'contacts',
-      text: t('My contacts')
-    }
-  ]);
 
   return (
     <main>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

@@ -3,7 +3,7 @@
 
 import type { Route, TFunction } from './types.js';
 
-import Component from '@polkadot/app-addresses';
+import Component, { useCounter } from '@polkadot/app-accounts';
 
 export default function create (t: TFunction): Route {
   return {
@@ -11,9 +11,10 @@ export default function create (t: TFunction): Route {
     display: {
       needsApi: []
     },
-    group: 'governance',
-    icon: 'address-card',
-    name: 'addresses',
-    text: t('nav.addresses', 'Address book', { ns: 'apps-routing' })
+    group: 'developer',
+    icon: 'users',
+    name: 'multisigAccounts',
+    text: t('nav.accounts', 'Multisig Accounts', { ns: 'apps-routing' }),
+    useCounter
   };
 }

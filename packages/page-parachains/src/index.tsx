@@ -5,11 +5,10 @@ import '@polkadot/api-augment/substrate';
 
 import type { ParaId } from '@polkadot/types/interfaces';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router';
 import { useLocation } from 'react-router-dom';
 
-import { Tabs } from '@polkadot/react-components';
 import { useApi, useCall } from '@polkadot/react-hooks';
 
 import Auctions from './Auctions/index.js';
@@ -17,7 +16,6 @@ import Crowdloan from './Crowdloan/index.js';
 import Overview from './Overview/index.js';
 import Parathreads from './Parathreads/index.js';
 import Proposals from './Proposals/index.js';
-import { useTranslation } from './translate.js';
 import useActionsQueue from './useActionsQueue.js';
 import useAuctionInfo from './useAuctionInfo.js';
 import useFunds from './useFunds.js';
@@ -33,7 +31,6 @@ interface Props {
 }
 
 function ParachainsApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const { api } = useApi();
   const { pathname } = useLocation();
   const auctionInfo = useAuctionInfo();
@@ -46,36 +43,8 @@ function ParachainsApp ({ basePath, className }: Props): React.ReactElement<Prop
   const upcomingIds = useUpcomingIds();
   const paraIds = useCall<ParaId[]>(api.query.paras.parachains);
 
-  const items = useRef([
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      name: 'parathreads',
-      text: t('Parathreads')
-    },
-    api.query.proposeParachain && {
-      name: 'proposals',
-      text: t('Proposals')
-    },
-    api.query.auctions && {
-      name: 'auctions',
-      text: t('Auctions')
-    },
-    api.query.crowdloan && {
-      name: 'crowdloan',
-      text: t('Crowdloan')
-    }
-  ].filter((q) => !!q));
-
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={items.current}
-      />
       <Routes>
         <Route path={basePath}>
           <Route
