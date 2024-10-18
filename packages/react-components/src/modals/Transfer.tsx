@@ -49,7 +49,7 @@ async function checkPhishing (_senderId: string | null, recipientId: string | nu
   ];
 }
 
-function Transfer ({ className = '', onClose, recipientId: propRecipientId, senderId: propSenderId }: Props): React.ReactElement<Props> {
+function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSenderId }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [amount, setAmount] = useState<BN | undefined>(BN_ZERO);

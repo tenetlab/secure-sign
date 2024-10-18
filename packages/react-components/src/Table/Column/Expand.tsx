@@ -3,7 +3,7 @@
 
 import React from 'react';
 
-import Icon from '../../Icon.js';
+// import Icon from '../../Icon.js';
 import { styled } from '../../styled.js';
 
 export interface Props {
@@ -14,7 +14,7 @@ export interface Props {
   toggle: () => void;
 }
 
-function Expand ({ className = '', colSpan, isExpanded, rowSpan, toggle }: Props): React.ReactElement<Props> {
+function Expand ({ className = '', colSpan, rowSpan, toggle }: Props): React.ReactElement<Props> {
   return (
     <StyledTd
       className={`${className} ui--Table-Column-Expand`}
