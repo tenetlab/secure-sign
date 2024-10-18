@@ -3,12 +3,8 @@
 
 import type { KeyedEvent } from '@polkadot/react-hooks/ctx/types';
 
-import React, { useRef } from 'react';
-
-import { Tabs } from '@polkadot/react-components';
-
+import React from 'react';
 import CrustFiles from './CrustFiles.js';
-import { useTranslation } from './translate.js';
 
 interface Props {
   basePath: string;
