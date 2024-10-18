@@ -1,12 +1,10 @@
 // Copyright 2017-2024 @polkadot/app-referenda authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useRef } from 'react';
+import React from 'react';
 
-import { Tabs } from '@polkadot/react-components';
 
 import Referenda from './Referenda/index.js';
-import { useTranslation } from './translate.js';
 
 export { default as useCounter } from './useCounter.js';
 
@@ -15,23 +13,10 @@ interface Props {
   className?: string;
 }
 
-function App ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-
-  const tabsRef = useRef([
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    }
-  ]);
+function App ({ className }: Props): React.ReactElement<Props> {
 
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={tabsRef.current}
-      />
       <Referenda
         isConvictionVote
         palletReferenda='referenda'

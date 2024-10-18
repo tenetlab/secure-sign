@@ -5,7 +5,7 @@ import type { BareProps as Props } from '@polkadot/react-components/types';
 
 import React, { useMemo } from 'react';
 
-import { AccountSidebar, styled } from '@polkadot/react-components';
+import { AccountSidebar, styled, Menu as Menubar} from '@polkadot/react-components';
 import GlobalStyle from '@polkadot/react-components/styles';
 import { useApi, useTheme } from '@polkadot/react-hooks';
 import Signer from '@polkadot/react-signer';
@@ -13,12 +13,12 @@ import Signer from '@polkadot/react-signer';
 import Content from './Content/index.js';
 import Menu from './Menu/index.js';
 import BottomOverlay from './overlays/Bottom.js';
-import ConnectingOverlay from './overlays/Connecting.js';
 import WarmUp from './WarmUp.js';
+import Sidebar from './Sidebar/index.js';
 
 export const PORTAL_ID = 'portals';
 
-function Apps ({ className = '' }: Props): React.ReactElement<Props> {
+function Apps({ className = '' }: Props): React.ReactElement<Props> {
   const { themeClassName } = useTheme();
   const { apiEndpoint, isDevelopment } = useApi();
 
@@ -34,14 +34,18 @@ function Apps ({ className = '' }: Props): React.ReactElement<Props> {
       <GlobalStyle uiHighlight={uiHighlight} />
       <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
         <Menu />
-        <AccountSidebar>
-          <Signer>
-            <Content />
-          </Signer>
-          <ConnectingOverlay />
-          <BottomOverlay />
-          <div id={PORTAL_ID} />
-        </AccountSidebar>
+        <Menubar.Divider />
+        <div style={{ display: 'flex' }}>
+          <Sidebar />
+          <AccountSidebar>
+            <Signer>
+              <Content />
+            </Signer>
+            {/* <ConnectingOverlay /> */}
+            <BottomOverlay />
+            <div id={PORTAL_ID} />
+          </AccountSidebar>
+        </div>
       </StyledDiv>
       <WarmUp />
     </>

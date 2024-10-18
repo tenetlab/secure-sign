@@ -18,7 +18,6 @@ function AccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<P
 
   return (
     <main className='accounts--App'>
-      
       <Routes>
         <Route path={basePath}>
           <Route

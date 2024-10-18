@@ -11,7 +11,7 @@ export default function create (t: TFunction): Route {
     display: {
       needsApi: []
     },
-    group: 'accounts',
+    group: 'governance',
     icon: 'address-card',
     name: 'addresses',
     text: t('nav.addresses', 'Address book', { ns: 'apps-routing' })

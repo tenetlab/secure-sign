@@ -3,17 +3,15 @@
 
 import type { Hash } from '@polkadot/types/interfaces';
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { Route, Routes } from 'react-router';
 
 import Motions from '@polkadot/app-tech-comm/Proposals';
-import { Tabs } from '@polkadot/react-components';
 import { useApi, useCall, useCollectiveMembers } from '@polkadot/react-hooks';
 
 import Announcements from './Announcements/index.js';
 import Members from './Members/index.js';
 import Unscrupulous from './Unscrupulous/index.js';
-import { useTranslation } from './translate.js';
 import useAnnoucements from './useAnnoucements.js';
 import useMembers from './useMembers.js';
 import useRule from './useRule.js';
@@ -30,7 +28,6 @@ interface Props {
 const DEFAULT_THRESHOLD = 2 / 3;
 
 function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const { api } = useApi();
   const proposalHashes = useCall<Hash[]>(api.derive.alliance.proposalHashes);
   const { isMember: isVoter, members: voters, prime } = useCollectiveMembers('alliance');
@@ -44,32 +41,8 @@ function AllianceApp ({ basePath, className }: Props): React.ReactElement<Props>
     []
   );
 
-  const items = useMemo(() => [
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      name: 'motions',
-      text: t('Motions ({{count}})', { replace: { count: proposalHashes?.length || 0 } })
-    },
-    {
-      name: 'announcements',
-      text: t('Announcements ({{count}})', { replace: { count: accouncements?.length || 0 } })
-    },
-    {
-      name: 'unscrupulous',
-      text: t('Unscrupulous')
-    }
-  ], [accouncements, proposalHashes, t]);
-
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={items}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

@@ -135,7 +135,6 @@ function isSwitchDisabled (hasUrlChanged: boolean, apiUrl: string, isUrlValid: b
   return true;
 }
 
-
 function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const linkOptions = createWsEndpoints(t);
@@ -242,7 +241,6 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
     },
     [apiUrl, onClose, hasUrlChanged]
   );
-
 
   const _saveApiEndpoint = useCallback(
     (): void => {

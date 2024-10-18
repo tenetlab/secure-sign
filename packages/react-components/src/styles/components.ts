@@ -142,7 +142,7 @@ export default `
       color: #3BBEFF;
 
       &.purpleColor {
-        color: #4964a8;
+        color: #E6007A;
       }
     }
   }

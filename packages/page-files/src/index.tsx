@@ -16,22 +16,10 @@ interface Props {
   newEvents?: KeyedEvent[];
 }
 
-function FilesApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'crust',
-      text: t('Your Files')
-    }
-  ]);
+function FilesApp ({ className }: Props): React.ReactElement<Props> {
 
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <CrustFiles />
     </main>
   );

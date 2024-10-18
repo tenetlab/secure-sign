@@ -22,7 +22,7 @@ function Summary ({ balance, className }: Props) {
     <SummaryBox className={className}>
       <CardSummary label={t('total balance')}>
         <FormatBalance
-          className={balance ? '' : ''}
+          className={balance ? '' : '--tmp'}
           value={balance?.total || 1}
         />
       </CardSummary>
@@ -31,13 +31,13 @@ function Summary ({ balance, className }: Props) {
         label={t('total transferable')}
       >
         <FormatBalance
-          className={balance ? '' : ''}
+          className={balance ? '' : '--tmp'}
           value={balance?.transferable || 1}
         />
       </CardSummary>
       <CardSummary label={t('total locked')}>
         <FormatBalance
-          className={balance ? '' : ''}
+          className={balance ? '' : '--tmp'}
           value={balance?.locked || 1}
         />
       </CardSummary>

@@ -6,16 +6,13 @@ import '@polkadot/api-augment/substrate';
 
 import type { BN } from '@polkadot/util';
 
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Tabs } from '@polkadot/react-components';
-import { useAccounts } from '@polkadot/react-hooks';
 import { BN_ONE } from '@polkadot/util';
 
 import Balances from './Balances/index.js';
 import Overview from './Overview/index.js';
-import { useTranslation } from './translate.js';
 import useAssetIds from './useAssetIds.js';
 import useAssetInfos from './useAssetInfos.js';
 
@@ -41,29 +38,8 @@ function findOpenId (ids?: BN[]): BN {
 }
 
 function AssetApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-  const { hasAccounts } = useAccounts();
   const ids = useAssetIds();
   const infos = useAssetInfos(ids);
-
-  const tabsRef = useRef([
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      name: 'balances',
-      text: t('Balances')
-    }
-  ]);
-
-  const hidden = useMemo(
-    () => (hasAccounts && infos && infos.some(({ details, metadata }) => !!(details && metadata)))
-      ? []
-      : ['balances'],
-    [hasAccounts, infos]
-  );
 
   const openId = useMemo(
     () => findOpenId(ids),
@@ -72,11 +48,6 @@ function AssetApp ({ basePath, className }: Props): React.ReactElement<Props> {
 
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        hidden={hidden}
-        items={tabsRef.current}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

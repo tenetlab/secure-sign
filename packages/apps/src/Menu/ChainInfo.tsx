@@ -1,13 +1,11 @@
 // Copyright 2017-2024 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-// import type { RuntimeVersion } from '@polkadot/types/interfaces';
-
 import React from 'react';
 
 import { ChainImg, Icon, styled } from '@polkadot/react-components';
 import { useIpfs, useToggle } from '@polkadot/react-hooks';
-import {  Chain } from '@polkadot/react-query';
+import { Chain } from '@polkadot/react-query';
 
 import Endpoints from '../Endpoints/index.js';
 
@@ -16,8 +14,6 @@ interface Props {
 }
 
 function ChainInfo ({ className }: Props): React.ReactElement<Props> {
-  // const { api, isApiReady } = useApi();
-  // const runtimeVersion = useCall<RuntimeVersion>(isApiReady && api.rpc.state.subscribeRuntimeVersion);
   const { ipnsChain } = useIpfs();
   const [isEndpointsVisible, toggleEndpoints] = useToggle();
   const canToggle = !ipnsChain;
@@ -25,19 +21,12 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={className}>
       <div
-        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} highlight--color-contrast`}
+        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} `}
         onClick={toggleEndpoints}
       >
         <ChainImg />
         <div className='info media--1000'>
           <Chain className='chain' />
-          {/* {runtimeVersion && (
-            <div className='runtimeVersion'>{runtimeVersion.specName.toString()}/{runtimeVersion.specVersion.toNumber()}</div>
-          )} */}
-          {/* <BestNumber
-            className='bestNumber'
-            label='#'
-          /> */}
         </div>
         {canToggle && (
           <Icon
@@ -55,10 +44,9 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   box-sizing: border-box;
-  padding: 0.5rem 1rem 0.5rem 0.75rem;
-  // margin: 5;
-  border: 1px solid #8d8d8d;
-  border-radius: 0.5rem;
+  padding: 0.5rem 1rem 0.5rem 0;
+  margin: 0;
+
   .apps--SideBar-logo-inner {
     display: flex;
     align-items: center;
@@ -69,10 +57,9 @@ const StyledDiv = styled.div`
     }
 
     .ui--ChainImg {
-      height: 2rem;
-      // margin-right: 0.5rem;
-      margin-lett: 0.5rem;
-      width: 2rem;
+      height: 3rem;
+      margin-right: 0.5rem;
+      width: 3rem;
     }
 
     .ui--Icon.dropdown,
@@ -95,7 +82,7 @@ const StyledDiv = styled.div`
       text-align: right;
 
       .chain {
-        font-size: var(--font-size-h3);
+        font-size: var(--font-size-small);
         max-width: 16rem;
         white-space: nowrap;
         overflow: hidden;

@@ -25,7 +25,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Aband',
     ui: {
-      color: '#4964a8',
+      color: '#7358ff',
       logo: chainsAbandPNG
     }
   },
@@ -39,7 +39,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Acurast Canary',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: chainsAcurastPNG
     }
   },
@@ -53,7 +53,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Altair',
     ui: {
-      color: '#4964a8',
+      color: '#ffb700',
       logo: chainsAltairSVG
     }
   },
@@ -67,7 +67,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Amplitude',
     ui: {
-      color: '#4964a8',
+      color: '#5DEFA7',
       logo: chainsAmplitudeSVG
     }
   },
@@ -82,7 +82,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bajun Network',
     ui: {
-      color: '#4964a8',
+      color: '#161212',
       logo: nodesBajunPNG
     }
   },
@@ -97,7 +97,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Basilisk',
     ui: {
-      color: '#4964a8',
+      color: '#49E49F',
       logo: nodesBasiliskPNG
     }
   },
@@ -113,7 +113,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bifrost',
     ui: {
-      color: '#4964a8',
+      color: '#5a25f0',
       logo: nodesBifrostSVG
     }
   },
@@ -126,7 +126,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Calamari',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: nodesCalamariPNG
     }
   },
@@ -141,7 +141,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Crab',
     ui: {
-      color: '#4964a8',
+      color: '#512DBC',
       logo: nodesCrabSVG
     }
   },
@@ -207,7 +207,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Dora Factory',
     ui: {
-      color: '#4964a8',
+      color: '#FF761C',
       logo: chainsDorafactoryPNG
     }
   },
@@ -220,7 +220,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Genshiro',
     ui: {
-      color: '#4964a8',
+      color: '#e8662d',
       logo: chainsGenshiroSVG
     }
   },
@@ -234,7 +234,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Genshiro crowdloan 2',
     ui: {
-      color: '#4964a8',
+      color: '#e8662d',
       logo: chainsGenshiroSVG
     }
   },
@@ -252,7 +252,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'GM',
     ui: {
-      color: '#4964a8',
+      color: '#f47b36',
       logo: chainsGmJPEG
     }
   },
@@ -265,7 +265,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hyperbridge (Messier)',
     ui: {
-      color: '#4964a8',
+      color: '#ED6FF1',
       logo: nodesHyperbridgePNG
     }
   },
@@ -279,7 +279,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Imbue Network',
     ui: {
-      color: '#4964a8',
+      color: '#baff36',
       logo: nodesImbuePNG
     }
   },
@@ -293,7 +293,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network',
     ui: {
-      color: '#4964a8',
+      color: '#2e154b',
       logo: nodesIntegriteeSVG
     }
   },
@@ -309,7 +309,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'InvArch Tinkernet',
     ui: {
-      color: '#4964a8',
+      color: '#161616',
       logo: chainsTinkerPNG
     }
   },
@@ -342,7 +342,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Karura',
     ui: {
-      color: '#4964a8',
+      color: '#ff4c3b',
       logo: chainsKaruraSVG
     }
   },
@@ -360,7 +360,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Khala Network',
     ui: {
-      color: '#4964a8',
+      color: '#03f3f3',
       logo: nodesKhalaSVG
     }
   },
@@ -374,7 +374,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'KICO',
     ui: {
-      color: '#4964a8',
+      color: '#29B58D',
       logo: chainsKicoPNG
     }
   },
@@ -387,7 +387,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'KICO 2',
     ui: {
-      color: '#4964a8',
+      color: '#29B58D',
       logo: chainsKicoPNG
     }
   },
@@ -403,7 +403,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Kintsugi BTC',
     ui: {
-      color: '#4964a8',
+      color: '#1a0a2d',
       logo: chainsKintsugiPNG
     }
   },
@@ -431,7 +431,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Kreivo - By Virto',
     ui: {
-      color: '#4964a8',
+      color: '#294940',
       identityIcon: 'polkadot',
       logo: chainsKreivoSVG
     }
@@ -461,7 +461,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Listen Network',
     ui: {
-      color: '#4964a8',
+      color: '#FFAD0A',
       logo: chainsListenPNG
     }
   },
@@ -474,7 +474,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Litmus',
     ui: {
-      color: '#4964a8',
+      color: '#3913D3',
       logo: nodesLitmusPNG
     }
   },
@@ -500,7 +500,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Mangata',
     ui: {
-      color: '#4964a8',
+      color: '#030408',
       logo: chainsMangataPNG
     }
   },
@@ -513,7 +513,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Mars',
     ui: {
-      color: '#4964a8',
+      color: '#E56239',
       logo: nodesAresMarsPNG
     }
   },
@@ -532,7 +532,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Moonriver',
     ui: {
-      color: '#4964a8',
+      color: '#06353d',
       logo: nodesMoonriverSVG
     }
   },
@@ -546,7 +546,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Parallel Heiko',
     ui: {
-      color: '#4964a8',
+      color: '#42d5de',
       logo: nodesParallelSVG
     }
   },
@@ -558,7 +558,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {},
     text: 'Parallel Heiko 2',
     ui: {
-      color: '#4964a8',
+      color: '#42d5de',
       logo: nodesParallelSVG
     }
   },
@@ -573,7 +573,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Picasso',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: nodesPicassoPNG
     }
   },
@@ -586,7 +586,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Pichiu',
     ui: {
-      color: '#4964a8',
+      color: '#ed007e',
       logo: nodesPichiuPNG
     }
   },
@@ -600,7 +600,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Pioneer',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: nodesBitcountryPNG
     }
   },
@@ -613,7 +613,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'PolkaSmith by PolkaFoundry',
     ui: {
-      color: '#4964a8',
+      color: '#0DDDFB',
       logo: nodesPolkasmithSVG
     }
   },
@@ -625,7 +625,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Quantum Portal Network',
     ui: {
-      color: '#4964a8',
+      color: '#b37700',
       logo: chainsQpnPNG
     }
   },
@@ -643,7 +643,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'QUARTZ by UNIQUE',
     ui: {
-      color: '#4964a8',
+      color: '#FF4D6A',
       logo: nodesQuartzPNG
     }
   },
@@ -656,7 +656,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'RioDeFi',
     ui: {
-      color: '#4964a8',
+      color: '#4E7AED',
       logo: chainsRiodefiPNG
     }
   },
@@ -673,7 +673,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Robonomics',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: nodesRobonomicsSVG
     }
   },
@@ -690,7 +690,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Robonomics 2',
     ui: {
-      color: '#4964a8',
+      color: '#2949d3',
       logo: nodesRobonomicsSVG
     }
   },
@@ -704,7 +704,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Sakura',
     ui: {
-      color: '#4964a8',
+      color: '#ff5995',
       logo: nodesSakuraSVG
     }
   },
@@ -722,7 +722,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Shiden',
     ui: {
-      color: '#4964a8',
+      color: '#5923B2',
       logo: chainsShidenPNG
     }
   },
@@ -736,7 +736,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Shiden Crowdloan 2',
     ui: {
-      color: '#4964a8',
+      color: '#5923B2',
       logo: chainsShidenPNG
     }
   },
@@ -761,7 +761,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SORA',
     ui: {
-      color: '#4964a8',
+      color: '#2D2926',
       logo: nodesSoraSubstrateSVG
     }
   },
@@ -774,7 +774,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SubGame Gamma',
     ui: {
-      color: '#4964a8',
+      color: '#EB027D',
       logo: nodesSubgameSVG
     }
   },
@@ -787,7 +787,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'SubsocialX',
     ui: {
-      color: '#4964a8',
+      color: '#69058C',
       logo: nodesSubsocialXSVG
     }
   },
@@ -800,7 +800,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 't1rn',
     ui: {
-      color: '#4964a8',
+      color: '#131532',
       logo: nodesT1rnPNG
     }
   },
@@ -825,7 +825,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {},
     text: 'TrustBase',
     ui: {
-      color: '#4964a8',
+      color: '#ff43aa',
       logo: nodesTrustbasePNG
     }
   },
@@ -839,7 +839,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Turing Network',
     ui: {
-      color: '#4964a8',
+      color: '#A8278C',
       logo: chainsTuringPNG
     }
   },
@@ -865,7 +865,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Xode',
     ui: {
-      color: '#4964a8',
+      color: '#ed1f7a',
       logo: nodesXodePNG
     }
   },
@@ -876,7 +876,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     providers: {},
     text: 'Yerba Network',
     ui: {
-      color: '#4964a8',
+      color: '#a5503c',
       logo: nodesYerbanetworkPNG
     }
   },
@@ -890,7 +890,7 @@ export const prodParasKusama: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'ZERO Canary',
     ui: {
-      color: '#4964a8',
+      color: '#000000',
       logo: nodesZeroSVG
     }
   }
@@ -916,7 +916,7 @@ export const prodParasKusamaCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'AssetHub',
     ui: {
-      color: '#4964a8',
+      color: '#113911',
       logo: chainsAssethubKusamaSVG
     }
   },
@@ -958,7 +958,7 @@ export const prodParasKusamaCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Coretime',
     ui: {
-      color: '#4964a8',
+      color: '#113911',
       logo: chainsCoretimeKusamaSVG
     }
   },
@@ -979,7 +979,7 @@ export const prodParasKusamaCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Encointer Network',
     ui: {
-      color: '#4964a8',
+      color: '#0000cc',
       logo: nodesEncointerBlueSVG
     }
   },
@@ -1000,7 +1000,7 @@ export const prodParasKusamaCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'People',
     ui: {
-      color: '#4964a8',
+      color: '#36454F',
       logo: chainsPeopleKusamaSVG
     }
   }

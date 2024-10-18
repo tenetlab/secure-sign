@@ -22,7 +22,7 @@ function LogoInfo ({ className }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={className}>
       <div
-        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} highlight--color-contrast`}
+        className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''}`}
       >
         <img src='/multi-signature.png' alt='logo' className='multisig_logo' width={60} height={60}/>
       </div>

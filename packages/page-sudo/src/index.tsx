@@ -3,10 +3,10 @@
 
 import type { AppProps as Props } from '@polkadot/react-components/types';
 
-import React, { useRef } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Icon, Tabs } from '@polkadot/react-components';
+import { Icon } from '@polkadot/react-components';
 import { useSudo } from '@polkadot/react-hooks';
 
 import SetKey from './SetKey.js';
@@ -17,24 +17,8 @@ function SudoApp ({ basePath }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts, hasSudoKey, sudoKey } = useSudo();
 
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'index',
-      text: t('Sudo access')
-    },
-    {
-      name: 'key',
-      text: t('Set sudo key')
-    }
-  ]);
-
   return (
     <main>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       {hasSudoKey
         ? (
           <Routes>

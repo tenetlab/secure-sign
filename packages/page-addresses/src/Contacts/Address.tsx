@@ -97,12 +97,12 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
     if (filter.length === 0) {
       setIsVisible(true);
     } else {
-      const _filter = filter?.toLowerCase();
+      const _filter = filter.toLowerCase();
 
       setIsVisible(
         tags.reduce((result: boolean, tag: string): boolean => {
-          return result || tag?.toLowerCase().includes(_filter);
-        }, accName?.toLowerCase().includes(_filter))
+          return result || tag.toLowerCase().includes(_filter);
+        }, accName.toLowerCase().includes(_filter))
       );
     }
   }, [accName, filter, tags]);

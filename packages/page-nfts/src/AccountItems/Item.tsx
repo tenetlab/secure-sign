@@ -18,7 +18,7 @@ function Item ({ className, collectionName, value: { account, id, ipfsData } }: 
   let imageLink = '';
 
   if (ipfsData?.image) {
-    imageLink = ipfsData.image?.toLowerCase().startsWith('http') ? ipfsData.image : `https://ipfs.io/ipfs/${ipfsData.image}`;
+    imageLink = ipfsData.image.toLowerCase().startsWith('http') ? ipfsData.image : `https://ipfs.io/ipfs/${ipfsData.image}`;
   }
 
   return (

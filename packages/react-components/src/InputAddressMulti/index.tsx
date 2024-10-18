@@ -107,8 +107,8 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 
 const StyledDiv = styled.div`
   border-top-width: 0px;
-  // margin-left: 2rem;
-  width: calc(100% - 0rem);
+  margin-left: 2rem;
+  width: calc(100% - 2rem);
 
   .ui--InputAddressMulti-Input {
     .ui.input {
