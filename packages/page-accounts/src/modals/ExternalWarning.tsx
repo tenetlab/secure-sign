@@ -7,7 +7,7 @@ import { MarkWarning } from '@polkadot/react-components';
 
 import { useTranslation } from '../translate.js';
 
-const isElectron = navigator.userAgent?.toLowerCase().indexOf(' electron/') > -1;
+const isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1;
 
 function ExternalWarning (): React.ReactElement | null {
   const { t } = useTranslation();

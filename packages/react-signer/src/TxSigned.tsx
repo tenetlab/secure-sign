@@ -465,7 +465,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   />
                 )}
                 {isSubmit && !senderInfo.isMultiCall && innerTx && (
-                  <Modal.Columns >
+                  <Modal.Columns hint={t('The full call data that can be supplied to a final call to multi approvals')}>
                     <Output
                       isDisabled
                       isTrimmed
@@ -476,7 +476,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   </Modal.Columns>
                 )}
                 {isSubmit && innerHash && (
-                  <Modal.Columns>
+                  <Modal.Columns hint={t('The call hash as calculated for this transaction')}>
                     <Output
                       isDisabled
                       isTrimmed
@@ -504,7 +504,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           onClick={_doStart}
           tabIndex={2}
         />
-        {/* <div className='signToggle'>
+        <div className='signToggle'>
           {!isBusy && (
             <Toggle
               isDisabled={!!currentItem.payload}
@@ -528,7 +528,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
               value={isQueueSubmit}
             />
           )}
-        </div> */}
+        </div>
       </Modal.Actions>
     </>
   );

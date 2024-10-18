@@ -25,7 +25,7 @@ function getHighlight (uiHighlight: string | undefined): string {
 }
 
 function countBrightness (uiHighlight: string | undefined): number {
-  const hc = getHighlight(uiHighlight).replace('#', '')?.toLowerCase();
+  const hc = getHighlight(uiHighlight).replace('#', '').toLowerCase();
 
   return PARTS.reduce((b, p, index) => b + (parseInt(hc.substring(p, p + 2), 16) * FACTORS[index]), 0);
 }
@@ -536,9 +536,9 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   // we treat h5 and label as equivalents
   label, h5 {
     color: var(--color-label);
-    font-size: var(--font-size-normal);
+    font-size: var(--font-size-label);
     font-style: normal;
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-weight-label);
     line-height: 1rem;
     margin-bottom: 0.25rem !important;
     text-transform: var(--text-transform-label);

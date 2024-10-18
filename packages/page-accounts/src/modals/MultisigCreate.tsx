@@ -159,7 +159,7 @@ function Multisig ({ className = '', onClose, onStatusChange }: Props): React.Re
       className={className}
       header={t('Add multisig')}
       onClose={onClose}
-      size='small'
+      size='large'
     >
       <Modal.Content>
         <Modal.Columns>
@@ -172,12 +172,12 @@ function Multisig ({ className = '', onClose, onStatusChange }: Props): React.Re
         </Modal.Columns>
         {!showSignaturesUpload && (
           <Modal.Columns
-            // hint={
-            //   <>
-            //     <p>{t('The signatories has the ability to create transactions using the multisig and approve transactions sent by others.Once the threshold is reached with approvals, the multisig transaction is enacted on-chain.')}</p>
-            //     <p>{t('Since the multisig function like any other account, once created it is available for selection anywhere accounts are used and needs to be funded before use.')}</p>
-            //   </>
-            // }
+            hint={
+              <>
+                <p>{t('The signatories has the ability to create transactions using the multisig and approve transactions sent by others.Once the threshold is reached with approvals, the multisig transaction is enacted on-chain.')}</p>
+                <p>{t('Since the multisig function like any other account, once created it is available for selection anywhere accounts are used and needs to be funded before use.')}</p>
+              </>
+            }
           >
             <InputAddressMulti
               available={availableSignatories}
@@ -227,7 +227,7 @@ function Multisig ({ className = '', onClose, onStatusChange }: Props): React.Re
             )}
           </Modal.Columns>
         )}
-        <Modal.Columns>
+        <Modal.Columns hint={t('The threshold for approval should be less or equal to the number of signatories for this multisig.')}>
           <InputNumber
             isError={!isThresholdValid}
             label={t('threshold')}
@@ -235,7 +235,7 @@ function Multisig ({ className = '', onClose, onStatusChange }: Props): React.Re
             value={threshold}
           />
         </Modal.Columns>
-        <Modal.Columns>
+        <Modal.Columns hint={t('The name is for unique identification of the account in your owner lists.')}>
           <Input
             autoFocus
             className='full'

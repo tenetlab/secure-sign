@@ -4,9 +4,10 @@
 import type { TFunction, TOptions } from '../types.js';
 import type { LinkOption } from './types.js';
 
-import { createCustom, createOwn } from './development.js';
-import { prodChains, prodRelayPolkadot } from './production.js';
-import { testRelayWestend } from './testing.js';
+import { createCustom, createDev, createOwn } from './development.js';
+import { prodChains, prodRelayKusama, prodRelayPolkadot } from './production.js';
+import { testChains, testRelayWestend } from './testing.js';
+import { testRelayPaseo } from './testingRelayPaseo.js';
 import { expandEndpoints } from './util.js';
 
 export { CUSTOM_ENDPOINT_KEY } from './development.js';
@@ -28,6 +29,25 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
+      text: t('rpc.header.polkadot.relay', 'Polkadot & parachains', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, [prodRelayPolkadot], firstOnly, withSort),
+    {
+      isDisabled: false,
+      isHeader: true,
+      text: t('rpc.header.kusama.relay', 'Kusama & parachains', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, [prodRelayKusama], firstOnly, withSort),
+    {
+      isDisabled: false,
+      isHeader: true,
+      isSpaced: true,
       text: t('rpc.header.westend.relay', 'Test Westend & parachains', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
@@ -38,13 +58,12 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       isDisabled: false,
       isHeader: true,
       isSpaced: true,
-      text: t('rpc.header.polkadot.relay', 'Polkadot & parachains', { ns: 'apps-config' }),
+      text: t('rpc.header.paseo.relay', 'Test Paseo & parachains', { ns: 'apps-config' }),
       textBy: '',
       ui: {},
       value: ''
     },
-    ...expandEndpoints(t, [prodRelayPolkadot], firstOnly, withSort),
-    
+    ...expandEndpoints(t, [testRelayPaseo], firstOnly, withSort),
     {
       isDisabled: false,
       isHeader: true,
@@ -55,7 +74,26 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       value: ''
     },
     ...expandEndpoints(t, prodChains, firstOnly, withSort),
-    // ...createDev(t),
+    {
+      isDisabled: false,
+      isHeader: true,
+      text: t('rpc.header.test', 'Test networks', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, testChains, firstOnly, withSort),
+    {
+      isDevelopment: true,
+      isDisabled: false,
+      isHeader: true,
+      isSpaced: true,
+      text: t('rpc.header.dev', 'Development', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...createDev(t),
     ...createOwn(t)
   ].filter(({ isDisabled }) => !isDisabled);
 }

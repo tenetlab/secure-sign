@@ -264,7 +264,7 @@ const StyledSpan = styled.span`
     word-break: break-all;
 
     .name {
-      font-weight: var(--font-weight-bold) !important;
+      font-weight: var(--font-weight-normal) !important;
       filter: grayscale(100%);
       line-height: 1;
       overflow: hidden;
@@ -284,7 +284,7 @@ const StyledSpan = styled.span`
       }
 
       .sub {
-        font-size: var(--font-size-h1);
+        font-size: var(--font-size-tiny);
         opacity: var(--opacity-light);
       }
     }

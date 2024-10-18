@@ -22,7 +22,7 @@ interface SignatureParts {
 
 // converts an Ethereum address to a checksum representation
 export function addrToChecksum (_address: string): string {
-  const address = _address?.toLowerCase();
+  const address = _address.toLowerCase();
   const hash = keccakAsHex(address.substring(2)).substring(2);
   let result = '0x';
 

@@ -4,7 +4,7 @@
 import type { Route, Routes } from '@polkadot/apps-routing/types';
 import type { ApiProps } from '@polkadot/react-api/types';
 import type { AccountId } from '@polkadot/types/interfaces';
-import type { Group, Groups } from './types.js';
+import type { Group, Groups, ItemRoute } from './types.js';
 
 import React, { useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -17,12 +17,29 @@ import { findMissingApis } from '../endpoint.js';
 import { useTranslation } from '../translate.js';
 import ChainInfo from './ChainInfo.js';
 import Grouping from './Grouping.js';
-import LogoInfo from './LogoInfo.js';
+import Item from './Item.js';
+import NodeInfo from './NodeInfo.js';
 
 interface Props {
   className?: string;
 }
 
+function createExternals (t: (key: string, optionsOrText?: string | { replace: Record<string, unknown> }, options?: { ns: string }) => string): ItemRoute[] {
+  return [
+    {
+      href: 'https://github.com/polkadot-js/apps',
+      icon: 'code-branch',
+      name: 'github',
+      text: t('nav.github', 'GitHub', { ns: 'apps-routing' })
+    },
+    {
+      href: 'https://wiki.polkadot.network',
+      icon: 'book',
+      name: 'wiki',
+      text: t('nav.wiki', 'Wiki', { ns: 'apps-routing' })
+    }
+  ];
+}
 
 function checkVisible ({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
   if (isHidden) {
@@ -77,11 +94,15 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
   const sudoKey = useCall<AccountId>(apiProps.isApiReady && apiProps.api.query.sudo?.key);
   const location = useLocation();
 
+  const externalRef = useRef(createExternals(t));
   const routeRef = useRef(createRoutes(t));
 
   const groupRef = useRef({
     accounts: t('Accounts'),
     developer: t('Developer'),
+    files: t('Files'),
+    governance: t('Governance'),
+    network: t('Network'),
     settings: t('Settings')
   });
 
@@ -106,11 +127,11 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''} highlight--bg`}>
       <div className='menuContainer'>
         <div className='menuSection'>
-          <LogoInfo/>
+          <ChainInfo />
           <ul className='menuItems'>
             {visibleGroups.map(({ name, routes }): React.ReactNode => (
               <Grouping
-                isActive={!!activeRoute && activeRoute.group === name?.toLowerCase()}
+                isActive={!!activeRoute && activeRoute.group === name.toLowerCase()}
                 key={name}
                 name={name}
                 routes={routes}
@@ -118,7 +139,19 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
             ))}
           </ul>
         </div>
-        <ChainInfo className='' />
+        <div className='menuSection media--1200'>
+          <ul className='menuItems'>
+            {externalRef.current.map((route): React.ReactNode => (
+              <Item
+                isLink
+                isToplevel
+                key={route.name}
+                route={route}
+              />
+            ))}
+          </ul>
+        </div>
+        <NodeInfo className='media--1400' />
       </div>
     </StyledDiv>
   );
@@ -129,6 +162,7 @@ const StyledDiv = styled.div`
   padding: 0;
   z-index: 220;
   position: relative;
+
   .smallShow {
     display: none;
   }
@@ -145,7 +179,7 @@ const StyledDiv = styled.div`
   }
 
   &.isLoading {
-    background: #4964a8 !important;
+    background: #999 !important;
 
     .menuActive {
       background: var(--bg-page);
