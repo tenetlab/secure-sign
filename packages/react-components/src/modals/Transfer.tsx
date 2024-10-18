@@ -110,11 +110,11 @@ function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSender
       className='app--accounts-Modal'
       header={t('Send funds')}
       onClose={onClose}
-      size='small'
+      size='large'
     >
       <Modal.Content>
-        {/* <div className={className}> */}
-          <Modal.Columns >
+        <div className={className}>
+          <Modal.Columns hint={t('The transferred balance will be subtracted (along with fees) from the sender account.')}>
             <InputAddress
               defaultValue={propSenderId}
               isDisabled={!!propSenderId}
@@ -129,7 +129,7 @@ function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSender
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns >
+          <Modal.Columns hint={t('The beneficiary will have access to the transferred fees when the transaction is included in a block.')}>
             <InputAddress
               defaultValue={propRecipientId}
               isDisabled={!!propRecipientId}
@@ -147,7 +147,7 @@ function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSender
               <MarkError content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })} />
             )}
           </Modal.Columns>
-          <Modal.Columns >
+          <Modal.Columns hint={t('If the recipient account is new, the balance needs to be more than the existential deposit. Likewise if the sending account balance drops below the same value, the account will be removed from the state.')}>
             {canToggleAll && isAll
               ? (
                 <InputBalance
@@ -177,7 +177,7 @@ function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSender
               )
             }
           </Modal.Columns>
-          <Modal.Columns >
+          <Modal.Columns hint={t('With the keep-alive option set, the account is protected against removal due to low balances.')}>
             {isFunction(api.tx.balances?.transferKeepAlive) && (
               <Toggle
                 className='typeToggle'
@@ -208,7 +208,7 @@ function Transfer ({ onClose, recipientId: propRecipientId, senderId: propSender
               <MarkWarning content={t('The transaction, after application of the transfer fees, will drop the available balance below the existential deposit. As such the transfer will fail. The account needs more free funds to cover the transaction fees.')} />
             )}
           </Modal.Columns>
-        {/* </div> */}
+        </div>
       </Modal.Content>
       <Modal.Actions>
         <TxButton

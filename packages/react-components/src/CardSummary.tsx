@@ -147,7 +147,7 @@ const StyledArticle = styled.article`
     }
 
     .isSecondary {
-      font-size: var(--font-size-h1);
+      font-size: var(--font-size-base);
       font-weight: var(--font-weight-normal);
 
       .timer {

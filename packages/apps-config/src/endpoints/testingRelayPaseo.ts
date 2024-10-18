@@ -4,7 +4,7 @@
 import type { EndpointOption } from './types.js';
 
 import { chainsAmplitudeSVG, chainsCoretimeKusamaSVG, chainsFrequencyPaseoSVG, chainsHydrationPaseoSVG, chainsLaosSigmaPNG, chainsMyxcavPNG, chainsPaseoPNG, chainsPeoplePolkadotSVG, chainsPopNetworkSVG } from '@polkadot/apps-config/ui/logos/chains';
-import { nodesAjunaPNG, nodesAssetHubSVG, nodesAventusSVG, nodesBajunPNG, nodesBifrostSVG, nodesBridgeHubSVG, nodesDarwiniaKoiSVG, nodesHyperbridgePNG, nodesIdealNetworkSVG, nodesIntegriteeSVG, nodesKiltPNG, nodesMandalaPNG, nodesMusePNG, nodesMyriadPaseoSVG, nodesNodleSVG, nodesRegionxPNG, nodesRexSVG, nodesZeitgeistPNG } from '@polkadot/apps-config/ui/logos/nodes';
+import { nodesAjunaPNG, nodesAssetHubSVG, nodesAventusSVG, nodesBajunPNG, nodesBifrostSVG, nodesBridgeHubSVG, nodesDarwiniaKoiSVG, nodesHyperbridgePNG, nodesIdealNetworkSVG, nodesIntegriteeSVG, nodesKiltPNG, nodesLitentryPaseoSVG, nodesMandalaPNG, nodesMusePNG, nodesMyriadPaseoSVG, nodesNodleSVG, nodesRegionxPNG, nodesRexSVG, nodesZeitgeistPNG } from '@polkadot/apps-config/ui/logos/nodes';
 
 import { PASEO_GENESIS } from '../api/constants.js';
 // import { testnetParachainSVG } from '../ui/logos/nodes/index.js';
@@ -40,7 +40,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Ajuna Network (Paseo)',
     ui: {
-      color: '#4964a8',
+      color: '#161212',
       logo: nodesAjunaPNG
     }
   },
@@ -52,7 +52,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Amplitude testnet (Foucoco)',
     ui: {
-      color: '#4964a8',
+      color: '#5DEFA7',
       logo: chainsAmplitudeSVG
     }
   },
@@ -65,7 +65,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Aventus',
     ui: {
-      color: '#4964a8',
+      color: '#E6E6FA',
       logo: nodesAventusSVG
     }
   },
@@ -78,7 +78,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bajun Network (Paseo)',
     ui: {
-      color: '#4964a8',
+      color: '#161212',
       logo: nodesBajunPNG
     }
   },
@@ -91,7 +91,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Bifrost',
     ui: {
-      color: '#4964a8',
+      color: '#5a25f0',
       logo: nodesBifrostSVG
     }
   },
@@ -104,7 +104,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Darwinia Koi',
     ui: {
-      color: '#4964a8',
+      color: '#FF0083',
       logo: nodesDarwiniaKoiSVG
     }
   },
@@ -117,7 +117,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Frequency',
     ui: {
-      color: '#4964a8',
+      color: '#19455E',
       logo: chainsFrequencyPaseoSVG
     }
   },
@@ -130,7 +130,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hydration (Paseo)',
     ui: {
-      color: '#4964a8',
+      color: '#b3d7fa',
       logo: chainsHydrationPaseoSVG
     }
   },
@@ -143,7 +143,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Hyperbridge (Gargantua)',
     ui: {
-      color: '#4964a8',
+      color: '#ED6FF1',
       logo: nodesHyperbridgePNG
     }
   },
@@ -169,7 +169,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Integritee Network (Paseo)',
     ui: {
-      color: '#4964a8',
+      color: '#658ea9',
       logo: nodesIntegriteeSVG
     }
   },
@@ -194,8 +194,21 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Laos Sigma',
     ui: {
-      color: '#4964a8',
+      color: '#363435',
       logo: chainsLaosSigmaPNG
+    }
+  },
+  {
+    homepage: 'https://www.litentry.com/',
+    info: 'paseoLitentry',
+    paraId: 2106,
+    providers: {
+      Litentry: 'wss://rpc.paseo-parachain.litentry.io'
+    },
+    text: 'Litentry',
+    ui: {
+      color: '#ECDA38',
+      logo: nodesLitentryPaseoSVG
     }
   },
   {
@@ -206,7 +219,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Muse network',
     ui: {
-      color: '#4964a8',
+      color: '#110ff9',
       logo: nodesMusePNG
     }
   },
@@ -219,7 +232,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Myriad Social Testnet',
     ui: {
-      color: '#4964a8',
+      color: '#d5e3e4',
       logo: nodesMyriadPaseoSVG
     }
   },
@@ -233,7 +246,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Niskala',
     ui: {
-      color: '#4964a8',
+      color: '#0036ac',
       logo: nodesMandalaPNG
     }
   },
@@ -246,7 +259,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Nodle',
     ui: {
-      color: '#4964a8',
+      color: '#1ab394',
       logo: nodesNodleSVG
     }
   },
@@ -258,7 +271,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'PEX',
     ui: {
-      color: '#4964a8',
+      color: '#452E66',
       logo: nodesRexSVG
     }
   },
@@ -285,7 +298,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'RegionX(Paseo)',
     ui: {
-      color: '#4964a8',
+      color: '#0CC184',
       logo: nodesRegionxPNG
     }
   },
@@ -298,7 +311,7 @@ export const testParasPaseo: Omit<EndpointOption, 'teleport'>[] = [
     },
     text: 'Xcavate',
     ui: {
-      color: '#4964a8',
+      color: '#FF0083',
       logo: chainsMyxcavPNG
     }
   },
@@ -333,7 +346,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'AssetHub',
     ui: {
-      color: '#4964a8',
+      color: '#77bb77',
       logo: nodesAssetHubSVG
     }
   },
@@ -349,7 +362,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'BridgeHub',
     ui: {
-      color: '#4964a8',
+      color: '#AAADD7',
       logo: nodesBridgeHubSVG
     }
   },
@@ -365,7 +378,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'Coretime',
     ui: {
-      color: '#4964a8',
+      color: '#113911',
       logo: chainsCoretimeKusamaSVG
     }
   },
@@ -382,7 +395,7 @@ export const testParasPaseoCommon: EndpointOption[] = [
     teleport: [-1],
     text: 'People',
     ui: {
-      color: '#4964a8',
+      color: '#e84366',
       logo: chainsPeoplePolkadotSVG
     }
   }

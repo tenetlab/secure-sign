@@ -22,7 +22,7 @@ import { AddressInfo, AddressSmall, Badge, Button, ChainLock, Columar, CryptoTyp
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useLedger, useQueue, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
-import { BN, BN_ZERO, isFunction, formatNumber, formatBalance } from '@polkadot/util';
+import { BN, BN_ZERO, formatBalance, formatNumber, isFunction } from '@polkadot/util';
 
 import Backup from '../modals/Backup.js';
 import ChangePass from '../modals/ChangePass.js';
@@ -89,11 +89,11 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
     return true;
   }
 
-  const _filter = filter?.toLowerCase();
+  const _filter = filter.toLowerCase();
 
   return tags.reduce((result: boolean, tag: string): boolean => {
-    return result || tag?.toLowerCase().includes(_filter);
-  }, name?.toLowerCase().includes(_filter));
+    return result || tag.toLowerCase().includes(_filter);
+  }, name.toLowerCase().includes(_filter));
 }
 
 function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
@@ -159,7 +159,7 @@ const transformRecovery = {
 
 function Account ({ account: { address, meta }, className = '', delegation, filter, isFavorite, proxy, setBalance, toggleFavorite }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  // const [isExpanded, toggleIsExpanded] = useToggle(false);
+  const [isExpanded, toggleIsExpanded] = useToggle(false);
   const { queueExtrinsic } = useQueue();
   const { api, apiIdentity, enableIdentity, isDevelopment: isDevelopmentApiProps, isEthereum: isEthereumApiProps } = useApi();
   const { getLedger } = useLedger();
@@ -707,14 +707,11 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
           </Button.Group>
         </td>
         <Table.Column.Expand
-          isExpanded={false}
-          toggle={
-            // toggleIsExpanded
-            () => {}
-          }
+          isExpanded={isExpanded}
+          toggle={toggleIsExpanded}
         />
       </StyledTr>
-      <StyledTr className={`${className} isExpanded ${false ? '' : 'isLast'} packedTop`}>
+      <StyledTr className={`${className} isExpanded ${isExpanded ? '' : 'isLast'} packedTop`}>
         <td />
         <td
           className='balance all'
@@ -728,7 +725,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         </td>
         <td />
       </StyledTr>
-      <StyledTr className={`${className} ${false ? 'isExpanded isLast' : 'isCollapsed'} packedTop`}>
+      <StyledTr className={`${className} ${isExpanded ? 'isExpanded isLast' : 'isCollapsed'} packedTop`}>
         <td />
         <td
           className='balance columar'

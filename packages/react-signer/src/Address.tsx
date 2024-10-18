@@ -262,7 +262,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
 
   return (
     <>
-      <Modal.Columns >
+      <Modal.Columns hint={t('The sending account that will be used to send this transaction. Any applicable fees will be paid by this account.')}>
         <InputAddress
           className='full'
           defaultValue={requestAddress}
@@ -283,7 +283,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {multiInfo && (
-        <Modal.Columns >
+        <Modal.Columns hint={t('The signatory is one of the allowed accounts on the multisig, making a recorded approval for the transaction.')}>
           <InputAddress
             filter={multiInfo.whoFilter}
             label={t('multisig signatory')}
@@ -306,7 +306,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {proxyInfo && (
-        <Modal.Columns>
+        <Modal.Columns hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}>
           <Toggle
             className='tipToggle'
             isDisabled={proxyInfo.isProxied}
@@ -321,7 +321,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {multiInfo && (
-        <Modal.Columns>
+        <Modal.Columns hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}>
           <Toggle
             className='tipToggle'
             label={

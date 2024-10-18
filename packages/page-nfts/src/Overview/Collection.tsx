@@ -22,7 +22,7 @@ function Collection ({ className, value: { details, id, ipfsData } }: Props): Re
   let imageLink = '';
 
   if (ipfsData?.image) {
-    imageLink = ipfsData.image?.toLowerCase().startsWith('http') ? ipfsData.image : `https://ipfs.io/ipfs/${ipfsData.image}`;
+    imageLink = ipfsData.image.toLowerCase().startsWith('http') ? ipfsData.image : `https://ipfs.io/ipfs/${ipfsData.image}`;
   }
 
   return (
