@@ -39,7 +39,6 @@ const StyledDiv = styled.div`
   z-index: 220;
   position: relative;
 
-
   .smallShow {
     display: none;
   }

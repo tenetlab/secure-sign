@@ -7,7 +7,7 @@ import type { ITuple } from '@polkadot/types/types';
 import React, { useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
-import { Button, Columar, InputAddress, Progress, Spinner, styled, Tabs, Toggle, TxButton } from '@polkadot/react-components';
+import { Button, Columar, InputAddress, Progress, Spinner, styled, Toggle, TxButton } from '@polkadot/react-components';
 import { useApi, useBestNumber, useCallMulti } from '@polkadot/react-hooks';
 import { BlockToTime, FormatBalance } from '@polkadot/react-query';
 import { BN, BN_MILLION, BN_ONE, BN_ZERO, bnMax, formatBalance, formatNumber } from '@polkadot/util';

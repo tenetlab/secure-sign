@@ -6,7 +6,6 @@ import type { Group } from './types.js';
 import React from 'react';
 
 import { Icon, styled } from '@polkadot/react-components';
-import { Icon, styled } from '@polkadot/react-components';
 
 import Item from './Item.js';
 
@@ -17,10 +16,7 @@ interface Props extends Group {
 
 const SHA_COL = 'rgba(34, 36, 38, 0.12)';
 const SHA_OFF = '5px';
-const SHA_COL = 'rgba(34, 36, 38, 0.12)';
-const SHA_OFF = '5px';
 
-function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
 function Grouping ({ className = '', isActive, name, routes }: Props): React.ReactElement<Props> {
   if (routes.length === 1 && routes[0].group === 'settings') {
     return (
