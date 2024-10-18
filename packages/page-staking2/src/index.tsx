@@ -3,22 +3,18 @@
 
 import type { AppProps as Props } from '@polkadot/react-components/types';
 
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Route, Routes } from 'react-router';
 
-import { Tabs } from '@polkadot/react-components';
 import { useApi, useFavorites } from '@polkadot/react-hooks';
-import { isFunction } from '@polkadot/util';
 
 import Pools from './Pools/index.js';
 import Validators from './Validators/index.js';
 import { STORE_FAVS_BASE } from './constants.js';
-import { useTranslation } from './translate.js';
 import { clearCache } from './useCache.js';
 import useSessionInfo from './useSessionInfo.js';
 
 function StakingApp ({ basePath }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const { api } = useApi();
 
   // on unmount anything else, ensure that for the next round we
@@ -38,24 +34,8 @@ function StakingApp ({ basePath }: Props): React.ReactElement<Props> {
     [api]
   );
 
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'sign',
-      text: t('Validators')
-    },
-    isFunction(api.query.nominationPools?.minCreateBond) && {
-      name: 'pools',
-      text: t('Pools')
-    }
-  ]);
-
   return (
     <main className='staking--App'>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <Routes>
         <Route path={basePath}>
           <Route

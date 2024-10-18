@@ -31,7 +31,7 @@ function Item ({ className = '', classNameText, isLink, isToplevel, route: { Mod
         target={href ? '_blank' : undefined}
       >
         <Icon icon={icon} />
-        <span className={classNameText}>{text}</span>
+        <span className={`${classNameText} sidebarItem`}>{text}</span>
         {!!count && (
           <Badge
             color='white'
@@ -50,9 +50,9 @@ const StyledLi = styled.li`
   cursor: pointer;
   position: relative;
   white-space: nowrap;
-
+  border-bottom: 2px dotted var(--border-table);
   &.topLevel {
-    font-weight: var(--font-weight-normal);
+    font-weight: var(--font-weight-bold);
     line-height: 1.214rem;
     border-radius: 0.15rem;
 
@@ -108,6 +108,9 @@ const StyledLi = styled.li`
 
   .ui--Icon {
     margin-right: 0.5rem;
+  }
+  .sidebarItem {
+    font-size: var(--font-size-h1);
   }
 `;
 

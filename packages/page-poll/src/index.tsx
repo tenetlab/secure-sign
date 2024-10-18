@@ -4,7 +4,7 @@
 import type { Approvals, Balance, BlockNumber } from '@polkadot/types/interfaces';
 import type { ITuple } from '@polkadot/types/types';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Trans } from 'react-i18next';
 
 import { Button, Columar, InputAddress, Progress, Spinner, styled, Tabs, Toggle, TxButton } from '@polkadot/react-components';
@@ -30,7 +30,7 @@ const OPT_MULTI = {
   defaultValue: [undefined, undefined] as MultiResult
 };
 
-function PollApp ({ basePath, className }: Props): React.ReactElement<Props> {
+function PollApp ({ className }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const bestNumber = useBestNumber();
@@ -45,12 +45,6 @@ function PollApp ({ basePath, className }: Props): React.ReactElement<Props> {
   const [opt1b, setOpt1b] = useState(false);
   const [opt10b, setOpt10b] = useState(false);
   const [progress, setProgress] = useState<BN[] | undefined>();
-
-  const itemsRef = useRef([{
-    isRoot: true,
-    name: 'poll',
-    text: t('Denomination poll')
-  }]);
 
   useEffect((): void => {
     if (totalIssuance && totals) {
@@ -94,10 +88,6 @@ function PollApp ({ basePath, className }: Props): React.ReactElement<Props> {
 
   return (
     <StyledMain className={className}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <div className='pollContainer'>
         <div className='pollHeader'>
           <h1>{t('denomination vote')}</h1>

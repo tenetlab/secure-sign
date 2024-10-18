@@ -54,7 +54,7 @@ function Badge ({ className = '', color = 'normal', hover, hoverAction, icon, in
       data-testid={badgeTestId}
       onClick={hoverAction ? undefined : onClick}
     >
-      <div className={isHighlight ? 'highlight--color-contrast' : ''}>
+      <div className={''}>
         {(icon && <Icon icon={icon} />)}
         {info}
         {hoverAction && (

@@ -11,7 +11,7 @@ export default function create (t: TFunction): Route {
     display: {
       needsApi: []
     },
-    group: 'accounts',
+    group: 'files',
     icon: 'users',
     name: 'accounts',
     text: t('nav.accounts', 'Accounts', { ns: 'apps-routing' }),
