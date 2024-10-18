@@ -3,12 +3,8 @@
 
 import type { KeyedEvent } from '@polkadot/react-hooks/ctx/types';
 
-import React, { useRef } from 'react';
-
-import { Tabs } from '@polkadot/react-components';
-
+import React from 'react';
 import CrustFiles from './CrustFiles.js';
-import { useTranslation } from './translate.js';
 
 interface Props {
   basePath: string;
@@ -16,22 +12,10 @@ interface Props {
   newEvents?: KeyedEvent[];
 }
 
-function FilesApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'crust',
-      text: t('Your Files')
-    }
-  ]);
+function FilesApp ({ className }: Props): React.ReactElement<Props> {
 
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <CrustFiles />
     </main>
   );

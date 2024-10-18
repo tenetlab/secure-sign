@@ -2,12 +2,12 @@
 // SPDX-License-Identifier: Apache-2.0
 
 /* default buttons, dark gray */
-export const colorBtnDefault = '#767778';
+export const colorBtnDefault = '';
 
-export const colorBtnShadow = '#98999a';
+export const colorBtnShadow = '';
 
 /* highlighted buttons, orange */
-export const colorBtnHighlight = '#f19135';
+export const colorBtnHighlight = '';
 
 /* primary buttons, blue */
 export const colorBtnPrimary = colorBtnDefault; // '#2e86ab';

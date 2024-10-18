@@ -1,35 +1,20 @@
 // Copyright 2017-2024 @polkadot/app-collator authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useRef } from 'react';
+import React from 'react';
 
-import { Tabs } from '@polkadot/react-components';
 
 import Collators from './Collators.js';
-import { useTranslation } from './translate.js';
 
 interface Props {
   basePath: string;
   className?: string;
 }
 
-function CollatorApp ({ basePath, className }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'index',
-      text: t('Overview')
-    }
-  ]);
+function CollatorApp ({ className }: Props): React.ReactElement<Props> {
 
   return (
     <main className={className}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <Collators />
     </main>
   );
