@@ -260,10 +260,22 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
     [hasUrlChanged, apiUrl, isUrlValid, isLocalFork]
   );
 
+  const canLocalFork = useMemo(
+    () => isLocalForkDisabled(hasUrlChanged, apiUrl, isUrlValid, isLocalFork),
+    [hasUrlChanged, apiUrl, isUrlValid, isLocalFork]
+  );
+
   return (
     <StyledSidebar
       buttons={
         <>
+          <Button
+            icon='code-fork'
+            isDisabled={canLocalFork}
+            label={t('Fork Locally')}
+            onClick={_onLocalFork}
+            tooltip='fork-locally-btn'
+          />
           <Button
             icon='sync'
             isDisabled={canSwitch}
@@ -275,7 +287,7 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
       className={className}
       offset={offset}
       onClose={onClose}
-      position='right'
+      position='left'
       sidebarRef={sidebarRef}
     >
       {groups.map((group, index): React.ReactNode => (

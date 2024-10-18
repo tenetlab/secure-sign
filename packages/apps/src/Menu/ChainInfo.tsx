@@ -47,6 +47,9 @@ const StyledDiv = styled.div`
   padding: 0.5rem 1rem 0.5rem 0;
   margin: 0;
 
+  padding: 0.5rem 1rem 0.5rem 0;
+  margin: 0;
+
   .apps--SideBar-logo-inner {
     display: flex;
     align-items: center;
@@ -57,6 +60,9 @@ const StyledDiv = styled.div`
     }
 
     .ui--ChainImg {
+      height: 3rem;
+      margin-right: 0.5rem;
+      width: 3rem;
       height: 3rem;
       margin-right: 0.5rem;
       width: 3rem;
@@ -82,6 +88,7 @@ const StyledDiv = styled.div`
       text-align: right;
 
       .chain {
+        font-size: var(--font-size-small);
         font-size: var(--font-size-small);
         max-width: 16rem;
         white-space: nowrap;
