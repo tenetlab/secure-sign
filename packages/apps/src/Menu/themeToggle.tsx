@@ -3,7 +3,7 @@
 
 import type { SettingsStruct } from '@polkadot/ui-settings/types';
 
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button } from '@polkadot/react-components';
 import { settings } from '@polkadot/ui-settings';
@@ -16,6 +16,7 @@ interface Props {
 
 function themeToggle({ className = '' }: Props): React.ReactElement<Props> {
     const [theme, setTheme] = useState<boolean>(false);
+
     const [state, setSettings] = useState((): SettingsStruct => {
         const values = settings.get();
 
@@ -26,24 +27,21 @@ function themeToggle({ className = '' }: Props): React.ReactElement<Props> {
         setTheme(state?.uiTheme === 'dark' ? true : false)
     },[])
 
-    const _saveMoon = useCallback(
-        (): void => {
+    useEffect((): void => {
+        save(state);
+      }, [state]);
+
+    const _saveMoon = () => {
             setTheme(false)
+            setSettings((state) => ({ ...state, [`uiTheme`]: 'light' })),
+            save(state);
+        }
+
+    const _saveSun = () => {
+            setTheme(true)
             setSettings((state) => ({ ...state, [`uiTheme`]: 'dark' })),
             save(state);
-        },
-        [state]
-    );
-
-    const _saveSun = useCallback(
-
-        (): void => {
-            setTheme(true)
-            setSettings((state) => ({ ...state, [`uiTheme`]: 'light' })),
-                save(state);
-        },
-        [state]
-    );
+        }
 
     return (
         <div className={className}>

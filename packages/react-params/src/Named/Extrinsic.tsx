@@ -7,7 +7,7 @@ import type { ComponentMap, RawParam } from '../types.js';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { InputExtrinsic } from '@polkadot/react-components';
+import { InputExtrinsic, styled } from '@polkadot/react-components';
 import Params from '@polkadot/react-params';
 import { getTypeDef } from '@polkadot/types/create';
 import { isUndefined, objectSpread } from '@polkadot/util';
@@ -122,9 +122,9 @@ function ExtrinsicDisplay ({ defaultArgs, defaultValue, filter, isDisabled, isEr
   );
 
   const { fn: { method, section }, params } = extrinsic;
-
+  
   return (
-    <div className='extrinsics--Extrinsic'>
+    <StyledExtrinsics className='extrinsics--Extrinsic'>
       <InputExtrinsic
         defaultValue={defaultValue}
         filter={filter}
@@ -144,8 +144,12 @@ function ExtrinsicDisplay ({ defaultArgs, defaultValue, filter, isDisabled, isEr
         params={params}
         values={values}
       />
-    </div>
+    </StyledExtrinsics>
   );
 }
+
+const StyledExtrinsics = styled.div`
+    display: flex;
+`
 
 export default React.memo(ExtrinsicDisplay);

@@ -1,6 +1,7 @@
 {
   "Add an address": "Add an address",
   "Add contact": "Add contact",
+  "Contacts": "Contacts",
   "Forget this address": "Forget this address",
   "My contacts": "My contacts",
   "Save": "Save",
@@ -13,5 +14,6 @@
   "name": "name",
   "new address": "new address",
   "no addresses saved yet, add any existing address": "no addresses saved yet, add any existing address",
+  "no saved addresses!": "no saved addresses!",
   "send": "send"
 }

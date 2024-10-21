@@ -156,8 +156,6 @@ const StyledDiv = styled.div`
   }
 
   &.isLoading {
-    background: #fff !important;
-
     .menuActive {
       background: var(--bg-page);
     }
@@ -200,7 +198,7 @@ const StyledDiv = styled.div`
       display: inline-block;
     }
 
-    > li + li {
+    > li {
       margin-left: 0.375rem
     }
   }

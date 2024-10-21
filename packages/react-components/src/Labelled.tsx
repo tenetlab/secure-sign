@@ -18,9 +18,9 @@ interface Props {
   withLabel?: boolean;
 }
 
-const defaultLabel: React.ReactNode = <div>&nbsp;</div>;
+// const defaultLabel: React.ReactNode = <div>&nbsp;</div>;
 
-function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmall, label = defaultLabel, labelExtra, withEllipsis, withLabel = true }: Props): React.ReactElement<Props> | null {
+function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmall, withLabel = true }: Props): React.ReactElement<Props> | null {
   if (isHidden) {
     return null;
   } else if (!withLabel) {
@@ -31,11 +31,11 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
 
   return (
     <StyledDiv className={`${className} ui--Labelled ${isSmall ? 'isSmall' : ''} ${isFull ? 'isFull' : ''} ${isOuter ? 'isOuter' : ''}`}>
-      <label>{withEllipsis
+      {/* <label>{withEllipsis
         ? <div className='withEllipsis'>{label}</div>
         : label
       }</label>
-      {labelExtra && <div className='labelExtra'>{labelExtra}</div>}
+      {labelExtra && <div className='labelExtra'>{labelExtra}</div>} */}
       <div className='ui--Labelled-content'>
         {children}
       </div>
@@ -139,7 +139,7 @@ const StyledDiv = styled.div`
         .ui.selection.dropdown {
           &:not(.floating) {
             padding-left: 1.45rem;
-            padding-top: 1.75rem;
+            // padding-top: 1.75rem;
           }
 
           &.floating {
@@ -155,13 +155,13 @@ const StyledDiv = styled.div`
 
           &.search:not(.multiple) > input.search {
             padding-left: 1.45rem;
-            padding-top: 1.75rem;
+            // padding-top: 1.75rem;
           }
 
           > .delete.icon,
           > .dropdown.icon,
           > .search.icon {
-            top: 1.75rem;
+            // top: 1.75rem;
           }
         }
 
@@ -169,7 +169,7 @@ const StyledDiv = styled.div`
         .ui.input > input,
         .ui--output {
           padding-left: 1.45rem;
-          padding-top: 1.75rem;
+          // padding-top: 1.75rem;
         }
 
         .ui--Messages {

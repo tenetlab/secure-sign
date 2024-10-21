@@ -5,7 +5,7 @@ import type { BareProps as Props } from '@polkadot/react-components/types';
 
 import React, { useMemo } from 'react';
 
-import { AccountSidebar, styled, Menu as Menubar} from '@polkadot/react-components';
+import { AccountSidebar, MultisigAccountSidebar, styled, Menu as Menubar } from '@polkadot/react-components';
 import GlobalStyle from '@polkadot/react-components/styles';
 import { useApi, useTheme } from '@polkadot/react-hooks';
 import Signer from '@polkadot/react-signer';
@@ -38,12 +38,14 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <div style={{ display: 'flex' }}>
           <Sidebar />
           <AccountSidebar>
-            <Signer>
-              <Content />
-            </Signer>
-            {/* <ConnectingOverlay /> */}
-            <BottomOverlay />
-            <div id={PORTAL_ID} />
+            <MultisigAccountSidebar>
+              <Signer>
+                <Content />
+              </Signer>
+              {/* <ConnectingOverlay /> */}
+              <BottomOverlay />
+              <div id={PORTAL_ID} />
+            </MultisigAccountSidebar>
           </AccountSidebar>
         </div>
       </StyledDiv>

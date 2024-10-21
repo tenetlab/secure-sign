@@ -55,8 +55,6 @@ const StyledDiv = styled.div`
   }
 
   &.isLoading {
-    background: #fff !important;
-
     .menuActive {
       background: var(--bg-page);
     }

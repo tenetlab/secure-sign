@@ -3,7 +3,7 @@
 
 import type { Route, TFunction } from './types.js';
 
-import Component, { useCounter } from '@polkadot/app-accounts';
+import Component from '@polkadot/app-calendar';
 
 export default function create (t: TFunction): Route {
   return {
@@ -14,7 +14,6 @@ export default function create (t: TFunction): Route {
     group: 'developer',
     icon: 'users',
     name: 'multisigAccounts',
-    text: t('nav.accounts', 'Multisig Accounts', { ns: 'apps-routing' }),
-    useCounter
+    text: t('nav.multisig-accounts', 'Multisig Accounts', { ns: 'apps-routing' }),
   };
 }
