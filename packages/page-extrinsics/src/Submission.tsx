@@ -58,54 +58,50 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
       setError(error ? error.message : null),
     []
   );
-  
 
-  
   return (
-    <>
-      <div className={className}>
-        <InputAddress
-          // label={t('using the selected account')}
-          // labelExtra={
-          // }
-          onChange={setAccountId}
-          type='account'
-        />
-        <BalanceFree
-          // label={<label>{t('free balance')}</label>}
-          params={accountId}
-        />
-        <Extrinsic
-          defaultArgs={defaultArgs}
-          defaultValue={defaultFn}
-          // label={t('submit the following extrinsic')}
-          onChange={_onExtrinsicChange}
-          onError={_onExtrinsicError}
-        />
-        <Decoded
+    <div className={className}>
+      <InputAddress
+        label={t('using the selected account')}
+        labelExtra={
+          <BalanceFree
+            label={<label>{t('free balance')}</label>}
+            params={accountId}
+          />
+        }
+        onChange={setAccountId}
+        type='account'
+      />
+      <Extrinsic
+        defaultArgs={defaultArgs}
+        defaultValue={defaultFn}
+        label={t('submit the following extrinsic')}
+        onChange={_onExtrinsicChange}
+        onError={_onExtrinsicError}
+      />
+      <Decoded
+        extrinsic={extrinsic}
+        isCall
+      />
+      {error && !extrinsic && (
+        <MarkError content={error} />
+      )}
+      <Button.Group>
+        <TxButton
           extrinsic={extrinsic}
-          isCall
+          icon='sign-in-alt'
+          isUnsigned
+          label={t('Submit Unsigned')}
+          withSpinner
         />
-        {error && !extrinsic && (
-          <MarkError content={error} />
-        )}
-        <Button.Group>
-          <TxButton
-            extrinsic={extrinsic}
-            icon='sign-in-alt'
-            isUnsigned
-            label={t('Submit Unsigned')}
-            withSpinner
-          />
-          <TxButton
-            accountId={accountId}
-            extrinsic={extrinsic}
-            icon='sign-in-alt'
-            label={t('Submit Transaction')}
-          />
-        </Button.Group>
-      </div>
-    </>
+        <TxButton
+          accountId={accountId}
+          extrinsic={extrinsic}
+          icon='sign-in-alt'
+          label={t('Submit Transaction')}
+        />
+      </Button.Group>
+    </div>
   );
 }
 

@@ -28,7 +28,6 @@ interface Props {
 
 function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
   const { api } = useApi();
-  
   const [optionsMethod, setOptionsMethod] = useState<DropdownOptions>(() => methodOptions(api, defaultValue.section, filter));
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
   const [value, setValue] = useState<SubmittableExtrinsicFunction<'promise'>>((): SubmittableExtrinsicFunction<'promise'> => defaultValue);
@@ -52,12 +51,11 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
         setOptionsMethod(optionsMethod);
         _onKeyChange(api.tx[newSection][optionsMethod[0].value]);
-        
       }
     },
     [_onKeyChange, api, filter, value]
   );
-  
+
   return (
     <LinkedWrapper
       className={className}

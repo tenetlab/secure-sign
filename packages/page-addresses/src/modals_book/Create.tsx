@@ -118,15 +118,6 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
       onClose={onClose}
     >
       <Modal.Content>
-        {/* <AddressRow
-          defaultName={name}
-          noDefaultNameOpacity
-          value={
-            isAddressValid
-              ? info?.accountId?.toString()
-              : undefined
-          }
-        > */}
         <div className='ui--Label-Input'>
           <div className='ui--lable'>
             <span>Address:</span>
@@ -135,10 +126,8 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
             autoFocus
             className='full'
             isError={!isAddressValid}
-            // label={t('address')}
             onChange={_onChangeAddress}
             onEnter={_onCommit}
-            // placeholder={t('new address')}
             value={addressInput}
           />
         </div>
@@ -149,13 +138,11 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
           <Input_book
             className='full'
             isError={!isNameValid}
-            // label={t('name')}
             onChange={_onChangeName}
             onEnter={_onCommit}
             value={name}
           />
         </div>
-        {/* </AddressRow> */}
       </Modal.Content>
       <Modal.Actions className='modal-Bg'>
         <Button

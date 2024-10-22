@@ -3,9 +3,9 @@
 
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { Button, FilterInput, styled, SummaryBox, TableBook } from '@polkadot/react-components';
+import { Button, styled, SummaryBox, TableBook } from '@polkadot/react-components';
 import { useAddresses, useFavorites, useNextTick, useToggle } from '@polkadot/react-hooks';
 
 // import CreateModal from '../modals/Create.js';
@@ -28,12 +28,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const [isCreateOpen, toggleCreate] = useToggle(false);
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [sortedAddresses, setSortedAddresses] = useState<SortedAddress[] | undefined>();
-  const [filterOn, setFilter] = useState<string>('');
   const isNextTick = useNextTick();
-
-  const headerRef = useRef<([React.ReactNode?, string?, number?] | false)[]>([
-    [t('Contacts'), 'start', 4]
-  ]);
 
   useEffect((): void => {
     setSortedAddresses(
@@ -58,14 +53,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         />
       )}
       <SummaryBox className='summary-box-contacts'>
-        {/* <section>
-          <FilterInput
-            className='media--1000'
-            filterOn={filterOn}
-            label={t('filter by name or tags')}
-            setFilter={setFilter}
-          />
-        </section> */}
         <Button.Group>
           <Button
             className='add-contact-button'
@@ -78,13 +65,12 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       <TableBook
         className='address-book-table'
         empty={isNextTick && sortedAddresses && t('no saved addresses!')}
-        // header={headerRef.current}
         isSplit
       >
         {isNextTick && sortedAddresses?.map(({ address, isFavorite }): React.ReactNode => (
           <Address
             address={address}
-            filter={filterOn}
+            filter={''}
             isFavorite={isFavorite}
             key={address}
             toggleFavorite={toggleFavorite}

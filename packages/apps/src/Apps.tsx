@@ -42,7 +42,6 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
               <Signer>
                 <Content />
               </Signer>
-              {/* <ConnectingOverlay /> */}
               <BottomOverlay />
               <div id={PORTAL_ID} />
             </MultisigAccountSidebar>

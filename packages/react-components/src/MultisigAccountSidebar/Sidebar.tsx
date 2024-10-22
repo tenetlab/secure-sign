@@ -5,11 +5,8 @@ import React, { useRef, useState } from 'react';
 
 import { useAccountInfo } from '@polkadot/react-hooks';
 
-// import LinkExternal from '../LinkExternal.js';
-// import Sidebar from '../Sidebar.js';
 import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
-// import Balances from './Balances.js';
 import Identity from './Identity.js';
 import Multisig from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
@@ -30,8 +27,6 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
   return (
     <StyledDiv
       className={`${className}${inEditMode ? ' inEditMode' : ''}`}
-      // dataTestId={dataTestId}
-      // sidebarRef={sidebarRef}
     >
       <div
         className='ui--AddressMenu-header'
@@ -46,7 +41,6 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
         />
       </div>
       <div className='ui--ScrollSection'>
-        {/* <Balances address={address} /> */}
         <Identity
           address={address}
           identity={identity}
@@ -56,13 +50,6 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
           meta={meta}
         />
       </div>
-      {/* <section className='ui--LinkSection'>
-        <LinkExternal
-          data={address}
-          isSidebar
-          type='address'
-        />
-      </section> */}
     </StyledDiv>
   );
 }

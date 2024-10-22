@@ -8,18 +8,18 @@ import React, { useState } from 'react';
 import { Route, Routes } from 'react-router';
 
 
-// import Decoder from './Decoder.js';
+import Decoder from './Decoder.js';
 import Submission from './Submission.js';
 
 
 function ExtrinsicsApp ({ basePath }: Props): React.ReactElement<Props> {
   const [decoded, setDecoded] = useState<DecodedExtrinsic | null>(null);
-  
+
   return (
     <main className='extrinsics--App'>
       <Routes>
         <Route path={basePath}>
-          {/* <Route
+          <Route
             element={
               <Decoder
                 defaultValue={decoded?.hex}
@@ -27,7 +27,7 @@ function ExtrinsicsApp ({ basePath }: Props): React.ReactElement<Props> {
               />
             }
             path='decode/:encoded?'
-          /> */}
+          />
           <Route
             element={
               <Submission defaultValue={decoded} />

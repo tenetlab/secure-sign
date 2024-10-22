@@ -36,7 +36,6 @@ const COLUMN_INDEXES = {
 
 function TableBase ({ children, className = '', empty, emptySpinner, filter, footer, header, headerChildren, isFixed, isInline, isSplit, legend, maxColumns, noBodyTag }: Props): React.ReactElement<Props> {
   const numColumns = useWindowColumns(maxColumns);
-  
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 

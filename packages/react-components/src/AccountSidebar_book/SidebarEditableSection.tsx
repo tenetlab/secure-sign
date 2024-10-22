@@ -9,7 +9,6 @@ import { keyring } from '@polkadot/ui-keyring';
 // import Tags from '../Tags.js';
 import AccountMenuButtons from './AccountMenuButtons.js';
 import AddressSection from './AddressSection.js';
-// import Flags from './Flags.js';
 import { styled } from '@polkadot/react-components';
 
 interface Props {
@@ -23,11 +22,6 @@ interface Props {
 function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdateName }: Props): React.ReactElement<Props> {
   const { flags, isEditing, isEditingName, name, onForgetAddress, onSaveName, onSaveTags, setIsEditingName, setIsEditingTags, setName, setTags, toggleIsEditingName, toggleIsEditingTags } = useAccountInfo(address);
   
-  // const refs = useMemo(
-  //   () => [sidebarRef],
-  //   [sidebarRef]
-  // );
-
   useEffect((): void => {
     isBeingEdited(isEditing());
     
@@ -50,7 +44,6 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
       }
     }, [isEditing, setName, setTags, setIsEditingName, setIsEditingTags, address]);
 
-  // useOutsideClick(refs, onCancel);
 
   return (
     <StyledEditableSection>
@@ -62,20 +55,6 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
         onChange={setName}
         value={address}
       />
-      {/* <div
-        className='ui--AddressMenu-tags'
-        data-testid='sidebar-tags'
-      >
-        <Tags
-          isEditable
-          isEditing={isEditingTags}
-          onChange={setTags}
-          value={tags}
-          withEditButton={false}
-          withTitle
-        />
-      </div> */}
-      {/* <Flags flags={flags} /> */}
       <AccountMenuButtons
         flags={flags}
         isEditing={isEditing()}

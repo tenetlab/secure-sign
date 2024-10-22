@@ -18,9 +18,9 @@ interface Props {
   withLabel?: boolean;
 }
 
-// const defaultLabel: React.ReactNode = <div>&nbsp;</div>;
+const defaultLabel: React.ReactNode = <div>&nbsp;</div>;
 
-function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmall, withLabel = true }: Props): React.ReactElement<Props> | null {
+function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmall, label = defaultLabel, withLabel = true }: Props): React.ReactElement<Props> | null {
   if (isHidden) {
     return null;
   } else if (!withLabel) {
@@ -29,13 +29,11 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
     );
   }
 
+  console.log("label", label);
+  
+
   return (
     <StyledDiv className={`${className} ui--Labelled ${isSmall ? 'isSmall' : ''} ${isFull ? 'isFull' : ''} ${isOuter ? 'isOuter' : ''}`}>
-      {/* <label>{withEllipsis
-        ? <div className='withEllipsis'>{label}</div>
-        : label
-      }</label>
-      {labelExtra && <div className='labelExtra'>{labelExtra}</div>} */}
       <div className='ui--Labelled-content'>
         {children}
       </div>

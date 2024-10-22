@@ -15,9 +15,6 @@ const hasPublic = fs.existsSync(path.join(context, 'public'));
 module.exports = merge(
   baseConfig(context),
   {
-    resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'], // Add the file extensions you need
-    },
     devtool: process.env.BUILD_ANALYZE ? 'source-map' : false,
     output: {
       crossOriginLoading: 'anonymous'
