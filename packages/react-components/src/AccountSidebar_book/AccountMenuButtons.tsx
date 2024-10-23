@@ -142,12 +142,6 @@ const StyledDiv = styled.div`
     justify-content: space-around;
     margin-bottom: 0;
   }
-  .ui--AddressMenu-buttons {
-    .ui--Button:hover {
-      background: transparent !important;
-      color: var(--color-text-hover) !important;
-    }
-  }
 `;
 
 export default React.memo(AccountMenuButtons);

@@ -85,6 +85,7 @@ const StyledDiv = styled.div`
   }
 
   table {
+
     border-collapse: collapse;
     border-spacing: 0;
     max-width: 100%;
@@ -113,9 +114,10 @@ const StyledDiv = styled.div`
       width: 100%;
 
       td,
+
       &:not(.filter) th {
         &:first-child {
-          padding-left: 1.5rem;
+          // padding-left: 1.5rem;
         }
 
         &:last-child {
@@ -124,7 +126,8 @@ const StyledDiv = styled.div`
 
         &.all {
           width: 100%;
-
+          // border: 2px solid var(--border-table);
+          border-radius: 5px;
           &:not(.overflow) {
             word-break: break-word;
           }
@@ -150,6 +153,8 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
+          border-top: 2px solid var(--border-table);
+
       background: var(--bg-table);
       padding: 0.5rem 1rem;
       text-align: left;
@@ -393,7 +398,7 @@ const StyledDiv = styled.div`
       &.isExpanded {
         &.isFirst {
           td {
-            border-top: ${BORDER_TOP};
+            // border-top: ${BORDER_TOP};
 
             &:first-child {
               border-top-left-radius: ${BORDER_RADIUS};
@@ -420,7 +425,7 @@ const StyledDiv = styled.div`
 
       &.packedBottom {
         td {
-          padding-bottom: 0;
+          // padding-bottom: 0;
         }
       }
 

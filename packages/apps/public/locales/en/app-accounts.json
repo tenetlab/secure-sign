@@ -11,6 +11,7 @@
   "A deposit paid by the proxied account that can not be used while the proxy is in existence. The deposit is returned when the proxy is destroyed. The amount reserved is based on the base deposit and number of proxies": "A deposit paid by the proxied account that can not be used while the proxy is in existence. The deposit is returned when the proxy is destroyed. The amount reserved is based on the base deposit and number of proxies",
   "Account": "Account",
   "Account type {{index}}": "Account type {{index}}",
+  "Accounts": "Accounts",
   "Accounts injected from any of these extensions will appear in this application and be available for use. The above list is updated as more extensions with external signing capability become available.": "Accounts injected from any of these extensions will appear in this application and be available for use. The above list is updated as more extensions with external signing capability become available.",
   "Add": "Add",
   "Add a mock account to chopsticks": "Add a mock account to chopsticks",

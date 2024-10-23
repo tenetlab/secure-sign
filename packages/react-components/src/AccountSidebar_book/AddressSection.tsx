@@ -91,12 +91,6 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
 const StyledAddressSection = styled.div`
   display: flex;
   width: 70%;
-  .ui--AddressMenu-copyaddr {
-    .ui--Button:hover {
-      background: transparent !important;
-      color: var(--color-text-hover) !important;
-    }
-  }
   .ui--AddressBook-Icon-Name {
     display: flex;
     align-items: center;

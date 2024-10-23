@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Input as SUIInput } from 'semantic-ui-react';
 
 import { isFunction, isUndefined } from '@polkadot/util';
+import { styled } from '@polkadot/react-components';
 
 import Labelled from './Labelled.js';
 
@@ -143,7 +144,7 @@ function Input ({ autoFocus = false, children, className, defaultValue, icon, in
   );
 
   return (
-    <Labelled
+    <StyledLabelled
       className={className}
       isFull={isFull}
       label={label}
@@ -216,9 +217,21 @@ function Input ({ autoFocus = false, children, className, defaultValue, icon, in
         {icon}
         {children}
       </SUIInput>
-    </Labelled>
+    </StyledLabelled>
   );
 }
+
+const StyledLabelled = styled(Labelled)`
+  input {
+    border: 1px solid var(--border-input) !important;
+  }
+  .ui.input>input:focus {
+    border-color: var(--border-input-hover) !important;
+  }
+  input:hover {
+    border-color: var(--border-input-hover) !important;
+  }
+`;
 
 export default React.memo(Input);
 

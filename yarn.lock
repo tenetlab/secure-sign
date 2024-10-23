@@ -1539,6 +1539,46 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@polkadot/app-multisig@workspace:packages/page-multisig":
+  version: 0.0.0-use.local
+  resolution: "@polkadot/app-multisig@workspace:packages/page-multisig"
+  dependencies:
+    "@polkadot/hw-ledger": "npm:^13.1.1"
+    "@polkadot/phishing": "npm:^0.23.7"
+    "@polkadot/react-components": "npm:^0.145.2-0-x"
+    "@polkadot/react-hooks": "npm:^0.145.2-0-x"
+    "@polkadot/test-support": "npm:0.145.2-0-x"
+    "@polkadot/util": "npm:^13.1.1"
+    "@polkadot/vanitygen": "npm:^0.59.1"
+    detect-browser: "npm:^5.3.0"
+    file-saver: "npm:^2.0.5"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+    react-is: "*"
+  languageName: unknown
+  linkType: soft
+
+"@polkadot/app-newmultisig@workspace:packages/page-newmultisig":
+  version: 0.0.0-use.local
+  resolution: "@polkadot/app-newmultisig@workspace:packages/page-newmultisig"
+  dependencies:
+    "@polkadot/hw-ledger": "npm:^13.1.1"
+    "@polkadot/phishing": "npm:^0.23.7"
+    "@polkadot/react-components": "npm:^0.145.2-0-x"
+    "@polkadot/react-hooks": "npm:^0.145.2-0-x"
+    "@polkadot/test-support": "npm:0.145.2-0-x"
+    "@polkadot/util": "npm:^13.1.1"
+    "@polkadot/vanitygen": "npm:^0.59.1"
+    detect-browser: "npm:^5.3.0"
+    file-saver: "npm:^2.0.5"
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+    react-is: "*"
+  languageName: unknown
+  linkType: soft
+
 "@polkadot/app-nfts@workspace:packages/page-nfts":
   version: 0.0.0-use.local
   resolution: "@polkadot/app-nfts@workspace:packages/page-nfts"

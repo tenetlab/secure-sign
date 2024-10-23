@@ -12,7 +12,8 @@ interface Props {
   className?: string;
 }
 
-const WITH_BALANCE = { available: true, bonded: true, free: true, locked: true, reserved: true, total: true };
+// const WITH_BALANCE = { available: true, bonded: true, free: true, locked: true, reserved: true, total: true };
+const WITH_BALANCE = { available: true, total: true };
 
 function Balances ({ address, className }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
@@ -20,7 +21,7 @@ function Balances ({ address, className }: Props): React.ReactElement<Props> | n
   return (
     <StyledSection className={className}>
       <div className='ui--AddressMenu-sectionHeader'>
-        {t('balance')}
+        {t('Account Detail')}
       </div>
       <AddressInfo
         address={address}
@@ -34,13 +35,19 @@ function Balances ({ address, className }: Props): React.ReactElement<Props> | n
 }
 
 const StyledSection = styled.section`
+  .ui--AddressMenu-sectionHeader {
+    padding: 20px;
+  }
+  .column:not(.column--expander) {
+    flex: none !important;
+    column-gap: 3rem !important;
+  }
   .balanceExpander {
     justify-content: flex-start;
-
+    padding-left: 20px;
     .column {
       width: auto;
       max-width: 18.57rem;
-
       label {
         text-align: left;
         color: inherit;
@@ -51,6 +58,7 @@ const StyledSection = styled.section`
       }
     }
   }
+  margin-bottom: 0 !important;
 `;
 
 export default React.memo(Balances);

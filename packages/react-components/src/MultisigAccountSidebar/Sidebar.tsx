@@ -7,7 +7,8 @@ import { useAccountInfo } from '@polkadot/react-hooks';
 
 import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
-import Identity from './Identity.js';
+import Balances from './Balances.js';
+// import Identity from './Identity.js';
 import Multisig from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
 
@@ -21,7 +22,7 @@ interface Props {
 
 function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
-  const { accountIndex, flags, identity, meta } = useAccountInfo(address);
+  const { accountIndex, flags, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -41,10 +42,11 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
         />
       </div>
       <div className='ui--ScrollSection'>
-        <Identity
+        <Balances address={address} />
+        {/* <Identity
           address={address}
           identity={identity}
-        />
+        /> */}
         <Multisig
           isMultisig={flags.isMultisig}
           meta={meta}
@@ -57,7 +59,7 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
 const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-sidebar);
+  background-color: var(--bg-page);
   // max-width: 30.42rem;
   // min-width: 30.42rem;
   // overflow-y: hidden;
@@ -71,10 +73,10 @@ const StyledDiv = styled.div`
 
   .ui--AddressMenu-header {
     align-items: center;
-    background: var(--bg-tabs);
+    background: var(--bg-page);
     border-bottom: 1px solid var(--border-table);
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     justify-content: center;
     padding: 1.35rem 1rem 1rem 1rem;
   }
@@ -166,7 +168,7 @@ const StyledDiv = styled.div`
     }
 
     &.withDivider {
-      padding-top: 1rem;
+      // padding-top: 1rem;
 
       ::before {
         position: absolute;
@@ -175,7 +177,7 @@ const StyledDiv = styled.div`
 
         content: '';
         width: 100%;
-        height: 1px;
+        // height: 1px;
         background-color: var(--border-table);
       }
     }
@@ -187,6 +189,7 @@ const StyledDiv = styled.div`
     .ui--AddressMenu-multisigTable {
       font-size: var(--font-size-small);
       margin-top: 0.6rem;
+      padding-left: 20px;
 
       .tr {
         padding: 0.25rem 0;

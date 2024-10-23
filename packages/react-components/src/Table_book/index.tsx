@@ -118,11 +118,11 @@ const StyledDiv = styled.div`
       td,
       &:not(.filter) th {
         &:first-child {
-          padding-left: 1.5rem;
+          // padding-left: 1.5rem;
         }
 
         &:last-child {
-          padding-right: 0.75rem;
+          // padding-right: 0.75rem;
         }
 
         &.all {
@@ -154,7 +154,7 @@ const StyledDiv = styled.div`
 
     td {
       background: var(--bg-table);
-      padding: 0 1rem;
+      padding: 0;
       text-align: left;
       vertical-align: middle;
 
@@ -177,7 +177,7 @@ const StyledDiv = styled.div`
 
       div.empty {
         opacity: var(--opacity-light);
-        padding: 0.25rem;
+        padding: 1rem 0;
       }
 
       .ui--Spinner {

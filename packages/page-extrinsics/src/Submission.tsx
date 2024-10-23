@@ -14,6 +14,7 @@ import { BalanceFree } from '@polkadot/react-query';
 
 import Decoded from './Decoded.js';
 import { useTranslation } from './translate.js';
+import { styled } from '@polkadot/react-components';
 
 interface Props {
   className?: string;
@@ -60,7 +61,7 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
   );
 
   return (
-    <div className={className}>
+    <StyledDiv className={className}>
       <InputAddress
         label={t('using the selected account')}
         labelExtra={
@@ -101,8 +102,12 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
           label={t('Submit Transaction')}
         />
       </Button.Group>
-    </div>
+    </StyledDiv>
   );
 }
 
 export default React.memo(Selection);
+
+const StyledDiv = styled.div`
+  margin-top: 2.5rem;
+`

@@ -13,6 +13,7 @@ import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
+import { styled } from '@polkadot/react-components';
 
 interface Props {
   value: string,
@@ -29,7 +30,7 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
   const NOOP = () => undefined;
 
   return (
-    <div className='ui--AddressSection'>
+    <StyledAddressSection className='ui--AddressSection'>
       <IdentityIcon
         size={80}
         value={value}
@@ -81,8 +82,15 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
           </CopyToClipboard>
         </div>
       </div>
-    </div>
+    </StyledAddressSection>
   );
 }
+
+const StyledAddressSection = styled.div`
+  width: 60%;
+  .ui--AddressMenu-addr {
+    width: 100% !important;
+  }
+`
 
 export default React.memo(AddressSection);

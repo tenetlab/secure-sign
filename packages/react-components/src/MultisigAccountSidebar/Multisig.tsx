@@ -24,9 +24,9 @@ function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | nul
 
   return (
     <section className='ui--AddressMenu-multisig withDivider'>
-      <div className='ui--AddressMenu-sectionHeader'>
+      {/* <div className='ui--AddressMenu-sectionHeader'>
         {t('multisig')}
-      </div>
+      </div> */}
       <div className='ui--AddressMenu-multisigTable'>
         <div className='tr'>
           <div className='th'>{t('threshold')}</div>

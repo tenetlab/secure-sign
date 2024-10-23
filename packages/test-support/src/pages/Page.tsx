@@ -88,6 +88,11 @@ jest.mock('@polkadot/app-accounts/Accounts/useMultisigApprovals', () => ({
   default: () => mockApiHooks.multisigApprovals
 }));
 
+jest.mock('@polkadot/app-multisig/Accounts/useMultisigApprovals', () => ({
+  __esModule: true,
+  default: () => mockApiHooks.multisigApprovals
+}));
+
 jest.mock('@polkadot/react-hooks/useDelegations', () => ({
   useDelegations: () => mockApiHooks.delegations
 }));

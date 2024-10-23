@@ -157,7 +157,7 @@ const transformRecovery = {
   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 };
 
-function Account ({ account: { address, meta }, className = '', delegation, filter, isFavorite, proxy, setBalance, toggleFavorite }: Props): React.ReactElement<Props> | null {
+function Account ({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const [isExpanded, toggleIsExpanded] = useToggle(false);
   const { queueExtrinsic } = useQueue();
@@ -475,11 +475,6 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   return (
     <>
       <StyledTr className={`${className} isExpanded isFirst packedBottom`}>
-        <Table.Column.Favorite
-          address={address}
-          isFavorite={isFavorite}
-          toggle={toggleFavorite}
-        />
         <td className='address all relative'>
           <AddressSmall
             parentAddress={meta.parentAddress}

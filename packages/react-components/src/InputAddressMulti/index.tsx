@@ -5,10 +5,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDebounce, useNextTick } from '@polkadot/react-hooks';
 
-import Input from '../Input.js';
 import Spinner from '../Spinner.js';
 import { styled } from '../styled.js';
-import { useTranslation } from '../translate.js';
 import Available from './Available.js';
 import Selected from './Selected.js';
 
@@ -35,12 +33,13 @@ function include (prev: string[], address: string, maxCount: number): string[] {
 }
 
 function InputAddressMulti ({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const [_filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<string[]>([]);
   const filter = useDebounce(_filter);
   const isNextTick = useNextTick();
 
+  console.log("", setFilter);
+  
   useEffect((): void => {
     defaultValue && setSelected(defaultValue);
   }, [defaultValue]);
@@ -61,15 +60,6 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 
   return (
     <StyledDiv className={`${className} ui--InputAddressMulti`}>
-      <Input
-        autoFocus
-        className='ui--InputAddressMulti-Input'
-        isSmall
-        onChange={setFilter}
-        placeholder={t('filter by name, address, or account index')}
-        value={_filter}
-        withLabel={false}
-      />
       <div className='ui--InputAddressMulti-columns'>
         <div className='ui--InputAddressMulti-column'>
           <label>{valueLabel}</label>
@@ -107,8 +97,7 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 
 const StyledDiv = styled.div`
   border-top-width: 0px;
-  margin-left: 2rem;
-  width: calc(100% - 2rem);
+  width: 100%;
 
   .ui--InputAddressMulti-Input {
     .ui.input {
@@ -118,9 +107,6 @@ const StyledDiv = styled.div`
   }
 
   .ui--InputAddressMulti-columns {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
     width: 100%;
 
     .ui--InputAddressMulti-column {
@@ -128,7 +114,7 @@ const StyledDiv = styled.div`
       flex-direction: column;
       min-height: 15rem;
       max-height: 15rem;
-      width: 50%;
+      width: 100%;
       padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
