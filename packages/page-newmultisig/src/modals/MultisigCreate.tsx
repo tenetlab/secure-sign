@@ -269,13 +269,14 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
 }
 
 const StyledDiv = styled.div`
-  width: 100%;
+  width: 80%;
   .signaturesFileToggle {
     width: 100%;
     text-align: right;
   }
   .input_btn {
     display: flex;
+    column-gap: 50px;
     width: 100%;
     justify-content: space-between;
     .create {

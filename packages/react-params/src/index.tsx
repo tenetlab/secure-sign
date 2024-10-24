@@ -93,7 +93,7 @@ class Params extends React.PureComponent<Props, State> {
 
     return (
       <Holder
-        className={className}
+        className={`${className} ui--Params-Container`}
         withBorder={withBorder}
         withExpander={withExpander}
       >

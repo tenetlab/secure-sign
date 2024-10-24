@@ -112,8 +112,7 @@ const StyledDiv = styled.div`
   .ui--Dropdown {
     width: 15rem;
   }
-  margin-top: 2.5rem;
-  margin-left: 2rem;
+  margin-top: 1rem;
   .header-box {
     .dropdown-section {
       display: flex;

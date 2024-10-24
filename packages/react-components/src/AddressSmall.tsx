@@ -23,11 +23,11 @@ interface Props {
   value?: string | Address | AccountId | null;
 }
 
-function AddressSmall ({ children, className = '', defaultName, onClickName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true }: Props): React.ReactElement<Props> {
+function AddressSmall ({ children, className = '', defaultName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={`${className} ui--AddressSmall ${(parentAddress || withShortAddress) ? 'withPadding' : ''}`}>
       <span className='ui--AddressSmall-icon'>
-        <IdentityIcon value={value as Uint8Array} />
+        <IdentityIcon value={value as Uint8Array} size={40}/>
       </span>
       <span className='ui--AddressSmall-info'>
         {parentAddress && (
@@ -38,7 +38,7 @@ function AddressSmall ({ children, className = '', defaultName, onClickName, ove
         <AccountName
           className={`accountName ${withSidebar ? 'withSidebar' : ''}`}
           defaultName={defaultName}
-          onClick={onClickName}
+          // onClick={onClickName}
           override={overrideName}
           toggle={toggle}
           value={value}
@@ -65,22 +65,30 @@ const StyledDiv = styled.div`
   white-space: nowrap;
 
   &.withPadding {
-    padding: 0.75rem 0;
+    // padding: 0.75rem 0;
+    display: flex;
+    padding-right: 2rem;
+    width: 100%;
   }
 
   .ui--AddressSmall-icon {
+    display: flex;
+    align-items: center;
     .ui--IdentityIcon {
-      margin-right: 0.5rem;
-      vertical-align: middle;
+      // margin-right: 0.5rem;
+      vertical-align: middle; 
     }
   }
 
   .ui--AddressSmall-info {
-    position: relative;
-    vertical-align: middle;
+    // position: relative;
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    width: 100%;
 
     .parentName, .shortAddress {
-      font-size: var(--font-size-tiny);
+      // font-size: var(--font-size-tiny);
     }
 
     .parentName {
@@ -90,14 +98,14 @@ const StyledDiv = styled.div`
     }
 
     .shortAddress {
-      bottom: -0.95rem;
-      color: #8B8B8B;
-      display: inline-block;
+      // bottom: -0.95rem;
+      // color: #8B8B8B;
+      // display: inline-block;
       left: 0;
-      min-width: var(--width-shortaddr);
-      max-width: var(--width-shortaddr);
+      // min-width: var(--width-shortaddr);
+      // max-width: var(--width-shortaddr);
       overflow: hidden;
-      position: absolute;
+      // position: absolute;
       text-overflow: ellipsis;
     }
   }
@@ -106,6 +114,7 @@ const StyledDiv = styled.div`
     overflow: hidden;
     vertical-align: middle;
     white-space: nowrap;
+    width: 30%;
 
     &.withSidebar {
       cursor: help;

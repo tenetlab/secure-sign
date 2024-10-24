@@ -5,11 +5,11 @@ import type { IconName } from '@fortawesome/fontawesome-svg-core';
 import type { DeriveAccountRegistration } from '@polkadot/api-derive/types';
 import type { AccountId, AccountIndex, Address } from '@polkadot/types/interfaces';
 
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { statics } from '@polkadot/react-api/statics';
 import { useApi, useDeriveAccountInfo } from '@polkadot/react-hooks';
-import { AccountSidebarCtx } from '@polkadot/react-hooks/ctx/AccountSidebar';
+// import { AccountSidebarCtx } from '@polkadot/react-hooks/ctx/AccountSidebar';
 import { formatNumber, isCodec, isFunction, isU8a, stringToU8a, u8aEmpty, u8aEq, u8aToBn } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 
@@ -186,11 +186,11 @@ function extractIdentity (address: string, identity: DeriveAccountRegistration):
   return elem;
 }
 
-function AccountName ({ children, className = '', defaultName, label, onClick, override, toggle, value, withSidebar }: Props): React.ReactElement<Props> {
+function AccountName ({ children, className = '', defaultName, label, override, toggle, value }: Props): React.ReactElement<Props> {
   const { apiIdentity } = useApi();
   const info = useDeriveAccountInfo(value);
   const [name, setName] = useState<React.ReactNode>(() => extractName((value || '').toString(), undefined, defaultName));
-  const toggleSidebar = useContext(AccountSidebarCtx);
+  // const toggleSidebar = useContext(AccountSidebarCtx);
 
   // set the actual nickname, local name, accountIndex, accountId
   useEffect((): void => {
@@ -214,25 +214,25 @@ function AccountName ({ children, className = '', defaultName, label, onClick, o
     }
   }, [apiIdentity, defaultName, info, toggle, value]);
 
-  const _onNameEdit = useCallback(
-    () => setName(defaultOrAddrNode(defaultName, (value || '').toString())),
-    [defaultName, value]
-  );
+  // const _onNameEdit = useCallback(
+  //   () => setName(defaultOrAddrNode(defaultName, (value || '').toString())),
+  //   [defaultName, value]
+  // );
 
-  const _onToggleSidebar = useCallback(
-    () => toggleSidebar && value && toggleSidebar([value.toString(), _onNameEdit]),
-    [_onNameEdit, toggleSidebar, value]
-  );
+  // const _onToggleSidebar = useCallback(
+  //   () => toggleSidebar && value && toggleSidebar([value.toString(), _onNameEdit]),
+  //   [_onNameEdit, toggleSidebar, value]
+  // );
 
   return (
     <StyledSpan
-      className={`${className}  ui--AccountName ${withSidebar ? 'withSidebar' : ''}`}
+      className={`${className}  ui--AccountName `}
       data-testid='account-name'
-      onClick={
-        withSidebar
-          ? _onToggleSidebar
-          : onClick
-      }
+      // onClick={
+      //   withSidebar
+      //     ? _onToggleSidebar
+      //     : onClick
+      // }
     >
       {label || ''}{override || name}{children}
     </StyledSpan>
@@ -245,10 +245,10 @@ const StyledSpan = styled.span`
   vertical-align: middle;
   white-space: nowrap;
 
-  &.withSidebar:hover {
-    border-bottom-color: #333;
-    cursor: help !important;
-  }
+  // &.withSidebar:hover {
+  //   border-bottom-color: #333;
+  //   cursor: default !important;
+  // }
 
   .isAddress {
     display: inline-block;

@@ -3,7 +3,7 @@
 
 import React, { useCallback } from 'react';
 
-import AddressToggle from '../AddressToggle.js';
+import SelectedAddressToggle from '../SelectedAddressToggle.js';
 
 interface Props {
   address: string;
@@ -23,7 +23,7 @@ function Selected ({ address, filter, isHidden, onDeselect }: Props): React.Reac
   }
 
   return (
-    <AddressToggle
+    <SelectedAddressToggle
       address={address}
       filter={filter}
       noToggle

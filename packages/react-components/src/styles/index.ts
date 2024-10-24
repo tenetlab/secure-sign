@@ -247,7 +247,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
       .ui--Icon {
         background: transparent;
         color: inherit;
-        color: ${getHighlight(uiHighlight)};
+        // color: ${getHighlight(uiHighlight)};
       }
     }
   }

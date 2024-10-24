@@ -8,7 +8,7 @@ import type { HexString } from '@polkadot/util/types';
 
 import React, { useMemo } from 'react';
 
-import { Columar, Inspect as DecodedInspect, Output, styled } from '@polkadot/react-components';
+import { Columar, Output, styled } from '@polkadot/react-components';
 import { u8aToHex } from '@polkadot/util';
 
 import { useTranslation } from './translate.js';
@@ -55,10 +55,10 @@ function extract (isCall: boolean, extrinsic?: SubmittableExtrinsic<'promise'> |
   ];
 }
 
-function Decoded ({ className, extrinsic, isCall, payload, withData = true, withHash = true }: Props): React.ReactElement<Props> | null {
+function Decoded ({ className, extrinsic, isCall, payload, withData = true }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
 
-  const [hex, hash, inspect] = useMemo(
+  const [hex, inspect] = useMemo(
     () => extract(isCall, extrinsic, payload),
     [extrinsic, isCall, payload]
   );
@@ -82,33 +82,36 @@ function Decoded ({ className, extrinsic, isCall, payload, withData = true, with
             withCopy
           />
         )}
-        {withHash && (
+        {/* {withHash && (
           <Output
             isDisabled
             label={t('encoded call hash')}
             value={hash}
             withCopy
           />
-        )}
+        )} */}
       </Columar.Column>
-      <Columar.Column>
+      {/* <Columar.Column>
         <DecodedInspect
           hex={hex}
           inspect={inspect}
           label={t('encoding details')}
         />
-      </Columar.Column>
+      </Columar.Column> */}
     </StyledColumar>
   );
 }
 
 const StyledColumar = styled(Columar)`
   .ui--Column:last-child .ui--Labelled {
-    padding-left: 0.5rem;
+    // padding-left: 0.5rem;
 
     label {
-      left: 2.05rem; /* 3.55 - 1.5 (diff from padding above) */
+      // left: 2.05rem; /* 3.55 - 1.5 (diff from padding above) */
     }
+  }
+  .ui--Column:first-child {
+    padding-left: 2rem;
   }
 `;
 

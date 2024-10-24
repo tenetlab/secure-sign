@@ -209,7 +209,11 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
   return (
     <StyledDiv className={className}>
-      <div className='multisig_list'>
+      { grouped['multisig'][0] === undefined ? (
+        <>No Multisig Accounts</>
+      ) : (
+        <>
+        <div className='multisig_list'>
         {!isNextTick || !sortedAccounts.length
           ? (
             <MultisigTable
@@ -232,13 +236,21 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
         }
       </div>
       <div className='multisig_detail'>
-        <Sidebar
-          address={multisigAddress === null ? grouped['multisig'][0] : multisigAddress}
+        {multisigAddress !== null ? (
+          <Sidebar
+          address={multisigAddress || ''}
           dataTestId='account-sidebar'
           // onClose={onClose}
           onUpdateName={onUpdateName}
         />
+        ) : (
+          <></>
+        )}
+        
       </div>
+        </>
+      )}
+      
     </StyledDiv>
   );
 }
@@ -251,7 +263,6 @@ const StyledDiv = styled.div`
   .ui--Dropdown {
     width: 15rem;
   }
-  margin-top: 1rem;
   .header-box {
     .dropdown-section {
       display: flex;

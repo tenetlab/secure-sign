@@ -87,14 +87,15 @@ const StyledDiv = styled.div`
   }
   .add-contact-button {
     border: 1px solid var(--border-button);
-    border-radius: 5px;
+    border-radius: 1rem;
+    margin: 0;
   }
   .add-contact-button:hover {
     border-color: var(--border-input-hover);
   }
   .address-book-table {
     border: 1px solid var(--border-table);
-    border-radius: 5px;
+    border-radius: 1rem;
     padding: 0 3rem;
     table {
       margin-bottom: 0 !important;

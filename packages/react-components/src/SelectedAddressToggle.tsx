@@ -22,7 +22,7 @@ interface Props {
   value?: boolean;
 }
 
-function AddressToggle({ address, className = '', filter, isHidden, noToggle, onChange, value }: Props): React.ReactElement<Props> | null {
+function SelectedAddressToggle({ address, className = '', filter, isHidden, noToggle, onChange, value }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { apiIdentity } = useApi();
   const info = useDeriveAccountInfo(address);
@@ -40,7 +40,7 @@ function AddressToggle({ address, className = '', filter, isHidden, noToggle, on
   return (
     <StyledDiv
       className={`${className} ui--AddressToggle ${(value || noToggle) ? 'isAye' : 'isNay'} ${isHidden || !isVisible ? 'isHidden' : ''}`}
-      // onClick={_onClick}
+    // onClick={_onClick}
     >
       <AddressMini
         className='ui--AddressToggle-address'
@@ -48,13 +48,11 @@ function AddressToggle({ address, className = '', filter, isHidden, noToggle, on
         withSidebar={false}
       />
       <span className='address-text'>{address}</span>
-      {!value && (
-        <Button
-        icon='plus'
-        label={t('Add')}
+      <Button
+        icon='trash-alt'
+        label={t('Remove')}
         onClick={_onClick}
       />
-      )}
       {!noToggle && (
         <div className='ui--AddressToggle-toggle'>
           <Toggle
@@ -68,7 +66,7 @@ function AddressToggle({ address, className = '', filter, isHidden, noToggle, on
 }
 
 const StyledDiv = styled.div`
-  align-items: center;
+  align-items: flex-start;
   border: 1px solid transparent; /* #eee */
   border-radius: 0.25rem;
   cursor: pointer;
@@ -82,14 +80,16 @@ const StyledDiv = styled.div`
 
   .ui--AddressToggle-address {
     filter: grayscale(100%);
-    width: 50%;
     opacity: var(--opacity-light);
+    width: 50%;
   }
+
   
   .address-text {
     width: 40%;
     font-size: var(--font-percent-small);
   }
+
 
   &:hover {
     border-color: var(--border-input-hover);
@@ -123,4 +123,4 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default React.memo(AddressToggle);
+export default React.memo(SelectedAddressToggle);

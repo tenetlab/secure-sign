@@ -67,14 +67,15 @@ function ColumarBase ({ children, className = '', is60, is100, isPadded = true, 
 }
 
 const StyledDiv = styled.div`
+  justify-content: flex-end;
   &.isReverse {
     flex-direction: row-reverse;
   }
 
   &.defaultSize {
-    @media only screen and (min-width: ${MIN_WIDTH_DEFAULT}) {
-      ${FLEX_OPTIONS}
-    }
+    // @media only screen and (min-width: ${MIN_WIDTH_DEFAULT}) {
+    //   ${FLEX_OPTIONS}
+    // }
 
     &.isPadded > .ui--Column {
       padding: 0 0.75rem;
@@ -82,9 +83,9 @@ const StyledDiv = styled.div`
   }
 
   &.smallSize {
-    @media only screen and (min-width: ${MIN_WIDTH_SMALL}) {
-      ${FLEX_OPTIONS}
-    }
+    // @media only screen and (min-width: ${MIN_WIDTH_SMALL}) {
+    //   ${FLEX_OPTIONS}
+    // }
 
     &isPadded > .ui--Column {
       padding: 0 0.5rem;
@@ -92,9 +93,9 @@ const StyledDiv = styled.div`
   }
 
   &.tinySize {
-    @media only screen and (min-width: ${MIN_WIDTH_TINY}) {
-      ${FLEX_OPTIONS}
-    }
+    // @media only screen and (min-width: ${MIN_WIDTH_TINY}) {
+    //   ${FLEX_OPTIONS}
+    // }
 
     &.isPadded > .ui--Column {
       padding: 0 0.25rem;

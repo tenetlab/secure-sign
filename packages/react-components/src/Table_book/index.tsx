@@ -74,7 +74,6 @@ const StyledDiv = styled.div`
   .ui--Table-Split {
     display: flex;
     flex-wrap: nowrap;
-    margin-bottom: 1.5rem;
 
     > .ui--Table-Split-3 {
       max-width: 33.3%;
@@ -122,7 +121,7 @@ const StyledDiv = styled.div`
         }
 
         &:last-child {
-          // padding-right: 0.75rem;
+          
         }
 
         &.all {

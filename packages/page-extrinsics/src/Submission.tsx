@@ -62,46 +62,49 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
 
   return (
     <StyledDiv className={className}>
-      <InputAddress
-        label={t('using the selected account')}
-        labelExtra={
-          <BalanceFree
-            label={<label>{t('free balance')}</label>}
-            params={accountId}
+      <h1>Extrinsics</h1>
+      <div className='ui--Extrinsic-Group'>
+        <InputAddress
+          label={t('selected account')}
+          labelExtra={
+            <BalanceFree
+              // label={<label>{t('free balance')}</label>}
+              params={accountId}
+            />
+          }
+          onChange={setAccountId}
+          type='account'
+        />
+        <Extrinsic
+          defaultArgs={defaultArgs}
+          defaultValue={defaultFn}
+          label={t('extrinsic')}
+          onChange={_onExtrinsicChange}
+          onError={_onExtrinsicError}
+        />
+        <Decoded
+          extrinsic={extrinsic}
+          isCall
+        />
+        {error && !extrinsic && (
+          <MarkError content={error} />
+        )}
+        <Button.Group>
+          <TxButton
+            extrinsic={extrinsic}
+            icon='sign-in-alt'
+            isUnsigned
+            label={t('Submit Unsigned')}
+            withSpinner
           />
-        }
-        onChange={setAccountId}
-        type='account'
-      />
-      <Extrinsic
-        defaultArgs={defaultArgs}
-        defaultValue={defaultFn}
-        label={t('submit the following extrinsic')}
-        onChange={_onExtrinsicChange}
-        onError={_onExtrinsicError}
-      />
-      <Decoded
-        extrinsic={extrinsic}
-        isCall
-      />
-      {error && !extrinsic && (
-        <MarkError content={error} />
-      )}
-      <Button.Group>
-        <TxButton
-          extrinsic={extrinsic}
-          icon='sign-in-alt'
-          isUnsigned
-          label={t('Submit Unsigned')}
-          withSpinner
-        />
-        <TxButton
-          accountId={accountId}
-          extrinsic={extrinsic}
-          icon='sign-in-alt'
-          label={t('Submit Transaction')}
-        />
-      </Button.Group>
+          <TxButton
+            accountId={accountId}
+            extrinsic={extrinsic}
+            icon='sign-in-alt'
+            label={t('Submit Transaction')}
+          />
+        </Button.Group>
+      </div>
     </StyledDiv>
   );
 }
@@ -109,5 +112,28 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
 export default React.memo(Selection);
 
 const StyledDiv = styled.div`
-  margin-top: 2.5rem;
+  margin-top: 0.5rem;
+  .extrinsics--Extrinsic {
+    display: flex;
+    .ui--Params-Container {
+      width: 50%;
+      .ui--Params-Content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+      }
+    }
+    .ui--Input-Container {
+      width: 50%;
+    }
+  }
+  .ui--Extrinsic-Group {
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 3rem;
+  }
+  .ui--InputAddress {
+    width: 50%;
+  }
 `

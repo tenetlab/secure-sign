@@ -115,7 +115,7 @@ const StyledDiv = styled.div`
       min-height: 15rem;
       max-height: 15rem;
       width: 100%;
-      padding: 0.25rem 0.5rem;
+      // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
         padding: 0.5rem 0;
@@ -125,7 +125,7 @@ const StyledDiv = styled.div`
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
-
+        margin-bottom: 50px;
         .ui--Spinner {
           margin-top: 2rem;
         }
@@ -143,6 +143,9 @@ const StyledDiv = styled.div`
           max-width: 100%;
         }
       }
+    > label {
+    font-size: var(--font-size-h2);
+  }
     }
   }
 `;

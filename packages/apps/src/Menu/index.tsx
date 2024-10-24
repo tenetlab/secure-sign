@@ -24,7 +24,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
           <LogoInfo />
           <h1 className='menuItems'>Multisig</h1>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left'}}>
           <ThemeToggle />
           <ChainInfo />
         </div>

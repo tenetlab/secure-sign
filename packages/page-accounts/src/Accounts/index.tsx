@@ -9,23 +9,15 @@ import type { SortCategory } from '../util.js';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { styled, MultisigTable } from '@polkadot/react-components';
+import { styled, Table } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
-import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO } from '@polkadot/util';
 
-import CreateModal from '../modals/Create.js';
-import ImportModal from '../modals/Import.js';
-import Ledger from '../modals/Ledger.js';
-import Local from '../modals/LocalAdd.js';
-import Multisig from '../modals/MultisigCreate.js';
-import Proxy from '../modals/ProxiedAdd.js';
-import Qr from '../modals/Qr.js';
 import { useTranslation } from '../translate.js';
 import { sortAccounts } from '../util.js';
 import Account from './Account.js';
-import BannerClaims from './BannerClaims.js';
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
@@ -42,53 +34,49 @@ interface SortControls {
   sortFromMax: boolean;
 }
 
-type GroupName = 'injected'| 'testing';
+type GroupName = 'accounts' | 'chopsticks' | 'hardware' | 'injected' | 'multisig' | 'proxied' | 'qr' | 'testing';
 
 const DEFAULT_SORT_CONTROLS: SortControls = { sortBy: 'date', sortFromMax: true };
 
 const STORE_FAVS = 'accounts:favorites';
 
-const GROUP_ORDER: GroupName[] = ['injected', 'testing'];
+const GROUP_ORDER: GroupName[] = ['accounts', 'injected', 'qr', 'hardware', 'proxied', 'multisig', 'testing', 'chopsticks'];
 
 function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> {
   const ret: Record<GroupName, string[]> = {
+    accounts: [],
+    chopsticks: [],
+    hardware: [],
     injected: [],
+    multisig: [],
+    proxied: [],
+    qr: [],
     testing: []
   };
 
   for (let i = 0, count = accounts.length; i < count; i++) {
     const { address } = accounts[i];
     const cryptoType = getAccountCryptoType(address);
-
     if (cryptoType !== 'multisig') {
-      ret.testing.push(address);
+      ret.accounts.push(address);
     }
   }
 
   return ret;
 }
 
-function Overview ({ className = '', onStatusChange }: Props): React.ReactElement<Props> {
+function Overview ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts } = useAccounts();
-  const [isCreateOpen, toggleCreate] = useToggle();
-  const [isImportOpen, toggleImport] = useToggle();
-  const [isLedgerOpen, toggleLedger] = useToggle();
-  const [isMultisigOpen, toggleMultisig] = useToggle();
-  const [isProxyOpen, toggleProxy] = useToggle();
-  const [isLocalOpen, toggleLocal] = useToggle();
-  const [isQrOpen, toggleQr] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [balances, setBalances] = useState<Balances>({ accounts: {} });
-  const [filterOn, setFilter] = useState<string>('');
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
   const [{ sortBy, sortFromMax }, setSortBy] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
 
- console.log('', setFilter, setSortBy);
- 
+  console.log('', setSortBy);  
 
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>
@@ -112,7 +100,6 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       }),
     []
   );
-
 
   // We use favorites only to check if it includes some element,
   // so Object is better than array for that because hashmap access is O(1).
@@ -150,8 +137,14 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const header = useMemo(
     (): Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> => {
       const ret: Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> = {
+        accounts: [[<>{t('Accounts')}<div className='sub'>{t('')}</div></>]],
+        chopsticks: [[<>{t('chopsticks')}<div className='sub'>{t('local accounts added via chopsticks fork')}</div></>]],
+        hardware: [[<>{t('hardware')}<div className='sub'>{t('accounts managed via hardware devices')}</div></>]],
         injected: [[<>{t('extension')}<div className='sub'>{t('accounts available via browser extensions')}</div></>]],
-        testing: [[<>{t('Accounts')}<div className='sub'>{t('')}</div></>]]
+        multisig: [[<>{t('multisig')}<div className='sub'>{t('on-chain multisig accounts')}</div></>]],
+        proxied: [[<>{t('proxied')}<div className='sub'>{t('on-chain proxied accounts')}</div></>]],
+        qr: [[<>{t('via qr')}<div className='sub'>{t('accounts available via mobile devices')}</div></>]],
+        testing: [[<>{t('development')}<div className='sub'>{t('accounts derived via development seeds')}</div></>]]
       };
 
       Object.values(ret).forEach((a): void => {
@@ -175,7 +168,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         <Account
           account={account}
           delegation={delegation}
-          filter={filterOn}
+          filter={''}
           isFavorite={isFavorite}
           key={address}
           proxy={proxies?.[index]}
@@ -186,7 +179,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
       return all;
     }, {}),
-    [accountsMap, filterOn, proxies, setBalance, toggleFavorite]
+    [accountsMap, proxies, setBalance, toggleFavorite]
   );
 
   const groups = useMemo(
@@ -221,63 +214,23 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
   return (
     <StyledDiv className={className}>
-      {isCreateOpen && (
-        <CreateModal
-          onClose={toggleCreate}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isImportOpen && (
-        <ImportModal
-          onClose={toggleImport}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isLedgerOpen && (
-        <Ledger onClose={toggleLedger} />
-      )}
-      {isLocalOpen && (
-        <Local
-          onClose={toggleLocal}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isMultisigOpen && (
-        <Multisig
-          onClose={toggleMultisig}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isProxyOpen && (
-        <Proxy
-          onClose={toggleProxy}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isQrOpen && (
-        <Qr
-          onClose={toggleQr}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {/* <BannerExtension /> */}
-      <BannerClaims />
       {!isNextTick || !sortedAccounts.length
         ? (
-          <MultisigTable
-            empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
+          <Table
+            empty={isNextTick && sortedAccounts && t("No any accounts")}
+            header={header.accounts}
           />
         )
         : GROUP_ORDER.map((group) =>
           groups[group] && (
-            <MultisigTable
+            <Table
               empty={t('No accounts')}
               header={header[group]}
               isSplit
               key={group}
             >
               {groups[group]}
-            </MultisigTable>
+            </Table>
           )
         )
       }
@@ -289,7 +242,7 @@ const StyledDiv = styled.div`
   .ui--Dropdown {
     width: 15rem;
   }
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   .header-box {
     .dropdown-section {
       display: flex;

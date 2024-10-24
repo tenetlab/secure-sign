@@ -17,14 +17,19 @@ interface Props extends Group {
 const SHA_COL = 'rgba(34, 36, 38, 0.12)';
 const SHA_OFF = '5px';
 
-function Grouping ({ routes }: Props): React.ReactElement<Props> {
-
+function Grouping ({ isActive, routes }: Props): React.ReactElement<Props> {
+  
   return (
-    <StyledLi>
+    <StyledLi className={`${isActive ? 'isActive' : ''}`}>
         {routes.map((route): React.ReactNode => (
           <Item
+            className={isActive ? 'isActive' : ''}
             key={route.name}
             route={route}
+            isActive={isActive}
+        classNameText='smallHide'
+        isToplevel
+
           />
         ))}
       </StyledLi>
@@ -46,7 +51,7 @@ const StyledLi = styled.li`
   }
 
   &.isActive .groupHdr {
-    background-color: var(--bg-tabs);
+    background-color: var(--bg-page) !important;
     font-weight: var(--font-weight-normal);
     margin-bottom: 0;
   }
@@ -88,13 +93,11 @@ const StyledLi = styled.li`
       margin-bottom: -2rem;
     }
 
-    .groupMenu {
       display: block;
 
       > li:hover {
-        background: var(--bg-menu-hover);
+        color: var(--color-text-hover) !important;
       }
-    }
   }
 `;
 

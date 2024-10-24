@@ -5,7 +5,7 @@ import type { Group } from './types.js';
 
 import React, { useCallback, useMemo } from 'react';
 
-import { Icon, styled } from '@polkadot/react-components';
+import { styled } from '@polkadot/react-components';
 
 import Network from './Network.js';
 
@@ -18,10 +18,12 @@ interface Props {
   isSelected: boolean;
   setApiUrl: (network: string, apiUrl: string) => void;
   setGroup: (groupIndex: number) => void;
+  settings: any;
+  hasUrlChanged: boolean;
   value: Group;
 }
 
-function GroupDisplay ({ affinities, apiUrl, children, className = '', index, isSelected, setApiUrl, setGroup, value: { header, isSpaced, networks } }: Props): React.ReactElement<Props> {
+function GroupDisplay ({ affinities, apiUrl, children, className = '', index, isSelected, setApiUrl, setGroup, settings, hasUrlChanged, value: { header, isSpaced, networks } }: Props): React.ReactElement<Props> {
   const _setGroup = useCallback(
     () => setGroup(isSelected ? -1 : index),
     [index, isSelected, setGroup]
@@ -38,11 +40,8 @@ function GroupDisplay ({ affinities, apiUrl, children, className = '', index, is
         className={`groupHeader${isSpaced ? ' isSpaced' : ''}`}
         onClick={_setGroup}
       >
-        <Icon icon={isSelected ? 'caret-up' : 'caret-down'} />
         {header}
       </div>
-      {isSelected && (
-        <>
           <div className='groupNetworks'>
             {filtered.map((network, index): React.ReactNode => (
               <Network
@@ -51,12 +50,12 @@ function GroupDisplay ({ affinities, apiUrl, children, className = '', index, is
                 key={index}
                 setApiUrl={setApiUrl}
                 value={network}
+                settings={settings}
+                hasUrlChanged={hasUrlChanged}
               />
             ))}
           </div>
           {children}
-        </>
-      )}
     </StyledDiv>
   );
 }
