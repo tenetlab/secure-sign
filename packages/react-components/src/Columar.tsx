@@ -67,7 +67,7 @@ function ColumarBase ({ children, className = '', is60, is100, isPadded = true, 
 }
 
 const StyledDiv = styled.div`
-  justify-content: flex-end;
+  justify-content: flex-start;
   &.isReverse {
     flex-direction: row-reverse;
   }

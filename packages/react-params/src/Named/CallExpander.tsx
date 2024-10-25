@@ -6,9 +6,9 @@ import type { BN } from '@polkadot/util';
 
 import React, { useMemo } from 'react';
 
-import { Expander } from '@polkadot/react-components';
+// import { Expander } from '@polkadot/react-components';
 
-import CallDisplay from './Call.js';
+// import CallDisplay from './Call.js';
 
 interface Props {
   children?: React.ReactNode;
@@ -27,7 +27,7 @@ interface Props {
   withSignature?: boolean;
 }
 
-function CallExpander ({ children, className = '', isHeader, labelHash, labelSignature, mortality, onError, stringId, tip, value, withBorder, withHash, withSignature }: Props): React.ReactElement<Props> | null {
+function CallExpander ({ className = '', value }: Props): React.ReactElement<Props> | null {
   const call = useMemo(
     () => value?.callIndex
       ? value.registry.findMetaCall(value.callIndex)
@@ -39,12 +39,12 @@ function CallExpander ({ children, className = '', isHeader, labelHash, labelSig
     return null;
   }
 
-  const { meta, method, section } = call;
-  const callName = `${section}.${method}`;
+  // const { meta, method, section } = call;
+  // const callName = `${section}.${method}`;
 
   return (
     <div className={`${className} ui--CallExpander`}>
-      <Expander
+      {/* <Expander
         isHeader={isHeader}
         isLeft
         summaryHead={
@@ -66,7 +66,7 @@ function CallExpander ({ children, className = '', isHeader, labelHash, labelSig
           withSignature={withSignature}
         />
         {children}
-      </Expander>
+      </Expander> */}
     </div>
   );
 }

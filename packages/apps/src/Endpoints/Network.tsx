@@ -82,7 +82,7 @@ const StyledDiv = styled.div`
 
   &.isSelected,
   &:hover {
-    background: var(--bg-menu);
+    background: var(--bg-menu-hover);
   }
 
   .endpointSection {

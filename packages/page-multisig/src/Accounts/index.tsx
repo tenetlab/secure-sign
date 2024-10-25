@@ -11,7 +11,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 
 import { styled, MultisigTable } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
-import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies } from '@polkadot/react-hooks';
+import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO } from '@polkadot/util';
 
@@ -20,6 +20,7 @@ import { sortAccounts } from '../util.js';
 import Account from './Account.js';
 import Sidebar from '@polkadot/react-components/MultisigAccountSidebar/Sidebar';
 import { AddressContext } from '@polkadot/react-components/MultisigAccountSidebar/index';
+import useMultisigApprovals from '../../../page-multisig/src/Accounts/useMultisigApprovals.js';
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
@@ -73,10 +74,16 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
+  const [isMultisigOpen, toggleMultisig] = useToggle();
 
-  const {multisigAddress, onUpdateName} = useContext(AddressContext)
+  const { multisigAddress, onUpdateName } = useContext(AddressContext)
+  const multiInfos = useMultisigApprovals(multisigAddress || '');
+  console.log('===========MultiInfos=========', multiInfos);
+
+
   console.log("setFilter", setFilter);
   console.log("setSortBy", setSortBy);
+
 
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>
@@ -138,7 +145,7 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
     (): Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> => {
       const ret: Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> = {
         hardware: [[<>{t('hardware')}<div className='sub'>{t('accounts managed via hardware devices')}</div></>]],
-        multisig: [[<>{t('multisig')}<div className='sub'>{t('')}</div></>]],
+        multisig: [[<>{t('multisig account list')}<div className='sub'>{t('')}</div></>]],
         testing: [[<>{t('development')}<div className='sub'>{t('accounts derived via development seeds')}</div></>]]
       };
 
@@ -169,12 +176,14 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
           proxy={proxies?.[index]}
           setBalance={setBalance}
           toggleFavorite={toggleFavorite}
+          isMultisigOpen={isMultisigOpen}
+          toggleMultisig={toggleMultisig}
         />
       );
 
       return all;
     }, {}),
-    [accountsMap, filterOn, proxies, setBalance, toggleFavorite]
+    [accountsMap, filterOn, proxies, setBalance, toggleFavorite, toggleMultisig, isMultisigOpen]
   );
 
   const groups = useMemo(
@@ -209,48 +218,73 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
   return (
     <StyledDiv className={className}>
-      { grouped['multisig'][0] === undefined ? (
+      {grouped['multisig'][0] === undefined ? (
         <>No Multisig Accounts</>
       ) : (
         <>
-        <div className='multisig_list'>
-        {!isNextTick || !sortedAccounts.length
-          ? (
-            <MultisigTable
-              empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
-              header={header.multisig}
-            />
-          )
-          : GROUP_ORDER.map((group) =>
-            groups[group] && (
-              <MultisigTable
-                empty={t('No accounts')}
-                header={header[group]}
-                isSplit
-                key={group}
-              >
-                {groups[group]}
-              </MultisigTable>
-            )
-          )
-        }
-      </div>
-      <div className='multisig_detail'>
-        {multisigAddress !== null ? (
-          <Sidebar
-          address={multisigAddress || ''}
-          dataTestId='account-sidebar'
-          // onClose={onClose}
-          onUpdateName={onUpdateName}
-        />
-        ) : (
-          <></>
-        )}
-        
-      </div>
+          <div className='multisig_list'>
+            {!isNextTick || !sortedAccounts.length
+              ? (
+                <MultisigTable
+                  empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
+                  header={header.multisig}
+                />
+              )
+              : GROUP_ORDER.map((group) =>
+                groups[group] && (
+                  <MultisigTable
+                    empty={t('No accounts')}
+                    header={header[group]}
+                    isSplit
+                    key={group}
+                  >
+                    {groups[group]}
+                  </MultisigTable>
+                )
+              )
+            }
+          </div>
+          <div className='multisig_detail'>
+            {multisigAddress !== null ? (
+              // <Sidebar
+              //   address={multisigAddress || ''}
+              //   dataTestId='account-sidebar'
+              //   // onClose={onClose}
+              //   ongoing={multiInfos}
+              //   onUpdateName={onUpdateName}
+              //   toggleMultisig={toggleMultisig}
+              // />
+              <>
+                {multiInfos && multiInfos.length !== 0 ? (
+                  <Sidebar
+                    address={multisigAddress || ''}
+                    dataTestId='account-sidebar'
+                    // onClose={onClose}
+                    ongoing={multiInfos}
+                    onUpdateName={onUpdateName}
+                    toggleMultisig={toggleMultisig}
+                  />
+                ) : (
+                  <>
+                  <Sidebar
+                    address={multisigAddress || ''}
+                    dataTestId='account-sidebar'
+                    // onClose={onClose}
+                    ongoing={[]}
+                    onUpdateName={onUpdateName}
+                    toggleMultisig={toggleMultisig}
+                  />
+                  </>
+                )}
+              </>
+            ) : (
+              <></>
+            )}
+
+          </div>
         </>
       )}
-      
+
     </StyledDiv>
   );
 }
@@ -258,7 +292,7 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   display: flex;
   height: 100%;
-  padding-top: 30px !important;
+  padding-top: 0px !important;
   padding-bottom: 70px !important;
   .ui--Dropdown {
     width: 15rem;

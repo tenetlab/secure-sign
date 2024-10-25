@@ -103,16 +103,7 @@ function Decoded ({ className, extrinsic, isCall, payload, withData = true }: Pr
 }
 
 const StyledColumar = styled(Columar)`
-  .ui--Column:last-child .ui--Labelled {
-    // padding-left: 0.5rem;
-
-    label {
-      // left: 2.05rem; /* 3.55 - 1.5 (diff from padding above) */
-    }
-  }
-  .ui--Column:first-child {
-    padding-left: 2rem;
-  }
+  
 `;
 
 export default React.memo(Decoded);

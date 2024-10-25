@@ -50,8 +50,8 @@ const StyledDiv = styled.div`
     justify-content: space-between;
     padding: 0 1.5rem;
     width: 100%;
-    max-width: var(--width-full);
-    margin: 0 auto;
+    // max-width: var(--width-full);
+    // margin: 0 auto;
   }
 
   &.isLoading {

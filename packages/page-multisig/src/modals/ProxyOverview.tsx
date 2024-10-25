@@ -255,7 +255,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
       size='large'
     >
       <Modal.Content>
-        <Modal.Columns hint={t('Any account set as proxy will be able to perform actions in place of the proxied account')}>
+        <Modal.Columns hint={t('')}>
           <InputAddress
             isDisabled={true}
             label={t('proxied account')}
@@ -263,7 +263,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
             value={proxiedAccount}
           />
         </Modal.Columns>
-        <Modal.Columns hint={t('If you add several proxy accounts for the same proxy type (e.g 2 accounts set as proxy for Governance), then any of those 2 accounts will be able to perform governance actions on behalf of the proxied account')}>
+        <Modal.Columns hint={t('')}>
           {previous.map((value, index) => (
             <PrevProxy
               index={index}
@@ -293,7 +293,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
             />
           </Button.Group>
         </Modal.Columns>
-        <Modal.Columns hint={t('A deposit paid by the proxied account that can not be used while the proxy is in existence. The deposit is returned when the proxy is destroyed. The amount reserved is based on the base deposit and number of proxies')}>
+        <Modal.Columns hint={t('')}>
           <InputBalance
             defaultValue={reservedAmount}
             isDisabled

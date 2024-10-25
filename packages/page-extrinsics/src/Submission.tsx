@@ -43,6 +43,7 @@ function extractDefaults (value: DecodedExtrinsic | null, defaultFn: Submittable
 function Selection ({ className, defaultValue }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { apiDefaultTxSudo } = useApi();
+  const { api } = useApi();
   const [accountId, setAccountId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [extrinsic, setExtrinsic] = useState<SubmittableExtrinsic<'promise'> | null>(null);
@@ -64,46 +65,52 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
     <StyledDiv className={className}>
       <h1>Extrinsics</h1>
       <div className='ui--Extrinsic-Group'>
-        <InputAddress
-          label={t('selected account')}
-          labelExtra={
-            <BalanceFree
-              // label={<label>{t('free balance')}</label>}
-              params={accountId}
+        {
+          api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
+          <div className='ui--Extrinsic-Group-Content'>
+            <InputAddress
+              label={t('selected account')}
+              labelExtra={
+                <BalanceFree
+                  // label={<label>{t('free balance')}</label>}
+                  params={accountId}
+                />
+              }
+              onChange={setAccountId}
+              type='account'
             />
-          }
-          onChange={setAccountId}
-          type='account'
-        />
-        <Extrinsic
-          defaultArgs={defaultArgs}
-          defaultValue={defaultFn}
-          label={t('extrinsic')}
-          onChange={_onExtrinsicChange}
-          onError={_onExtrinsicError}
-        />
-        <Decoded
-          extrinsic={extrinsic}
-          isCall
-        />
-        {error && !extrinsic && (
-          <MarkError content={error} />
-        )}
-        <Button.Group>
-          <TxButton
-            extrinsic={extrinsic}
-            icon='sign-in-alt'
-            isUnsigned
-            label={t('Submit Unsigned')}
-            withSpinner
-          />
-          <TxButton
-            accountId={accountId}
-            extrinsic={extrinsic}
-            icon='sign-in-alt'
-            label={t('Submit Transaction')}
-          />
-        </Button.Group>
+            <Extrinsic
+              defaultArgs={defaultArgs}
+              defaultValue={defaultFn}
+              label={t('extrinsic')}
+              onChange={_onExtrinsicChange}
+              onError={_onExtrinsicError}
+            />
+            <Decoded
+              extrinsic={extrinsic}
+              isCall
+            />
+            {error && !extrinsic && (
+              <MarkError content={error} />
+            )}
+            <Button.Group>
+              {/* <TxButton
+                extrinsic={extrinsic}
+                icon='sign-in-alt'
+                isUnsigned
+                label={t('Submit Unsigned')}
+                withSpinner
+              /> */}
+              <TxButton
+                accountId={accountId}
+                extrinsic={extrinsic}
+                icon='sign-in-alt'
+                label={t('Submit Transaction')}
+              />
+            </Button.Group>
+          </div>:
+          <div>Extrinsics does not support this network.</div>
+        }
       </div>
     </StyledDiv>
   );
@@ -114,13 +121,23 @@ export default React.memo(Selection);
 const StyledDiv = styled.div`
   margin-top: 0.5rem;
   .extrinsics--Extrinsic {
+    // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
+    //   padding-left: 1rem;
+    // }
+    // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown.search:not(.multiple)>input.search {
+    //   padding-left: 1rem;
+    // }
+    position: relative;
     display: flex;
     .ui--Params-Container {
       width: 50%;
+      position: absolute;
+      right: 0;
+      top: -7.5rem;
       .ui--Params-Content {
         display: flex;
         flex-direction: column;
-        row-gap: 1rem;
+        row-gap: 4rem;
       }
     }
     .ui--Input-Container {
@@ -130,8 +147,15 @@ const StyledDiv = styled.div`
   .ui--Extrinsic-Group {
     padding-top: 2rem;
     display: flex;
-    flex-direction: column;
-    row-gap: 3rem;
+    .ui--Extrinsic-Group-Content {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 4rem;
+      .ui--Button-Group {
+        width: 50%;
+      }
+    }
   }
   .ui--InputAddress {
     width: 50%;

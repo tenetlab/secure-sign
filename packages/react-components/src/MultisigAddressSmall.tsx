@@ -63,9 +63,11 @@ const StyledDiv = styled.div`
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  border: 2px solid var(--border-table);
+  border-radius: 1rem;
 
   &.withPadding {
-    padding: 0.75rem 0;
+    padding: 0.75rem 1rem;
   }
 
   .ui--AddressSmall-icon {

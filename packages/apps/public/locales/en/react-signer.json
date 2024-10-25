@@ -1,6 +1,7 @@
 {
   "Adding an optional tip to the transaction could allow for higher priority, especially when the chain is busy.": "Adding an optional tip to the transaction could allow for higher priority, especially when the chain is busy.",
   "Authorize transaction": "Authorize transaction",
+  "Confirm transaction": "Confirm transaction",
   "Current account nonce: {{accountNonce}}": "Current account nonce: {{accountNonce}}",
   "Do not include a tip for the block author": "Do not include a tip for the block author",
   "Don't use a proxy for this call": "Don't use a proxy for this call",
@@ -35,11 +36,14 @@
   "Unable to connect to the Ledger, ensure support is enabled in settings and no other app is using it. {{errorMessage}}": "Unable to connect to the Ledger, ensure support is enabled in settings and no other app is using it. {{errorMessage}}",
   "Unlock the sending account to allow signing of this transaction.": "Unlock the sending account to allow signing of this transaction.",
   "Use a proxy for this call": "Use a proxy for this call",
+  "call data": "call data",
   "call hash": "call hash",
+  "from": "from",
   "multisig call data": "multisig call data",
   "multisig signatory": "multisig signatory",
   "proxy account": "proxy account",
   "sending from my account": "sending from my account",
+  "signatory": "signatory",
   "unlock account with password": "unlock account with password",
   "unlock for {{expiry}} min": "unlock for {{expiry}} min"
 }

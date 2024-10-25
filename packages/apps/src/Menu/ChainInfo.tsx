@@ -19,7 +19,7 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   const canToggle = !ipnsChain;
 
   return (
-    <StyledDiv className={className}>
+    <StyledDiv className={`${className}`}>
       <div
         className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} `}
         onClick={toggleEndpoints}
@@ -44,9 +44,14 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   box-sizing: border-box;
-  padding: 0.5rem 1rem 0.5rem 0;
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border: 2px solid var(--border-table);
+  border-radius: 1rem;
   margin: 0;
 
+  &:hover {
+    border-color: var(--border-input-hover) !important;
+  }
   .apps--SideBar-logo-inner {
     display: flex;
     align-items: center;
@@ -71,7 +76,8 @@ const StyledDiv = styled.div`
     .ui--Icon.dropdown {
       flex: 0;
       margin: 0;
-      width: 1rem;
+      // width: 1rem;
+      display: none;
     }
 
     .info {

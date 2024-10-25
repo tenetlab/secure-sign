@@ -1,7 +1,7 @@
 // Copyright 2017-2024 @polkadot/react-components authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 
 import { useAccountInfo } from '@polkadot/react-hooks';
 
@@ -9,8 +9,10 @@ import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
 import Balances from './Balances.js';
 // import Identity from './Identity.js';
-import Multisig from './Multisig.js';
+import MultisigPage from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
+import { MultisigOutput } from '@polkadot/react-components';
+import type { H256, Multisig } from '@polkadot/types/interfaces';
 
 interface Props {
   address: string;
@@ -18,12 +20,26 @@ interface Props {
   dataTestId?: string;
   onClose?: () => void;
   onUpdateName?: (() => void) | null;
+  toggleMultisig: () => void;
+  ongoing: [H256, Multisig][];
 }
 
-function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props): React.ReactElement<Props> {
+
+interface Option {
+  text: string;
+  value: string;
+}
+
+
+function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMultisig, ongoing }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
   const { accountIndex, flags, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const hashes = useMemo<Option[]>(
+    () => ongoing?.map(([h]) => ({ text: h.toHex(), value: h.toHex() })),
+    [ongoing]
+  );
 
   return (
     <StyledDiv
@@ -41,17 +57,32 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName }: Props):
           sidebarRef={sidebarRef}
         />
       </div>
-      <div className='ui--ScrollSection'>
-        <Balances address={address} />
-        {/* <Identity
+      <div style={{ display: 'flex' }}>
+        <div className='ui--ScrollSection' style={{ width: '38%' }}>
+          <Balances address={address} />
+          {/* <Identity
           address={address}
           identity={identity}
         /> */}
-        <Multisig
-          isMultisig={flags.isMultisig}
-          meta={meta}
-        />
+          <MultisigPage
+            isMultisig={flags.isMultisig}
+            meta={meta}
+          />
+        </div>
+        <div className='hash'>
+          {hashes?.map((item, key) =>
+            <MultisigOutput
+              key={key}
+              isDisabled
+              value={item.value}
+              withCopy
+              toggleMultisig={toggleMultisig}
+            />
+          )}
+
+        </div>
       </div>
+
     </StyledDiv>
   );
 }
@@ -65,6 +96,10 @@ const StyledDiv = styled.div`
   // overflow-y: hidden;
   width: 100%;
 
+  .hash {
+    width: 62%;
+    margin-top: 1rem;
+  }
   padding: 0 0 3.286rem;
 
   input {
@@ -189,21 +224,21 @@ const StyledDiv = styled.div`
     .ui--AddressMenu-multisigTable {
       font-size: var(--font-size-small);
       margin-top: 0.6rem;
-      padding-left: 20px;
+      padding-left: 60px;
 
       .tr {
-        padding: 0.25rem 0;
+        padding: 0rem 0rem 0.6rem 0rem;
         display: inline-flex;
         align-items: center;
         width: 100%;
+        justify-content: space-between;
 
         .th {
-          text-transform: uppercase;
           color: var(--color-label);
-          font-weight: var(--font-weight-normal);
+          font-weight: var(--font-weight-bold);
           text-align: left;
           flex-basis: 25%;
-          font-size: var(--font-size-tiny);
+          font-size: var(--font-size-h3);
 
           &.top {
             align-self: flex-start;
@@ -211,10 +246,11 @@ const StyledDiv = styled.div`
         }
 
         .td {
-          flex: 1;
           overflow: hidden;
           padding-left: 0.6rem;
           text-overflow: ellipsis;
+          text-align: left;
+          flex-basis: 50%;
         }
       }
 

@@ -20,7 +20,7 @@ import type { AddressFlags, AddressProxy, QrState } from './types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { web3FromSource } from '@polkadot/extension-dapp';
-import { Button, ErrorBoundary, Modal, Output, styled, Toggle } from '@polkadot/react-components';
+import { Button, ErrorBoundary, Modal, Output, styled} from '@polkadot/react-components';
 import { useApi, useLedger, useQueue, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
@@ -230,7 +230,7 @@ function tryExtract (address: string | null): AddressFlags {
   }
 }
 
-function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAddress, setIsQueueSubmit }: Props): React.ReactElement<Props> | null {
+function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAddress }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const { getLedger } = useLedger();
@@ -423,6 +423,8 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
     return null;
   }
 
+  console.log('', setIsSubmit);
+  
   return (
     <>
       <StyledModalContent className={className}>
@@ -465,18 +467,22 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   />
                 )}
                 {isSubmit && !senderInfo.isMultiCall && innerTx && (
-                  <Modal.Columns hint={t('The full call data that can be supplied to a final call to multi approvals')}>
+                  <Modal.Columns 
+                    // hint={t('The full call data that can be supplied to a final call to multi approvals')}
+                  >
                     <Output
                       isDisabled
                       isTrimmed
-                      label={t('multisig call data')}
+                      label={t('call data')}
                       value={innerTx}
                       withCopy
                     />
                   </Modal.Columns>
                 )}
                 {isSubmit && innerHash && (
-                  <Modal.Columns hint={t('The call hash as calculated for this transaction')}>
+                  <Modal.Columns 
+                    // hint={t('The call hash as calculated for this transaction')}
+                  >
                     <Output
                       isDisabled
                       isTrimmed
@@ -504,7 +510,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           onClick={_doStart}
           tabIndex={2}
         />
-        <div className='signToggle'>
+        {/* <div className='signToggle'>
           {!isBusy && (
             <Toggle
               isDisabled={!!currentItem.payload}
@@ -528,7 +534,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
               value={isQueueSubmit}
             />
           )}
-        </div>
+        </div> */}
       </Modal.Actions>
     </>
   );

@@ -17,7 +17,7 @@ import type { AccountBalance, Delegation } from '../types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
-import { MultisigAddressSmall, Badge, Forget, styled, TransferModal } from '@polkadot/react-components';
+import { MultisigAddressSmall, Badge, Forget, styled, TransferModal, Menu } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN, BN_ZERO, formatBalance, formatNumber } from '@polkadot/util';
@@ -46,6 +46,8 @@ interface Props {
   proxy?: [ProxyDefinition[], BN];
   setBalance: (address: string, value: AccountBalance) => void;
   toggleFavorite: (address: string) => void;
+  toggleMultisig: () => void;
+  isMultisigOpen: boolean;
 }
 
 interface DemocracyUnlockable {
@@ -58,7 +60,7 @@ interface ReferendaUnlockable {
   ids: [classId: BN, refId: BN][];
 }
 
-function calcVisible (filter: string, name: string, tags: string[]): boolean {
+function calcVisible(filter: string, name: string, tags: string[]): boolean {
   if (filter.length === 0) {
     return true;
   }
@@ -70,7 +72,7 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
   }, name.toLowerCase().includes(_filter));
 }
 
-function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
+function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
   if (!stakingInfo?.unlocking) {
     return BN_ZERO;
   }
@@ -83,7 +85,7 @@ function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
   return total;
 }
 
-function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
+function createClearDemocracyTx(api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
   return api.tx.utility && ids.length
     ? api.tx.utility.batch(
       ids
@@ -93,7 +95,7 @@ function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): S
     : null;
 }
 
-function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
+function createClearReferendaTx(api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
   if (!api.tx.utility || !ids.length) {
     return null;
   }
@@ -119,7 +121,7 @@ const transformRecovery = {
   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 };
 
-function Account ({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
+function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance, toggleMultisig, isMultisigOpen }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api, isDevelopment: isDevelopmentApiProps, isEthereum: isEthereumApiProps } = useApi();
   const bestNumber = useBestNumber();
@@ -139,7 +141,6 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const [isForgetOpen, toggleForget] = useToggle();
   const [isIdentityMainOpen, toggleIdentityMain] = useToggle();
   const [isIdentitySubOpen, toggleIdentitySub] = useToggle();
-  const [isMultisigOpen, toggleMultisig] = useToggle();
   const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
   const [isPasswordOpen, togglePassword] = useToggle();
   const [isRecoverAccountOpen, toggleRecoverAccount] = useToggle();
@@ -149,7 +150,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const [isUndelegateOpen, toggleUndelegate] = useToggle();
 
   console.log("", isDevelopmentApiProps, isEthereumApiProps, democracyUnlockTx, referendaUnlockTx, vestingVestTx);
-  
+
 
   useEffect((): void => {
     if (balancesAll) {
@@ -250,6 +251,16 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
             parentAddress={meta.parentAddress}
             value={address}
             withShortAddress
+          />
+          <Menu.Item
+            icon='sitemap'
+            key='proxy-overview'
+            label={proxy?.[0].length
+              ? t('Manage proxies')
+              : t('Add proxy')
+            }
+            className='proxyItem'
+            onClick={toggleProxyOverview}
           />
           {isBackupOpen && (
             <Backup
@@ -421,10 +432,10 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               <Badge
                 className='important'
                 color='purple'
-                hover={t('Multisig approvals pending')}
-                hoverAction={t('View pending approvals')}
+                // hover={t('Multisig approvals pending')}
+                // hoverAction={t('View pending approvals')}
                 icon='file-signature'
-                onClick={toggleMultisig}
+                onClick={() => { }}
               />
             )}
             {delegation?.accountDelegated && (
@@ -459,6 +470,11 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
 const StyledTr = styled.tr`
   .devBadge {
     opacity: var(--opacity-light);
+  }
+  .proxyItem {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
   }
 `;
 

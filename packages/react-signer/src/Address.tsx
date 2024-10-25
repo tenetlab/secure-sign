@@ -262,18 +262,22 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
 
   return (
     <>
-      <Modal.Columns hint={t('The sending account that will be used to send this transaction. Any applicable fees will be paid by this account.')}>
+      <Modal.Columns 
+        // hint={t('The sending account that will be used to send this transaction. Any applicable fees will be paid by this account.')}
+      >
         <InputAddress
           className='full'
           defaultValue={requestAddress}
           isDisabled
           isInput
-          label={t('sending from my account')}
+          label={t('from')}
           withLabel
         />
       </Modal.Columns>
       {proxyInfo && isProxyActive && (
-        <Modal.Columns hint={t('The proxy is one of the allowed proxies on the account, as set and filtered by the transaction type.')}>
+        <Modal.Columns 
+          // hint={t('The proxy is one of the allowed proxies on the account, as set and filtered by the transaction type.')}
+        >
           <InputAddress
             filter={proxyInfo.proxiesFilter}
             label={t('proxy account')}
@@ -283,10 +287,12 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {multiInfo && (
-        <Modal.Columns hint={t('The signatory is one of the allowed accounts on the multisig, making a recorded approval for the transaction.')}>
+        <Modal.Columns 
+          // hint={t('The signatory is one of the allowed accounts on the multisig, making a recorded approval for the transaction.')}
+        >
           <InputAddress
             filter={multiInfo.whoFilter}
-            label={t('multisig signatory')}
+            label={t('signatory')}
             onChange={setMultiAddress}
             type='account'
           />
@@ -306,7 +312,9 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {proxyInfo && (
-        <Modal.Columns hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}>
+        <Modal.Columns 
+          // hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}
+        >
           <Toggle
             className='tipToggle'
             isDisabled={proxyInfo.isProxied}
@@ -321,7 +329,9 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         </Modal.Columns>
       )}
       {multiInfo && (
-        <Modal.Columns hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}>
+        <Modal.Columns 
+          // hint={t('This could either be an approval for the hash or with full call details. The call as last approval triggers execution.')}
+        >
           <Toggle
             className='tipToggle'
             label={

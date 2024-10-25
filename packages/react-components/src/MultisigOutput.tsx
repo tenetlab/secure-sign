@@ -5,9 +5,9 @@ import React from 'react';
 
 import { isString } from '@polkadot/util';
 
-import CopyButton from './CopyButton.js';
 import Labelled from './Labelled.js';
 import { styled } from './styled.js';
+import MultisigViewDetail from './MultisigViewDetail.js';
 
 interface Props {
   children?: React.ReactNode;
@@ -24,9 +24,10 @@ interface Props {
   value?: React.ReactNode | string | null;
   withCopy?: boolean;
   withLabel?: boolean;
+  toggleMultisig: () => void;
 }
 
-function Output ({ children, className = '', isDisabled, isError, isFull, isHidden, isMonospace, isSmall, isTrimmed, label, labelExtra, value, withCopy = false, withLabel }: Props): React.ReactElement<Props> {
+function MultisigOutput ({ children, className = '', isDisabled, isError, isFull, isHidden, isMonospace, isSmall, isTrimmed, label, labelExtra, value, withCopy = false, withLabel, toggleMultisig }: Props): React.ReactElement<Props> {
   return (
     <StyledLabelled
       className={`${className} ui--Output`}
@@ -45,7 +46,7 @@ function Output ({ children, className = '', isDisabled, isError, isFull, isHidd
         {children}
       </div>
       {withCopy && (
-        <CopyButton value={value} />
+        <MultisigViewDetail value={value} toggleMultisig={toggleMultisig}/>
       )}
     </StyledLabelled>
   );
@@ -57,6 +58,7 @@ const StyledLabelled = styled(Labelled)`
     border-style: dashed;
     opacity: 1;
   }
+
   pre {
     margin: 0;
     overflow: hidden;
@@ -64,4 +66,4 @@ const StyledLabelled = styled(Labelled)`
   }
 `;
 
-export default React.memo(Output);
+export default React.memo(MultisigOutput);

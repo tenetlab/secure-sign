@@ -5,22 +5,22 @@ import type { Props } from '../types.js';
 
 import React, { useMemo } from 'react';
 
-import { getTypeDef } from '@polkadot/types';
-import { encodeTypeDef } from '@polkadot/types/create';
+// import { getTypeDef } from '@polkadot/types';
+// import { encodeTypeDef } from '@polkadot/types/create';
 import { isUndefined } from '@polkadot/util';
 
 import findComponent from './findComponent.js';
 import Static from './Static.js';
 
-function formatJSON (input: string): string {
-  return input
-    .replace(/"/g, '')
-    .replace(/\\/g, '')
-    .replace(/:Null/g, '')
-    .replace(/:/g, ': ')
-    .replace(/,/g, ', ')
-    .replace(/^{_alias: {.*}, /, '{');
-}
+// function formatJSON (input: string): string {
+//   return input
+//     .replace(/"/g, '')
+//     .replace(/\\/g, '')
+//     .replace(/:Null/g, '')
+//     .replace(/:/g, ': ')
+//     .replace(/,/g, ', ')
+//     .replace(/^{_alias: {.*}, /, '{');
+// }
 
 function Param ({ className = '', defaultValue, isDisabled, isError, isOptional, name, onChange, onEnter, onEscape, overrides, registry, type }: Props): React.ReactElement<Props> | null {
   const Component = useMemo(
@@ -30,16 +30,17 @@ function Param ({ className = '', defaultValue, isDisabled, isError, isOptional,
 
   const label = useMemo(
     (): string => {
-      const inner = encodeTypeDef(
-        registry,
-        // if our type is a Lookup, try and unwrap again
-        registry.isLookupType(type.lookupName || type.type)
-          ? getTypeDef(registry.createType(type.type).toRawType())
-          : type
-      );
-      const fmtType = formatJSON(inner);
+      // const inner = encodeTypeDef(
+      //   registry,
+      //   // if our type is a Lookup, try and unwrap again
+      //   registry.isLookupType(type.lookupName || type.type)
+      //     ? getTypeDef(registry.createType(type.type).toRawType())
+      //     : type
+      // );
+      // const fmtType = formatJSON(inner);
 
-      return `${isUndefined(name) ? '' : `${name}: `}${fmtType}${type.typeName && !fmtType.includes(type.typeName) ? ` (${type.typeName})` : ''}`;
+      // return `${isUndefined(name) ? '' : `${name}: `}${fmtType}${type.typeName && !fmtType.includes(type.typeName) ? ` (${type.typeName})` : ''}`;
+      return `${isUndefined(name) ? '' : `${name} `}`;
     },
     [name, registry, type]
   );

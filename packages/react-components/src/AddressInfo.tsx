@@ -665,7 +665,7 @@ export default withMulti(
           text-align: right;
           vertical-align: middle;
           margin-bottom: 0.25rem;
-
+          font-size: var(--font-size-h3);
           .help.circle.icon {
             display: none;
           }

@@ -5,7 +5,6 @@ import React from 'react';
 
 import AddressInfo from '../AddressInfo.js';
 import { styled } from '../styled.js';
-import { useTranslation } from '../translate.js';
 
 interface Props {
   address: string;
@@ -16,13 +15,9 @@ interface Props {
 const WITH_BALANCE = { available: true, total: true };
 
 function Balances ({ address, className }: Props): React.ReactElement<Props> | null {
-  const { t } = useTranslation();
 
   return (
     <StyledSection className={className}>
-      <div className='ui--AddressMenu-sectionHeader'>
-        {t('Account Detail')}
-      </div>
       <AddressInfo
         address={address}
         className='balanceExpander'
@@ -40,11 +35,11 @@ const StyledSection = styled.section`
   }
   .column:not(.column--expander) {
     flex: none !important;
-    column-gap: 3rem !important;
+    column-gap: 4.2rem !important;
   }
   .balanceExpander {
     justify-content: flex-start;
-    padding-left: 20px;
+    padding-left: 60px;
     .column {
       width: auto;
       max-width: 18.57rem;

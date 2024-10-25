@@ -153,10 +153,8 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
-          border-top: 2px solid var(--border-table);
-
       background: var(--bg-table);
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0rem;
       text-align: left;
       vertical-align: middle;
 
@@ -310,9 +308,9 @@ const StyledDiv = styled.div`
 
         .absolute {
           position: absolute;
-          right: 0.5rem;
+          right: 2rem;
           // this seems aligned with expander (when zoomed in)
-          top: 0.72rem;
+          top: 3rem;
           white-space: nowrap;
         }
       }

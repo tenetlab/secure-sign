@@ -94,9 +94,10 @@ const StyledLi = styled.li`
     }
 
       display: block;
-
+    background-color: var(--bg-page) !important;
       > li:hover {
         color: var(--color-text-hover) !important;
+        background-color: var(--bg-page) !important;
       }
   }
 `;

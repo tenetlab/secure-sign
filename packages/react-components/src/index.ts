@@ -74,6 +74,8 @@ export { default as Modal } from './Modal/index.js';
 export { default as NextTick } from './NextTick.js';
 export { default as Nonce } from './Nonce.js';
 export { default as Output } from './Output.js';
+export { default as MultisigOutput } from './MultisigOutput.js';
+export { default as MultisigViewDetail } from './MultisigViewDetail.js';
 export { default as ParaLink } from './ParaLink.js';
 export { default as Password } from './Password.js';
 export { default as PasswordStrength } from './PasswordStrength.js';

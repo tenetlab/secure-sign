@@ -126,7 +126,7 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
         <TransferModal
           key='modal-transfer'
           onClose={toggleIsTransferOpen}
-          recipientId={recipientId}
+          senderId={recipientId}
         />
       )}
     </StyledDiv>

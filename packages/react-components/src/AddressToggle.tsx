@@ -71,7 +71,7 @@ const StyledDiv = styled.div`
   align-items: center;
   border: 1px solid transparent; /* #eee */
   border-radius: 0.25rem;
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin: 0.125rem;
@@ -92,7 +92,8 @@ const StyledDiv = styled.div`
   }
 
   &:hover {
-    border-color: var(--border-input-hover);
+    // border-color: var(--border-input-hover);
+    background-color: var(--bg-menu-hover)
   }
 
   &.isHidden {

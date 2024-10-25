@@ -58,7 +58,7 @@ export default `
     }
 
     .large .ui.selection.dropdown {
-      border-left: none;
+      // border-left: none;
       border-bottom-left-radius: 0;
       border-top-left-radius: 0;
     }

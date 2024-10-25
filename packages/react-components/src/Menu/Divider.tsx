@@ -14,7 +14,7 @@ function Divider ({ className = '' }: DividerProps): React.ReactElement {
 }
 
 const StyledDiv = styled.div`
-  margin: 0.25rem 0 1rem;
+  // margin: 0.25rem 0 1rem;
   border-top: 3px solid var(--border-table);
 
   &:first-child, &:last-child {

@@ -57,7 +57,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
   const [isProtected, setIsProtected] = useState(true);
   const [isAll, setIsAll] = useState(false);
   const [senderIdMeta, setSenderIdMeta] = useState<KeyringJson$Meta>();
-  const [[maxTransfer, noFees], setMaxTransfer] = useState<[BN | null, boolean]>([null, false]);
+  const [[maxTransfer], setMaxTransfer] = useState<[BN | null, boolean]>([null, false]);
   const [recipientId, setRecipientId] = useState<string | null>(null);
   const [senderId, setSenderId] = useState<string | null>(null);
   const [[, recipientPhish], setPhishing] = useState<[string | null, string | null]>([null, null]);
@@ -90,6 +90,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
     } else {
       setMaxTransfer([null, false]);
     }
+
   }, [api, balances, propRecipientId, propSenderId, recipientId, senderId]);
 
   useEffect((): void => {
@@ -105,23 +106,25 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
     : true;
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
 
+  console.log('', setIsProtected);
+  
   return (
     <StyledModal
       className='app--accounts-Modal'
-      header={t('Send funds')}
+      header={t('Transfer')}
       onClose={onClose}
       size='large'
     >
       <Modal.Content>
-        <div className={className}>
-          <Modal.Columns hint={t('The transferred balance will be subtracted (along with fees) from the sender account.')}>
+        <div className={`${className} ui--Modal-Column-Container`}>
+          <Modal.Columns hint={t('')}>
             <InputAddress
               defaultValue={propSenderId}
               isDisabled={!!propSenderId}
-              label={t('send from account')}
+              label={t('from')}
               labelExtra={
                 <Available
-                  label={t('transferable')}
+                  label={t('')}
                   params={propSenderId || senderId}
                 />
               }
@@ -129,14 +132,14 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
               type='account'
             />
           </Modal.Columns>
-          <Modal.Columns hint={t('The beneficiary will have access to the transferred fees when the transaction is included in a block.')}>
+          <Modal.Columns hint={t('')}>
             <InputAddress
               defaultValue={propRecipientId}
               isDisabled={!!propRecipientId}
-              label={t('send to address')}
+              label={t('to')}
               labelExtra={
                 <Available
-                  label={t('transferable')}
+                  label={t('')}
                   params={propRecipientId || recipientId}
                 />
               }
@@ -147,7 +150,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
               <MarkError content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })} />
             )}
           </Modal.Columns>
-          <Modal.Columns hint={t('If the recipient account is new, the balance needs to be more than the existential deposit. Likewise if the sending account balance drops below the same value, the account will be removed from the state.')}>
+          <Modal.Columns hint={t('')}>
             {canToggleAll && isAll
               ? (
                 <InputBalance
@@ -168,17 +171,17 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
                     maxValue={maxTransfer}
                     onChange={setAmount}
                   />
-                  <InputBalance
+                  {/* <InputBalance
                     defaultValue={api.consts.balances?.existentialDeposit}
                     isDisabled
                     label={t('existential deposit')}
-                  />
+                  /> */}
                 </>
               )
             }
           </Modal.Columns>
-          <Modal.Columns hint={t('With the keep-alive option set, the account is protected against removal due to low balances.')}>
-            {isFunction(api.tx.balances?.transferKeepAlive) && (
+          <Modal.Columns hint={t('')}>
+            {/* {isFunction(api.tx.balances?.transferKeepAlive) && (
               <Toggle
                 className='typeToggle'
                 label={
@@ -189,7 +192,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
                 onChange={setIsProtected}
                 value={isProtected}
               />
-            )}
+            )} */}
             {canToggleAll && (
               <Toggle
                 className='typeToggle'
@@ -204,9 +207,9 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
             {!isProtected && !noReference && (
               <MarkWarning content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')} />
             )}
-            {noFees && (
+            {/* {noFees && (
               <MarkWarning content={t('The transaction, after application of the transfer fees, will drop the available balance below the existential deposit. As such the transfer will fail. The account needs more free funds to cover the transaction fees.')} />
-            )}
+            )} */}
           </Modal.Columns>
         </div>
       </Modal.Content>
@@ -219,7 +222,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
             !(propRecipientId || recipientId) ||
             !!recipientPhish
           }
-          label={t('Make Transfer')}
+          label={t('Send')}
           onStart={onClose}
           params={
             canToggleAll && isAll
@@ -251,7 +254,11 @@ const StyledModal = styled(Modal)`
       opacity: 0.7;
     }
   }
-
+  .ui--Modal-Column-Container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2rem;
+  }
   label.with-help {
     flex-basis: 10rem;
   }

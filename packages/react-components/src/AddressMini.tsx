@@ -180,7 +180,7 @@ const StyledDiv = styled.div`
   .ui--AddressMini-icon,
   .ui--AddressMini-info {
     position: relative;
-    vertical-align: middle;
+    // vertical-align: middle;
   }
 
   .ui--AddressMini-summary {

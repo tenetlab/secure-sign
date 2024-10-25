@@ -61,7 +61,7 @@ const StyledDiv = styled.div`
     padding: 0;
 
     .ui--Params-Content {
-      margin-left: 2rem;
+      // margin-left: 2rem;
     }
   }
 

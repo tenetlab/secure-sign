@@ -65,8 +65,6 @@ const StyledLi = styled.li`
 
     &.isActive.highlight--color-contrast {
       font-weight: var(--font-weight-normal);
-      color: var(--color-text-hover);
-
       a {
         color: var(--color-text-hover) !important;
         font-weight: var(--font-weight-bold) !important;
@@ -78,7 +76,7 @@ const StyledLi = styled.li`
 
       a {
         padding: 0.857rem 1.429rem 0.857rem;
-        color: var(--color-text);
+        // color: var(--color-text);
         cursor: default;
       }
 
@@ -117,6 +115,12 @@ const StyledLi = styled.li`
   .sidebarItem {
     font-size: var(--font-size-h1);
   }
+  
+  a:hover {
+    background-color: var(--bg-page) !important;
+    color: var(--color-text-hover) !important;
+  }
+
 `;
 
 export default React.memo(Item);

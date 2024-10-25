@@ -116,7 +116,7 @@ const StyledDiv = styled.div`
   }
 
   &.largeSize .ui--Modal__body {
-    max-width: 1080px;
+    max-width: 720px;
   }
 `;
 

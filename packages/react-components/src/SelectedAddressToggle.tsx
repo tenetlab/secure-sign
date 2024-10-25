@@ -66,10 +66,10 @@ function SelectedAddressToggle({ address, className = '', filter, isHidden, noTo
 }
 
 const StyledDiv = styled.div`
-  align-items: flex-start;
+  align-items: center;
   border: 1px solid transparent; /* #eee */
   border-radius: 0.25rem;
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin: 0.125rem;
@@ -80,19 +80,18 @@ const StyledDiv = styled.div`
 
   .ui--AddressToggle-address {
     filter: grayscale(100%);
-    opacity: var(--opacity-light);
     width: 50%;
+    opacity: var(--opacity-light);
   }
-
   
   .address-text {
     width: 40%;
     font-size: var(--font-percent-small);
   }
 
-
   &:hover {
-    border-color: var(--border-input-hover);
+    // border-color: var(--border-input-hover);
+    background-color: var(--bg-menu-hover)
   }
 
   &.isHidden {

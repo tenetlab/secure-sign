@@ -269,10 +269,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     }
 
     .ui--Toggle.isChecked .ui--Toggle-Slider {
-      background: ${getHighlight(uiHighlight)};
+      background: var(--bg-toggle);
 
       &::before {
-        border-color: ${getHighlight(uiHighlight)};
+        border-color: var(--border-table);
       }
     }
   }
@@ -326,10 +326,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     .ui--Toggle.isChecked {
       &:not(.isRadio) {
         .ui--Toggle-Slider {
-          background: ${getHighlight(uiHighlight)} !important;
+          background: var(--bg-toggle);
 
           &:before {
-            border-color: ${getHighlight(uiHighlight)} !important;
+            border-color: var(--border-table);
           }
         }
       }
@@ -536,7 +536,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   // we treat h5 and label as equivalents
   label, h5 {
     color: var(--color-label);
-    font-size: var(--font-size-label);
+    // font-size: var(--font-size-label);
     font-style: normal;
     font-weight: var(--font-weight-label);
     line-height: 1rem;
