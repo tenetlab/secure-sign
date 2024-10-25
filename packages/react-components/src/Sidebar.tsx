@@ -62,7 +62,7 @@ const StyledDiv = styled.div`
   }
 
   .ui--Sidebar-buttons {
-    margin: 0;
+    // margin: 0;
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;

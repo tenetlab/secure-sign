@@ -118,6 +118,7 @@ const StyledDiv = styled.div`
       // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
+        margin-top: 0.5rem;
         padding: 0.5rem 0;
         background: var(--bg-input);
         border: 1px solid var(--border-input);

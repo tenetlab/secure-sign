@@ -190,7 +190,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
               <InputAddress
                 defaultValue={multisig.depositor}
                 isDisabled
-                label={t('depositor')}
+                label={t('creator')}
               />
             </Modal.Columns>
             <Modal.Columns 

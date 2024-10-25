@@ -244,10 +244,11 @@ const StyledSpan = styled.span`
   line-height: 1;
   vertical-align: middle;
   white-space: nowrap;
+  padding: 4% 51% 3% 0%;
 
   &.withSidebar:hover {
     border-bottom-color: #333;
-    cursor: help !important;
+    cursor: pointer !important;
   }
 
   .isAddress {

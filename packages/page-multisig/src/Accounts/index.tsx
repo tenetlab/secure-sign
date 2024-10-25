@@ -219,7 +219,10 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={className}>
       {grouped['multisig'][0] === undefined ? (
-        <>No Multisig Accounts</>
+        <div className='empty-account'>
+          <h1>Multisig Accounts</h1>
+          <p>No Multisig Accounts</p>
+        </div>
       ) : (
         <>
           <div className='multisig_list'>
@@ -246,14 +249,6 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
           </div>
           <div className='multisig_detail'>
             {multisigAddress !== null ? (
-              // <Sidebar
-              //   address={multisigAddress || ''}
-              //   dataTestId='account-sidebar'
-              //   // onClose={onClose}
-              //   ongoing={multiInfos}
-              //   onUpdateName={onUpdateName}
-              //   toggleMultisig={toggleMultisig}
-              // />
               <>
                 {multiInfos && multiInfos.length !== 0 ? (
                   <Sidebar
@@ -309,7 +304,7 @@ const StyledDiv = styled.div`
     }
   }
   .multisig_detail {
-    border-left: 2px solid var(--border-table);
+    // border-left: 2px solid var(--border-table);
     width: 65%;
     padding-left: 15px !important;
   }
@@ -317,6 +312,14 @@ const StyledDiv = styled.div`
   .multisig_list {
     width: 35%;
     padding-right: 25px !important;
+  }
+  .empty-account {
+    margin-top: 0.8rem;
+    p {
+      padding: 1.25rem 0 0 0.25rem;
+      font-size: var(--font-percent-small);
+      opacity: var(--opacity-light);
+    }
   }
 `;
 

@@ -25,6 +25,9 @@ const StyledArticle = styled.article`
     color: rgba(255, 12, 12, 1);
     margin-right: 0.5rem;
   }
+  
+  border-color: var(--bg-page) !important;
+  margin-left: 10rem !important;
 `;
 
 export default React.memo(MarkError);

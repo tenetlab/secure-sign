@@ -549,6 +549,9 @@ const StyledModalContent = styled(Modal.Content)`
   .ui--Checks {
     margin-top: 0.75rem;
   }
+  // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
+  //   padding-left: 1rem !important;
+  // }
 `;
 
 export default React.memo(TxSigned);

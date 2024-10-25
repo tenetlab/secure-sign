@@ -5,7 +5,7 @@ import type { ItemRoute } from './types.js';
 
 import React from 'react';
 
-import { Badge, Icon, styled } from '@polkadot/react-components';
+import { Icon, styled } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
 interface Props {
@@ -33,12 +33,12 @@ function Item ({ className = '', classNameText, isLink, isToplevel, route: { Mod
       >
         <Icon icon={icon} />
         <span className={`${classNameText} sidebarItem`}>{text}</span>
-        {!!count && (
+        {/* {!!count && (
           <Badge
             color='white'
             info={count}
           />
-        )}
+        )} */}
       </a>
       {Modal && isModalVisible && (
         <Modal onClose={toggleModal} />

@@ -20,6 +20,9 @@ function Content ({ children, className = '' }: Props): React.ReactElement<Props
 
 const StyledDiv = styled.div`
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
 `;
 
 export default React.memo(Content);

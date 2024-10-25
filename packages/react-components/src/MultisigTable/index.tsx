@@ -482,8 +482,6 @@ const StyledDiv = styled.div`
 
       &:last-child {
         th {
-          padding-top: 1rem;
-
           &:first-child {
             border-bottom-left-radius: ${BORDER_RADIUS};
           }

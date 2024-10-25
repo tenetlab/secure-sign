@@ -121,12 +121,6 @@ export default React.memo(Selection);
 const StyledDiv = styled.div`
   margin-top: 0.5rem;
   .extrinsics--Extrinsic {
-    // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
-    //   padding-left: 1rem;
-    // }
-    // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown.search:not(.multiple)>input.search {
-    //   padding-left: 1rem;
-    // }
     position: relative;
     display: flex;
     .ui--Params-Container {
@@ -142,6 +136,25 @@ const StyledDiv = styled.div`
     }
     .ui--Input-Container {
       width: 50%;
+      .ui--DropdownLinked-Items {
+        .ui {
+          padding-left: 1rem !important;
+          .search {
+            padding-left: 1rem !important;
+          }
+        }
+      }
+    }
+  }
+  .ui--Columar {
+    .ui--Column {
+      .ui--Output {
+        .ui--Labelled-content {
+          .ui {
+            padding-left: 1rem !important;
+          }
+        }
+      }
     }
   }
   .ui--Extrinsic-Group {

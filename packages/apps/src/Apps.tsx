@@ -37,6 +37,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <Menubar.Divider />
         <div style={{ display: 'flex' }}>
           <Sidebar />
+          <div className='sidebarDivider'></div>
           <AccountSidebar>
             <MultisigAccountSidebar>
               <Signer>
@@ -59,6 +60,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  height: 100%;
 
   ${[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,

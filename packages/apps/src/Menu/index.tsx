@@ -38,7 +38,6 @@ const StyledDiv = styled.div`
   padding: 0;
   z-index: 220;
   position: relative;
-
   .smallShow {
     display: none;
   }

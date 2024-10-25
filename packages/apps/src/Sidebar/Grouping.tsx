@@ -27,9 +27,8 @@ function Grouping ({ isActive, routes }: Props): React.ReactElement<Props> {
             key={route.name}
             route={route}
             isActive={isActive}
-        classNameText='smallHide'
-        isToplevel
-
+            classNameText='smallHide'
+            isToplevel
           />
         ))}
       </StyledLi>

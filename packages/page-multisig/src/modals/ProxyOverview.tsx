@@ -133,6 +133,7 @@ function NewProxy ({ index, onChangeAccount, onChangeType, onRemove, proxiedAcco
         <Dropdown
           label={'type'}
           onChange={_onChangeType}
+          className='type-padding'
           options={typeOpts}
           value={type.toNumber()}
         />
@@ -335,6 +336,13 @@ const StyledModal = styled(Modal)`
 
     .input-column {
       grid-column: 1;
+      .type-padding {
+        .ui--Labelled-content {
+          .ui {
+            padding-left: 1rem !important;
+          }
+        }
+      }
     }
 
     .buttons-column {

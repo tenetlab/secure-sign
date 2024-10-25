@@ -53,7 +53,7 @@ const StyledDiv = styled.div`
   }
   .copyContainer {
     position: absolute;
-    top: -0.5rem;
+    top: 0rem;
     right: 0rem;
   }
   

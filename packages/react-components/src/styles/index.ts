@@ -88,6 +88,9 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: ${getContrast(uiHighlight)} !important;
   }
 
+  .ui.dropdown .menu>.header {
+    color: var(--color-text) !important;
+  }
   .ui--MenuItem {
     & .ui--Badge {
       color: ${countBrightness(uiHighlight) < BRIGHTNESS ? '#fff' : '#424242'};
@@ -208,7 +211,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
     &.isBasic:not(.isDisabled):not(.isIcon):not(.isSelected) {
       &:not(.isReadOnly) {
-        box-shadow: 0 0 1px var(--color-text-hover);
+        // box-shadow: 0 0 1px var(--color-text-hover);
       }
 
       .ui--Icon {

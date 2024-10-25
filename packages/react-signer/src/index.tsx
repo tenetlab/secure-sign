@@ -164,6 +164,21 @@ const StyledModal = styled(Modal)`
       }
     }
   }
+  .ui--Modal__body {
+    .ui--Modal-Content {
+      .ui--Modal-Columns {
+        .ui--Modal-Columns-content {
+          .ui--Output {
+            .ui--Labelled-content {
+              .ui {
+                padding-left: 1rem !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 `;
 
 export default React.memo(Signer);
