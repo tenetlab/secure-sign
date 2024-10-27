@@ -15,8 +15,8 @@ export default `
     word-break: break-all;
 
     &.error {
-      background: var(--bg-input-error);
-      border-color: #e0b4b4;
+      background: var(--bg-input);
+      border-color: var(--border-input);
     }
 
     &.monospace {
@@ -59,8 +59,8 @@ export default `
 
     .large .ui.selection.dropdown {
       // border-left: none;
-      border-bottom-left-radius: 0;
-      border-top-left-radius: 0;
+      // border-bottom-left-radius: 0;
+      // border-top-left-radius: 0;
     }
   }
 

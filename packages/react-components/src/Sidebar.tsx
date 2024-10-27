@@ -40,10 +40,10 @@ function Sidebar ({ buttons, children, className = '', dataTestId = '', onClose,
 }
 
 const StyledDiv = styled.div`
-  background: var(--bg-page);
+  background: var(--bg-chainSidebar);
   bottom: 0;
   margin-left: -0.125rem;
-  max-width: 24rem;
+  max-width: 30rem;
   min-width: 24rem;
   position: fixed;
   padding: 1rem;

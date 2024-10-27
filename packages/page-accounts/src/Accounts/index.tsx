@@ -216,10 +216,17 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={className}>
       {!isNextTick || !sortedAccounts.length
         ? (
-          <Table
-            empty={isNextTick && sortedAccounts && t("No any accounts")}
-            header={header.accounts}
-          />
+          // <Table
+          //   empty={isNextTick && sortedAccounts && t("No any accounts")}
+          //   header={header.accounts}
+          // />
+          <div className='detail'>
+            <svg width="25" height="25" viewBox="0 0 25 25">
+              <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+              <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+            </svg>
+            <p>No Accounts</p>
+          </div>
         )
         : GROUP_ORDER.map((group) =>
           groups[group] && (
@@ -239,10 +246,12 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
+  background-color: var(--bg-menubar);
+  border-radius: 1rem;
+  
   .ui--Dropdown {
     width: 15rem;
   }
-  margin-top: 0.5rem;
   .header-box {
     .dropdown-section {
       display: flex;
@@ -254,6 +263,18 @@ const StyledDiv = styled.div`
       margin-left: auto;
     }
   }
+  .detail {
+      padding: 1rem 2rem 1rem 1rem;
+      height: 4rem;
+      align-items: center;
+      text-align: center;
+      justity-content: center;
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
 `;
 
 export default React.memo(Overview);

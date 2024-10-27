@@ -441,9 +441,8 @@ const StyledTr = styled.tr`
   .devBadge {
     opacity: var(--opacity-light);
   }
-  border: 1px solid var(--border-table);
   border-radius: 1rem;
-  padding: 1rem 4rem 1rem 2rem;
+  padding: 1rem 3rem 0 3rem;
   display: flex;
   // justify-content: space-between;
   .ui--SmallAddress-Copy-Balance {

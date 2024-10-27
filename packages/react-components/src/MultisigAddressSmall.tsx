@@ -21,11 +21,12 @@ interface Props {
   withShortAddress?: boolean;
   toggle?: unknown;
   value?: string | Address | AccountId | null;
+  isActive: boolean;
 }
 
-function MultisigAddressSmall ({ children, className = '', defaultName, onClickName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true }: Props): React.ReactElement<Props> {
+function MultisigAddressSmall ({ children, className = '', defaultName, onClickName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true, isActive }: Props): React.ReactElement<Props> {
   return (
-    <StyledDiv className={`${className} ui--AddressSmall ${(parentAddress || withShortAddress) ? 'withPadding' : ''}`}>
+    <StyledDiv className={`${className} ui--AddressSmall ${(parentAddress || withShortAddress) ? 'withPadding' : ''} ${isActive ? 'selected' : ''}`}>
       <span className='ui--AddressSmall-icon'>
         <IdentityIcon value={value as Uint8Array} size={40}/>
       </span>
@@ -63,8 +64,24 @@ const StyledDiv = styled.div`
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border: 2px solid var(--border-table);
   border-radius: 1rem;
+  background-color: var(--bg-page);
+  border-radius: 1rem 0rem 0rem 1rem;
+
+  &:hover {
+    background-color: var(--item-active);
+    color: var(--color-text-hover);
+  }
+
+  &:active {
+    background-color: var(--item-active);
+    color: var(--color-text-hover);
+  }
+  
+  &.selected {
+    background-color: var(--item-active);
+    color: var(--color-text-hover);
+  }
 
   &.withPadding {
     padding: 0.75rem 1rem;
@@ -108,10 +125,73 @@ const StyledDiv = styled.div`
     vertical-align: middle;
     white-space: nowrap;
 
-    &.withSidebar {
-      cursor: help;
-    }
+    
   }
 `;
+// const StyledDiv = styled.div`
+//   overflow-x: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   border-radius: 1rem;
+//   background-color: var(--bg-page);
+//   border-radius: 1rem 0rem 0rem 1rem;
+//   transition: background-color 0.2s ease; /* Optional: adds smooth transition */
+
+//   &:hover {
+//     background-color: rgba(255, 0, 0, 0.1); /* Light red with transparency */
+//   }
+
+//   &:active {
+//     background-color: rgba(255, 0, 0, 0.2); /* Slightly darker red when clicked */
+//   }
+
+//   &.withPadding {
+//     padding: 0.75rem 1rem;
+//   }
+
+//   /* Rest of your existing styles... */
+//   .ui--AddressSmall-icon {
+//     .ui--IdentityIcon {
+//       margin-right: 0.5rem;
+//       vertical-align: middle;
+//     }
+//   }
+
+//   .ui--AddressSmall-info {
+//     position: relative;
+//     vertical-align: middle;
+
+//     .parentName, .shortAddress {
+//       font-size: var(--font-size-tiny);
+//     }
+
+//     .parentName {
+//       left: 0;
+//       position: absolute;
+//       top: -0.80rem;
+//     }
+
+//     .shortAddress {
+//       bottom: -0.95rem;
+//       color: #8B8B8B;
+//       display: inline-block;
+//       left: 0;
+//       min-width: var(--width-shortaddr);
+//       max-width: var(--width-shortaddr);
+//       position: absolute;
+//       text-overflow: ellipsis;
+//     }
+//   }
+
+//   .ui--AccountName {
+//     overflow: hidden;
+//     vertical-align: middle;
+//     white-space: nowrap;
+
+//     &.withSidebar {
+//       cursor: help;
+//     }
+//   }
+// `;
 
 export default React.memo(MultisigAddressSmall);

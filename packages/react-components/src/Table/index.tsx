@@ -9,7 +9,6 @@ import { styled } from '../styled.js';
 import Column from './Column/index.js';
 import Row from './Row/index.js';
 import Body from './Body.js';
-import Head from './Head.js';
 
 interface Props {
   children?: React.ReactNode;
@@ -28,25 +27,25 @@ interface Props {
   noBodyTag?: boolean;
 }
 
-function TableBase ({ children, className = '', empty, emptySpinner, filter, header, headerChildren, isFixed, isInline, legend, noBodyTag }: Props): React.ReactElement<Props> {
+function TableBase ({ children, className = '', empty, emptySpinner, isFixed, isInline, legend, noBodyTag }: Props): React.ReactElement<Props> {
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 
-  const headerNode = (
-    <Head
-      filter={filter}
-      header={header}
-      isEmpty={isEmpty}
-    >
-      {headerChildren}
-    </Head>
-  );
+  // const headerNode = (
+  //   <Head
+  //     filter={filter}
+  //     header={header}
+  //     isEmpty={isEmpty}
+  //   >
+  //     {headerChildren}
+  //   </Head>
+  // );
 
   return (
     <StyledDiv className={`${className} ui--Table`}>
       {legend}
       <table className={`${(isFixed && !isEmpty) ? 'isFixed' : 'isNotFixed'} ${isInline ? 'isInline' : ''}`}>
-        {headerNode}
+        {/* {headerNode} */}
         <Body
           empty={empty}
           emptySpinner={emptySpinner}
@@ -68,7 +67,7 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
-
+  min-height: calc(100vh - 13rem);
   .ui--Table-Body {
     padding-top: 1rem;
     display: flex;
@@ -156,8 +155,8 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
-      background: var(--bg-table);
-      // padding: 0.5rem 0;
+      background: var(--bg-subCard);
+      padding: 1rem 2rem 1rem 3rem;
       text-align: left;
       vertical-align: middle;
 
@@ -401,14 +400,16 @@ const StyledDiv = styled.div`
       &.isExpanded {
         &.isFirst {
           td {
-            // border-top: ${BORDER_TOP};
-
+            border-top: 1rem;
+            
             &:first-child {
-              // border-top-left-radius: ${BORDER_RADIUS};
+              border-top-left-radius: 1rem;
+              border-bottom-left-radius: 1rem;
             }
 
             &:last-child {
-              border-top-right-radius: ${BORDER_RADIUS};
+              border-top-right-radius: 1rem;
+              border-bottom-right-radius: 1rem;
             }
           }
         }
@@ -416,11 +417,11 @@ const StyledDiv = styled.div`
         &.isLast {
           td {
             &:first-child {
-              border-bottom-left-radius: ${BORDER_RADIUS};
+              border-bottom-left-radius: 1rem;
             }
 
             &:last-child {
-              border-bottom-right-radius: ${BORDER_RADIUS};
+              border-bottom-right-radius: 1rem;
             }
           }
         }
@@ -428,7 +429,7 @@ const StyledDiv = styled.div`
 
       &.packedBottom {
         td {
-          padding-bottom: 0;
+          // padding-bottom: 0;
         }
       }
 

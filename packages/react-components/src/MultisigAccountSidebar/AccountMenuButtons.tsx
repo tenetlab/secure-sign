@@ -26,9 +26,10 @@ interface Props {
   onForgetAddress: () => void;
   onUpdateName?: (() => void) | null;
   recipientId: string;
+  toggleProxyOverview: () => void;
 }
 
-function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
+function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
   const api = useApi();
@@ -119,6 +120,12 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
               label={t('Edit')}
               onClick={onEdit}
             />
+            <Button
+                icon='sitemap'
+                isDisabled={isEditing}
+                label={t('Add proxy')}
+                onClick={toggleProxyOverview}
+              />
           </Button.Group>
         )
       }
@@ -134,7 +141,7 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 }
 
 const StyledDiv = styled.div`
-  width: 40%;
+  width: 35%;
 
   .ui--Button-Group {
     display: flex;

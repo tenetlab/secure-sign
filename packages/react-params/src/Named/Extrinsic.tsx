@@ -7,7 +7,14 @@ import type { ComponentMap, RawParam } from '../types.js';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { InputExtrinsic } from '@polkadot/react-components';
+import {
+  InputExtrinsic, InputAddress, MarkError,
+  TxButton, Button 
+} from '@polkadot/react-components';
+import { BalanceFree } from '@polkadot/react-query';
+import { useTranslation } from '../utils/translate.js';
+import Decoded from '../utils/Decoded.js';
+
 import Params from '@polkadot/react-params';
 import { getTypeDef } from '@polkadot/types/create';
 import { isUndefined, objectSpread } from '@polkadot/util';
@@ -29,6 +36,8 @@ interface Props {
   onError?: (error?: Error | null) => void;
   onEscape?: () => void;
   withLabel?: boolean;
+  extrinsicUpper?: SubmittableExtrinsic<'promise'> | null;
+  error?: string | null;
 }
 
 interface ParamDef {
@@ -46,7 +55,7 @@ interface CallState {
 
 const allComponents = objectSpread<ComponentMap>({}, paramComponents, balanceCallsOverrides);
 
-function isValuesValid (params: ParamDef[], values: RawParam[]): boolean {
+function isValuesValid(params: ParamDef[], values: RawParam[]): boolean {
   return values.reduce((isValid, value): boolean =>
     isValid &&
     !isUndefined(value) &&
@@ -55,7 +64,7 @@ function isValuesValid (params: ParamDef[], values: RawParam[]): boolean {
   );
 }
 
-function getParams ({ meta }: SubmittableExtrinsicFunction<'promise'>): ParamDef[] {
+function getParams({ meta }: SubmittableExtrinsicFunction<'promise'>): ParamDef[] {
   return meta.args.map(({ name, type, typeName }): { name: string; type: TypeDef } => ({
     name: name.toString(),
     type: {
@@ -68,7 +77,7 @@ function getParams ({ meta }: SubmittableExtrinsicFunction<'promise'>): ParamDef
   }));
 }
 
-function getCallState (fn: SubmittableExtrinsicFunction<'promise'>, values: RawParam[] = []): CallState {
+function getCallState(fn: SubmittableExtrinsicFunction<'promise'>, values: RawParam[] = []): CallState {
   return {
     extrinsic: {
       fn,
@@ -78,7 +87,10 @@ function getCallState (fn: SubmittableExtrinsicFunction<'promise'>, values: RawP
   };
 }
 
-function ExtrinsicDisplay ({ defaultArgs, defaultValue, filter, isDisabled, isError, isPrivate, label, onChange, onEnter, onError, onEscape, withLabel }: Props): React.ReactElement<Props> {
+function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isError, isPrivate, label, onChange, onEnter, onError, onEscape, withLabel, extrinsicUpper, error }: Props): React.ReactElement<Props> {
+  const { t } = useTranslation();
+  const [accountId, setAccountId] = useState<string | null>(null);
+
   const [{ extrinsic, values }, setDisplay] = useState<CallState>(() => getCallState(defaultValue, defaultArgs));
 
   useEffect((): void => {
@@ -125,25 +137,54 @@ function ExtrinsicDisplay ({ defaultArgs, defaultValue, filter, isDisabled, isEr
 
   return (
     <div className='extrinsics--Extrinsic'>
-      <InputExtrinsic
-        defaultValue={defaultValue}
-        filter={filter}
-        isDisabled={isDisabled}
-        isError={isError}
-        isPrivate={isPrivate}
-        label={label}
-        onChange={_onChangeMethod}
-        withLabel={withLabel}
-      />
-      <Params
-        key={`${section}.${method}:params` /* force re-render on change */}
-        onChange={_setValues}
-        onEnter={onEnter}
-        onEscape={onEscape}
-        overrides={overrides}
-        params={params}
-        values={values}
-      />
+      <div className='ui--Address-Extrinsic'>
+        <InputAddress
+          label={t('selected account')}
+          labelExtra={
+            <BalanceFree
+              params={accountId}
+            />
+          }
+          onChange={setAccountId}
+          type='account'
+        />
+        <InputExtrinsic
+          defaultValue={defaultValue}
+          filter={filter}
+          isDisabled={isDisabled}
+          isError={isError}
+          isPrivate={isPrivate}
+          label={label}
+          onChange={_onChangeMethod}
+          withLabel={withLabel}
+        />
+      </div>
+      <div className='ui--Params-Decoded-Button'>
+        <Params
+          key={`${section}.${method}:params`}
+          onChange={_setValues}
+          onEnter={onEnter}
+          onEscape={onEscape}
+          overrides={overrides}
+          params={params}
+          values={values}
+        />
+        <Decoded
+          extrinsic={extrinsicUpper}
+          isCall
+        />
+        {error && !extrinsic && (
+          <MarkError content={error} />
+        )}
+        <Button.Group>
+          <TxButton
+            accountId={accountId}
+            extrinsic={extrinsicUpper}
+            icon='sign-in-alt'
+            label={t('Submit Transaction')}
+          />
+        </Button.Group>
+      </div>
     </div>
   );
 }

@@ -11,20 +11,24 @@ import { useIpfs } from '@polkadot/react-hooks';
 
 interface Props {
   className?: string;
+  logo: boolean;
 }
 
-function LogoInfo ({ className }: Props): React.ReactElement<Props> {
-  // const { api, isApiReady } = useApi();
+function LogoInfo({ className, logo }: Props): React.ReactElement<Props> {
+
   // const runtimeVersion = useCall<RuntimeVersion>(isApiReady && api.rpc.state.subscribeRuntimeVersion);
   const { ipnsChain } = useIpfs();
   const canToggle = !ipnsChain;
+
+  console.log("===================logo==============", logo);
+  
 
   return (
     <StyledDiv className={className}>
       <div
         className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''}`}
       >
-        <img src='/multi-signature.png' alt='logo' className='multisig_logo' width={60} height={60}/>
+        <img src={`${logo ? '/multi-signature-dark.png' : '/multi-signature-light.png'}`} alt='logo' className='multisig_logo' width={50} height={50} />
       </div>
     </StyledDiv>
   );
@@ -34,7 +38,7 @@ const StyledDiv = styled.div`
   display: flex;
   
   align-items: center;
-  margin-right: 2rem;
+  margin-right: 1rem;
   padding-top: 0.5rem;   
   padding-bottom: 0.5rem;   
 `;

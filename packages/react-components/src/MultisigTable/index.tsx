@@ -67,6 +67,7 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
+  // margin-left: 2rem;
 
   .ui--Table-Split {
     display: flex;
@@ -85,13 +86,13 @@ const StyledDiv = styled.div`
   }
 
   table {
-
+    float: right;
     border-collapse: collapse;
     border-spacing: 0;
-    max-width: 100%;
+    max-width: 90%;
     overflow: hidden;
     position: relative;
-    width: 100%;
+    width: 90%;
     z-index: 1;
 
     &.isFixed {
@@ -121,13 +122,13 @@ const StyledDiv = styled.div`
         }
 
         &:last-child {
-          padding-right: 0.75rem;
+          // padding-right: 0.75rem;
         }
 
         &.all {
           width: 100%;
           // border: 2px solid var(--border-table);
-          border-radius: 5px;
+          
           &:not(.overflow) {
             word-break: break-word;
           }
@@ -153,7 +154,7 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
-      background: var(--bg-table);
+      // background: var(--bg-table);
       padding: 0.5rem 0rem;
       text-align: left;
       vertical-align: middle;
@@ -163,11 +164,11 @@ const StyledDiv = styled.div`
       }
 
       &:first-child {
-        border-left: ${BORDER_SIDE};
+        // border-left: ${BORDER_SIDE};
       }
 
       &:last-child {
-        border-right: ${BORDER_SIDE};
+        // border-right: ${BORDER_SIDE};
       }
 
       label {
@@ -308,7 +309,7 @@ const StyledDiv = styled.div`
 
         .absolute {
           position: absolute;
-          right: 2rem;
+          right: 0rem;
           // this seems aligned with expander (when zoomed in)
           top: 3rem;
           white-space: nowrap;
@@ -379,16 +380,16 @@ const StyledDiv = styled.div`
     tr {
       &:not(.isExpanded) {
         td {
-          border-top: ${BORDER_TOP};
+          // border-top: ${BORDER_TOP};
 
           &:first-child {
-            border-top-left-radius: ${BORDER_RADIUS};
-            border-bottom-left-radius: ${BORDER_RADIUS};
+            // border-top-left-radius: ${BORDER_RADIUS};
+            // border-bottom-left-radius: ${BORDER_RADIUS};
           }
 
           &:last-child {
-            border-top-right-radius: ${BORDER_RADIUS};
-            border-bottom-right-radius: ${BORDER_RADIUS};
+            // border-top-right-radius: ${BORDER_RADIUS};
+            // border-bottom-right-radius: ${BORDER_RADIUS};
           }
         }
       }
@@ -399,11 +400,11 @@ const StyledDiv = styled.div`
             // border-top: ${BORDER_TOP};
 
             &:first-child {
-              border-top-left-radius: ${BORDER_RADIUS};
+              // border-top-left-radius: ${BORDER_RADIUS};
             }
 
             &:last-child {
-              border-top-right-radius: ${BORDER_RADIUS};
+              // border-top-right-radius: ${BORDER_RADIUS};
             }
           }
         }
@@ -411,11 +412,11 @@ const StyledDiv = styled.div`
         &.isLast {
           td {
             &:first-child {
-              border-bottom-left-radius: ${BORDER_RADIUS};
+              // border-bottom-left-radius: ${BORDER_RADIUS};
             }
 
             &:last-child {
-              border-bottom-right-radius: ${BORDER_RADIUS};
+              // border-bottom-right-radius: ${BORDER_RADIUS};
             }
           }
         }
@@ -468,14 +469,14 @@ const StyledDiv = styled.div`
     tr {
       &:first-child {
         th {
-          border-top: ${BORDER_TOP};
+          // border-top: ${BORDER_TOP};
 
           &:first-child {
-            border-top-left-radius: ${BORDER_RADIUS};
+            // border-top-left-radius: ${BORDER_RADIUS};
           }
 
           &:last-child {
-            border-top-right-radius: ${BORDER_RADIUS};
+            // border-top-right-radius: ${BORDER_RADIUS};
           }
         }
       }
@@ -483,22 +484,22 @@ const StyledDiv = styled.div`
       &:last-child {
         th {
           &:first-child {
-            border-bottom-left-radius: ${BORDER_RADIUS};
+            // border-bottom-left-radius: ${BORDER_RADIUS};
           }
 
           &:last-child {
-            border-bottom-right-radius: ${BORDER_RADIUS};
+            // border-bottom-right-radius: ${BORDER_RADIUS};
           }
         }
       }
 
       th {
         &:first-child {
-          border-left: ${BORDER_SIDE};
+          // border-left: ${BORDER_SIDE};
         }
 
         &:last-child {
-          border-right: ${BORDER_SIDE};
+          // border-right: ${BORDER_SIDE};
         }
       }
     }

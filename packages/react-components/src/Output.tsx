@@ -53,9 +53,13 @@ function Output ({ children, className = '', isDisabled, isError, isFull, isHidd
 
 const StyledLabelled = styled(Labelled)`
   .ui.selection.dropdown.ui--output.isDisabled {
-    background: transparent;
+    background: var(--bg-input);
     border-style: dashed;
     opacity: 1;
+  }
+  .ui.selection.dropdown.ui--output.isDisabled:hover {
+    cursor: default !important;
+    border-color: var(--border-input-hover) !important;
   }
   pre {
     margin: 0;

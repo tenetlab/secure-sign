@@ -142,8 +142,8 @@ const StyledDiv = styled.div`
   width: 100% !important;
 
   &.error {
-    background: var(--bg-input-error);
-    border-color: #e0b4b4;
+    background: var(--bg-input);
+    border-color: var(--border-input-hover);
   }
 
   &:hover {

@@ -328,6 +328,31 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
 }
 
 const StyledModal = styled(Modal)`
+  .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+    left: -14rem;
+    top: 1.5rem;
+  }
+  .ui--Modal-content-body {
+    width: 80%;
+  }
+  .ui.input>input {
+    background-color: var(--bg-modal-input) !important;
+    border: none !important;
+    opacity: 1 !important;
+  }
+  .ui.selection.dropdown {
+    background-color: var(--bg-modal-input) !important;
+    border: none !important;
+    opacity: 1 !important;
+  }
+  .error {
+    background-color: var(--bg-modal-input) !important;
+    border: none !important;
+    border-radius: 0.7rem;
+  }
+  .ui--Button-Group {
+    margin: 0 !important;
+  }
   .proxy-container {
     display: grid;
     grid-column-gap: 0.5rem;
@@ -348,6 +373,12 @@ const StyledModal = styled(Modal)`
     .buttons-column {
       grid-column: 2;
       padding-top: 0.3rem;
+    }
+
+    .ui.selection.dropdown {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+      opacity: 1 !important;
     }
   }
 `;

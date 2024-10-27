@@ -14,9 +14,10 @@ interface Props {
   isBeingEdited: (arg: boolean) => void;
   onUpdateName?: (() => void) | null;
   sidebarRef: React.RefObject<HTMLDivElement>;
+  toggleProxyOverview: () => void;
 }
 
-function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdateName }: Props): React.ReactElement<Props> {
+function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdateName, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const { flags, isEditing, isEditingName, name, onForgetAddress, onSaveName, onSaveTags, setIsEditingName, setIsEditingTags, setName, setTags, toggleIsEditingName, toggleIsEditingTags } = useAccountInfo(address);
 
   useEffect((): void => {
@@ -61,6 +62,7 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
         recipientId={address}
         toggleIsEditingName={toggleIsEditingName}
         toggleIsEditingTags={toggleIsEditingTags}
+        toggleProxyOverview={toggleProxyOverview}
       />
     </>
   );

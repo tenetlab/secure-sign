@@ -82,8 +82,8 @@ const StyledDiv = styled.div`
         .labelExtra {
           position: absolute;
           text-align: left;
-          top: 3.5rem;
-          left: 0;
+          top: 4rem;
+          right: 0;
           z-index: 1;
         }
 
@@ -91,7 +91,7 @@ const StyledDiv = styled.div`
           left: 0rem;
           right: 0;
           text-align: left;
-          top: -1rem;
+          top: -1.5rem;
         }
       }
 
@@ -114,7 +114,7 @@ const StyledDiv = styled.div`
 
       .labelExtra {
         color: var(--color-label);
-        font-size: var(--font-size-label);
+        font-size: var(--font-size-base);
         font-weight: var(--font-weight-label);
         position: absolute;
         right: 1.25rem;
@@ -170,7 +170,7 @@ const StyledDiv = styled.div`
         .ui--InputFile,
         .ui.input > input,
         .ui--output {
-          padding-left: 1.45rem;
+          // padding-left: 1.45rem;
           // padding-top: 1.75rem;
         }
 

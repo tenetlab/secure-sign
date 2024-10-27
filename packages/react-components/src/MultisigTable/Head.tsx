@@ -51,10 +51,12 @@ const StyledThead = styled.thead`
   z-index: 1;
 
   th {
-    background: var(--bg-table);
+    border-radius: 1rem;
+    background: var(--bg-menubar);
     font: var(--font-sans);
+    font-size: var(--font-size-h1) !important;
     font-weight: var(--font-weight-normal);
-    padding: 0.375rem 0;
+    padding: 3rem 2rem;
     text-align: right;
     vertical-align: middle;
     white-space: nowrap;

@@ -134,12 +134,6 @@ const StyledLabelled = styled(Labelled)`
   .ui.selection.dropdown:hover {
     border-color: var(--border-input-hover);
   }
-  .ui.selection.active.dropdown{
-    border-color: var(--border-input-hover);
-  }
-  .ui.selection.active.dropdown .menu {
-    border-color: var(--border-input-hover);
-  }
   .ui--Dropdown-item {
     position: relative;
     white-space: nowrap;

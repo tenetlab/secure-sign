@@ -70,7 +70,7 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
-
+  min-height: calc(100vh - 18rem);
   .ui--Table-Split {
     display: flex;
     flex-wrap: nowrap;
@@ -152,7 +152,7 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
-      background: var(--bg-table);
+      // background-color: var(--bg-subCard);
       padding: 0;
       text-align: left;
       vertical-align: middle;
@@ -162,11 +162,11 @@ const StyledDiv = styled.div`
       }
 
       &:first-child {
-        border-left: ${BORDER_SIDE};
+        // border-left: ${BORDER_SIDE};
       }
 
       &:last-child {
-        border-right: ${BORDER_SIDE};
+        // border-right: ${BORDER_SIDE};
       }
 
       label {
@@ -378,7 +378,7 @@ const StyledDiv = styled.div`
     tr {
       &:not(.isExpanded) {
         td {
-          border-top: ${BORDER_TOP};
+          // border-top: ${BORDER_TOP};
 
           &:first-child {
             border-top-left-radius: ${BORDER_RADIUS};

@@ -307,6 +307,22 @@ const StyledModal = styled(Modal)`
     width: 100%;
     text-align: right;
   }
+  .ui--Modal-content-body {
+    width: 78%;
+  }
+  .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+    left: -15.5rem;
+    top: 1.5rem;
+  }
+  .ui.input.error input {
+    background-color: var(--bg-modal-input) !important;
+    border: none !important;
+  }
+  .ui.selection.dropdown {
+    background-color: var(--bg-modal-input) !important;
+    border: none !important;
+    opacity: 100% !important;
+  }
 `;
 
 export default React.memo(MultisigApprove);

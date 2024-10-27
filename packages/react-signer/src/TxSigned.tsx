@@ -32,7 +32,7 @@ import Address from './Address.js';
 import Qr from './Qr.js';
 import SignFields from './SignFields.js';
 import Tip from './Tip.js';
-import Transaction from './Transaction.js';
+// import Transaction from './Transaction.js';
 import { useTranslation } from './translate.js';
 import { cacheUnlock, extractExternal, handleTxResults } from './util.js';
 
@@ -444,11 +444,11 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
             )
             : (
               <>
-                <Transaction
+                {/* <Transaction
                   accountId={senderInfo.signAddress}
                   currentItem={currentItem}
                   onError={toggleRenderError}
-                />
+                /> */}
                 <Address
                   currentItem={currentItem}
                   onChange={setSenderInfo}
@@ -549,9 +549,6 @@ const StyledModalContent = styled(Modal.Content)`
   .ui--Checks {
     margin-top: 0.75rem;
   }
-  // .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
-  //   padding-left: 1rem !important;
-  // }
 `;
 
 export default React.memo(TxSigned);

@@ -254,10 +254,26 @@ const StyledModal = styled(Modal)`
       opacity: 0.7;
     }
   }
+  .ui--Button-Group {
+    margin: 0 !important;
+  }
   .ui--Modal-Column-Container {
     display: flex;
     flex-direction: column;
     row-gap: 2rem;
+    .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+      top: 1.5rem;
+      left: -8rem;
+    }
+    .ui.input>input {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+    }
+    .ui.selection.dropdown {
+      background-color: var(--bg-modal-input) !important;
+      opacity: 1 !important;
+      border: none !important;
+    }
   }
   label.with-help {
     flex-basis: 10rem;

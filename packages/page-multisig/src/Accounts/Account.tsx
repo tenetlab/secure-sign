@@ -17,7 +17,7 @@ import type { AccountBalance, Delegation } from '../types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
-import { MultisigAddressSmall, Badge, Forget, styled, TransferModal, Menu } from '@polkadot/react-components';
+import { MultisigAddressSmall, Badge, Forget, styled, TransferModal } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN, BN_ZERO, formatBalance, formatNumber } from '@polkadot/util';
@@ -48,6 +48,9 @@ interface Props {
   toggleFavorite: (address: string) => void;
   toggleMultisig: () => void;
   isMultisigOpen: boolean;
+  toggleProxyOverview: () => void;
+  isProxyOverviewOpen: boolean;
+  multisigAddress: string | null;
 }
 
 interface DemocracyUnlockable {
@@ -121,7 +124,7 @@ const transformRecovery = {
   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 };
 
-function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance, toggleMultisig, isMultisigOpen }: Props): React.ReactElement<Props> | null {
+function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance, toggleMultisig, isMultisigOpen, isProxyOverviewOpen, toggleProxyOverview, multisigAddress }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api, isDevelopment: isDevelopmentApiProps, isEthereum: isEthereumApiProps } = useApi();
   const bestNumber = useBestNumber();
@@ -141,7 +144,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const [isForgetOpen, toggleForget] = useToggle();
   const [isIdentityMainOpen, toggleIdentityMain] = useToggle();
   const [isIdentitySubOpen, toggleIdentitySub] = useToggle();
-  const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
+  // const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
   const [isPasswordOpen, togglePassword] = useToggle();
   const [isRecoverAccountOpen, toggleRecoverAccount] = useToggle();
   const [isRecoverSetupOpen, toggleRecoverSetup] = useToggle();
@@ -251,8 +254,9 @@ function Account({ account: { address, meta }, className = '', delegation, filte
             parentAddress={meta.parentAddress}
             value={address}
             withShortAddress
+            isActive={multisigAddress === address ? true : false}
           />
-          <Menu.Item
+          {/* <Menu.Item
             icon='sitemap'
             key='proxy-overview'
             label={proxy?.[0].length
@@ -261,7 +265,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
             }
             className='proxyItem'
             onClick={toggleProxyOverview}
-          />
+          /> */}
           {isBackupOpen && (
             <Backup
               address={address}
@@ -396,6 +400,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
                         <MultisigAddressSmall
                           key={index}
                           value={friend}
+                          isActive={multisigAddress === address ? true : false}
                         />
                       ))}
                     </div>

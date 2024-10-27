@@ -117,7 +117,7 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
       header={t('Add an address')}
       onClose={onClose}
     >
-      <Modal.Content>
+      <Modal.Content className='modal-content'>
         <div className='ui--Label-Input'>
           <div className='ui--lable'>
             <span>Address:</span>
@@ -161,9 +161,6 @@ const StyledModal = styled(Modal)`
     padding-left: 0 !important;
     width: 100%
   }
-  .modal-Bg {
-    background: var(--bg-page) !important;
-  }
   .ui--Label-Input {
     width: 100%;
     display: flex;
@@ -175,6 +172,9 @@ const StyledModal = styled(Modal)`
   .ui--Button-Group {
     margin-top: 0 !important;
     margin-bottom: 1rem !important;
+  }
+  .modal-content {
+    
   }
 `;
 export default React.memo(Create);

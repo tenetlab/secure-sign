@@ -5,7 +5,7 @@ import type { BareProps as Props } from '@polkadot/react-components/types';
 
 import React, { useMemo } from 'react';
 
-import { AccountSidebar, MultisigAccountSidebar, styled, Menu as Menubar } from '@polkadot/react-components';
+import { AccountSidebar, MultisigAccountSidebar, styled } from '@polkadot/react-components';
 import GlobalStyle from '@polkadot/react-components/styles';
 import { useApi, useTheme } from '@polkadot/react-hooks';
 import Signer from '@polkadot/react-signer';
@@ -34,10 +34,8 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
       <GlobalStyle uiHighlight={uiHighlight} />
       <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
         <Menu />
-        <Menubar.Divider />
         <div style={{ display: 'flex' }}>
           <Sidebar />
-          <div className='sidebarDivider'></div>
           <AccountSidebar>
             <MultisigAccountSidebar>
               <Signer>
@@ -60,7 +58,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  height: 100%;
+  // height: 100%;
 
   ${[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,

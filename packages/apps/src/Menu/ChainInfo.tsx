@@ -45,9 +45,8 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   box-sizing: border-box;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
-  border: 2px solid var(--border-table);
-  border-radius: 1rem;
   margin: 0;
+  font-family: cursive;
 
   &:hover {
     border-color: var(--border-input-hover) !important;
@@ -62,9 +61,9 @@ const StyledDiv = styled.div`
     }
 
     .ui--ChainImg {
-      height: 3rem;
+      height: 2.5rem;
       margin-right: 0.5rem;
-      width: 3rem;
+      width: 2.5rem;
     }
 
     .ui--Icon.dropdown,
@@ -88,7 +87,9 @@ const StyledDiv = styled.div`
       text-align: right;
 
       .chain {
-        font-size: var(--font-size-small);
+        font-size: var(--font-size-h1);
+        color: var(--color-text-hover);
+        font-weight: var(--font-weight-bold);
         max-width: 16rem;
         white-space: nowrap;
         overflow: hidden;

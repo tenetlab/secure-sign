@@ -74,6 +74,10 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
 
 const StyledEditableSection = styled.div`
   display: flex;
+  background-color: var(--bg-subCard);
+  margin: 1.5rem 0 1.5rem 0;
+  padding-left: 3rem;
+  border-radius: 1rem;
 `;
 
 export default React.memo(SidebarEditableSection);

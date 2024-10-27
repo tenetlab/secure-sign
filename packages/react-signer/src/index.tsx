@@ -165,6 +165,22 @@ const StyledModal = styled(Modal)`
     }
   }
   .ui--Modal__body {
+    .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+      left: -8rem;
+      top: 1.5rem;
+    }
+    .ui.selection.dropdown.ui--output.isDisabled {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+    }
+    .ui.selection.dropdown {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+      opacity: 1 !important;
+    }
+    .ui--Button-Group {
+      margin: 0 !important;
+    } 
     .ui--Modal-Content {
       .ui--Modal-Columns {
         .ui--Modal-Columns-content {

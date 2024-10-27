@@ -115,130 +115,30 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
   const isValid = isNameValid && isThresholdValid;
 
   return (
-    // <StyledModal
-    //   className={className}
-    //   header={t('Add multisig')}
-    //   onClose={onClose}
-    //   size='large'
-    // >
-    //   <Modal.Content>
-    //     <Modal.Columns>
-    //       <Toggle
-    //         className='signaturesFileToggle'
-    //         label={t('Upload JSON file with signatories')}
-    //         onChange={setShowSignaturesUpload}
-    //         value={showSignaturesUpload}
-    //       />
-    //     </Modal.Columns>
-    //     {!showSignaturesUpload && (
-    //       <Modal.Columns
-    //         hint={
-    //           <>
-    //             <p>{t('The signatories has the ability to create transactions using the multisig and approve transactions sent by others.Once the threshold is reached with approvals, the multisig transaction is enacted on-chain.')}</p>
-    //             <p>{t('Since the multisig function like any other account, once created it is available for selection anywhere accounts are used and needs to be funded before use.')}</p>
-    //           </>
-    //         }
-    //       >
-    //         <InputAddressMulti
-    //           available={availableSignatories}
-    //           availableLabel={t('available signatories')}
-    //           maxCount={MAX_SIGNATORIES}
-    //           onChange={_onChangeAddressMulti}
-    //           valueLabel={t('selected signatories')}
-    //         />
-    //       </Modal.Columns>
-    //     )}
-    //     {showSignaturesUpload && (
-    //       <Modal.Columns hint={t('Supply a JSON file with the list of signatories.')}>
-    //         <InputFile
-    //           accept={acceptedFormats}
-    //           className='full'
-    //           clearContent={!uploadedSignatories.length && isUploadedFileValid}
-    //           isError={!isUploadedFileValid}
-    //           label={t('upload signatories list')}
-    //           onChange={_onChangeFile}
-    //           withLabel
-    //         />
-    //         {!!uploadedSignatories.length && (
-    //           <Labelled
-    //             label={t('found signatories')}
-    //             labelExtra={(
-    //               <IconLink
-    //                 icon='sync'
-    //                 label={t('Reset')}
-    //                 onClick={resetFileUpload}
-    //               />
-    //             )}
-    //           >
-    //             <div className='ui--Static ui dropdown selection'>
-    //               {uploadedSignatories.map((address): React.ReactNode => (
-    //                 <div key={address}>
-    //                   <AddressMini
-    //                     value={address}
-    //                     withSidebar={false}
-    //                   />
-    //                 </div>
-    //               ))}
-    //             </div>
-    //           </Labelled>
-    //         )}
-    //         {uploadedFileError && (
-    //           <MarkError content={uploadedFileError} />
-    //         )}
-    //       </Modal.Columns>
-    //     )}
-    //     <Modal.Columns hint={t('The threshold for approval should be less or equal to the number of signatories for this multisig.')}>
-    //       <InputNumber
-    //         isError={!isThresholdValid}
-    //         label={t('threshold')}
-    //         onChange={_onChangeThreshold}
-    //         value={threshold}
-    //       />
-    //     </Modal.Columns>
-    //     <Modal.Columns hint={t('The name is for unique identification of the account in your owner lists.')}>
-    //       <Input
-    //         autoFocus
-    //         className='full'
-    //         isError={!isNameValid}
-    //         label={t('name')}
-    //         onChange={_onChangeName}
-    //         placeholder={t('multisig name')}
-    //       />
-    //     </Modal.Columns>
-    //   </Modal.Content>
-    //   <Modal.Actions>
-    //     <Button
-    //       icon='plus'
-    //       isDisabled={!isValid}
-    //       label={t('Create')}
-    //       onClick={_createMultisig}
-    //     />
-    //   </Modal.Actions>
-    // </StyledModal>
     <StyledDiv
       className={className}
-    // header={t('Add multisig')}
-    // onClose={onClose}
-    // size='large'
     >
-      {/* <Toggle
-            className='signaturesFileToggle'
-            label={t('Upload JSON file with signatories')}
-            onChange={setShowSignaturesUpload}
-            value={showSignaturesUpload}
-          /> */}
-   
-        <InputAddressMulti
-          available={availableSignatories}
-          availableLabel={t('available signatories')}
-          maxCount={MAX_SIGNATORIES}
-          onChange={_onChangeAddressMulti}
-          valueLabel={t('selected signatories')}
-        />
+      <div className='signatory'>
+        <div className='detail'>
+          <svg width="25" height="25" viewBox="0 0 25 25">
+            <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+            <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+          </svg>
+          <p>The Members of a mutisig are called singatories</p>
+        </div>
+        <span>You Should at least 2</span>
+      </div>
+      <InputAddressMulti
+        available={availableSignatories}
+        availableLabel={t('New Signatory:')}
+        maxCount={MAX_SIGNATORIES}
+        onChange={_onChangeAddressMulti}
+        valueLabel={t('selected signatories:')}
+      />
       <div className='input_btn'>
         <InputNumber
           isError={!isThresholdValid}
-          label={t('threshold')}
+          label={t('threshold:')}
           onChange={_onChangeThreshold}
           value={threshold}
           className='threshold'
@@ -247,7 +147,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           autoFocus
           className='full name'
           isError={!isNameValid}
-          label={t('name')}
+          label={t('name:')}
           onChange={_onChangeName}
           placeholder={t('multisig name')}
 
@@ -269,10 +169,13 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
 }
 
 const StyledDiv = styled.div`
-  width: 80%;
   .signaturesFileToggle {
     width: 100%;
     text-align: right;
+  }
+  .title {
+    margin-bottom: 2rem; 
+    font-size: var(--font-size-h1);
   }
   .input_btn {
     display: flex;
@@ -280,8 +183,11 @@ const StyledDiv = styled.div`
     width: 100%;
     justify-content: space-between;
     .create {
-      margin-top: 10px;
+      margin: 1rem 2rem 0 0;
       float: right;
+      background-color: var(--bg-page);
+      border: 1px solid var(--border-card);
+      border-radius: 0.5rem;
     }
   }
   .threshold {
@@ -290,7 +196,25 @@ const StyledDiv = styled.div`
   .name {
     width: 50%;
   }
-  
+  .signatory {
+    display: flex;
+    padding: 1rem 2rem 1rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .detail {
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
+    span {
+      color: var(--subcolor-text);
+    }
+  }  
 `;
 
 export default React.memo(Multisig);

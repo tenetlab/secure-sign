@@ -98,7 +98,7 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 const StyledDiv = styled.div`
   border-top-width: 0px;
   width: 100%;
-
+  padding-top: 2rem;
   .ui--InputAddressMulti-Input {
     .ui.input {
       margin-bottom: 0.25rem;
@@ -108,25 +108,23 @@ const StyledDiv = styled.div`
 
   .ui--InputAddressMulti-columns {
     width: 100%;
-
     .ui--InputAddressMulti-column {
       display: flex;
       flex-direction: column;
-      min-height: 15rem;
-      max-height: 15rem;
+      min-height: 20rem;
+      max-height: 20rem;
       width: 100%;
       // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
-        margin-top: 0.5rem;
-        padding: 0.5rem 0;
-        background: var(--bg-input);
-        border: 1px solid var(--border-input);
-        border-radius: 0.286rem 0.286rem;
+        margin-top: 1rem;
+        padding: 0.5rem 2rem 0.5rem 2rem;
+        background-color: var(--bg-menubar);
+        border-radius: 1rem;
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
-        margin-bottom: 50px;
+        margin-bottom: 2rem;
         .ui--Spinner {
           margin-top: 2rem;
         }

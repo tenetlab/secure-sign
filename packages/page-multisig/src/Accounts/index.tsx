@@ -78,7 +78,8 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
   const { multisigAddress, onUpdateName } = useContext(AddressContext)
   const multiInfos = useMultisigApprovals(multisigAddress || '');
-  console.log('===========MultiInfos=========', multiInfos);
+  const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
+
 
 
   console.log("setFilter", setFilter);
@@ -145,7 +146,7 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
     (): Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> => {
       const ret: Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> = {
         hardware: [[<>{t('hardware')}<div className='sub'>{t('accounts managed via hardware devices')}</div></>]],
-        multisig: [[<>{t('multisig account list')}<div className='sub'>{t('')}</div></>]],
+        multisig: [[<>{t('Multisignature')}<div className='sub'>{t('')}</div></>]],
         testing: [[<>{t('development')}<div className='sub'>{t('accounts derived via development seeds')}</div></>]]
       };
 
@@ -178,12 +179,15 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
           toggleFavorite={toggleFavorite}
           isMultisigOpen={isMultisigOpen}
           toggleMultisig={toggleMultisig}
+          toggleProxyOverview={toggleProxyOverview}
+          isProxyOverviewOpen={isProxyOverviewOpen}
+          multisigAddress={multisigAddress}
         />
       );
 
       return all;
     }, {}),
-    [accountsMap, filterOn, proxies, setBalance, toggleFavorite, toggleMultisig, isMultisigOpen]
+    [accountsMap, filterOn, proxies, setBalance, toggleFavorite, toggleMultisig, isMultisigOpen, toggleProxyOverview, isProxyOverviewOpen, multisigAddress]
   );
 
   const groups = useMemo(
@@ -220,8 +224,13 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={className}>
       {grouped['multisig'][0] === undefined ? (
         <div className='empty-account'>
-          <h1>Multisig Accounts</h1>
-          <p>No Multisig Accounts</p>
+          <div className='detail'>
+            <svg width="25" height="25" viewBox="0 0 25 25">
+              <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+              <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+            </svg>
+            <p>No Multisig accounts</p>
+          </div>
         </div>
       ) : (
         <>
@@ -258,17 +267,19 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
                     ongoing={multiInfos}
                     onUpdateName={onUpdateName}
                     toggleMultisig={toggleMultisig}
+                    toggleProxyOverview={toggleProxyOverview}
                   />
                 ) : (
                   <>
-                  <Sidebar
-                    address={multisigAddress || ''}
-                    dataTestId='account-sidebar'
-                    // onClose={onClose}
-                    ongoing={[]}
-                    onUpdateName={onUpdateName}
-                    toggleMultisig={toggleMultisig}
-                  />
+                    <Sidebar
+                      address={multisigAddress || ''}
+                      dataTestId='account-sidebar'
+                      // onClose={onClose}
+                      ongoing={[]}
+                      onUpdateName={onUpdateName}
+                      toggleMultisig={toggleMultisig}
+                      toggleProxyOverview={toggleProxyOverview}
+                    />
                   </>
                 )}
               </>
@@ -287,8 +298,9 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   display: flex;
   height: 100%;
+  // border: 1px solid var(--border-card);
+  border-radius: 1rem;
   padding-top: 0px !important;
-  padding-bottom: 70px !important;
   .ui--Dropdown {
     width: 15rem;
   }
@@ -305,20 +317,35 @@ const StyledDiv = styled.div`
   }
   .multisig_detail {
     // border-left: 2px solid var(--border-table);
-    width: 65%;
+    width: 69%;
     padding-left: 15px !important;
+    
   }
   
   .multisig_list {
-    width: 35%;
-    padding-right: 25px !important;
+    width: 31%;
+    background-color: var(--bg-menubar);
+    border-radius: 1rem;
   }
   .empty-account {
-    margin-top: 0.8rem;
-    p {
-      padding: 1.25rem 0 0 0.25rem;
-      font-size: var(--font-percent-small);
-      opacity: var(--opacity-light);
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    padding: 1rem 2rem 1rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .detail {
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
+    span {
+      color: var(--subcolor-text);
     }
   }
 `;

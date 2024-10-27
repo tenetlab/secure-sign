@@ -51,28 +51,30 @@ const StyledLi = styled.li`
   cursor: pointer;
   position: relative;
   white-space: nowrap;
-  border-bottom: 2px dotted var(--border-table);
+  width: 13vw;
+  border-radius: 1rem;
   &.topLevel {
     font-weight: var(--font-weight-bold);
     line-height: 1.214rem;
-    border-radius: 0.15rem;
+    border-radius: 1rem;
 
     a {
       padding: 0.857rem 0.857em 0.857rem 1rem;
       line-height: 1.214rem;
-      border-radius: 0.25rem;
+      border-radius: 1rem;
     }
 
     &.isActive.highlight--color-contrast {
       font-weight: var(--font-weight-normal);
       a {
         color: var(--color-text-hover) !important;
+        background-color: var(--item-active) !important;
         font-weight: var(--font-weight-bold) !important;
       }
     }
 
     &.isActive {
-      border-radius: 0.15rem 0.15rem 0 0;
+      border-radius: 1rem;
 
       a {
         padding: 0.857rem 1.429rem 0.857rem;
@@ -117,10 +119,12 @@ const StyledLi = styled.li`
   }
   
   a:hover {
-    background-color: var(--bg-page) !important;
+    background-color: var(--item-active) !important;
     color: var(--color-text-hover) !important;
   }
-
+  @media only screen and (max-width: 1300px) {
+    width: 16vw;
+  }
 `;
 
 export default React.memo(Item);

@@ -64,7 +64,13 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
       </SummaryBox>
       <Table_Book
         className='address-book-table'
-        empty={isNextTick && sortedAddresses && t('no saved addresses!')}
+        empty={isNextTick && sortedAddresses && <div className='detail'>
+          <svg width="25" height="25" viewBox="0 0 25 25">
+            <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+            <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+          </svg>
+          <p>No Saved Address</p>
+        </div>}
         isSplit
       >
         {isNextTick && sortedAddresses?.map(({ address, isFavorite }): React.ReactNode => (
@@ -82,8 +88,12 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 }
 
 const StyledDiv = styled.div`
+  background-color: var(--bg-menubar);
+  border-radius: 1rem;
+
   .summary-box-contacts {
     align-items: center;
+    padding-left: 2rem;
   }
   .add-contact-button {
     border: 1px solid var(--border-button);
@@ -94,7 +104,6 @@ const StyledDiv = styled.div`
     border-color: var(--border-input-hover);
   }
   .address-book-table {
-    border: 1px solid var(--border-table);
     border-radius: 1rem;
     padding: 0 3rem;
     table {
@@ -114,6 +123,17 @@ const StyledDiv = styled.div`
       // background: var(--bg-page) !important;
     }
   }
+  .detail {
+      padding: 1rem 0rem 0rem 1rem;
+      align-items: center;
+      text-align: center;
+      justity-content: center;
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
 `;
 
 export default React.memo(Overview);

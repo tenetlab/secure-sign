@@ -49,10 +49,11 @@ const StyledTd = styled.td`
       border: 1px solid var(--border-table);
       border-radius: 4px;
       box-sizing: border-box;
-      display: inline-flex;
+      // display: inline-flex;
       height: 1.7rem;
       justify-content: center;
       width: 1.7rem;
+      
     }
   }
 `;

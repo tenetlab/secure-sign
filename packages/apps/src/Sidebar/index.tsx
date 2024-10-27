@@ -117,42 +117,38 @@ function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
             ))}
           </ul>
         </div>
-        {/* <div className='menuSection media--1200'>
-          <ul className='menuItems'>
-            {externalRef.current.map((route): React.ReactNode => (
-              <Item
-                isLink
-                isToplevel
-                key={route.name}
-                route={route}
-              />
-            ))}
-          </ul>
-        </div>
-        <NodeInfo className='media--1400' /> */}
+
       </div>
+      {/* <div className='IconContainer'>
+        <Menu.Item icon='plus' className={`iconBtn`}/>
+        <Menu.Item icon='user'  className={`iconBtn isActive`}/>
+        <Menu.Item icon='users'  className={`iconBtn`}/>
+        <Menu.Item icon='address-book'  className={`iconBtn`}/>
+        <Menu.Item icon='users' className={`iconBtn`}/>
+      </div> */}
     </StyledDiv>
   );
 }
 
 const StyledDiv = styled.div`
-  width: 16%;
-  height: calc(100vh - 81px);
-  padding: 0;
+  width: 20%;
+  height: calc(100vh - 110px);
+  padding: 8rem 1rem 0rem 1rem;
   z-index: 220;
   // position: relative;
-  border-right: 3px solid var(--border-table);
   .smallShow {
     display: none;
   }
 
-  & .menuContainer {
+  .menuContainer {
     align-items: center;
     justify-content: center;
     // padding: 0 3.5rem;
     width: 100%;
     max-width: var(--width-full);
     margin: 0 auto;
+    background-color: var(--bg-menubar);
+    border-radius: 2.5rem;
   }
 
   &.isLoading {
@@ -192,7 +188,7 @@ const StyledDiv = styled.div`
   .menuItems {
     list-style: none;
     margin: 0 1rem 0 0;
-    padding: 0;
+    padding: 2rem 0rem 2rem 1rem;
 
     > li {
       display: inline-block;
@@ -231,6 +227,24 @@ const StyledDiv = styled.div`
 
   @media only screen and (max-width: 1300px) {
     width: 25%;
+  }
+
+  .IconContainer {
+    justify-content: space-between;
+    display: flex;
+    margin: 0 1.5rem;
+    .iconBtn {
+      background-color: var(--bg-menubar);
+      border-radius: 50%;
+      padding: 1.5rem;
+      align-items: center;
+      text-align: center;
+      
+    }
+    .isActive {
+        border-top-left-radius: unset;
+        border-top-right-radius: unset;
+      }
   }
 `;
 

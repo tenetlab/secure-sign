@@ -54,12 +54,19 @@ function ModalBase ({ children, className = '', header, onClose, size = 'medium'
       />
       <div className='ui--Modal__body'>
         <Header
-          header={header}
+          // header={header}
           onClose={onClose}
         />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
+        <div className='ui--Modal_sub_body'>
+          <div className='ui--Header-Flex'>
+            {header && (
+              <h1>{header}</h1>
+            )}
+          </div>
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
+        </div>
       </div>
     </StyledDiv>,
     document.body
@@ -92,31 +99,43 @@ const StyledDiv = styled.div`
   }
 
   .ui--Modal__body {
-    margin-top: 30px;
-    background: var(--bg-page);
-    border-radius: 4px;
+    background: var(--bg-modal);
+    border-radius: 1rem;
     box-shadow: none;
-
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 0;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, 0);
 
-    max-width: 900px;
     width: calc(100% - 16px);
+    max-width: 80rem;
 
     color: var(--color-text);
     font: var(--font-sans);
+
+    h1 {
+      font-size: var(--font-size-h0);
+      border-bottom: 3px solid var(--border-input-hover);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+    }
+    .ui--Modal_sub_body {
+      .ui--Header-Flex {
+        display: flex;
+      }
+      padding: 1rem 2rem 0 2rem;
+    }
   }
 
   &.smallSize .ui--Modal__body {
-    max-width: 720px;
+    max-width: 80rem;
   }
 
   &.largeSize .ui--Modal__body {
-    max-width: 720px;
+    max-width: 80rem;
   }
 `;
 

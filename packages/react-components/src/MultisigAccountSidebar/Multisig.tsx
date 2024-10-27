@@ -6,7 +6,7 @@ import type { KeyringJson$Meta } from '@polkadot/ui-keyring/types';
 import React from 'react';
 
 import AddressMini from '../AddressMini.js';
-import { useTranslation } from '../translate.js';
+import {styled} from '../styled.js';
 
 interface Props {
   isMultisig: boolean;
@@ -14,7 +14,6 @@ interface Props {
 }
 
 function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
-  const { t } = useTranslation();
 
   if (!isMultisig || !meta) {
     return null;
@@ -23,19 +22,19 @@ function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | nul
   const { threshold, who } = meta;
 
   return (
-    <section className='ui--AddressMenu-multisig withDivider'>
+    <StyledSection className='ui--AddressMenu-multisig withDivider'>
       {/* <div className='ui--AddressMenu-sectionHeader'>
         {t('multisig')}
       </div> */}
       <div className='ui--AddressMenu-multisigTable'>
         <div className='tr'>
-          <div className='th'>{t('threshold')}</div>
-          <div className='td'>
-            {threshold}/{who?.length}
+          <div className='th threshold'>
+            <span className='subTitle'>Threshold:</span>
+            <span>{threshold}/{who?.length}</span>
           </div>
         </div>
         <div className='tr'>
-          <div className='th signatories'>{t('signatories')}</div>
+          <div className='th signatories'>Signatories:</div>
           <div className='td'>
             {who?.map((address) => (
               <AddressMini
@@ -46,8 +45,25 @@ function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | nul
           </div>
         </div>
       </div>
-    </section>
+    </StyledSection>
   );
 }
 
 export default React.memo(Multisig);
+
+const StyledSection = styled.section`
+  background-color: var(--bg-subCard);
+  .signatories {
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-cardBtn);
+  }
+  height: 20rem;
+  border-radius: 1rem;
+  .threshold {
+    display: flex;
+    margin-bottom: 2rem;
+    .subTitle {
+      margin-right: 1rem;
+    } 
+  }
+`

@@ -14,6 +14,7 @@ import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
 import { styled } from '@polkadot/react-components';
+import Balances from './Balances.js';
 
 interface Props {
   value: string,
@@ -24,7 +25,7 @@ interface Props {
   accountIndex: string | undefined,
 }
 
-function AddressSection ({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
+function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
@@ -57,37 +58,35 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
         />
         <div className='ui--AddressMenu-addr'>
           {value}
+          <CopyToClipboard
+            text={value}
+          >
+            <span>
+                <Button
+                  icon={isCopyShown ? 'check' : 'copy'}
+                  label={isCopyShown ? t('Copied') : t('')}
+                  onClick={isCopyShown ? NOOP : toggleIsCopyShown}
+                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
+                />
+            </span>
+          </CopyToClipboard>
         </div>
         {accountIndex && (
           <div className='ui--AddressMenu-index'>
             <label>{t('index')}:</label> {accountIndex}
           </div>
         )}
+          
       </div>
-      <div className='ui--AddressSection__CopyColumn'>
-        <div className='ui--AddressMenu-copyaddr'>
-          <CopyToClipboard
-            text={value}
-          >
-            <span>
-              <Button.Group>
-                <Button
-                  icon={isCopyShown ? 'check' : 'copy'}
-                  label={isCopyShown ? t('Copied') : t('Copy')}
-                  onClick={isCopyShown ? NOOP : toggleIsCopyShown }
-                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
-                />
-              </Button.Group>
-            </span>
-          </CopyToClipboard>
-        </div>
+      <div>
+        <Balances address={value} />
       </div>
     </StyledAddressSection>
   );
 }
 
 const StyledAddressSection = styled.div`
-  width: 60%;
+  width: 65%;
   .ui--AddressMenu-addr {
     width: 100% !important;
   }

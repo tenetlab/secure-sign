@@ -90,7 +90,53 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
   .ui.dropdown .menu>.header {
     color: var(--color-text) !important;
+    margin: 0.75rem !important;
   }
+  
+  .ui.selection.active.dropdown:hover .menu {
+    border-color: var(--bg-page);
+  }
+
+  .ui.selection.active.dropdown .menu {
+    border-color: var(--bg-page);
+    border-radius: 0.7rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+  
+  .ui.active.selection.dropdown {
+    border-bottom-left-radius: 0.7rem !important;
+    border-bottom-right-radius: 0.7rem !important;
+  }
+
+  .ui.selection.active.dropdown {
+    border-color: var(--border-input-hover);
+  }
+
+  .ui.selection.dropdown .menu>.item {
+    height: 48px;
+    padding: 1.2rem 1rem 0 1rem !important;
+    border-radius: 0.7rem;
+  }
+
+  .ui.dropdown .menu >.item  {
+    border-color: var(--border-input);
+    padding: 1.2rem 1rem 0 1rem !important;
+  }
+
+  .ui.input.error input {
+    background-color: var(--bg-input) !important;
+  }
+  .error {
+    background-color: var(--bg-input) !important;
+    border-color: var(--border-input-hover) !important;
+    border-radius: 0.7rem;
+  }
+
+  .ui.selection.dropdown.ui--output.isDisabled {
+    border-style: solid !important;
+  }
+
   .ui--MenuItem {
     & .ui--Badge {
       color: ${countBrightness(uiHighlight) < BRIGHTNESS ? '#fff' : '#424242'};
@@ -201,10 +247,24 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   }
 
   .ui--Button {
+    background: var(--bg-button);
+    color: var(--color-text);
+    border: 1px solid var(--border-button);
+    border-radius: 0.5rem !important;
+
+    &:hover {
+      background: var(--bg-button-hover) !important;
+      color: var(--button-color) !important;
+      .ui--Icon {
+        background: var(--bg-button-hover) !important;
+        color: var(--button-color) !important;
+      }
+    }
+    
     &:not(.isDisabled):not(.isIcon):not(.isBasic),
     &.withoutLink:not(.isDisabled) {
       .ui--Icon {
-        background: var(--bg-page);
+        background: var(--bg-button);
         color: var(--color-text);
       }
     }
@@ -543,9 +603,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     font-style: normal;
     font-weight: var(--font-weight-label);
     line-height: 1rem;
-    margin-bottom: 0.25rem !important;
+    // margin-bottom: 0.25rem !important;
     text-transform: var(--text-transform-label);
     vertical-align: middle;
+    font-size: var(--font-size-h2);
   }
 
   button {

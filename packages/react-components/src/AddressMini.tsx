@@ -156,7 +156,7 @@ const StyledDiv = styled.div`
     .ui--Balance,
     .ui--Bonded,
     .ui--LockedVote {
-      font-size: var(--font-size-tiny);
+      font-size: var(--font-size-h3);
       margin-left: 2.25rem;
       margin-top: -0.5rem;
       text-align: left;

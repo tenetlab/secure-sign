@@ -7,12 +7,12 @@ import type { DecodedExtrinsic } from './types.js';
 
 import React, { useCallback, useState } from 'react';
 
-import { Button, InputAddress, MarkError, TxButton } from '@polkadot/react-components';
+// import { Button, InputAddress, MarkError, TxButton } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 import { Extrinsic } from '@polkadot/react-params';
-import { BalanceFree } from '@polkadot/react-query';
+// import { BalanceFree } from '@polkadot/react-query';
 
-import Decoded from './Decoded.js';
+// import Decoded from './Decoded.js';
 import { useTranslation } from './translate.js';
 import { styled } from '@polkadot/react-components';
 
@@ -26,7 +26,7 @@ interface DefaultExtrinsic {
   defaultFn: SubmittableExtrinsicFunction<'promise'>;
 }
 
-function extractDefaults (value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
+function extractDefaults(value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
   if (!value) {
     return { defaultFn };
   }
@@ -40,18 +40,18 @@ function extractDefaults (value: DecodedExtrinsic | null, defaultFn: Submittable
   };
 }
 
-function Selection ({ className, defaultValue }: Props): React.ReactElement<Props> {
+function Selection({ className, defaultValue }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { apiDefaultTxSudo } = useApi();
   const { api } = useApi();
-  const [accountId, setAccountId] = useState<string | null>(null);
+  // const [accountId, setAccountId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [extrinsic, setExtrinsic] = useState<SubmittableExtrinsic<'promise'> | null>(null);
+  const [extrinsicUpper, setExtrinsicUpper] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [{ defaultArgs, defaultFn }] = useState<DefaultExtrinsic>(() => extractDefaults(defaultValue, apiDefaultTxSudo));
 
   const _onExtrinsicChange = useCallback(
     (method?: SubmittableExtrinsic<'promise'>) =>
-      setExtrinsic(() => method || null),
+      setExtrinsicUpper(() => method || null),
     []
   );
 
@@ -63,55 +63,55 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
 
   return (
     <StyledDiv className={className}>
-      <h1>Extrinsics</h1>
-      <div className='ui--Extrinsic-Group'>
-        {
-          api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
-          <div className='ui--Extrinsic-Group-Content'>
-            <InputAddress
-              label={t('selected account')}
-              labelExtra={
-                <BalanceFree
-                  // label={<label>{t('free balance')}</label>}
-                  params={accountId}
-                />
-              }
-              onChange={setAccountId}
-              type='account'
-            />
+      {/* <h1>Extrinsics</h1> */}
+      {
+        api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
+          <>
+            {/* <InputAddress
+            label={t('selected account')}
+            labelExtra={
+              <BalanceFree
+                // label={<label>{t('free balance')}</label>}
+                params={accountId}
+              />
+            }
+            onChange={setAccountId}
+            type='account'
+          /> */}
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
               label={t('extrinsic')}
               onChange={_onExtrinsicChange}
               onError={_onExtrinsicError}
+              extrinsicUpper={extrinsicUpper}
+              error={error}
             />
-            <Decoded
-              extrinsic={extrinsic}
-              isCall
+            {/* <Decoded
+            extrinsic={extrinsicUpper}
+            isCall
+          /> */}
+            {/* {error && !extrinsicUpper && (
+            <MarkError content={error} />
+          )} */}
+            {/* <Button.Group>
+            <TxButton
+              extrinsic={extrinsicUpper}
+              icon='sign-in-alt'
+              isUnsigned
+              label={t('Submit Unsigned')}
+              withSpinner
             />
-            {error && !extrinsic && (
-              <MarkError content={error} />
-            )}
-            <Button.Group>
-              {/* <TxButton
-                extrinsic={extrinsic}
-                icon='sign-in-alt'
-                isUnsigned
-                label={t('Submit Unsigned')}
-                withSpinner
-              /> */}
-              <TxButton
-                accountId={accountId}
-                extrinsic={extrinsic}
-                icon='sign-in-alt'
-                label={t('Submit Transaction')}
-              />
-            </Button.Group>
-          </div>:
+            <TxButton
+              accountId={accountId}
+              extrinsic={extrinsicUpper}
+              icon='sign-in-alt'
+              label={t('Submit Transaction')}
+            />
+          </Button.Group> */}
+          </> :
           <div>Extrinsics does not support this network.</div>
-        }
-      </div>
+      }
     </StyledDiv>
   );
 }
@@ -119,23 +119,44 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
 export default React.memo(Selection);
 
 const StyledDiv = styled.div`
-  margin-top: 0.5rem;
   .extrinsics--Extrinsic {
-    position: relative;
     display: flex;
+    padding-right: 3rem;
     .ui--Params-Container {
-      width: 50%;
-      position: absolute;
-      right: 0;
-      top: -7.5rem;
       .ui--Params-Content {
         display: flex;
         flex-direction: column;
-        row-gap: 4rem;
+        row-gap: 3rem;
+      }
+    }
+    .ui--Address-Extrinsic {
+      width: 48%;
+      padding-right: 6rem;
+      padding-top: 4rem;
+    }
+    .ui--Params-Decoded-Button {
+      width: 52%;
+      background-color: var(--bg-menubar);
+      padding: 4rem 5rem 3rem 5rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      row-gap: 3rem;
+      .ui--Button-Group {
+        margin: 0;
+        .ui--Button {
+          margin: 0;
+        }
+        .hasLabel {
+          padding: 0.7rem;
+        }
+      }
+      .ui--InputFile {
+        padding: 1rem !important;
       }
     }
     .ui--Input-Container {
-      width: 50%;
+      margin-top: 6rem;
       .ui--DropdownLinked-Items {
         .ui {
           padding-left: 1rem !important;
@@ -144,6 +165,14 @@ const StyledDiv = styled.div`
           }
         }
       }
+    }
+    .is50 {
+      .ui--Column {
+        max-width: 100%;
+      }
+    }
+    .withBorder {
+      padding-left: 0;
     }
   }
   .ui--Columar {
@@ -157,20 +186,6 @@ const StyledDiv = styled.div`
       }
     }
   }
-  .ui--Extrinsic-Group {
-    padding-top: 2rem;
-    display: flex;
-    .ui--Extrinsic-Group-Content {
-      width: 80%;
-      display: flex;
-      flex-direction: column;
-      row-gap: 4rem;
-      .ui--Button-Group {
-        width: 50%;
-      }
-    }
-  }
   .ui--InputAddress {
-    width: 50%;
   }
 `

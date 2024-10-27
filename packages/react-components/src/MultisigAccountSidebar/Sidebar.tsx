@@ -7,7 +7,6 @@ import { useAccountInfo } from '@polkadot/react-hooks';
 
 import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
-import Balances from './Balances.js';
 // import Identity from './Identity.js';
 import MultisigPage from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
@@ -22,6 +21,7 @@ interface Props {
   onUpdateName?: (() => void) | null;
   toggleMultisig: () => void;
   ongoing: [H256, Multisig][];
+  toggleProxyOverview: () => void;
 }
 
 
@@ -31,7 +31,7 @@ interface Option {
 }
 
 
-function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMultisig, ongoing }: Props): React.ReactElement<Props> {
+function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMultisig, ongoing, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
   const { accountIndex, flags, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -55,11 +55,12 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           isBeingEdited={setInEditMode}
           onUpdateName={onUpdateName}
           sidebarRef={sidebarRef}
+          toggleProxyOverview={toggleProxyOverview}
         />
       </div>
       <div style={{ display: 'flex' }}>
-        <div className='ui--ScrollSection' style={{ width: '38%' }}>
-          <Balances address={address} />
+        <div className='ui--ScrollSection'>
+          <h1 >Account Detail</h1>
           {/* <Identity
           address={address}
           identity={identity}
@@ -70,15 +71,18 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           />
         </div>
         <div className='hash'>
-          {hashes?.map((item, key) =>
-            <MultisigOutput
-              key={key}
-              isDisabled
-              value={item.value}
-              withCopy
-              toggleMultisig={toggleMultisig}
-            />
-          )}
+          <h1 >Recent Transaction</h1>
+          <div className='subCard'>
+            {hashes?.map((item, key) =>
+              <MultisigOutput
+                key={key}
+                isDisabled
+                value={item.value}
+                withCopy
+                toggleMultisig={toggleMultisig}
+              />
+            )}
+          </div>
 
         </div>
       </div>
@@ -98,7 +102,16 @@ const StyledDiv = styled.div`
 
   .hash {
     width: 62%;
-    margin-top: 1rem;
+    background-color: var(--bg-menubar);
+    border-radius: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--border-card);
+
+    .subCard {
+      background-color: var(--bg-subCard);
+      border-radius: 1rem;
+      height: 20rem;
+    }
   }
   padding: 0 0 3.286rem;
 
@@ -108,12 +121,14 @@ const StyledDiv = styled.div`
 
   .ui--AddressMenu-header {
     align-items: center;
-    background: var(--bg-page);
-    border-bottom: 1px solid var(--border-table);
+    background: var(--bg-menubar);
+    border: 1px solid var(--border-card);
     display: flex;
     // flex-direction: column;
+    margin: 1rem 0 1rem 1rem;
     justify-content: center;
-    padding: 1.35rem 1rem 1rem 1rem;
+    padding: 2rem 1rem 2rem 2rem;
+    border-radius: 1rem;
   }
 
   .ui--AddressSection {
@@ -121,7 +136,7 @@ const StyledDiv = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    width: 100%;
+    width: 60%;
 
     .ui--AddressSection__AddressColumn {
       flex: 1;
@@ -224,11 +239,11 @@ const StyledDiv = styled.div`
     .ui--AddressMenu-multisigTable {
       font-size: var(--font-size-small);
       margin-top: 0.6rem;
-      padding-left: 60px;
+      padding: 1rem 2rem 0rem 2rem;
 
       .tr {
         padding: 0rem 0rem 0.6rem 0rem;
-        display: inline-flex;
+        // display: inline-flex;
         align-items: center;
         width: 100%;
         justify-content: space-between;
@@ -247,10 +262,11 @@ const StyledDiv = styled.div`
 
         .td {
           overflow: hidden;
-          padding-left: 0.6rem;
+          padding: 1rem;
           text-overflow: ellipsis;
           text-align: left;
           flex-basis: 50%;
+          font-size: var(--font-size-h3);
         }
       }
 
@@ -339,6 +355,11 @@ const StyledDiv = styled.div`
   .ui--ScrollSection {
     padding: 1rem;
     overflow: auto;
+    width: 38%;
+    margin: 0 1rem 0 1rem;
+    border: 1px solid var(--border-card);
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
   }
 
   .ui--LinkSection {

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 
@@ -16,16 +16,17 @@ interface Props {
 
 function Menu({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
+  const [logo, setLogo] = useState<boolean>(false);
 
   return (
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
       <div className='menuContainer'>
         <div className='menuSection'>
-          <LogoInfo />
+          <LogoInfo logo={logo}/>
           <h1 className='menuItems'>Multisig</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left'}}>
-          <ThemeToggle />
+          <ThemeToggle setLogo={setLogo} logo={logo}/>
           <ChainInfo />
         </div>
       </div>
@@ -35,12 +36,13 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   width: 100%;
-  padding: 0;
+  padding: 2rem 2rem 1rem 1rem;
   z-index: 220;
   position: relative;
   .smallShow {
     display: none;
   }
+  background-color: var(--bg-page);
 
   & .menuContainer {
     flex-direction: row;
@@ -49,8 +51,8 @@ const StyledDiv = styled.div`
     justify-content: space-between;
     padding: 0 1.5rem;
     width: 100%;
-    // max-width: var(--width-full);
-    // margin: 0 auto;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
   }
 
   &.isLoading {
@@ -70,6 +72,15 @@ const StyledDiv = styled.div`
   .menuSection {
     align-items: center;
     display: flex;
+    .menuItems {
+      list-style: none;
+      margin: 0 0 0 0;
+      padding: 0;
+      font-size: var(--font-size-h1);
+      color: var(--color-text-hover);
+      font-weight: var(--font-weight-normal);
+      text-transform: uppercase;
+    }
   }
 
   .menuActive {
@@ -86,14 +97,7 @@ const StyledDiv = styled.div`
     }
   }
 
-  .menuItems {
-    list-style: none;
-    margin: 0 1rem 0 0;
-    padding: 0;
-    font-size: var(--font-size-h2);
-    color: var(--color-text);
-
-  }
+  
 
   .ui--NodeInfo {
     align-self: center;

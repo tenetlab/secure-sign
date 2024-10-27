@@ -22,6 +22,7 @@ function Body ({ children, className = '', empty, emptySpinner, isEmpty, noBodyT
   return isEmpty
     ? (
       <tbody className={bodyClassName}>
+        
         <tr>
           <td colSpan={100}>{
             isString(empty)
@@ -33,7 +34,13 @@ function Body ({ children, className = '', empty, emptySpinner, isEmpty, noBodyT
     )
     : noBodyTag
       ? <>{children}</>
-      : <tbody className={bodyClassName}>{children}</tbody>;
+      : <tbody className={bodyClassName}>
+        {/* <tr style={{justifyContent: 'space-between', width: '100%', display: 'flex', textAlign: 'center', alignItems: 'center'}}>
+          <h2 style={{float: 'right',textAlign: 'center', alignItems: 'center'}}>Name</h2>
+          <h2 style={{justifyContent: 'center',textAlign: 'center', alignItems: 'center'}}>Name</h2>
+          <h2 style={{float: 'left',textAlign: 'center', alignItems: 'center'}}>Name</h2>
+        </tr> */}
+        {children}</tbody>;
 }
 
 export default React.memo(Body);

@@ -35,10 +35,10 @@ function MultisigViewDetail ({ children, className = '', value, toggleMultisig}:
           {children}
           <span className='copySpan'>
             <Button
-              className='icon-button show-on-hover'
+              className='icon-button show-on-hover review'
               // icon={``}
               isDisabled={!value}
-              label={'View Detail'}
+              label={'Review'}
               onClick={toggleMultisig}
             />
           </span>
@@ -48,13 +48,18 @@ function MultisigViewDetail ({ children, className = '', value, toggleMultisig}:
 }
 
 const StyledDiv = styled.div`
+  // border: 1px solid var(--bg-subCard);
   .copySpan {
     white-space: nowrap;
   }
   .copyContainer {
     position: absolute;
-    top: 0rem;
+    top: 0.2rem;
     right: 0rem;
+  }
+  .review {
+    border: 1px solid var(--border-cardBtn);
+    border-radius: 1rem;
   }
   
 `;
