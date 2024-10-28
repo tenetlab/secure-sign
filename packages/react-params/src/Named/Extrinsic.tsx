@@ -139,7 +139,7 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
     <div className='extrinsics--Extrinsic'>
       <div className='ui--Address-Extrinsic'>
         <InputAddress
-          label={t('selected account')}
+          label={t('Selected account')}
           labelExtra={
             <BalanceFree
               params={accountId}

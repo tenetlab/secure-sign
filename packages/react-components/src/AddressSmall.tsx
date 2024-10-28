@@ -71,6 +71,9 @@ const StyledDiv = styled.div`
     width: 100%;
   }
 
+  .accountName {
+    font-size: var(--font-size-account-name);
+  }
   .ui--AddressSmall-icon {
     display: flex;
     align-items: center;
@@ -98,14 +101,9 @@ const StyledDiv = styled.div`
     }
 
     .shortAddress {
-      // bottom: -0.95rem;
-      // color: #8B8B8B;
-      // display: inline-block;
+      font-size: var(--font-size-account-name);
       left: 0;
-      // min-width: var(--width-shortaddr);
-      // max-width: var(--width-shortaddr);
       overflow: hidden;
-      // position: absolute;
       text-overflow: ellipsis;
     }
   }

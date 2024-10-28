@@ -6,6 +6,7 @@
   "The amount you wish to lock for the duration. It needs to be more than the nis minimum.": "The amount you wish to lock for the duration. It needs to be more than the nis minimum.",
   "The number of periods this bid is to be locked for, less than the maximum period.": "The number of periods this bid is to be locked for, less than the maximum period.",
   "This account will make the bid for the nis and pay all associated fees.": "This account will make the bid for the nis and pay all associated fees.",
+  "Use proxied account": "Use proxied account",
   "balance": "balance",
   "bid amount": "bid amount",
   "intake": "intake",

@@ -81,7 +81,7 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
-              label={t('extrinsic')}
+              label={t('Extrinsic')}
               onChange={_onExtrinsicChange}
               onError={_onExtrinsicError}
               extrinsicUpper={extrinsicUpper}
@@ -110,7 +110,15 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
             />
           </Button.Group> */}
           </> :
-          <div>Extrinsics does not support this network.</div>
+          <div className='empty-account'>
+            <div className='detail'>
+              <svg width="25" height="25" viewBox="0 0 25 25">
+                <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+                <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+              </svg>
+              <p>Extrinsics does not support this network.</p>
+            </div>
+          </div>
       }
     </StyledDiv>
   );
@@ -188,4 +196,21 @@ const StyledDiv = styled.div`
   }
   .ui--InputAddress {
   }
+  .empty-account {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    padding: 1rem 2rem 1rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .detail {
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
 `

@@ -102,11 +102,13 @@ const StyledAddressSection = styled.div`
     width: 70%;
     padding-right: 3rem;
     justify-content: space-between;
+    font-size: var(--font-size-account-name);
   }  
   .ui--AccountName-LeftPadding {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
+    font-size: var(--font-size-account-name);
   }
   .ui--IdentityIcon-RightPadding {
     padding-right: 1rem;

@@ -418,7 +418,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               <Button
                 className='send-button'
                 icon='paper-plane'
-                label={t('send')}
+                label={t('Send')}
                 onClick={toggleTransfer}
               />
             )}
@@ -452,10 +452,13 @@ const StyledTr = styled.tr`
   .ui--Copy-Balance {
     display: flex;
     justify-content: space-between;
-    width: 35%;
+    width: 40%;
   }
   .ui--Balance {
     display: flex;
+  }
+  .ui--FormatBalance-value {
+    font-size: var(--font-size-balance) !important;
   }
 `;
 

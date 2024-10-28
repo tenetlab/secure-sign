@@ -83,7 +83,7 @@ function ProxyAdd ({ className = '', onClose, onStatusChange }: Props): React.Re
           <InputAddressSimple
             autoFocus
             isError={!proxyInfo || proxyInfo.isEmpty}
-            label={t('proxied account')}
+            label={t('Proxied account')}
             onChange={setStashAddress}
             placeholder={t('address being proxied')}
           />

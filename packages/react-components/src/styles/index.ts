@@ -271,7 +271,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
     &.isBasic:not(.isDisabled):not(.isIcon):not(.isSelected) {
       &:not(.isReadOnly) {
-        // box-shadow: 0 0 1px var(--color-text-hover);
+        
       }
 
       .ui--Icon {
@@ -557,8 +557,6 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
   h1 {
     font-size: var(--font-size-h1);
-    text-transform: lowercase;
-
     em {
       font-style: normal;
       text-transform: none;
@@ -599,12 +597,9 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   // we treat h5 and label as equivalents
   label, h5 {
     color: var(--color-label);
-    // font-size: var(--font-size-label);
     font-style: normal;
     font-weight: var(--font-weight-label);
     line-height: 1rem;
-    // margin-bottom: 0.25rem !important;
-    text-transform: var(--text-transform-label);
     vertical-align: middle;
     font-size: var(--font-size-h2);
   }

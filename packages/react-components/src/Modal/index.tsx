@@ -42,6 +42,8 @@ function ModalBase ({ children, className = '', header, onClose, size = 'medium'
     };
   }, [listenKeyboard]);
 
+  console.log('------------', header?.toString().charAt(0));
+  
   return createPortal(
     <StyledDiv
       className={`${className} ui--Modal ${size}Size ${themeClassName} `}
@@ -117,7 +119,6 @@ const StyledDiv = styled.div`
     font: var(--font-sans);
 
     h1 {
-      font-size: var(--font-size-h0);
       border-bottom: 3px solid var(--border-input-hover);
       margin-bottom: 2rem;
       padding-bottom: 1rem;

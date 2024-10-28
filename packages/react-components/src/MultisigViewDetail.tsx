@@ -55,13 +55,12 @@ const StyledDiv = styled.div`
   .copyContainer {
     position: absolute;
     top: 0.2rem;
-    right: 0rem;
+    right: 0.1rem;
   }
   .review {
     border: 1px solid var(--border-cardBtn);
     border-radius: 1rem;
   }
-  
 `;
 
 export default React.memo(MultisigViewDetail);

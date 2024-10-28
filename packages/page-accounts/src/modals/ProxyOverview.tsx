@@ -258,7 +258,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
         <Modal.Columns hint={t('Any account set as proxy will be able to perform actions in place of the proxied account')}>
           <InputAddress
             isDisabled={true}
-            label={t('proxied account')}
+            label={t('Proxied account')}
             type='account'
             value={proxiedAccount}
           />

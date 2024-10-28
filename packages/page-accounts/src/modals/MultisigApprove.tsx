@@ -174,7 +174,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
           // hint={t('The call hash from the list of available and unapproved calls.')}
         >
           <Dropdown
-            label={t('pending hashes {{count}}', {
+            label={t('Pending hashes {{count}}', {
               replace: { count: hashes.length }
             })}
             onChange={setHash}
@@ -190,7 +190,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
               <InputAddress
                 defaultValue={multisig.depositor}
                 isDisabled
-                label={t('creator')}
+                label={t('Creator')}
               />
             </Modal.Columns>
             <Modal.Columns 
@@ -220,7 +220,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
         // hint={t('The operation type to apply. For approvals both non-final and final approvals are supported.')}
         >
           <Dropdown
-            label={t('approval type')}
+            label={t('Approval type')}
             onChange={setType}
             options={callOptRef.current}
             value={type}
@@ -233,7 +233,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
             >
               <InputAddress
                 filter={whoFilter}
-                label={t('signatory')}
+                label={t('Signatory')}
                 onChange={setSignatory}
               />
             </Modal.Columns>
@@ -260,7 +260,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
                         <Input
                           autoFocus
                           isError={!callHex || !!callError}
-                          label={t('call data')}
+                          label={t('Call data')}
                           onChange={setCallHex}
                         />
                       )}

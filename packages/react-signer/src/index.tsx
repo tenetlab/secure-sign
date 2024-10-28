@@ -168,6 +168,7 @@ const StyledModal = styled(Modal)`
     .ui--Labelled:not(.isSmall):not(.isOuter) >label {
       left: -8rem;
       top: 1.5rem;
+      width: 12%;
     }
     .ui.selection.dropdown.ui--output.isDisabled {
       background-color: var(--bg-modal-input) !important;

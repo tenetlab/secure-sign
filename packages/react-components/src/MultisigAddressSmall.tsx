@@ -28,7 +28,7 @@ function MultisigAddressSmall ({ children, className = '', defaultName, onClickN
   return (
     <StyledDiv className={`${className} ui--AddressSmall ${(parentAddress || withShortAddress) ? 'withPadding' : ''} ${isActive ? 'selected' : ''}`}>
       <span className='ui--AddressSmall-icon'>
-        <IdentityIcon value={value as Uint8Array} size={40}/>
+        <IdentityIcon value={value as Uint8Array} size={50}/>
       </span>
       <span className='ui--AddressSmall-info'>
         {parentAddress && (
@@ -81,10 +81,13 @@ const StyledDiv = styled.div`
   &.selected {
     background-color: var(--item-active);
     color: var(--color-text-hover);
+    &.withPadding {
+      padding: 0.3rem 0rem 1.5rem 1.2rem;
+    }
   }
 
   &.withPadding {
-    padding: 0.75rem 1rem;
+    padding: 0rem 0rem 1.2rem 1.2rem;
   }
 
   .ui--AddressSmall-icon {
@@ -122,7 +125,7 @@ const StyledDiv = styled.div`
 
   .ui--AccountName {
     overflow: hidden;
-    vertical-align: middle;
+    vertical-align: bottom;
     white-space: nowrap;
 
     

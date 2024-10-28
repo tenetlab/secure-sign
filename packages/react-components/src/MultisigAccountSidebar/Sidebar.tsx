@@ -125,7 +125,7 @@ const StyledDiv = styled.div`
     border: 1px solid var(--border-card);
     display: flex;
     // flex-direction: column;
-    margin: 1rem 0 1rem 1rem;
+    margin: 0 0 1rem 1rem;
     justify-content: center;
     padding: 2rem 1rem 2rem 2rem;
     border-radius: 1rem;

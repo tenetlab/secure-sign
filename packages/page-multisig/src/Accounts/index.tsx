@@ -263,7 +263,6 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
                   <Sidebar
                     address={multisigAddress || ''}
                     dataTestId='account-sidebar'
-                    // onClose={onClose}
                     ongoing={multiInfos}
                     onUpdateName={onUpdateName}
                     toggleMultisig={toggleMultisig}
@@ -274,7 +273,6 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
                     <Sidebar
                       address={multisigAddress || ''}
                       dataTestId='account-sidebar'
-                      // onClose={onClose}
                       ongoing={[]}
                       onUpdateName={onUpdateName}
                       toggleMultisig={toggleMultisig}

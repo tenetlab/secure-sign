@@ -473,7 +473,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                     <Output
                       isDisabled
                       isTrimmed
-                      label={t('call data')}
+                      label={t('Call data')}
                       value={innerTx}
                       withCopy
                     />
@@ -486,7 +486,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                     <Output
                       isDisabled
                       isTrimmed
-                      label={t('call hash')}
+                      label={t('Call hash')}
                       value={innerHash}
                       withCopy
                     />

@@ -61,7 +61,7 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
           <CopyToClipboard
             text={value}
           >
-            <span>
+            <span className='copy-btn'>
                 <Button
                   icon={isCopyShown ? 'check' : 'copy'}
                   label={isCopyShown ? t('Copied') : t('')}
@@ -89,6 +89,12 @@ const StyledAddressSection = styled.div`
   width: 65%;
   .ui--AddressMenu-addr {
     width: 100% !important;
+  }
+  .copy-btn {
+    margin-left: 2rem;
+    .ui--Button {
+      border: 1px solid var(--bg-menubar) !important;
+    }
   }
 `
 

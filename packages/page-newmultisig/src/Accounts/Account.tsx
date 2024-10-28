@@ -692,7 +692,7 @@ function NewMultisigAccount ({ account: { address, meta }, className = '', deleg
               <Button
                 className='send-button'
                 icon='paper-plane'
-                label={t('send')}
+                label={t('Send')}
                 onClick={toggleTransfer}
               />
             )}

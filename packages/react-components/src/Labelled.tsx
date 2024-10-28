@@ -59,7 +59,7 @@ const StyledDiv = styled.div`
     }
 
     .withEllipsis {
-      overflow: hidden;
+      // overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -119,7 +119,7 @@ const StyledDiv = styled.div`
         position: absolute;
         right: 1.25rem;
         text-align: right;
-        text-transform: var(--text-transform-label);
+        // text-transform: var(--text-transform-label);
         top: 0.75rem;
         z-index: 1;
 

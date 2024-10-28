@@ -157,6 +157,10 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
 }
 
 const StyledModal = styled(Modal)`
+  .ui--Modal-content-body {
+    width: 100% !important;
+
+  }
   .full  {
     padding-left: 0 !important;
     width: 100%
@@ -166,15 +170,18 @@ const StyledModal = styled(Modal)`
     display: flex;
     align-items: center;
     .ui--lable {
-      width: 100px;
+      width: 10rem;
+      font-size: var(--font-size-h2);
+    }
+    .ui--Labelled {
+      .ui.input.error input {
+          background-color: var(--bg-modal-input) !important;
+          border: none !important;
+      }
     }
   }
   .ui--Button-Group {
-    margin-top: 0 !important;
-    margin-bottom: 1rem !important;
-  }
-  .modal-content {
-    
+    margin: 3rem 0 0 0!important
   }
 `;
 export default React.memo(Create);

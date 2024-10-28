@@ -1,6 +1,7 @@
 {
   "0x...": "0x...",
   "Decode": "Decode",
+  "Extrinsic": "Extrinsic",
   "Submission": "Submission",
   "Submit Transaction": "Submit Transaction",
   "Submit Unsigned": "Submit Unsigned",

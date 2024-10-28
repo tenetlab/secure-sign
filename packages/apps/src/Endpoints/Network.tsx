@@ -20,39 +20,27 @@ interface Props {
 }
 
 function NetworkDisplay({ apiUrl,  setApiUrl, settings, hasUrlChanged, value: { isChild, isUnreachable, name, nameRelay: relay, providers, ui } }: Props): React.ReactElement<Props> {
-
   const _selectUrl = useCallback(
     () => {
       const filteredProviders = providers.filter(({ url }) => !url.startsWith('light://'));
-
-      return setApiUrl(name, filteredProviders[Math.floor(Math.random() * filteredProviders.length)].url);
+      const selectUrl = filteredProviders[Math.floor(Math.random() * filteredProviders.length)].url;
+      store.set('localFork', '');
+      settings.set({ ...(settings.get()), selectUrl });
+      setApiUrl(name, selectUrl);
+      
+      return window.location.assign(`${window.location.origin}${window.location.pathname}?rpc=${encodeURIComponent(selectUrl)}${window.location.hash}`);
     },
     [name, providers, setApiUrl]
   );
 
-  const onApply = useCallback(
-    () => {
-      store.set('localFork', '');
-      settings.set({ ...(settings.get()), apiUrl });
-      console.log('==========================', apiUrl, relay);
-      window.location.assign(`${window.location.origin}${window.location.pathname}?rpc=${encodeURIComponent(apiUrl)}${window.location.hash}`);
-      // if (!hasUrlChanged) {
-      //   window.location.reload();
-      // }
-    },
-    [apiUrl, hasUrlChanged]
-  )
-
-  const changeNetwork = () => {
-    _selectUrl();
-    onApply();
-  }
+  console.log('', apiUrl, hasUrlChanged, relay);
+  
 
   return (
     <StyledDiv className={``}>
       <div
         className={`endpointSection${isChild ? ' isChild' : ''}`}
-        onClick={isUnreachable ? undefined : changeNetwork}
+        onClick={isUnreachable ? undefined : _selectUrl}
       >
         <ChainImg
           className='endpointIcon'

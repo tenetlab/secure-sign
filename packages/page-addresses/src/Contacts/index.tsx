@@ -114,17 +114,15 @@ const StyledDiv = styled.div`
       margin-bottom: 0 !important;
     }
     td {
-      // background: var(--bg-page) !important;
       div.empty {
         opacity: 1 !important;
       }
     }
     th {
-      // background: var(--bg-page) !important;
     }
   }
   .detail {
-      padding: 1rem 0rem 0rem 1rem;
+      padding: 1rem 0rem 0rem 0rem;
       align-items: center;
       text-align: center;
       justity-content: center;

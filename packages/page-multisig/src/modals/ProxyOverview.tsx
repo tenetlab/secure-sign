@@ -259,7 +259,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
         <Modal.Columns hint={t('')}>
           <InputAddress
             isDisabled={true}
-            label={t('proxied account')}
+            label={t('Proxied account')}
             type='account'
             value={proxiedAccount}
           />
@@ -298,7 +298,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
           <InputBalance
             defaultValue={reservedAmount}
             isDisabled
-            label={t('reserved balance')}
+            label={t('Reserved balance')}
           />
         </Modal.Columns>
         <Modal.Columns>
@@ -331,6 +331,7 @@ const StyledModal = styled(Modal)`
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -14rem;
     top: 1.5rem;
+    width: 24%;
   }
   .ui--Modal-content-body {
     width: 80%;

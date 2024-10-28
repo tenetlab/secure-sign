@@ -270,7 +270,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
           defaultValue={requestAddress}
           isDisabled
           isInput
-          label={t('from')}
+          label={t('From')}
           withLabel
         />
       </Modal.Columns>
@@ -280,7 +280,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         >
           <InputAddress
             filter={proxyInfo.proxiesFilter}
-            label={t('proxy account')}
+            label={t('Proxy account')}
             onChange={setProxyAddress}
             type='account'
           />
@@ -292,7 +292,7 @@ function Address ({ currentItem, onChange, onEnter, passwordError, requestAddres
         >
           <InputAddress
             filter={multiInfo.whoFilter}
-            label={t('signatory')}
+            label={t('Signatory')}
             onChange={setMultiAddress}
             type='account'
           />

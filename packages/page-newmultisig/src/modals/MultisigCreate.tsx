@@ -133,12 +133,12 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
         availableLabel={t('New Signatory:')}
         maxCount={MAX_SIGNATORIES}
         onChange={_onChangeAddressMulti}
-        valueLabel={t('selected signatories:')}
+        valueLabel={t('Selected signatories:')}
       />
-      <div className='input_btn'>
+      <div className='input_btn input_btn_margintop'>
         <InputNumber
           isError={!isThresholdValid}
-          label={t('threshold:')}
+          label={t('Threshold:')}
           onChange={_onChangeThreshold}
           value={threshold}
           className='threshold'
@@ -147,15 +147,14 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           autoFocus
           className='full name'
           isError={!isNameValid}
-          label={t('name:')}
+          label={t('Name:')}
           onChange={_onChangeName}
           placeholder={t('multisig name')}
 
         />
 
       </div>
-      <div className='input_btn'>
-        <div></div>
+      <div className='input_btn button_end'>
         <Button
           icon='plus'
           isDisabled={!isValid}
@@ -177,17 +176,28 @@ const StyledDiv = styled.div`
     margin-bottom: 2rem; 
     font-size: var(--font-size-h1);
   }
+  .ui--AccountName, .address-text {
+    font-size: var(--font-size-account-name) !important;
+  }
+  .button_end {
+    justify-content: flex-end !important;
+  }
   .input_btn {
+    margin-top: 1.5rem;
     display: flex;
     column-gap: 50px;
     width: 100%;
     justify-content: space-between;
     .create {
-      margin: 1rem 2rem 0 0;
+      // margin: 1rem 2rem 0 0;
       float: right;
       background-color: var(--bg-page);
-      border: 1px solid var(--border-card);
+      border: 1px solid var(--border-button);
       border-radius: 0.5rem;
+    }
+    .ui.input.error input {
+      background-color: var(--bg-menubar) !important;
+      font-size: var(--font-size-base) !important;
     }
   }
   .threshold {

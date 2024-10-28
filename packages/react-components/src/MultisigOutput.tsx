@@ -38,7 +38,7 @@ function MultisigOutput ({ children, className = '', isDisabled, isError, isFull
       labelExtra={labelExtra}
       withLabel={withLabel}
     >
-      <div className={`ui--paaaa ui--output ui dropdown selection ${isError ? ' error' : ''}${isMonospace ? ' monospace' : ''}${isDisabled ? 'isDisabled' : ''}`}>
+      <div className={`pendinghash ui--paaaa ui--output ui dropdown selection ${isError ? ' error' : ''}${isMonospace ? ' monospace' : ''}${isDisabled ? 'isDisabled' : ''}`}>
         {isTrimmed && isString(value) && (value.length > 512)
           ? `${value.slice(0, 256)}…${value.slice(-256)}`
           : value
@@ -53,6 +53,7 @@ function MultisigOutput ({ children, className = '', isDisabled, isError, isFull
 }
 
 const StyledLabelled = styled(Labelled)`
+  
   .ui.selection.dropdown.ui--output.isDisabled {
     background: transparent;
     border-style: dashed;
@@ -69,6 +70,9 @@ const StyledLabelled = styled(Labelled)`
     .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
       padding-left: 1rem;
     }
+  }
+  .pendinghash {
+    font-size: var(--font-size-small) !important;
   }
 `;
 

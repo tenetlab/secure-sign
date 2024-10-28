@@ -216,7 +216,7 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
                 className='send-button'
                 icon='paper-plane'
                 key='send'
-                label={t('send')}
+                label={t('Send')}
                 onClick={_toggleTransfer}
               />
             )}

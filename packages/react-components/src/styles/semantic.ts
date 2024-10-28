@@ -26,7 +26,7 @@ export default `
     border-color: var(--border-input);
     color: var(--color-text);
     font: var(--font-sans);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-input-dropdown);
 
     &:focus {
       background: var(--bg-input);

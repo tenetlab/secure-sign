@@ -121,7 +121,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
             <InputAddress
               defaultValue={propSenderId}
               isDisabled={!!propSenderId}
-              label={t('from')}
+              label={t('From')}
               labelExtra={
                 <Available
                   label={t('')}
@@ -136,7 +136,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
             <InputAddress
               defaultValue={propRecipientId}
               isDisabled={!!propRecipientId}
-              label={t('to')}
+              label={t('To')}
               labelExtra={
                 <Available
                   label={t('')}
@@ -167,7 +167,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
                     autoFocus
                     isError={!hasAvailable}
                     isZeroable
-                    label={t('amount')}
+                    label={t('Amount')}
                     maxValue={maxTransfer}
                     onChange={setAmount}
                   />
@@ -264,6 +264,7 @@ const StyledModal = styled(Modal)`
     .ui--Labelled:not(.isSmall):not(.isOuter) >label {
       top: 1.5rem;
       left: -8rem;
+      width: 10%;
     }
     .ui.input>input {
       background-color: var(--bg-modal-input) !important;

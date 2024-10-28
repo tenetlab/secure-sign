@@ -121,7 +121,7 @@ const StyledThead = styled.thead`
   }
 
   tr {
-    text-transform: lowercase;
+    // text-transform: lowercase;
 
     &.filter {
       .ui.input,

@@ -111,8 +111,8 @@ const StyledDiv = styled.div`
     .ui--InputAddressMulti-column {
       display: flex;
       flex-direction: column;
-      min-height: 20rem;
-      max-height: 20rem;
+      min-height: 16rem;
+      max-height: 16rem;
       width: 100%;
       // padding: 0.25rem 0.5rem;
 
@@ -124,7 +124,7 @@ const StyledDiv = styled.div`
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         .ui--Spinner {
           margin-top: 2rem;
         }
