@@ -111,9 +111,9 @@ const StyledHeader = styled.header`
     padding: 0;
     white-space: nowrap;
 
-    @media only screen and (max-width: 900px) {
-      margin: 0 2.72rem 0 2.35rem;
-    }
+    // @media only screen and (max-width: 900px) {
+    //   margin: 0 2.72rem 0 2.35rem;
+    // }
   }
 `;
 

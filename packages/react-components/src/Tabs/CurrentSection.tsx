@@ -40,9 +40,9 @@ const StyledDiv = styled.div`
     max-height: 1rem;
   }
 
-  @media only screen and (max-width: 900px) {
-    margin: 0 1.5rem;
-  }
+  // @media only screen and (max-width: 900px) {
+  //   margin: 0 1.5rem;
+  // }
 `;
 
 export default React.memo(CurrentSection);
