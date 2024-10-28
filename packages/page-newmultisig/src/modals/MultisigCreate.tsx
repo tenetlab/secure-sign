@@ -126,7 +126,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           </svg>
           <p>The Members of a mutisig are called singatories</p>
         </div>
-        <span>You must select 2 accounts at least</span>
+        <span>You must choose 2 accounts at least</span>
       </div>
       <InputAddressMulti
         available={availableSignatories}
