@@ -111,6 +111,7 @@ const StyledDiv = styled.div`
       background-color: var(--bg-subCard);
       border-radius: 1rem;
       height: 20rem;
+      padding: 0.5rem;
     }
   }
   padding: 0 0 3.286rem;

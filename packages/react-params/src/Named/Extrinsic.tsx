@@ -13,7 +13,7 @@ import {
 } from '@polkadot/react-components';
 import { BalanceFree } from '@polkadot/react-query';
 import { useTranslation } from '../utils/translate.js';
-import Decoded from '../utils/Decoded.js';
+import Decoded from '../utils/Decoded_hr.js';
 
 import Params from '@polkadot/react-params';
 import { getTypeDef } from '@polkadot/types/create';

@@ -137,6 +137,14 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     border-style: solid !important;
   }
 
+  .ui--CopyButton {
+    top: 1rem !important;
+    right: 1.3rem !important;
+    .ui--Button {
+      padding: 0 !important;
+    }
+  }
+  
   .ui--MenuItem {
     & .ui--Badge {
       color: ${countBrightness(uiHighlight) < BRIGHTNESS ? '#fff' : '#424242'};

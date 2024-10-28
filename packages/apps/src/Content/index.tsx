@@ -102,7 +102,7 @@ function Content ({ className }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   flex-grow: 1;
   overflow: hidden auto;
-  padding: 2rem 1rem 2rem 4rem;
+  padding: 2rem 1rem 2rem 2rem;
   position: relative;
   width: 100%;
   margin: 0rem 1rem 1rem 0rem;

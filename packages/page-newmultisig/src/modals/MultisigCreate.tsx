@@ -126,7 +126,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           </svg>
           <p>The Members of a mutisig are called singatories</p>
         </div>
-        <span>You Should at least 2</span>
+        <span>You must select two or more accounts</span>
       </div>
       <InputAddressMulti
         available={availableSignatories}
@@ -149,7 +149,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           isError={!isNameValid}
           label={t('Name:')}
           onChange={_onChangeName}
-          placeholder={t('multisig name')}
+          placeholder='Multisig name'
 
         />
 

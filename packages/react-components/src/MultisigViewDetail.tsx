@@ -7,7 +7,6 @@ import React from 'react';
 
 import { isString } from '@polkadot/util';
 
-import Button from './Button/index.js';
 import { styled } from './styled.js';
 
 interface Props {
@@ -34,13 +33,14 @@ function MultisigViewDetail ({ children, className = '', value, toggleMultisig}:
         <div className='copyContainer'>
           {children}
           <span className='copySpan'>
-            <Button
+            {/* <Button
               className='icon-button show-on-hover review'
               // icon={``}
               isDisabled={!value}
               label={'Review'}
               onClick={toggleMultisig}
-            />
+            /> */}
+            <button className='review' onClick={toggleMultisig}>Review</button>
           </span>
         </div>
     </StyledDiv>
@@ -51,15 +51,25 @@ const StyledDiv = styled.div`
   // border: 1px solid var(--bg-subCard);
   .copySpan {
     white-space: nowrap;
+    
   }
   .copyContainer {
     position: absolute;
-    top: 0.2rem;
-    right: 0.1rem;
+    top: -0.45rem;
+    right: -1rem;
   }
   .review {
     border: 1px solid var(--border-cardBtn);
-    border-radius: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    color: var(--color-text);
+    padding: 0.8rem;
+
+    &:hover {
+      background-color: var(--bg-button-hover);
+      color: var(--bg-input) !important;
+    }
   }
 `;
 

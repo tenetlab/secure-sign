@@ -129,7 +129,6 @@ export default React.memo(Selection);
 const StyledDiv = styled.div`
   .extrinsics--Extrinsic {
     display: flex;
-    padding-right: 3rem;
     .ui--Params-Container {
       .ui--Params-Content {
         display: flex;
@@ -194,7 +193,15 @@ const StyledDiv = styled.div`
       }
     }
   }
-  .ui--InputAddress {
+  .ui--CopyButton {
+    top: 1rem !important;
+    right: 1.3rem !important;
+    .ui--Button {
+      padding: 0 !important;
+    }
+  }
+  .default {
+    left: -3rem !important;
   }
   .empty-account {
     width: 100%;
@@ -211,6 +218,7 @@ const StyledDiv = styled.div`
       font-size: var(--font-size-h3);  
       p {
         padding-left: 1rem;
-      }
+      } 
     }
+  }
 `
