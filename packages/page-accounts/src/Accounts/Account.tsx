@@ -65,7 +65,7 @@ interface ReferendaUnlockable {
 const BAL_OPTS_DEFAULT = {
   available: false,
   bonded: false,
-  locked: false,
+  locked: true,
   redeemable: false,
   reserved: false,
   total: true,
