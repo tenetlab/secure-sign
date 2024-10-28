@@ -32,7 +32,7 @@ function Item ({ className = '', classNameText, isLink, isToplevel, route: { Mod
         target={href ? '_blank' : undefined}
       >
         <Icon icon={icon} />
-        <span className={`${classNameText} sidebarItem`}>{text}</span>
+        <span className={`${classNameText} sidebarItem media--1200`}>{text}</span>
         {/* {!!count && (
           <Badge
             color='white'
@@ -122,8 +122,17 @@ const StyledLi = styled.li`
     background-color: var(--item-active) !important;
     color: var(--color-text-hover) !important;
   }
-  @media only screen and (max-width: 1300px) {
+  @media only screen and (max-width: 1600px) {
     width: 16vw;
+    padding: 2rem 0rem 0rem 0rem;
+  }
+  
+  @media only screen and (max-width: 1400px) {
+    width: 18vw;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    width: 6vw;
   }
 `;
 

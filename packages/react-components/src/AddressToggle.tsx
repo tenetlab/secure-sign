@@ -47,7 +47,7 @@ function AddressToggle({ address, className = '', filter, isHidden, noToggle, on
         value={address}
         withSidebar={false}
       />
-      <span className='address-text'>{address}</span>
+      <span className='address-text media--1000'>{address}</span>
       {!value && (
         <Button
         icon='plus'
@@ -89,6 +89,10 @@ const StyledDiv = styled.div`
   .address-text {
     width: 40%;
     font-size: var(--font-percent-small);
+    
+    @media only screen and (max-width: 1760px) {
+      width: 70%;
+    }
   }
 
   &:hover {

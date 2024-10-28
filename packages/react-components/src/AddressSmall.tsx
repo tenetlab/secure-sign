@@ -48,7 +48,7 @@ function AddressSmall ({ children, className = '', defaultName, overrideName, pa
         </AccountName>
         {value && withShortAddress && (
           <div
-            className='shortAddress'
+            className='shortAddress media--1500'
             data-testid='short-address'
           >
             {value.toString()}
@@ -105,6 +105,9 @@ const StyledDiv = styled.div`
       left: 0;
       overflow: hidden;
       text-overflow: ellipsis;
+      @media only screen and (max-width: 1600px) {
+        font-size: var(--font-percent-small);
+      }
     }
   }
 

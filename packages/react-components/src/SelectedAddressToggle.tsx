@@ -47,7 +47,7 @@ function SelectedAddressToggle({ address, className = '', filter, isHidden, noTo
         value={address}
         withSidebar={false}
       />
-      <span className='address-text'>{address}</span>
+      <span className='address-text media--1000'>{address}</span>
       <Button
         icon='trash-alt'
         label={t('Remove')}
@@ -84,11 +84,15 @@ const StyledDiv = styled.div`
     opacity: var(--opacity-light);
   }
   
-  .address-text {
+ .address-text {
     width: 40%;
     font-size: var(--font-percent-small);
+    
+    @media only screen and (max-width: 1760px) {
+      width: 70%;
+    }
   }
-
+  
   &:hover {
     // border-color: var(--border-input-hover);
     background-color: var(--bg-menu-hover)

@@ -58,7 +58,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           toggleProxyOverview={toggleProxyOverview}
         />
       </div>
-      <div style={{ display: 'flex' }}>
+      <div className='account_detail'>
         <div className='ui--ScrollSection'>
           <h1 >Account Detail</h1>
           {/* <Identity
@@ -100,6 +100,12 @@ const StyledDiv = styled.div`
   // overflow-y: hidden;
   width: 100%;
 
+  .account_detail {
+    display: flex;
+    @media only screen and (max-width: 1400px) {
+      display: block;
+    }
+  }
   .hash {
     width: 62%;
     background-color: var(--bg-menubar);
@@ -112,6 +118,10 @@ const StyledDiv = styled.div`
       border-radius: 1rem;
       height: 20rem;
       padding: 0.5rem;
+    }
+    @media only screen and (max-width: 1400px) {
+      width: 98%;
+      margin: 1rem 0rem 0rem 1rem;
     }
   }
   padding: 0 0 3.286rem;
@@ -357,10 +367,15 @@ const StyledDiv = styled.div`
     padding: 1rem;
     overflow: auto;
     width: 38%;
+
     margin: 0 1rem 0 1rem;
     border: 1px solid var(--border-card);
     border-radius: 1rem;
     background-color: var(--bg-menubar);
+    
+    @media only screen and (max-width: 1400px) {
+      width: 98%;
+    }
   }
 
   .ui--LinkSection {

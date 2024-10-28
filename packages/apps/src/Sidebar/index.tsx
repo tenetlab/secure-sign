@@ -225,9 +225,18 @@ const StyledDiv = styled.div`
     // }
   }
 
-  // @media only screen and (max-width: 1300px) {
-  //   width: 25%;
-  // }
+  @media only screen and (max-width: 1600px) {
+    width: 24%;
+  }
+  
+  @media only screen and (max-width: 1400px) {
+    width: 30%;
+    padding: 2rem 0rem 0rem 1rem;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    width: 14%;
+  }
 
   .IconContainer {
     justify-content: space-between;

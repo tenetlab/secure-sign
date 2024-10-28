@@ -64,7 +64,7 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
         )}
       </div>
       <div className='ui--AddressBook-Address-Copy'>
-        <div className='ui--AddressMenu-addr'>
+        <div className='ui--AddressMenu-addr media--1400'>
           {value}
         </div>
         <div className='ui--AddressMenu-copyaddr'>
@@ -103,6 +103,16 @@ const StyledAddressSection = styled.div`
     padding-right: 3rem;
     justify-content: space-between;
     font-size: var(--font-size-account-name);
+
+    @media only screen and (max-width: 1600px) {
+        font-size: var(--font-percent-small);
+        padding-right: 0;
+    }
+
+    @media only screen and (max-width: 1400px) {
+        justify-content: end;
+    }
+
   }  
   .ui--AccountName-LeftPadding {
     width: 100%;
@@ -120,6 +130,9 @@ const StyledAddressSection = styled.div`
     }
     .ui--AddressBook-Address-Copy {
       width: 80%;
+      @media only screen and (max-width: 1600px) {
+        width: 75%;
+      }
     }
   }
 `

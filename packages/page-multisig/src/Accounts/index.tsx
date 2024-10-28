@@ -318,12 +318,20 @@ const StyledDiv = styled.div`
     width: 69%;
     padding-left: 15px !important;
     
+    @media only screen and (max-width: 1400px) {
+      width: 76%;
+    }
+
   }
   
   .multisig_list {
     width: 31%;
     background-color: var(--bg-menubar);
     border-radius: 1rem;
+
+    @media only screen and (max-width: 1400px) {
+      width: 24%;
+    }
   }
   .empty-account {
     width: 100%;
