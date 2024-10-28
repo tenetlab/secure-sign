@@ -141,7 +141,7 @@ const StyledDiv = styled.div`
         .ui.selection.dropdown {
           &:not(.floating) {
             padding-left: 4rem;
-            // padding-top: 1.75rem;
+            padding-top: 0.95rem;
           }
 
           &.floating {

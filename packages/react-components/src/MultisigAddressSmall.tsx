@@ -120,6 +120,7 @@ const StyledDiv = styled.div`
       max-width: var(--width-shortaddr);
       position: absolute;
       text-overflow: ellipsis;
+      color: var(--color-input);
     }
   }
 

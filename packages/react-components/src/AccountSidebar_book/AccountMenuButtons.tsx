@@ -5,8 +5,8 @@ import type { AddressFlags } from '@polkadot/react-hooks/types';
 
 import React, { useCallback } from 'react';
 
-import { useApi, useToggle } from '@polkadot/react-hooks';
-import { isFunction } from '@polkadot/util';
+import { useToggle } from '@polkadot/react-hooks';
+// import { isFunction } from '@polkadot/util';
 
 import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
@@ -31,7 +31,7 @@ interface Props {
 function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
-  const api = useApi();
+  // const api = useApi();
 
   const _onForgetAddress = useCallback(
     (): void => {
@@ -89,14 +89,14 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
         )
         : (
           <Button.Group className='ui--AddressMenu-buttons'>
-            {(isFunction(api.api.tx.balances?.transferAllowDeath) || isFunction(api.api.tx.balances?.transfer)) && (
+            {/* {(isFunction(api.api.tx.balances?.transferAllowDeath) || isFunction(api.api.tx.balances?.transfer)) && (
               <Button
                 icon='paper-plane'
                 isDisabled={isEditing}
                 label={t('Send')}
                 onClick={toggleIsTransferOpen}
               />
-            )}
+            )} */}
             {!flags.isOwned && !flags.isInContacts && (
               <Button
                 icon='plus'

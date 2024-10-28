@@ -253,7 +253,7 @@ function InputNumber ({ autoFocus, bitLength = DEFAULT_BITLENGTH, children, clas
       placeholder={placeholder || (
         isSigned
           ? t('Valid number')
-          : t('Positive number')
+          : t('Number')
       )}
       type='text'
       value={value}

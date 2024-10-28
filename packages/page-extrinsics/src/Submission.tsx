@@ -148,7 +148,7 @@ const StyledDiv = styled.div`
       border-radius: 1rem;
       display: flex;
       flex-direction: column;
-      row-gap: 3rem;
+      row-gap: 2rem;
       .ui--Button-Group {
         margin: 0;
         .ui--Button {

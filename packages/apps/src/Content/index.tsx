@@ -119,13 +119,13 @@ const StyledDiv = styled.div`
     width: 100%;
     // padding: 0 3.5rem;
 
-    @media only screen and (max-width: 1100px) {
-      padding: 0 1rem;
-    }
+    // @media only screen and (max-width: 1100px) {
+    //   padding: 0 1rem;
+    // }
 
-    @media only screen and (max-width: 800px) {
-      padding: 0 0.75rem;
-    }
+    // @media only screen and (max-width: 800px) {
+    //   padding: 0 0.75rem;
+    // }
   }
 `;
 
