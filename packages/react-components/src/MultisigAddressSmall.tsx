@@ -116,9 +116,10 @@ const StyledDiv = styled.div`
       color: #8B8B8B;
       display: inline-block;
       left: 0;
-      min-width: var(--width-shortaddr);
-      max-width: var(--width-shortaddr);
+      min-width: 100%;
+      max-width: 100%;
       position: absolute;
+      overflow: hidden;
       text-overflow: ellipsis;
       color: var(--color-input);
     }

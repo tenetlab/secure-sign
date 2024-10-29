@@ -105,8 +105,13 @@ const StyledAddressSection = styled.div`
     font-size: var(--font-size-account-name);
 
     @media only screen and (max-width: 1600px) {
-        font-size: var(--font-percent-small);
+        font-size: var(--font-size-account-name);
         padding-right: 0;
+        .ui--AddressMenu-addr {
+          width: 70%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
     }
 
     @media only screen and (max-width: 1400px) {

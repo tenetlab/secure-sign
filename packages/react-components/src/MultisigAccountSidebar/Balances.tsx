@@ -12,7 +12,7 @@ interface Props {
 }
 
 // const WITH_BALANCE = { available: true, bonded: true, free: true, locked: true, reserved: true, total: true };
-const WITH_BALANCE = { total: true, locked: true };
+const WITH_BALANCE = { total: true, locked: true, available: true };
 
 function Balances ({ address, className }: Props): React.ReactElement<Props> | null {
 
@@ -23,6 +23,7 @@ function Balances ({ address, className }: Props): React.ReactElement<Props> | n
         className='balanceExpander'
         key={address}
         withBalance={WITH_BALANCE}
+        withLabel
       />
     </StyledSection>
   );

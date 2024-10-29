@@ -25,9 +25,9 @@ interface Props {
 const isEditable = true;
 
 const BAL_OPTS_DEFAULT = {
-  available: false,
+  available: true,
   bonded: false,
-  locked: false,
+  locked: true,
   redeemable: false,
   reserved: false,
   total: true,
@@ -238,6 +238,7 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
             address={address}
             balancesAll={balancesAll}
             withBalance={BAL_OPTS_DEFAULT}
+            withLabel
           />
         </td>
         <td />

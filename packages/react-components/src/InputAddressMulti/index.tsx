@@ -131,6 +131,25 @@ const StyledDiv = styled.div`
 
         .ui--AddressToggle {
           padding-left: 0.75rem;
+
+          .ui--AddressToggle-address {
+            flex: none;
+            width: 40%;
+          }
+
+          @media only screen and (max-width: 1440px) {
+            .ui--AddressToggle-address {
+              flex: none;
+              width: 30%;
+            }
+            .address-text {
+              width: 60%;
+            }
+          }
+
+          .address-text {
+            width: 50%;
+          }
         }
 
         .ui--AddressMini-address {

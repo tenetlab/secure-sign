@@ -660,11 +660,13 @@ export default withMulti(
         }
 
         label {
+          display: flex;
+          align-content: center;
           grid-column: 1;
-          padding-right: 0.5rem;
+          // padding-right: 0.5rem;
           text-align: right;
           vertical-align: middle;
-          margin-bottom: 0.25rem;
+          // margin-bottom: 0.25rem;
           font-size: var(--font-size-h3);
           .help.circle.icon {
             display: none;

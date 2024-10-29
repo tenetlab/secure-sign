@@ -183,6 +183,7 @@ const StyledModal = styled(Modal)`
       margin: 0 !important;
     } 
     .ui--Modal-Content {
+      padding-bottom: 2rem;
       .ui--Modal-Columns {
         .ui--Modal-Columns-content {
           .ui--Output {

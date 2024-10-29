@@ -26,7 +26,7 @@ const StyledDiv = styled.div`
   .ui--Modal-content-body {
     display: flex;
     flex-direction: column;
-    row-gap: 3rem;
+    row-gap: 2rem;
     padding-top: 2rem;
     width: 88%;
   }

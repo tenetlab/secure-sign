@@ -225,6 +225,10 @@ const StyledDiv = styled.div`
     // }
   }
 
+  @media only screen and (max-width: 1900px) {
+    width: 22%;
+  }
+  
   @media only screen and (max-width: 1600px) {
     width: 24%;
   }

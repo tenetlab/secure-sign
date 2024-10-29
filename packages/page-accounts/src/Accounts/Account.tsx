@@ -63,14 +63,14 @@ interface ReferendaUnlockable {
 }
 
 const BAL_OPTS_DEFAULT = {
-  available: false,
-  bonded: false,
+  available: true,
+  bonded: true,
   locked: true,
-  redeemable: false,
-  reserved: false,
+  redeemable: true,
+  reserved: true,
   total: true,
-  unlocking: false,
-  vested: false
+  unlocking: true,
+  vested: true
 };
 
 // const BAL_OPTS_EXPANDED = {
@@ -412,6 +412,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
             address={address}
             balancesAll={balancesAll}
             withBalance={BAL_OPTS_DEFAULT}
+            withLabel
           />
           <Button.Group>
             {(isFunction(api.tx.balances?.transferAllowDeath) || isFunction(api.tx.balances?.transfer)) && (
@@ -444,21 +445,49 @@ const StyledTr = styled.tr`
   border-radius: 1rem;
   padding: 1rem 3rem 0 3rem;
   display: flex;
-  // justify-content: space-between;
   .ui--SmallAddress-Copy-Balance {
     display: flex;
-    // justify-content: space-between;
+    width: 65% !important;
   }
   .ui--Copy-Balance {
     display: flex;
     justify-content: space-between;
-    width: 40%;
+    width: 35%;
   }
   .ui--Balance {
     display: flex;
   }
   .ui--FormatBalance-value {
     font-size: var(--font-size-balance) !important;
+  }
+  @media only screen and (max-width: 1920px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 60% !important;
+    }
+    .ui--Copy-Balance {
+      width: 40%;
+    }
+  }
+  @media only screen and (max-width: 1440px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 40% !important;
+      .shortAddress {
+        display: block !important;
+        width: 56%
+      }
+    }
+    .ui--AddressSmall-info {
+      column-gap: 1rem;
+    }
+    .ui--AccountName {
+      text-overflow: ellipsis;
+    }
+    .ui--Copy-Balance {
+      width: 40%;
+    }
+    .withPadding {
+      padding-right: 0;
+    }
   }
 `;
 

@@ -87,12 +87,13 @@ const StyledDiv = styled.div`
     // position: relative;
     display: flex;
     align-items: center;
+    column-gap: 2rem;
     padding-left: 1rem;
     width: 100%;
 
-    .parentName, .shortAddress {
-      // font-size: var(--font-size-tiny);
-    }
+    // .shortAddress {
+    //   width: 60%;
+    // }
 
     .parentName {
       left: 0;
@@ -105,9 +106,9 @@ const StyledDiv = styled.div`
       left: 0;
       overflow: hidden;
       text-overflow: ellipsis;
-      @media only screen and (max-width: 1600px) {
-        font-size: var(--font-percent-small);
-      }
+      // @media only screen and (max-width: 1600px) {
+      //   font-size: var(--font-percent-small);
+      // }
     }
   }
 

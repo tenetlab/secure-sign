@@ -113,7 +113,7 @@ const StyledDiv = styled.div`
   }
 
   & main > *:not(header):not(.hasOwnMaxWidth) {
-    max-width: var(--width-full);
+    // max-width: var(--width-full);
     margin-right: auto;
     margin-left: auto;
     width: 100%;

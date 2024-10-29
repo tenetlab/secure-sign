@@ -143,7 +143,6 @@ const StyledDiv = styled.div`
             padding-left: 4rem;
             padding-top: 0.95rem;
           }
-
           &.floating {
             > .dropdown.icon {
               top: 1.25rem;
@@ -157,7 +156,6 @@ const StyledDiv = styled.div`
 
           &.search:not(.multiple) > input.search {
             padding-left: 4rem;
-            // padding-top: 1.75rem;
           }
 
           > .delete.icon,

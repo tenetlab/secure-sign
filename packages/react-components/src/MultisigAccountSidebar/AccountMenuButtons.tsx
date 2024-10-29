@@ -142,7 +142,8 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 
 const StyledDiv = styled.div`
   width: 35%;
-
+  display: flex;
+  justify-content: center;
   .ui--Button-Group {
     display: flex;
     flex-direction: row;

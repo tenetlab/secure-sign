@@ -106,7 +106,7 @@ function Decoded ({ className, extrinsic, isCall, payload, withData = true }: Pr
 const StyledColumar = styled(Columar)`
   .divider {
     width: 100%;
-    margin-bottom: 3rem;
+    margin-bottom: 3.5rem;
     margin-top: 0;
     border-color: var(--border-input);
   }

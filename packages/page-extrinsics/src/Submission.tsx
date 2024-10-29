@@ -129,6 +129,9 @@ export default React.memo(Selection);
 const StyledDiv = styled.div`
   .extrinsics--Extrinsic {
     display: flex;
+    .ui.selection.dropdown {
+      word-wrap: normal !important;
+    }
     .ui--Params-Container {
       .ui--Params-Content {
         display: flex;
@@ -203,6 +206,9 @@ const StyledDiv = styled.div`
   .default {
     left: -3rem !important;
   }
+  .address {
+    width: 70%;
+  }
   .empty-account {
     width: 100%;
     height: 4rem;
@@ -219,6 +225,12 @@ const StyledDiv = styled.div`
       p {
         padding-left: 1rem;
       } 
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    > .name {
+      margin-left: 2rem;
     }
   }
 `
