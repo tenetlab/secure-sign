@@ -145,6 +145,9 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     }
   }
   
+  .ui.dropdown .menu>.message {
+    color: var(--color-text) !important;
+  }
   .ui--MenuItem {
     & .ui--Badge {
       color: ${countBrightness(uiHighlight) < BRIGHTNESS ? '#fff' : '#424242'};
