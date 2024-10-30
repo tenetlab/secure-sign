@@ -148,7 +148,7 @@ const StyledDiv = styled.div`
     max-width: var(--width-full);
     margin: 0 auto;
     background-color: var(--bg-menubar);
-    border-radius: 2.5rem;
+    border-radius: 1rem;
   }
 
   &.isLoading {

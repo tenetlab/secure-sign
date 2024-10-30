@@ -93,7 +93,7 @@ const StyledAddressSection = styled.div`
   .copy-btn {
     margin-left: 0rem;
     .ui--Button {
-      border: 1px solid var(--bg-menubar) !important;
+      border: none !important;
     }
   }
 `

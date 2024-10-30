@@ -329,6 +329,9 @@ const StyledDiv = styled.div`
     background-color: var(--bg-menubar);
     border-radius: 1rem;
 
+    .start {
+      padding-left: 0 !important;
+    }
     @media only screen and (max-width: 1400px) {
       width: 24%;
     }

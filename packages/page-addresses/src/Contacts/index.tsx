@@ -93,7 +93,8 @@ const StyledDiv = styled.div`
 
   .summary-box-contacts {
     align-items: center;
-    padding-left: 2rem;
+    padding-left: 3rem;
+    padding-top: 1rem;
   }
   .add-contact-button {
     border: 1px solid var(--border-button);

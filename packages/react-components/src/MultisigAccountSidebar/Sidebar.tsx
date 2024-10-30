@@ -301,7 +301,7 @@ const StyledDiv = styled.div`
     align-items: center;
 
     .ui--FormatBalance:first-of-type {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0rem;
     }
 
     .ui--FormatBalance {
