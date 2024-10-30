@@ -26,11 +26,11 @@ const isEditable = true;
 
 const BAL_OPTS_DEFAULT = {
   available: true,
-  bonded: false,
-  locked: false,
+  bonded: true,
+  locked: true,
   redeemable: false,
-  reserved: false,
-  total: false,
+  reserved: true,
+  total: true,
   unlocking: false,
   vested: false
 };
