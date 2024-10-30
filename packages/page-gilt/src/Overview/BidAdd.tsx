@@ -58,7 +58,7 @@ function Bid ({ className, isDisabled, proxies }: Props): React.ReactElement<Pro
             <Modal.Columns hint={t('This account will make the bid for the gilt and pay all associated fees.')}>
               <InputAddress
                 filter={proxiedAccounts}
-                label={t('use proxied account')}
+                label={t('Use proxied account')}
                 labelExtra={
                   <Available
                     label={<span className='label'>{t('transferable')}</span>}

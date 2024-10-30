@@ -26,7 +26,7 @@ const StyledDiv = styled.div`
     padding-left: 2rem;
 
     .ui--Params-Content {
-      border-left: 1px dashed var(--border-input);
+      // border-left: 1px dashed var(--border-input);
 
       .ui--Params.withBorder {
         padding-left: 0;
@@ -61,7 +61,7 @@ const StyledDiv = styled.div`
     padding: 0;
 
     .ui--Params-Content {
-      margin-left: 2rem;
+      // margin-left: 2rem;
     }
   }
 

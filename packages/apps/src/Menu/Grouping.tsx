@@ -31,7 +31,7 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
 
   return (
     <StyledLi className={`${className} ${isActive ? 'isActive' : ''}`}>
-      <div className={`groupHdr ${!isActive ? 'highlight--color-contrast' : ''}`}>
+      <div className={`groupHdr ${''}`}>
         <span className='smallHide'>{name}</span>
         <Icon
           className='smallShow'
@@ -54,7 +54,7 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
 const StyledLi = styled.li`
   cursor: pointer;
   position: relative;
-
+line-height: .214rem;
   .groupHdr {
     border-radius: 0.25rem;
     padding: 0.857rem 1.375rem;

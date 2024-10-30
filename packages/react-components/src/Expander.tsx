@@ -212,7 +212,7 @@ const StyledDiv = styled.div`
   }
 
   &.isPadded .ui--Expander-summary {
-    margin-left: 2.25rem;
+    // margin-left: 2.25rem;
   }
 `;
 

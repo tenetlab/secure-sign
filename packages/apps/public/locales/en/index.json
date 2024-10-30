@@ -16,6 +16,8 @@
   "app-files.json",
   "app-gilt.json",
   "app-js.json",
+  "app-multisig.json",
+  "app-newmultisig.json",
   "app-nfts.json",
   "app-nis.json",
   "app-parachains.json",

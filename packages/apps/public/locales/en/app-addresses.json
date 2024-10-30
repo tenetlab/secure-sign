@@ -4,6 +4,7 @@
   "Forget this address": "Forget this address",
   "My contacts": "My contacts",
   "Save": "Save",
+  "Send": "Send",
   "address": "address",
   "address created": "address created",
   "address edited": "address edited",
@@ -13,5 +14,6 @@
   "name": "name",
   "new address": "new address",
   "no addresses saved yet, add any existing address": "no addresses saved yet, add any existing address",
+  "no saved addresses!": "no saved addresses!",
   "send": "send"
 }

@@ -3,14 +3,12 @@
 
 import React from 'react';
 
-import { useWindowColumns } from '@polkadot/react-hooks';
+// import { useWindowColumns } from '@polkadot/react-hooks';
 
 import { styled } from '../styled.js';
 import Column from './Column/index.js';
 import Row from './Row/index.js';
 import Body from './Body.js';
-import Foot from './Foot.js';
-import Head from './Head.js';
 
 interface Props {
   children?: React.ReactNode;
@@ -29,56 +27,25 @@ interface Props {
   noBodyTag?: boolean;
 }
 
-const COLUMN_INDEXES = {
-  2: [0, 1],
-  3: [0, 1, 2]
-} as const;
-
-function TableBase ({ children, className = '', empty, emptySpinner, filter, footer, header, headerChildren, isFixed, isInline, isSplit, legend, maxColumns, noBodyTag }: Props): React.ReactElement<Props> {
-  const numColumns = useWindowColumns(maxColumns);
+function TableBase ({ children, className = '', empty, emptySpinner, isFixed, isInline, legend, noBodyTag }: Props): React.ReactElement<Props> {
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 
-  const headerNode = (
-    <Head
-      filter={filter}
-      header={header}
-      isEmpty={isEmpty}
-    >
-      {headerChildren}
-    </Head>
-  );
-
-  if (isSplit && isArray && !isEmpty && (numColumns !== 1)) {
-    return (
-      <StyledDiv className={`${className} ui--Table isSplit`}>
-        {legend}
-        <table className='noMargin'>
-          {headerNode}
-        </table>
-        <div className='ui--Table-Split'>
-          {COLUMN_INDEXES[numColumns].map((column) => (
-            <div
-              className={`ui--Table-Split-${numColumns}`}
-              key={column}
-            >
-              <table className='noMargin'>
-                <tbody className='ui--Table-Body'>
-                  {children.filter((_, i) => (i % numColumns) === column)}
-                </tbody>
-              </table>
-            </div>
-          ))}
-        </div>
-      </StyledDiv>
-    );
-  }
+  // const headerNode = (
+  //   <Head
+  //     filter={filter}
+  //     header={header}
+  //     isEmpty={isEmpty}
+  //   >
+  //     {headerChildren}
+  //   </Head>
+  // );
 
   return (
     <StyledDiv className={`${className} ui--Table`}>
       {legend}
       <table className={`${(isFixed && !isEmpty) ? 'isFixed' : 'isNotFixed'} ${isInline ? 'isInline' : ''}`}>
-        {headerNode}
+        {/* {headerNode} */}
         <Body
           empty={empty}
           emptySpinner={emptySpinner}
@@ -87,10 +54,6 @@ function TableBase ({ children, className = '', empty, emptySpinner, filter, foo
         >
           {children}
         </Body>
-        <Foot
-          footer={footer}
-          isEmpty={isEmpty}
-        />
       </table>
     </StyledDiv>
   );
@@ -104,11 +67,16 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
-
+  min-height: calc(100vh - 13rem);
+  .ui--Table-Body {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
   .ui--Table-Split {
     display: flex;
     flex-wrap: nowrap;
-    margin-bottom: 1.5rem;
 
     > .ui--Table-Split-3 {
       max-width: 33.3%;
@@ -152,11 +120,11 @@ const StyledDiv = styled.div`
       td,
       &:not(.filter) th {
         &:first-child {
-          padding-left: 1.5rem;
+          // padding-left: 1.5rem;
         }
 
         &:last-child {
-          padding-right: 0.75rem;
+          
         }
 
         &.all {
@@ -187,8 +155,8 @@ const StyledDiv = styled.div`
     position: relative;
 
     td {
-      background: var(--bg-table);
-      padding: 0.5rem 1rem;
+      background: var(--bg-subCard);
+      padding: 1rem 2rem 1rem 3rem;
       text-align: left;
       vertical-align: middle;
 
@@ -197,11 +165,11 @@ const StyledDiv = styled.div`
       }
 
       &:first-child {
-        border-left: ${BORDER_SIDE};
+        // border-left: ${BORDER_SIDE};
       }
 
       &:last-child {
-        border-right: ${BORDER_SIDE};
+        // border-right: ${BORDER_SIDE};
       }
 
       label {
@@ -223,8 +191,10 @@ const StyledDiv = styled.div`
       }
 
       &.actions {
-        padding-left: 0.35rem;
-        width: 1%;
+        // padding-left: 0.35rem;
+        // width: 1%;
+        display: flex;
+        align-items: center;
 
         > div {
           display: flex;
@@ -247,9 +217,9 @@ const StyledDiv = styled.div`
       }
 
       &.address {
-        max-width: 0;
-        min-width: 15rem;
-        overflow-x: hidden;
+        // max-width: 0;
+        // min-width: 15rem;
+        // overflow-x: hidden;
       }
 
       &.badge {
@@ -262,7 +232,7 @@ const StyledDiv = styled.div`
       }
 
       &.button {
-        padding: 0.25rem 0.35rem 0.5rem;
+        // padding: 0.25rem 0.35rem 0.5rem;
         text-align: right;
         white-space: nowrap;
 
@@ -430,14 +400,16 @@ const StyledDiv = styled.div`
       &.isExpanded {
         &.isFirst {
           td {
-            border-top: ${BORDER_TOP};
-
+            border-top: 1rem;
+            
             &:first-child {
-              border-top-left-radius: ${BORDER_RADIUS};
+              border-top-left-radius: 1rem;
+              border-bottom-left-radius: 1rem;
             }
 
             &:last-child {
-              border-top-right-radius: ${BORDER_RADIUS};
+              border-top-right-radius: 1rem;
+              border-bottom-right-radius: 1rem;
             }
           }
         }
@@ -445,11 +417,11 @@ const StyledDiv = styled.div`
         &.isLast {
           td {
             &:first-child {
-              border-bottom-left-radius: ${BORDER_RADIUS};
+              border-bottom-left-radius: 1rem;
             }
 
             &:last-child {
-              border-bottom-right-radius: ${BORDER_RADIUS};
+              border-bottom-right-radius: 1rem;
             }
           }
         }
@@ -457,7 +429,7 @@ const StyledDiv = styled.div`
 
       &.packedBottom {
         td {
-          padding-bottom: 0;
+          // padding-bottom: 0;
         }
       }
 
@@ -502,7 +474,7 @@ const StyledDiv = styled.div`
     tr {
       &:first-child {
         th {
-          border-top: ${BORDER_TOP};
+          // border-top: ${BORDER_TOP};
 
           &:first-child {
             border-top-left-radius: ${BORDER_RADIUS};
@@ -516,7 +488,7 @@ const StyledDiv = styled.div`
 
       &:last-child {
         th {
-          padding-top: 1rem;
+          // padding-top: 1rem;
 
           &:first-child {
             border-bottom-left-radius: ${BORDER_RADIUS};

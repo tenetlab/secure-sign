@@ -7,6 +7,8 @@
   },
   "references": [
     { "path": "../page-accounts/tsconfig.build.json" },
+    { "path": "../page-multisig/tsconfig.build.json" },
+    { "path": "../page-newmultisig/tsconfig.build.json" },
     { "path": "../page-addresses/tsconfig.build.json" },
     { "path": "../page-alliance/tsconfig.build.json" },
     { "path": "../page-ambassador/tsconfig.build.json" },

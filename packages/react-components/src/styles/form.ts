@@ -10,7 +10,7 @@ export default `
   .ui--grid,
   .ui--row {
     align-items: stretch;
-    display: flex;
+    // display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: flex-start;

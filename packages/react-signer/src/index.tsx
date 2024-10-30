@@ -127,7 +127,7 @@ function Signer ({ children, className = '' }: Props): React.ReactElement<Props>
       {currentItem && isVisible && (
         <StyledModal
           className={className}
-          header={<>{t('Authorize transaction')}{(queueSize === 1) ? undefined : <>&nbsp;1/{queueSize}</>}</>}
+          header={<>{t('Confirm transaction')}{(queueSize === 1) ? undefined : <>&nbsp;1/{queueSize}</>}</>}
           key={currentItem.id}
           onClose={_onCancel}
           size='large'
@@ -161,6 +161,39 @@ const StyledModal = styled(Modal)`
 
       &+.ui--Toggle {
         margin-left: 1rem;
+      }
+    }
+  }
+  .ui--Modal__body {
+    .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+      left: -8rem;
+      top: 1.5rem;
+      width: 12%;
+    }
+    .ui.selection.dropdown.ui--output.isDisabled {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+    }
+    .ui.selection.dropdown {
+      background-color: var(--bg-modal-input) !important;
+      border: none !important;
+      opacity: 1 !important;
+    }
+    .ui--Button-Group {
+      margin: 0 !important;
+    } 
+    .ui--Modal-Content {
+      padding-bottom: 2rem;
+      .ui--Modal-Columns {
+        .ui--Modal-Columns-content {
+          .ui--Output {
+            .ui--Labelled-content {
+              .ui {
+                padding-left: 1rem !important;
+              }
+            }
+          }
+        }
       }
     }
   }

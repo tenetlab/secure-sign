@@ -58,7 +58,7 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
   return (
     <LinkedWrapper
-      className={className}
+      className={`${className} ui--Input-Container`}
       label={label}
       withLabel={withLabel}
     >

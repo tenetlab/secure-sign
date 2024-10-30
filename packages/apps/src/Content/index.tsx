@@ -102,28 +102,30 @@ function Content ({ className }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   flex-grow: 1;
   overflow: hidden auto;
-  padding: 0 0 1rem 0;
+  padding: 2rem 1rem 2rem 2rem;
   position: relative;
   width: 100%;
-
+  margin: 0rem 1rem 1rem 0rem;
+  // border: 1px solid var(--border-card);
+  border-radius: 1rem;
   .connecting {
     padding: 3.5rem 0;
   }
 
   & main > *:not(header):not(.hasOwnMaxWidth) {
-    max-width: var(--width-full);
+    // max-width: var(--width-full);
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    padding: 0 1.5rem;
+    // padding: 0 3.5rem;
 
-    @media only screen and (max-width: 1100px) {
-      padding: 0 1rem;
-    }
+    // @media only screen and (max-width: 1100px) {
+    //   padding: 0 1rem;
+    // }
 
-    @media only screen and (max-width: 800px) {
-      padding: 0 0.75rem;
-    }
+    // @media only screen and (max-width: 800px) {
+    //   padding: 0 0.75rem;
+    // }
   }
 `;
 

@@ -76,7 +76,7 @@ const StyledLabelled = styled(Labelled)`
       }
 
       &.ui-textArea-withError {
-        background: var(--bg-input-error);
+        background: var(--bg-input);
         color: var(--color-error);
       }
     }

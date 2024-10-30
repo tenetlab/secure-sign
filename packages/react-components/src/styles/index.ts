@@ -18,7 +18,7 @@ const FACTORS = [0.2126, 0.7152, 0.0722];
 const PARTS = [0, 2, 4];
 const VERY_DARK = 16;
 
-export const defaultHighlight = '#f19135';
+export const defaultHighlight = '#';
 
 function getHighlight (uiHighlight: string | undefined): string {
   return (uiHighlight || defaultHighlight);
@@ -88,6 +88,66 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: ${getContrast(uiHighlight)} !important;
   }
 
+  .ui.dropdown .menu>.header {
+    color: var(--color-text) !important;
+    margin: 0.75rem !important;
+  }
+  
+  .ui.selection.active.dropdown:hover .menu {
+    border-color: var(--bg-page);
+  }
+
+  .ui.selection.active.dropdown .menu {
+    border-color: var(--bg-page);
+    border-radius: 0.7rem;
+    padding-left: 0.7rem;
+    padding-right: 0.7rem;
+  }
+  
+  .ui.active.selection.dropdown {
+    border-bottom-left-radius: 0.7rem !important;
+    border-bottom-right-radius: 0.7rem !important;
+  }
+
+  .ui.selection.active.dropdown {
+    border-color: var(--border-input-hover);
+  }
+
+  .ui.selection.dropdown .menu>.item {
+    height: 48px;
+    padding: 1.2rem 1rem 0 1rem !important;
+    border-radius: 0.7rem;
+  }
+
+  .ui.dropdown .menu >.item  {
+    border-color: var(--border-input);
+    padding: 1.2rem 1rem 0 1rem !important;
+  }
+
+  .ui.input.error input {
+    background-color: var(--bg-input) !important;
+  }
+  .error {
+    background-color: var(--bg-input) !important;
+    border-color: var(--border-input-hover) !important;
+    border-radius: 0.7rem;
+  }
+
+  .ui.selection.dropdown.ui--output.isDisabled {
+    border-style: solid !important;
+  }
+
+  .ui--CopyButton {
+    top: 1rem !important;
+    right: 1.3rem !important;
+    .ui--Button {
+      padding: 0 !important;
+    }
+  }
+  
+  .ui.dropdown .menu>.message {
+    color: var(--color-text) !important;
+  }
   .ui--MenuItem {
     & .ui--Badge {
       color: ${countBrightness(uiHighlight) < BRIGHTNESS ? '#fff' : '#424242'};
@@ -198,32 +258,46 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   }
 
   .ui--Button {
+    background: var(--bg-button);
+    color: var(--color-text);
+    border: 1px solid var(--border-button);
+    border-radius: 0.5rem !important;
+
+    &:hover {
+      background: var(--bg-button-hover) !important;
+      color: var(--button-color) !important;
+      .ui--Icon {
+        background: var(--bg-button-hover) !important;
+        color: var(--button-color) !important;
+      }
+    }
+    
     &:not(.isDisabled):not(.isIcon):not(.isBasic),
     &.withoutLink:not(.isDisabled) {
       .ui--Icon {
-        background: ${getHighlight(uiHighlight)};
-        color: ${getContrast(uiHighlight)};
+        background: var(--bg-button);
+        color: var(--color-text);
       }
     }
 
     &.isBasic:not(.isDisabled):not(.isIcon):not(.isSelected) {
       &:not(.isReadOnly) {
-        box-shadow: 0 0 1px ${getHighlight(uiHighlight)};
+        
       }
 
       .ui--Icon {
-        color: ${getHighlight(uiHighlight)};
+        color: var(--color-text);
       }
     }
 
     &.isSelected {
-      box-shadow: 0 0 1px ${getHighlight(uiHighlight)};
+      box-shadow: 0 0 1px var(--bg-page);
     }
 
     &:hover:not(.isDisabled):not(.isReadOnly),
     &.isSelected {
-      background: ${getHighlight(uiHighlight)};
-      color: ${getContrast(uiHighlight)};
+      background: var(--bg-page);
+      color: var(--color-text-hover);
       text-shadow: none;
 
       &:not(.isIcon),
@@ -240,14 +314,14 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     &.withoutLink:not(.isDisabled) {
       &:hover {
         .ui--Icon {
-          color: ${getContrast(uiHighlight)};
+          color: var(--color-text-hover);
         }
       }
 
       .ui--Icon {
         background: transparent;
         color: inherit;
-        color: ${getHighlight(uiHighlight)};
+        // color: ${getHighlight(uiHighlight)};
       }
     }
   }
@@ -269,10 +343,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     }
 
     .ui--Toggle.isChecked .ui--Toggle-Slider {
-      background: ${getHighlight(uiHighlight)};
+      background: var(--bg-toggle);
 
       &::before {
-        border-color: ${getHighlight(uiHighlight)};
+        border-color: var(--border-table);
       }
     }
   }
@@ -326,10 +400,10 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     .ui--Toggle.isChecked {
       &:not(.isRadio) {
         .ui--Toggle-Slider {
-          background: ${getHighlight(uiHighlight)} !important;
+          background: var(--bg-toggle);
 
           &:before {
-            border-color: ${getHighlight(uiHighlight)} !important;
+            border-color: var(--border-table);
           }
         }
       }
@@ -494,8 +568,6 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
   h1 {
     font-size: var(--font-size-h1);
-    text-transform: lowercase;
-
     em {
       font-style: normal;
       text-transform: none;
@@ -536,13 +608,11 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   // we treat h5 and label as equivalents
   label, h5 {
     color: var(--color-label);
-    font-size: var(--font-size-label);
     font-style: normal;
     font-weight: var(--font-weight-label);
     line-height: 1rem;
-    margin-bottom: 0.25rem !important;
-    text-transform: var(--text-transform-label);
     vertical-align: middle;
+    font-size: var(--font-size-h2);
   }
 
   button {

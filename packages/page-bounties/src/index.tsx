@@ -1,12 +1,10 @@
 // Copyright 2017-2024 @polkadot/app-bounties authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useRef } from 'react';
+import React from 'react';
 
-import { Tabs } from '@polkadot/react-components';
 
 import Bounties from './Bounties.js';
-import { useTranslation } from './translate.js';
 
 export { default as useCounter } from './useCounter.js';
 
@@ -15,23 +13,10 @@ interface Props {
   className?: string;
 }
 
-function BountiesApp ({ basePath, className = '' }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-
-  const itemsRef = useRef([
-    {
-      isRoot: true,
-      name: 'index',
-      text: t('Overview')
-    }
-  ]);
+function BountiesApp ({ className = '' }: Props): React.ReactElement<Props> {
 
   return (
     <main className={`${className} bounties--App`}>
-      <Tabs
-        basePath={basePath}
-        items={itemsRef.current}
-      />
       <Bounties />
     </main>
   );

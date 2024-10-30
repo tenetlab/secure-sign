@@ -128,6 +128,12 @@ function DropdownBase<Option extends DropdownItemProps> ({ allowAdd = false, chi
 }
 
 const StyledLabelled = styled(Labelled)`
+  .ui.dropdown .menu>.item:hover{
+    background: var(--bg-menu-hover);
+  }
+  .ui.selection.dropdown:hover {
+    border-color: var(--border-input-hover);
+  }
   .ui--Dropdown-item {
     position: relative;
     white-space: nowrap;

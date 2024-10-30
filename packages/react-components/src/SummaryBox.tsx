@@ -25,7 +25,7 @@ const StyledDiv = styled.div`
   display: flex;
   flex-wrap: no-wrap;
   justify-content: space-between;
-  margin: 1.5rem 0;
+  // margin: 1.5rem 0;
 
   > section {
     display: flex;

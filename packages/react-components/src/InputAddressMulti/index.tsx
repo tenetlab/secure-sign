@@ -5,10 +5,8 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDebounce, useNextTick } from '@polkadot/react-hooks';
 
-import Input from '../Input.js';
 import Spinner from '../Spinner.js';
 import { styled } from '../styled.js';
-import { useTranslation } from '../translate.js';
 import Available from './Available.js';
 import Selected from './Selected.js';
 
@@ -35,12 +33,13 @@ function include (prev: string[], address: string, maxCount: number): string[] {
 }
 
 function InputAddressMulti ({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const [_filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<string[]>([]);
   const filter = useDebounce(_filter);
   const isNextTick = useNextTick();
 
+  console.log("", setFilter);
+  
   useEffect((): void => {
     defaultValue && setSelected(defaultValue);
   }, [defaultValue]);
@@ -61,15 +60,6 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 
   return (
     <StyledDiv className={`${className} ui--InputAddressMulti`}>
-      <Input
-        autoFocus
-        className='ui--InputAddressMulti-Input'
-        isSmall
-        onChange={setFilter}
-        placeholder={t('filter by name, address, or account index')}
-        value={_filter}
-        withLabel={false}
-      />
       <div className='ui--InputAddressMulti-columns'>
         <div className='ui--InputAddressMulti-column'>
           <label>{valueLabel}</label>
@@ -107,9 +97,8 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
 
 const StyledDiv = styled.div`
   border-top-width: 0px;
-  margin-left: 2rem;
-  width: calc(100% - 2rem);
-
+  width: 100%;
+  padding-top: 2rem;
   .ui--InputAddressMulti-Input {
     .ui.input {
       margin-bottom: 0.25rem;
@@ -118,34 +107,49 @@ const StyledDiv = styled.div`
   }
 
   .ui--InputAddressMulti-columns {
-    display: inline-flex;
-    flex-direction: row-reverse;
-    justify-content: space-between;
     width: 100%;
-
     .ui--InputAddressMulti-column {
       display: flex;
       flex-direction: column;
-      min-height: 15rem;
-      max-height: 15rem;
-      width: 50%;
-      padding: 0.25rem 0.5rem;
+      min-height: 16rem;
+      max-height: 16rem;
+      width: 100%;
+      // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
-        padding: 0.5rem 0;
-        background: var(--bg-input);
-        border: 1px solid var(--border-input);
-        border-radius: 0.286rem 0.286rem;
+        margin-top: 1rem;
+        padding: 0.5rem 2rem 0.5rem 2rem;
+        background-color: var(--bg-menubar);
+        border-radius: 1rem;
         flex: 1;
         overflow-y: auto;
         overflow-x: hidden;
-
+        margin-bottom: 1.5rem;
         .ui--Spinner {
           margin-top: 2rem;
         }
 
         .ui--AddressToggle {
           padding-left: 0.75rem;
+
+          .ui--AddressToggle-address {
+            flex: none;
+            width: 40%;
+          }
+
+          @media only screen and (max-width: 1440px) {
+            .ui--AddressToggle-address {
+              flex: none;
+              width: 30%;
+            }
+            .address-text {
+              width: 60%;
+            }
+          }
+
+          .address-text {
+            width: 50%;
+          }
         }
 
         .ui--AddressMini-address {
@@ -157,6 +161,9 @@ const StyledDiv = styled.div`
           max-width: 100%;
         }
       }
+    > label {
+    font-size: var(--font-size-h2);
+  }
     }
   }
 `;

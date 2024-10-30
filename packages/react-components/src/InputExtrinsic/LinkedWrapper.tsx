@@ -60,8 +60,8 @@ const StyledDiv = styled.div`
 
   .ui--DropdownLinked-Item-text {
     flex: 1;
-    font-size: var(--font-size-small);
-    opacity: var(--opacity-light);
+    // font-size: var(--font-size-small);
+    // opacity: var(--opacity-light);
     overflow: hidden;
     text-align: right;
     text-overflow: ellipsis;

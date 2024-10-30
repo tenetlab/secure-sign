@@ -41,12 +41,12 @@ const StyledDiv = styled.div`
 
   > .address {
     display: inline-block;
-    flex: 1;
-    font-size: var(--font-size-small);
+    // flex: 1;
+    // font-size: var(--font-size-small);
     margin-left: 1rem;
-    max-width: var(--width-shortaddr);
-    min-width: var(--width-shortaddr);
-    opacity: var(--opacity-light);
+    // max-width: var(--width-shortaddr);
+    // min-width: var(--width-shortaddr);
+    // opacity: var(--opacity-light);
     overflow: hidden;
     text-align: right;
     text-overflow: ellipsis;

@@ -32,6 +32,10 @@ function SelectMethod ({ api, className = '', defaultValue, isDisabled, isError,
     return null;
   }
 
+  options = options.filter((option) => {
+    return option.value == 'addStake' || option.value == 'register' || option.value == 'removeStake'
+  })
+  
   return (
     <Dropdown
       className={`${className} ui--DropdownLinked-Items`}

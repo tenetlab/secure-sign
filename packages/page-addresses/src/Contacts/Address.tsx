@@ -25,12 +25,12 @@ interface Props {
 const isEditable = true;
 
 const BAL_OPTS_DEFAULT = {
-  available: false,
+  available: true,
   bonded: false,
   locked: false,
   redeemable: false,
   reserved: false,
-  total: true,
+  total: false,
   unlocking: false,
   vested: false
 };
@@ -216,7 +216,7 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
                 className='send-button'
                 icon='paper-plane'
                 key='send'
-                label={t('send')}
+                label={t('Send')}
                 onClick={_toggleTransfer}
               />
             )}
@@ -238,6 +238,7 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
             address={address}
             balancesAll={balancesAll}
             withBalance={BAL_OPTS_DEFAULT}
+            withLabel
           />
         </td>
         <td />

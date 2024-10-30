@@ -5,7 +5,8 @@
     <meta name="theme-color" content="#000000">
     <link rel="manifest" href="manifest.json">
     <link rel="shortcut icon" href="favicon.ico">
-    <title><%= htmlWebpackPlugin.options.PAGE_TITLE %></title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/open-props/easings.min.css" />
+    <title>Secure-Sign by Tenet Crypto Lab</title>
     <script type="text/javascript" src="env-config.js"></script>
     <style>
       :root {
@@ -18,12 +19,22 @@
         */
         --font-percent-small: 88.9%;
         --font-percent-tiny: 79.0%;
-        --font-size-base: 1rem;
+        
+        /* --font-size-base: 1rem;
+        --font-size-h0: 1.7rem;
         --font-size-h1: 1.424rem;
         --font-size-h2: 1.266rem;
         --font-size-h3: 1.125rem;
         --font-size-small: 0.889rem;
-        --font-size-tiny: 0.79rem;
+        --font-size-tiny: 0.79rem; */
+
+        --font-size-base: 1.2rem;
+        --font-size-h0: 2rem;
+        --font-size-h1: 1.7rem;
+        --font-size-h2: 1.5rem;
+        --font-size-h3: 1.3rem;
+        --font-size-small: 1rem;
+        --font-size-tiny: 0.8rem;
 
         --font-weight-bold: 600; /* semi */
         --font-weight-light: 200;
@@ -37,67 +48,170 @@
         --width-shorthash: 9em;
 
         --font-weight-header: var(--font-weight-normal);
-        --font-size-label: var(--font-size-small);
+
+        --font-size-menu-text: var(--font-size-h1);
+        --font-size-modal-title: var(--font-size-h0);
+        --font-size-modal-label: var(--font-size-h1);
+        --font-size-balance: var(--font-size-h3);
+        --font-size-label: var(--font-size-h2);
+        --font-size-account-name: var(--font-size-h3);
+        --font-size-button: var(--font-size-small);
+        --font-size-input-dropdown: var(--font-size-small);
+        
         --font-weight-label: var(--font-weight-bold);
-        --text-transform-label: lowercase;
+        /* --text-transform-label: lowercase; */
 
         --bg-menu-hover: rgba(255, 255, 255, 0.2);
       }
 
       [data-theme="dark"] {
         --bg-identicon-circle: #282829;
-        --bg-input: #38393f;
-        --bg-input-error: #48393f;
+
+        /* --bg-input: #38393f; */
+        --bg-input: #101318;
+
+        /* --bg-input-error: #48393f; */
+        --bg-input-error: #000000;
+
         --bg-inverse: rgba(78, 78, 78, 0.66);
         --bg-menu: #26272c;
-        --bg-page: #26272c;
-        --bg-table: #3b3d3f;
+
+        --bg-modal: #0E1116;
+
+        --bg-button: #101318;
+
+        --bg-modal-input: #1F2329;
+        
+        --bg-page: #000000;
+
+        --bg-menubar: #101318;
+
+        /* --bg-table: #3b3d3f; */
+        --bg-table: #000000;
+
         --bg-tabs: #38393f;
         --bg-toggle: #58595f;
         --bg-sidebar: #1a1b20;
         --bg-static-extra: rgba(200, 200, 200, 0.1);
         --border-identicon: transparent;
-        --border-input: rgba(234, 236, 238, .15);
+
+        /* --border-input: rgba(234, 236, 238, .15);
         --border-table: #343536;
+        --border-button: #343536; */
+
+        --border-input: #31343A;
+        --border-table: #282a2d;
+        --border-button: #3D444D;
+
+        --border-input-hover: #595e66;
+        --bg-menu-hover: #ffffff1a;
+
+        --bg-button-hover: #686868;
+        --button-color: #FFFFFF;
+
         --border-tabs: #343536;
+        --border-card: #1d2024;
         --color-bounty-info: #8E8E8E;
         --color-checkbox: rgba(78, 78, 78, 0.66);
-        --color-error: rgba(255, 83, 83, 0.8);
+
+        /* --color-error: rgba(255, 83, 83, 0.8); */
+        --color-error: rgba(244, 242, 240, 0.8);
+
         /* --color-header: rgba(244, 242, 240, 0.8); */
+
         /* --color-label: rgba(244, 242, 240, 0.45); */
+        --color-label: rgba(244, 242, 240, 0.8);
+
         /* --color-summary: rgba(244, 242, 240, 0.75); */
         /* --color-table-foot: rgba(254, 240, 240, 0.66); */
         /* --color-table-head: rgba(254, 240, 240, 0.8); */
+        
         --color-text: rgba(244, 242, 240, 0.8);
+        --color-text-hover: rgb(255, 255, 255);
+
         --opacity-gray: 0.1;
+        --bg-ui-icon: #f4f2f0cc;
+        --subcolor-text: #7e7e7e;
+        --color-icon: #ffffff;
+        --color-btn: #686868;
+        --bg-subCard: #191C21;
+        --border-cardBtn: #3D444D;
+        --item-active: #686868;
+        --bg-chainSidebar: #101318E5;
       }
 
       [data-theme="light"] {
         --bg-identicon-circle: #eee;
-        --bg-input: #ffffff;
-        --bg-input-error: #fff6f6;
+
+        --bg-input: #FBFBFB;
+
+        /* --bg-input-error: #fff6f6; */
+        --bg-input-error: #ffffff;
+
         --bg-inverse: rgba(244, 242, 240, 0.91);
         --bg-menu: #ffffff;
-        --bg-page: #f5f3f1;
+
+        --bg-modal: #eeeded;
+
+        --bg-button: #eeeded;
+
+        --bg-modal-input: #FBFBFB;
+        --bg-page: #ffffff;
+
+        --bg-menubar: #eeeded;
+
+        /* --bg-table: #b6b3b3; */
         --bg-table: #ffffff;
+
         --bg-tabs: #ffffff;
         --bg-toggle: #e4e5e6;
-        --bg-sidebar: #fafafa;
+        --bg-sidebar: #fdfdfd;
         --bg-static-extra: rgba(200, 200, 200, 0.1);
         --border-identicon: #ddd;
-        --border-input: rgba(34, 36, 38, .15);
+
+        /* --border-input: rgba(34, 36, 38, .15);
         --border-table: #efedeb;
+        --border-button: #efedeb; */
+
+        --border-input: #F9F8F8;
+        --border-table: #dbdde1;
+        --border-button: #1C1E21;
+
+        --bg-button-hover: #1C1E21;
+        --button-color: #FFFFFF;
+
+        --border-input-hover: #b0b6c0;
+        --bg-menu-hover: #e7e3e3;
+
         --border-tabs: #f1efed;
+        --border-card: #fefefe;
         --color-bounty-info: #4D4D4D;
         --color-checkbox: rgba(34, 36, 38, 0.15);
-        --color-error: rgba(139, 0, 0);
+
+        /* --color-error: rgba(139, 0, 0); */
+        --color-error: rgba(78, 78, 78, 0.8);;
+
         /* --color-header: rgba(78, 78, 78, 0.8); */
+
         /* --color-label: rgba(78, 78, 78, 0.66); */
+        --color-label: rgba(78, 78, 78, 0.8);
+
         /* --color-summary: rgba(78, 78, 78, 0.66); */
         /* --color-table-foot: rgba(78, 78, 78, 0.66); */
         /* --color-table-head: rgba(78, 78, 78, 0.8); */
+
         --color-text: rgba(78, 78, 78, 0.8); /* 1 */
+        --color-text-hover: rgba(78, 78, 78, 1); /* 1 */
+        
         --opacity-gray: 0.75;
+        --bg-ui-icon: #4e4e4ecc;
+        --subcolor-text: #9b9b9b;
+        --color-icon: #000000;
+        --color-btn: #1C1E21;
+        --bg-subCard: #FFFFFF;
+        --border-cardBtn: #CFCFCF;
+        --item-active: #DEDEDE;
+        --bg-chainSidebar: #F4F4F4;
       }
 
       .--absolute {

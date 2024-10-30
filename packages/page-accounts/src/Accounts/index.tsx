@@ -7,28 +7,17 @@ import type { BN } from '@polkadot/util';
 import type { AccountBalance, Delegation, SortedAccount } from '../types.js';
 import type { SortCategory } from '../util.js';
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Button, FilterInput, SortDropdown, styled, SummaryBox, Table } from '@polkadot/react-components';
+import { styled, Table } from '@polkadot/react-components';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
-import { useAccounts, useApi, useDelegations, useFavorites, useIpfs, useLedger, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
-import { settings } from '@polkadot/ui-settings';
-import { BN_ZERO, isFunction } from '@polkadot/util';
+import { BN_ZERO } from '@polkadot/util';
 
-import CreateModal from '../modals/Create.js';
-import ImportModal from '../modals/Import.js';
-import Ledger from '../modals/Ledger.js';
-import Local from '../modals/LocalAdd.js';
-import Multisig from '../modals/MultisigCreate.js';
-import Proxy from '../modals/ProxiedAdd.js';
-import Qr from '../modals/Qr.js';
 import { useTranslation } from '../translate.js';
-import { SORT_CATEGORY, sortAccounts } from '../util.js';
+import { sortAccounts } from '../util.js';
 import Account from './Account.js';
-import BannerClaims from './BannerClaims.js';
-import BannerExtension from './BannerExtension.js';
-import Summary from './Summary.js';
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
@@ -66,24 +55,9 @@ function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> 
   };
 
   for (let i = 0, count = accounts.length; i < count; i++) {
-    const { account, address } = accounts[i];
+    const { address } = accounts[i];
     const cryptoType = getAccountCryptoType(address);
-
-    if (account?.meta.isHardware) {
-      ret.hardware.push(address);
-    } else if (account?.meta.isTesting) {
-      ret.testing.push(address);
-    } else if (cryptoType === 'injected') {
-      ret.injected.push(address);
-    } else if (cryptoType === 'multisig') {
-      ret.multisig.push(address);
-    } else if (cryptoType === 'proxied') {
-      ret.proxied.push(address);
-    } else if (cryptoType === 'chopsticks') {
-      ret.chopsticks.push(address);
-    } else if (cryptoType === 'qr') {
-      ret.qr.push(address);
-    } else {
+    if (cryptoType !== 'multisig') {
       ret.accounts.push(address);
     }
   }
@@ -91,39 +65,18 @@ function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> 
   return ret;
 }
 
-function Overview ({ className = '', onStatusChange }: Props): React.ReactElement<Props> {
+function Overview ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
-  const { api, fork, isElectron } = useApi();
-  const { allAccounts, hasAccounts } = useAccounts();
-  const { isIpfs } = useIpfs();
-  const { isLedgerEnabled } = useLedger();
-  const [isCreateOpen, toggleCreate] = useToggle();
-  const [isImportOpen, toggleImport] = useToggle();
-  const [isLedgerOpen, toggleLedger] = useToggle();
-  const [isMultisigOpen, toggleMultisig] = useToggle();
-  const [isProxyOpen, toggleProxy] = useToggle();
-  const [isLocalOpen, toggleLocal] = useToggle();
-  const [isQrOpen, toggleQr] = useToggle();
+  const { allAccounts } = useAccounts();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [balances, setBalances] = useState<Balances>({ accounts: {} });
-  const [filterOn, setFilter] = useState<string>('');
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
   const [{ sortBy, sortFromMax }, setSortBy] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
 
-  const onSortChange = useCallback(
-    (sortBy: SortCategory) => setSortBy(({ sortFromMax }) => ({ sortBy, sortFromMax })),
-    []
-  );
-
-  const onSortDirectionChange = useCallback(
-    () => setSortBy(({ sortBy, sortFromMax }) => ({ sortBy, sortFromMax: !sortFromMax })),
-    []
-  );
-
-  const sortOptions = useRef(SORT_CATEGORY.map((text) => ({ text, value: text })));
+  console.log('', setSortBy);  
 
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>
@@ -148,28 +101,11 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
     []
   );
 
-  const canStoreAccounts = useMemo(
-    () => isElectron || (!isIpfs && settings.get().storage === 'on'),
-    [isElectron, isIpfs]
-  );
-
   // We use favorites only to check if it includes some element,
   // so Object is better than array for that because hashmap access is O(1).
   const favoritesMap = useMemo(
     () => Object.fromEntries(favorites.map((x) => [x, true])),
     [favorites]
-  );
-
-  // detect multisigs
-  const hasPalletMultisig = useMemo(
-    () => isFunction((api.tx.multisig || api.tx.utility)?.approveAsMulti),
-    [api]
-  );
-
-  // proxy support
-  const hasPalletProxy = useMemo(
-    () => isFunction(api.tx.proxy?.addProxy),
-    [api]
   );
 
   const accountsMap = useMemo(
@@ -201,7 +137,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
   const header = useMemo(
     (): Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> => {
       const ret: Record<GroupName, [React.ReactNode?, string?, number?, (() => void)?][]> = {
-        accounts: [[<>{t('accounts')}<div className='sub'>{t('all locally stored accounts')}</div></>]],
+        accounts: [[<>{t('Accounts')}<div className='sub'>{t('')}</div></>]],
         chopsticks: [[<>{t('chopsticks')}<div className='sub'>{t('local accounts added via chopsticks fork')}</div></>]],
         hardware: [[<>{t('hardware')}<div className='sub'>{t('accounts managed via hardware devices')}</div></>]],
         injected: [[<>{t('extension')}<div className='sub'>{t('accounts available via browser extensions')}</div></>]],
@@ -232,7 +168,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
         <Account
           account={account}
           delegation={delegation}
-          filter={filterOn}
+          filter={''}
           isFavorite={isFavorite}
           key={address}
           proxy={proxies?.[index]}
@@ -243,7 +179,7 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
       return all;
     }, {}),
-    [accountsMap, filterOn, proxies, setBalance, toggleFavorite]
+    [accountsMap, proxies, setBalance, toggleFavorite]
   );
 
   const groups = useMemo(
@@ -278,132 +214,19 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 
   return (
     <StyledDiv className={className}>
-      {isCreateOpen && (
-        <CreateModal
-          onClose={toggleCreate}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isImportOpen && (
-        <ImportModal
-          onClose={toggleImport}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isLedgerOpen && (
-        <Ledger onClose={toggleLedger} />
-      )}
-      {isLocalOpen && (
-        <Local
-          onClose={toggleLocal}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isMultisigOpen && (
-        <Multisig
-          onClose={toggleMultisig}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isProxyOpen && (
-        <Proxy
-          onClose={toggleProxy}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      {isQrOpen && (
-        <Qr
-          onClose={toggleQr}
-          onStatusChange={onStatusChange}
-        />
-      )}
-      <BannerExtension />
-      <BannerClaims />
-      <Summary balance={balances.summary} />
-      <SummaryBox className='header-box'>
-        <section
-          className='dropdown-section media--1300'
-          data-testid='sort-by-section'
-        >
-          <SortDropdown
-            className='media--1500'
-            defaultValue={sortBy}
-            label={t('sort by')}
-            onChange={onSortChange}
-            onClick={onSortDirectionChange}
-            options={sortOptions.current}
-            sortDirection={
-              sortFromMax
-                ? 'ascending'
-                : 'descending'
-            }
-          />
-          <FilterInput
-            filterOn={filterOn}
-            label={t('filter by name or tags')}
-            setFilter={setFilter}
-          />
-        </section>
-        <Button.Group>
-          {canStoreAccounts && (
-            <>
-              <Button
-                icon='plus'
-                label={t('Account')}
-                onClick={toggleCreate}
-              />
-              <Button
-                icon='sync'
-                label={t('From JSON')}
-                onClick={toggleImport}
-              />
-            </>
-          )}
-          <Button
-            icon='qrcode'
-            label={t('From Qr')}
-            onClick={toggleQr}
-          />
-          {isLedgerEnabled && (
-            <Button
-              icon='project-diagram'
-              label={t('From Ledger')}
-              onClick={toggleLedger}
-            />
-          )}
-          {hasAccounts && (
-            <>
-              {hasPalletMultisig && (
-                <Button
-                  icon='plus'
-                  label={t('Multisig')}
-                  onClick={toggleMultisig}
-                />
-              )}
-              {hasPalletProxy && (
-                <Button
-                  icon='plus'
-                  label={t('Proxied')}
-                  onClick={toggleProxy}
-                />
-              )}
-            </>
-          )}
-          {fork && (
-            <Button
-              icon='plus'
-              label={t('Local')}
-              onClick={toggleLocal}
-            />
-          )}
-        </Button.Group>
-      </SummaryBox>
       {!isNextTick || !sortedAccounts.length
         ? (
-          <Table
-            empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
-            header={header.accounts}
-          />
+          // <Table
+          //   empty={isNextTick && sortedAccounts && t("No any accounts")}
+          //   header={header.accounts}
+          // />
+          <div className='detail'>
+            <svg width="25" height="25" viewBox="0 0 25 25">
+              <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+              <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+            </svg>
+            <p>No Accounts</p>
+          </div>
         )
         : GROUP_ORDER.map((group) =>
           groups[group] && (
@@ -423,10 +246,12 @@ function Overview ({ className = '', onStatusChange }: Props): React.ReactElemen
 }
 
 const StyledDiv = styled.div`
+  background-color: var(--bg-menubar);
+  border-radius: 1rem;
+  
   .ui--Dropdown {
     width: 15rem;
   }
-
   .header-box {
     .dropdown-section {
       display: flex;
@@ -438,6 +263,18 @@ const StyledDiv = styled.div`
       margin-left: auto;
     }
   }
+  .detail {
+      padding: 1rem 2rem 1rem 1rem;
+      height: 4rem;
+      align-items: center;
+      text-align: center;
+      justity-content: center;
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      }
+    }
 `;
 
 export default React.memo(Overview);

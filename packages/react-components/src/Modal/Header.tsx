@@ -12,12 +12,9 @@ interface Props {
   onClose: () => void;
 }
 
-function Header ({ className = '', header, onClose }: Props): React.ReactElement<Props> {
+function Header ({ className = '', onClose }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={`${className} ui--Modal-Header`}>
-      {header && (
-        <h1>{header}</h1>
-      )}
       <Button
         dataTestId='close-modal'
         icon='times'
@@ -29,8 +26,7 @@ function Header ({ className = '', header, onClose }: Props): React.ReactElement
 
 const StyledDiv = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0.75rem 1.5rem 0;
+  justify-content: flex-end;
 `;
 
 export default React.memo(Header);

@@ -3,44 +3,41 @@
 
 import type { Network } from './types.js';
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import { ChainImg, styled } from '@polkadot/react-components';
 
-import { useTranslation } from '../translate.js';
-import Url from './Url.js';
+import store from 'store';
 
 interface Props {
   affinity?: string; // unused - previous selection
   apiUrl: string;
   className?: string;
   setApiUrl: (network: string, apiUrl: string) => void;
+  settings: any;
+  hasUrlChanged: boolean;
   value: Network;
 }
 
-function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, isRelay, isUnreachable, name, nameRelay: relay, paraId, providers, ui } }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
-  const isSelected = useMemo(
-    () => providers.some(({ url }) => url === apiUrl),
-    [apiUrl, providers]
-  );
-
+function NetworkDisplay({ apiUrl,  setApiUrl, settings, hasUrlChanged, value: { isChild, isUnreachable, name, nameRelay: relay, providers, ui } }: Props): React.ReactElement<Props> {
   const _selectUrl = useCallback(
     () => {
       const filteredProviders = providers.filter(({ url }) => !url.startsWith('light://'));
-
-      return setApiUrl(name, filteredProviders[Math.floor(Math.random() * filteredProviders.length)].url);
+      const selectUrl = filteredProviders[Math.floor(Math.random() * filteredProviders.length)].url;
+      store.set('localFork', '');
+      settings.set({ ...(settings.get()), selectUrl });
+      setApiUrl(name, selectUrl);
+      
+      return window.location.assign(`${window.location.origin}${window.location.pathname}?rpc=${encodeURIComponent(selectUrl)}${window.location.hash}`);
     },
     [name, providers, setApiUrl]
   );
 
-  const _setApiUrl = useCallback(
-    (apiUrl: string) => setApiUrl(name, apiUrl),
-    [name, setApiUrl]
-  );
+  console.log('', apiUrl, hasUrlChanged, relay);
+  
 
   return (
-    <StyledDiv className={`${className}${isSelected ? ' isSelected highlight--border' : ''}${isUnreachable ? ' isUnreachable' : ''}`}>
+    <StyledDiv className={``}>
       <div
         className={`endpointSection${isChild ? ' isChild' : ''}`}
         onClick={isUnreachable ? undefined : _selectUrl}
@@ -53,39 +50,18 @@ function NetworkDisplay ({ apiUrl, className = '', setApiUrl, value: { isChild, 
         />
         <div className='endpointValue'>
           <div>{name}</div>
-          {isSelected && (isRelay || !!paraId) && (
-            <div className='endpointExtra'>
-              {isRelay
-                ? t('Relay chain')
-                : paraId && paraId < 1000
-                  ? t('{{relay}} System', { replace: { relay } })
-                  : paraId && paraId < 2000
-                    ? t('{{relay}} Common', { replace: { relay } })
-                    : t('{{relay}} Parachain', { replace: { relay } })
-              }
-            </div>
-          )}
         </div>
       </div>
-      {isSelected && providers.map(({ name, url }): React.ReactNode => (
-        <Url
-          apiUrl={apiUrl}
-          key={url}
-          label={name}
-          setApiUrl={_setApiUrl}
-          url={url}
-        />
-      ))}
     </StyledDiv>
   );
 }
 
 const StyledDiv = styled.div`
-  border-left: 0.25rem solid transparent;
-  border-radius: 0.25rem;
+  border: 1px solid var(--border-table);
+  border-radius: 1rem;
   cursor: pointer;
-  margin: 0 0 0.25rem 0;
-  padding: 0.375rem 0.5rem 0.375rem 1rem;
+  margin: 0 0 2rem 0;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
   position: relative;
 
   &.isUnreachable {
@@ -94,7 +70,7 @@ const StyledDiv = styled.div`
 
   &.isSelected,
   &:hover {
-    background: var(--bg-table);
+    background: var(--bg-menu-hover);
   }
 
   .endpointSection {

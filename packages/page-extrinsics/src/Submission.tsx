@@ -7,13 +7,14 @@ import type { DecodedExtrinsic } from './types.js';
 
 import React, { useCallback, useState } from 'react';
 
-import { Button, InputAddress, MarkError, TxButton } from '@polkadot/react-components';
+// import { Button, InputAddress, MarkError, TxButton } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 import { Extrinsic } from '@polkadot/react-params';
-import { BalanceFree } from '@polkadot/react-query';
+// import { BalanceFree } from '@polkadot/react-query';
 
-import Decoded from './Decoded.js';
+// import Decoded from './Decoded.js';
 import { useTranslation } from './translate.js';
+import { styled } from '@polkadot/react-components';
 
 interface Props {
   className?: string;
@@ -25,7 +26,7 @@ interface DefaultExtrinsic {
   defaultFn: SubmittableExtrinsicFunction<'promise'>;
 }
 
-function extractDefaults (value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
+function extractDefaults(value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
   if (!value) {
     return { defaultFn };
   }
@@ -39,17 +40,18 @@ function extractDefaults (value: DecodedExtrinsic | null, defaultFn: Submittable
   };
 }
 
-function Selection ({ className, defaultValue }: Props): React.ReactElement<Props> {
+function Selection({ className, defaultValue }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { apiDefaultTxSudo } = useApi();
-  const [accountId, setAccountId] = useState<string | null>(null);
+  const { api } = useApi();
+  // const [accountId, setAccountId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [extrinsic, setExtrinsic] = useState<SubmittableExtrinsic<'promise'> | null>(null);
+  const [extrinsicUpper, setExtrinsicUpper] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [{ defaultArgs, defaultFn }] = useState<DefaultExtrinsic>(() => extractDefaults(defaultValue, apiDefaultTxSudo));
 
   const _onExtrinsicChange = useCallback(
     (method?: SubmittableExtrinsic<'promise'>) =>
-      setExtrinsic(() => method || null),
+      setExtrinsicUpper(() => method || null),
     []
   );
 
@@ -60,49 +62,175 @@ function Selection ({ className, defaultValue }: Props): React.ReactElement<Prop
   );
 
   return (
-    <div className={className}>
-      <InputAddress
-        label={t('using the selected account')}
-        labelExtra={
-          <BalanceFree
-            label={<label>{t('free balance')}</label>}
-            params={accountId}
-          />
-        }
-        onChange={setAccountId}
-        type='account'
-      />
-      <Extrinsic
-        defaultArgs={defaultArgs}
-        defaultValue={defaultFn}
-        label={t('submit the following extrinsic')}
-        onChange={_onExtrinsicChange}
-        onError={_onExtrinsicError}
-      />
-      <Decoded
-        extrinsic={extrinsic}
-        isCall
-      />
-      {error && !extrinsic && (
-        <MarkError content={error} />
-      )}
-      <Button.Group>
-        <TxButton
-          extrinsic={extrinsic}
-          icon='sign-in-alt'
-          isUnsigned
-          label={t('Submit Unsigned')}
-          withSpinner
-        />
-        <TxButton
-          accountId={accountId}
-          extrinsic={extrinsic}
-          icon='sign-in-alt'
-          label={t('Submit Transaction')}
-        />
-      </Button.Group>
-    </div>
+    <StyledDiv className={className}>
+      {/* <h1>Extrinsics</h1> */}
+      {
+        api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
+          <>
+            {/* <InputAddress
+            label={t('selected account')}
+            labelExtra={
+              <BalanceFree
+                // label={<label>{t('free balance')}</label>}
+                params={accountId}
+              />
+            }
+            onChange={setAccountId}
+            type='account'
+          /> */}
+            <Extrinsic
+              defaultArgs={defaultArgs}
+              defaultValue={defaultFn}
+              label={t('Extrinsic')}
+              onChange={_onExtrinsicChange}
+              onError={_onExtrinsicError}
+              extrinsicUpper={extrinsicUpper}
+              error={error}
+            />
+            {/* <Decoded
+            extrinsic={extrinsicUpper}
+            isCall
+          /> */}
+            {/* {error && !extrinsicUpper && (
+            <MarkError content={error} />
+          )} */}
+            {/* <Button.Group>
+            <TxButton
+              extrinsic={extrinsicUpper}
+              icon='sign-in-alt'
+              isUnsigned
+              label={t('Submit Unsigned')}
+              withSpinner
+            />
+            <TxButton
+              accountId={accountId}
+              extrinsic={extrinsicUpper}
+              icon='sign-in-alt'
+              label={t('Submit Transaction')}
+            />
+          </Button.Group> */}
+          </> :
+          <div className='empty-account'>
+            <div className='detail'>
+              <svg width="25" height="25" viewBox="0 0 25 25">
+                <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
+                <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+              </svg>
+              <p>Extrinsics does not support this network.</p>
+            </div>
+          </div>
+      }
+    </StyledDiv>
   );
 }
 
 export default React.memo(Selection);
+
+const StyledDiv = styled.div`
+  .extrinsics--Extrinsic {
+    display: flex;
+    .ui.selection.dropdown {
+      word-wrap: normal !important;
+    }
+    .ui--Params-Container {
+      .ui--Params-Content {
+        display: flex;
+        flex-direction: column;
+        row-gap: 3rem;
+      }
+    }
+    .ui--Address-Extrinsic {
+      width: 48%;
+      padding-right: 6rem;
+      padding-top: 4rem;
+    }
+    .ui--Params-Decoded-Button {
+      width: 52%;
+      background-color: var(--bg-menubar);
+      padding: 4rem 5rem 3rem 5rem;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      row-gap: 2rem;
+      .ui--Button-Group {
+        margin: 0;
+        .ui--Button {
+          margin: 0;
+        }
+        .hasLabel {
+          padding: 0.7rem;
+        }
+      }
+      .ui--InputFile {
+        padding: 1rem !important;
+      }
+    }
+    .ui--Input-Container {
+      margin-top: 6rem;
+      .ui--DropdownLinked-Items {
+        .ui {
+          padding-left: 1rem !important;
+          .search {
+            padding-left: 1rem !important;
+          }
+        }
+      }
+    }
+    .is50 {
+      .ui--Column {
+        max-width: 100%;
+      }
+    }
+    .withBorder {
+      padding-left: 0;
+    }
+  }
+  .ui--Columar {
+    .ui--Column {
+      .ui--Output {
+        .ui--Labelled-content {
+          .ui {
+            padding-left: 1rem !important;
+          }
+        }
+      }
+    }
+  }
+  .ui--CopyButton {
+    top: 1rem !important;
+    right: 1.3rem !important;
+    .ui--Button {
+      padding: 0 !important;
+    }
+  }
+  .default {
+    left: -3rem !important;
+  }
+  .address {
+    width: 70%;
+  }
+  .empty-account {
+    width: 100%;
+    height: 4rem;
+    display: flex;
+    padding: 1rem 2rem 1rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    .detail {
+      display: flex;
+      font-size: var(--font-size-h3);  
+      p {
+        padding-left: 1rem;
+      } 
+    }
+  }
+
+  @media only screen and (max-width: 1440px) {
+    > .name {
+      margin-left: 2rem;
+    }
+  }
+`

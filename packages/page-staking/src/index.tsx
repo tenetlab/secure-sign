@@ -12,9 +12,8 @@ import { useLocation } from 'react-router-dom';
 
 import Pools from '@polkadot/app-staking2/Pools';
 import useOwnPools from '@polkadot/app-staking2/Pools/useOwnPools';
-import { styled, Tabs } from '@polkadot/react-components';
+import { styled } from '@polkadot/react-components';
 import { useAccounts, useApi, useAvailableSlashes, useCall, useCallMulti, useFavorites, useOwnStashInfos } from '@polkadot/react-hooks';
-import { isFunction } from '@polkadot/util';
 
 import Actions from './Actions/index.js';
 import Bags from './Bags/index.js';
@@ -25,11 +24,9 @@ import Targets from './Targets/index.js';
 import Validators from './Validators/index.js';
 import { STORE_FAVS_BASE } from './constants.js';
 import MarkPoolsWarning from './MarkPoolsWarning.js';
-import { useTranslation } from './translate.js';
 import useNominations from './useNominations.js';
 import useSortedTargets from './useSortedTargets.js';
 
-const HIDDEN_ACC = ['actions', 'payout'];
 
 const OPT_MULTI = {
   defaultValue: [false, undefined, {}] as [boolean, BN | undefined, Record<string, boolean>],
@@ -45,7 +42,6 @@ const OPT_MULTI = {
 };
 
 function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Props> {
-  const { t } = useTranslation();
   const { api } = useApi();
   const { areAccountsLoaded, hasAccounts } = useAccounts();
   const { pathname } = useLocation();
@@ -70,11 +66,8 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
     [api, hasAccounts]
   );
 
-  const hasStashes = useMemo(
-    () => hasAccounts && !!ownStashes && (ownStashes.length !== 0),
-    [hasAccounts, ownStashes]
-  );
-
+  console.log("areAccountsLoaded", areAccountsLoaded);
+  
   const ownValidators = useMemo(
     () => (ownStashes || []).filter(({ isStashValidating }) => isStashValidating),
     [ownStashes]
@@ -90,56 +83,8 @@ function StakingApp ({ basePath, className = '' }: Props): React.ReactElement<Pr
     []
   );
 
-  const items = useMemo(() => [
-    {
-      isRoot: true,
-      name: 'overview',
-      text: t('Overview')
-    },
-    {
-      name: 'actions',
-      text: t('Accounts')
-    },
-    hasStashes && isFunction(api.query.staking.activeEra) && {
-      name: 'payout',
-      text: t('Payouts')
-    },
-    isFunction(api.query.nominationPools?.minCreateBond) && {
-      name: 'pools',
-      text: t('Pools')
-    },
-    {
-      alias: 'returns',
-      name: 'targets',
-      text: t('Targets')
-    },
-    hasStashes && isFunction((api.query.voterBagsList || api.query.bagsList || api.query.voterList)?.counterForListNodes) && {
-      name: 'bags',
-      text: t('Bags')
-    },
-    {
-      count: slashes.reduce((count, [, unapplied]) => count + unapplied.length, 0),
-      name: 'slashes',
-      text: t('Slashes')
-    },
-    {
-      hasParams: true,
-      name: 'query',
-      text: t('Validator stats')
-    }
-  ].filter((q): q is { name: string; text: string } => !!q), [api, hasStashes, slashes, t]);
-
   return (
     <StyledMain className={`${className} staking--App`}>
-      <Tabs
-        basePath={basePath}
-        hidden={
-          areAccountsLoaded && !hasAccounts
-            ? HIDDEN_ACC
-            : undefined
-        }
-        items={items}
-      />
       <MarkPoolsWarning />
       <Routes>
         <Route path={basePath}>

@@ -32,8 +32,8 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
   return (
     <StyledDiv className={`${className} ui--Labelled ${isSmall ? 'isSmall' : ''} ${isFull ? 'isFull' : ''} ${isOuter ? 'isOuter' : ''}`}>
       <label>{withEllipsis
-        ? <div className='withEllipsis'>{label}</div>
-        : label
+        ? <div className='withEllipsis'>{label == 'None' ? '': label}</div>
+        : label == 'None' ? '': label
       }</label>
       {labelExtra && <div className='labelExtra'>{labelExtra}</div>}
       <div className='ui--Labelled-content'>
@@ -54,12 +54,12 @@ const StyledDiv = styled.div`
 
     .ui--CopyButton {
       position: absolute;
-      top: 0.9rem;
-      right: 0.5rem;
+      top: 0.3rem;
+      right: 0.1rem;
     }
 
     .withEllipsis {
-      overflow: hidden;
+      // overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -75,21 +75,23 @@ const StyledDiv = styled.div`
     }
 
     &:not(.isSmall) {
-      padding-left: 2rem;
+      // padding-left: 2rem;
 
       &:not(.isOuter) {
         > label,
         .labelExtra {
           position: absolute;
           text-align: left;
-          top: 0.75rem;
+          top: 4rem;
+          right: 0;
           z-index: 1;
         }
 
         > label {
-          left: 3.55rem;
+          left: 0rem;
           right: 0;
           text-align: left;
+          top: -1.5rem;
         }
       }
 
@@ -112,12 +114,12 @@ const StyledDiv = styled.div`
 
       .labelExtra {
         color: var(--color-label);
-        font-size: var(--font-size-label);
+        font-size: var(--font-size-base);
         font-weight: var(--font-weight-label);
         position: absolute;
         right: 1.25rem;
         text-align: right;
-        text-transform: var(--text-transform-label);
+        // text-transform: var(--text-transform-label);
         top: 0.75rem;
         z-index: 1;
 
@@ -138,10 +140,9 @@ const StyledDiv = styled.div`
 
         .ui.selection.dropdown {
           &:not(.floating) {
-            padding-left: 1.45rem;
-            padding-top: 1.75rem;
+            padding-left: 4rem;
+            padding-top: 0.95rem;
           }
-
           &.floating {
             > .dropdown.icon {
               top: 1.25rem;
@@ -154,22 +155,21 @@ const StyledDiv = styled.div`
           }
 
           &.search:not(.multiple) > input.search {
-            padding-left: 1.45rem;
-            padding-top: 1.75rem;
+            padding-left: 4rem;
           }
 
           > .delete.icon,
           > .dropdown.icon,
           > .search.icon {
-            top: 1.75rem;
+            // top: 1.75rem;
           }
         }
 
         .ui--InputFile,
         .ui.input > input,
         .ui--output {
-          padding-left: 1.45rem;
-          padding-top: 1.75rem;
+          // padding-left: 1.45rem;
+          // padding-top: 1.75rem;
         }
 
         .ui--Messages {

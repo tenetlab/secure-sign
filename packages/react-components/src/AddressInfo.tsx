@@ -78,13 +78,13 @@ type TFunction = (key: string, options?: { replace: Record<string, unknown> }) =
 
 const DEFAULT_BALANCES: BalanceActiveType = {
   available: true,
-  bonded: true,
-  locked: true,
-  redeemable: true,
-  reserved: true,
-  total: true,
-  unlocking: true,
-  vested: true
+  bonded: false,
+  locked: false,
+  redeemable: false,
+  reserved: false,
+  total: false,
+  unlocking: false,
+  vested: false
 };
 const DEFAULT_EXTENDED = {
   crypto: true,
@@ -243,7 +243,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
 
   !withBalanceToggle && balanceDisplay.total && allItems.push(
     <React.Fragment key={0}>
-      <Label label={withLabel ? t('total') : ''} />
+      <Label label={withLabel ? 'Total' : ''} />
       <FormatBalance
         className={`result ${balancesAll ? '' : '--tmp'}`}
         formatIndex={formatIndex}
@@ -254,7 +254,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
   );
   balancesAll && balanceDisplay.available && (deriveBalances.transferable || deriveBalances.availableBalance) && allItems.push(
     <React.Fragment key={1}>
-      <Label label={t('transferable')} />
+      <Label label='Free' />
       <FormatBalance
         className='result'
         formatIndex={formatIndex}
@@ -269,7 +269,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
 
     allItems.push(
       <React.Fragment key={2}>
-        <Label label={t('vested')} />
+        <Label label='vested' />
         <FormatBalance
           className='result'
           formatIndex={formatIndex}
@@ -607,7 +607,7 @@ export default withMulti(
   styled(AddressInfo)`
     align-items: flex-start;
     display: flex;
-    flex: 1;
+    // flex: 1;
     white-space: nowrap;
 
     &:not(.ui--AddressInfo-expander) {
@@ -660,12 +660,14 @@ export default withMulti(
         }
 
         label {
+          display: flex;
+          align-content: center;
           grid-column: 1;
-          padding-right: 0.5rem;
-          text-align: right;
+          // padding-right: 0.5rem;
+          text-align: left;
           vertical-align: middle;
-          margin-bottom: 0.25rem;
-
+          // margin-bottom: 0.25rem;
+          font-size: var(--font-size-h3);
           .help.circle.icon {
             display: none;
           }

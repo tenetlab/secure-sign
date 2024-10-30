@@ -40,10 +40,10 @@ function Sidebar ({ buttons, children, className = '', dataTestId = '', onClose,
 }
 
 const StyledDiv = styled.div`
-  background: var(--bg-page);
+  background: var(--bg-chainSidebar);
   bottom: 0;
   margin-left: -0.125rem;
-  max-width: 24rem;
+  max-width: 30rem;
   min-width: 24rem;
   position: fixed;
   padding: 1rem;
@@ -62,7 +62,7 @@ const StyledDiv = styled.div`
   }
 
   .ui--Sidebar-buttons {
-    margin: 0;
+    // margin: 0;
     position: absolute;
     right: 0.5rem;
     top: 0.5rem;

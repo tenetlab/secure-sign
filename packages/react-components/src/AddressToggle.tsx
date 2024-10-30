@@ -9,6 +9,8 @@ import { checkVisibility } from './util/index.js';
 import AddressMini from './AddressMini.js';
 import { styled } from './styled.js';
 import Toggle from './Toggle.js';
+import Button from './Button/index.js';
+import { useTranslation } from './translate.js';
 
 interface Props {
   address: string;
@@ -20,7 +22,8 @@ interface Props {
   value?: boolean;
 }
 
-function AddressToggle ({ address, className = '', filter, isHidden, noToggle, onChange, value }: Props): React.ReactElement<Props> | null {
+function AddressToggle({ address, className = '', filter, isHidden, noToggle, onChange, value }: Props): React.ReactElement<Props> | null {
+  const { t } = useTranslation();
   const { apiIdentity } = useApi();
   const info = useDeriveAccountInfo(address);
 
@@ -37,13 +40,21 @@ function AddressToggle ({ address, className = '', filter, isHidden, noToggle, o
   return (
     <StyledDiv
       className={`${className} ui--AddressToggle ${(value || noToggle) ? 'isAye' : 'isNay'} ${isHidden || !isVisible ? 'isHidden' : ''}`}
-      onClick={_onClick}
+      // onClick={_onClick}
     >
       <AddressMini
         className='ui--AddressToggle-address'
         value={address}
         withSidebar={false}
       />
+      <span className='address-text media--1000'>{address}</span>
+      {!value && (
+        <Button
+        icon='plus'
+        label={t('Add')}
+        onClick={_onClick}
+      />
+      )}
       {!noToggle && (
         <div className='ui--AddressToggle-toggle'>
           <Toggle
@@ -57,10 +68,10 @@ function AddressToggle ({ address, className = '', filter, isHidden, noToggle, o
 }
 
 const StyledDiv = styled.div`
-  align-items: flex-start;
+  align-items: center;
   border: 1px solid transparent; /* #eee */
   border-radius: 0.25rem;
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin: 0.125rem;
@@ -71,11 +82,22 @@ const StyledDiv = styled.div`
 
   .ui--AddressToggle-address {
     filter: grayscale(100%);
+    width: 50%;
     opacity: var(--opacity-light);
+  }
+  
+  .address-text {
+    width: 40%;
+    font-size: var(--font-percent-small);
+    
+    @media only screen and (max-width: 1760px) {
+      width: 70%;
+    }
   }
 
   &:hover {
-    border-color: #ccc;
+    // border-color: var(--border-input-hover);
+    background-color: var(--bg-menu-hover)
   }
 
   &.isHidden {

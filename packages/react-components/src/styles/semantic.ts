@@ -20,11 +20,13 @@ export default `
   .ui.selection.dropdown,
   .ui.input > input,
   .ui.selection.dropdown > input {
+    height: 48px;
+    border-radius: 0.7rem;
     background: var(--bg-input);
     border-color: var(--border-input);
     color: var(--color-text);
     font: var(--font-sans);
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-input-dropdown);
 
     &:focus {
       background: var(--bg-input);
@@ -40,7 +42,7 @@ export default `
     &.disabled {
       background: transparent;
       border-style: dashed;
-      opacity: 1;
+      
 
       .dropdown.icon {
         opacity: 0;
@@ -111,8 +113,8 @@ export default `
     }
 
     &.error input {
-      background-color: var(--bg-input-error);
-      border-color: #e0b4b4;
+      background-color: var(--bg-input);
+      border-color: var(--border-input);
     }
 
     > input {
