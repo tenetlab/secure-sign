@@ -15,7 +15,9 @@ import Menu from './Menu/index.js';
 import BottomOverlay from './overlays/Bottom.js';
 import WarmUp from './WarmUp.js';
 import Sidebar from './Sidebar/index.js';
+import Footer from './Footer/index.js';
 
+import { PolkadotProvider } from '@polkadot/react-hooks/ctx/StakedAmount/polkadot';
 export const PORTAL_ID = 'portals';
 
 function Apps({ className = '' }: Props): React.ReactElement<Props> {
@@ -28,9 +30,10 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
       : apiEndpoint?.ui.color,
     [apiEndpoint, isDevelopment]
   );
-
+  
   return (
     <>
+    <PolkadotProvider wsEndpoint={apiEndpoint?.providers !== undefined ? apiEndpoint.providers[0] : ''}>
       <GlobalStyle uiHighlight={uiHighlight} />
       <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
         <Menu />
@@ -46,8 +49,10 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
             </MultisigAccountSidebar>
           </AccountSidebar>
         </div>
+        <Footer />
       </StyledDiv>
       <WarmUp />
+      </PolkadotProvider>
     </>
   );
 }

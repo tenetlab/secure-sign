@@ -6,14 +6,14 @@ import type { AddressFlags } from '@polkadot/react-hooks/types';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import { useToggle } from '@polkadot/react-hooks';
+import { useBalancesAll, useToggle } from '@polkadot/react-hooks';
 
 import AccountName from '../AccountName.js';
 import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
-import { styled } from '@polkadot/react-components';
+import { AddressInfo, styled } from '@polkadot/react-components';
 
 interface Props {
   value: string,
@@ -24,10 +24,22 @@ interface Props {
   accountIndex: string | undefined,
 }
 
-function AddressSection ({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
+const BAL_OPTS_DEFAULT = {
+  available: true,
+  bonded: true,
+  // locked: true,
+  // redeemable: false,
+  // reserved: true,
+  // total: true,
+  // unlocking: false,
+  // vested: false
+};
+
+function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
+  const balancesAll = useBalancesAll(value);
 
   return (
     <StyledAddressSection>
@@ -83,6 +95,12 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
             </span>
           </CopyToClipboard>
         </div>
+        <AddressInfo
+            address={value}
+            balancesAll={balancesAll}
+            withBalance={BAL_OPTS_DEFAULT}
+            withLabel
+          />
       </div>
     </StyledAddressSection>
   );
@@ -94,15 +112,20 @@ const StyledAddressSection = styled.div`
   .ui--AddressBook-Icon-Name {
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 20%;
   }
   .ui--AddressBook-Address-Copy {
     display: flex;
     align-items: center;
-    width: 70%;
+    width: 100%;
     padding-right: 3rem;
     justify-content: space-between;
     font-size: var(--font-size-account-name);
+    
+    
+    label, h5 {
+      
+    }
 
     @media only screen and (max-width: 1600px) {
         font-size: var(--font-size-account-name);
@@ -134,7 +157,7 @@ const StyledAddressSection = styled.div`
       width: 20%;
     }
     .ui--AddressBook-Address-Copy {
-      width: 80%;
+      width: 100%;
       @media only screen and (max-width: 1600px) {
         width: 75%;
       }

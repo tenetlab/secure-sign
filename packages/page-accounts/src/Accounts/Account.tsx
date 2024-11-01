@@ -5,8 +5,8 @@
 //
 /* eslint-disable deprecation/deprecation */
 
-import type { ApiPromise } from '@polkadot/api';
-import type { SubmittableExtrinsic } from '@polkadot/api/types';
+// import type { ApiPromise } from '@polkadot/api';
+// import type { SubmittableExtrinsic } from '@polkadot/api/types';
 import type { DeriveDemocracyLock, DeriveStakingAccount } from '@polkadot/api-derive/types';
 // import type { Ledger, LedgerGeneric } from '@polkadot/hw-ledger';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
@@ -15,7 +15,7 @@ import type { ProxyDefinition } from '@polkadot/types/interfaces';
 import type { KeyringAddress } from '@polkadot/ui-keyring/types';
 import type { AccountBalance, Delegation } from '../types.js';
 
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
 import { AddressInfo, AddressSmall, Button, Forget, styled, TransferModal } from '@polkadot/react-components';
@@ -52,25 +52,25 @@ interface Props {
   toggleFavorite: (address: string) => void;
 }
 
-interface DemocracyUnlockable {
-  democracyUnlockTx: SubmittableExtrinsic<'promise'> | null;
-  ids: BN[];
-}
+// interface DemocracyUnlockable {
+//   democracyUnlockTx: SubmittableExtrinsic<'promise'> | null;
+//   ids: BN[];
+// }
 
-interface ReferendaUnlockable {
-  referendaUnlockTx: SubmittableExtrinsic<'promise'> | null;
-  ids: [classId: BN, refId: BN][];
-}
+// interface ReferendaUnlockable {
+//   referendaUnlockTx: SubmittableExtrinsic<'promise'> | null;
+//   ids: [classId: BN, refId: BN][];
+// }
 
 const BAL_OPTS_DEFAULT = {
   available: true,
   bonded: true,
-  locked: true,
-  redeemable: false,
-  reserved: true,
-  total: true,
-  unlocking: false,
-  vested: false
+  // locked: true,
+  // redeemable: false,
+  // reserved: true,
+  // total: true,
+  // unlocking: false,
+  // vested: false
 };
 
 // const BAL_OPTS_EXPANDED = {
@@ -110,37 +110,37 @@ function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
   return total;
 }
 
-function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
-  return api.tx.utility && ids.length
-    ? api.tx.utility.batch(
-      ids
-        .map((id) => api.tx.democracy.removeVote(id))
-        .concat(api.tx.democracy.unlock(address))
-    )
-    : null;
-}
+// function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
+//   return api.tx.utility && ids.length
+//     ? api.tx.utility.batch(
+//       ids
+//         .map((id) => api.tx.democracy.removeVote(id))
+//         .concat(api.tx.democracy.unlock(address))
+//     )
+//     : null;
+// }
 
-function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
-  if (!api.tx.utility || !ids.length) {
-    return null;
-  }
+// function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
+//   if (!api.tx.utility || !ids.length) {
+//     return null;
+//   }
 
-  const inner = ids.map(([classId, refId]) => api.tx[palletReferenda].removeVote(classId, refId));
+//   const inner = ids.map(([classId, refId]) => api.tx[palletReferenda].removeVote(classId, refId));
 
-  ids
-    .reduce((all: BN[], [classId]) => {
-      if (!all.find((id) => id.eq(classId))) {
-        all.push(classId);
-      }
+//   ids
+//     .reduce((all: BN[], [classId]) => {
+//       if (!all.find((id) => id.eq(classId))) {
+//         all.push(classId);
+//       }
 
-      return all;
-    }, [])
-    .forEach((classId): void => {
-      inner.push(api.tx[palletReferenda].unlock(classId, address));
-    });
+//       return all;
+//     }, [])
+//     .forEach((classId): void => {
+//       inner.push(api.tx[palletReferenda].unlock(classId, address));
+//     });
 
-  return api.tx.utility.batch(inner);
-}
+//   return api.tx.utility.batch(inner);
+// }
 
 // async function showLedgerAddress (getLedger: () => LedgerGeneric | Ledger, meta: KeyringJson$Meta, ss58Prefix: number): Promise<void> {
 //   const currApp = settings.get().ledgerApp;
@@ -173,9 +173,9 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   // const proxyInfo = useProxies(address);
   const { flags: { isMultisig }, name: accName, tags } = useAccountInfo(address);
   const convictionLocks = useAccountLocks('referenda', 'convictionVoting', address);
-  const [{ democracyUnlockTx }, setDemocracyUnlock] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
-  const [{ referendaUnlockTx }, setReferandaUnlock] = useState<ReferendaUnlockable>({ ids: [], referendaUnlockTx: null });
-  const [vestingVestTx, setVestingTx] = useState<SubmittableExtrinsic<'promise'> | null>(null);
+  // const [{ democracyUnlockTx }, setDemocracyUnlock] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
+  // const [{ referendaUnlockTx }, setReferandaUnlock] = useState<ReferendaUnlockable>({ ids: [], referendaUnlockTx: null });
+  // const [vestingVestTx, setVestingTx] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [isBackupOpen, toggleBackup] = useToggle();
   const [isDeriveOpen, toggleDerive] = useToggle();
   const [isForgetOpen, toggleForget] = useToggle();
@@ -193,7 +193,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
 
-  console.log(democracyUnlockTx, referendaUnlockTx, vestingVestTx);
+  // console.log(democracyUnlockTx, referendaUnlockTx, vestingVestTx);
   
   useEffect((): void => {
     if (balancesAll) {
@@ -206,51 +206,51 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         transferable: balancesAll.transferable || balancesAll.availableBalance,
         unbonding: calcUnbonding(stakingInfo)
       });
-
-      api.tx.vesting?.vest && setVestingTx(() =>
-        balancesAll.vestingLocked.isZero()
-          ? null
-          : api.tx.vesting.vest()
-      );
+      
+      // api.tx.vesting?.vest && setVestingTx(() =>
+      //   balancesAll.vestingLocked.isZero()
+      //     ? null
+      //     : api.tx.vesting.vest()
+      // );
     }
   }, [address, api, balancesAll, setBalance, stakingInfo]);
 
   useEffect((): void => {
-    bestNumber && democracyLocks && setDemocracyUnlock(
-      (prev): DemocracyUnlockable => {
-        const ids = democracyLocks
-          .filter(({ isFinished, unlockAt }) => isFinished && bestNumber.gt(unlockAt))
-          .map(({ referendumId }) => referendumId);
+    // bestNumber && democracyLocks && setDemocracyUnlock(
+    //   (prev): DemocracyUnlockable => {
+    //     const ids = democracyLocks
+    //       .filter(({ isFinished, unlockAt }) => isFinished && bestNumber.gt(unlockAt))
+    //       .map(({ referendumId }) => referendumId);
 
-        if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
-          return prev;
-        }
+    //     if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
+    //       return prev;
+    //     }
 
-        return {
-          democracyUnlockTx: createClearDemocracyTx(api, address, ids),
-          ids
-        };
-      }
-    );
+    //     return {
+    //       democracyUnlockTx: createClearDemocracyTx(api, address, ids),
+    //       ids
+    //     };
+    //   }
+    // );
   }, [address, api, bestNumber, democracyLocks]);
 
   useEffect((): void => {
-    bestNumber && convictionLocks && setReferandaUnlock(
-      (prev): ReferendaUnlockable => {
-        const ids = convictionLocks
-          .filter(({ endBlock }) => endBlock.gt(BN_ZERO) && bestNumber.gt(endBlock))
-          .map(({ classId, refId }): [classId: BN, refId: BN] => [classId, refId]);
+    // bestNumber && convictionLocks && setReferandaUnlock(
+    //   (prev): ReferendaUnlockable => {
+    //     const ids = convictionLocks
+    //       .filter(({ endBlock }) => endBlock.gt(BN_ZERO) && bestNumber.gt(endBlock))
+    //       .map(({ classId, refId }): [classId: BN, refId: BN] => [classId, refId]);
 
-        if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
-          return prev;
-        }
+    //     if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
+    //       return prev;
+    //     }
 
-        return {
-          ids,
-          referendaUnlockTx: createClearReferendaTx(api, address, ids)
-        };
-      }
-    );
+    //     return {
+    //       ids,
+    //       referendaUnlockTx: createClearReferendaTx(api, address, ids)
+    //     };
+    //   }
+    // );
   }, [address, api, bestNumber, convictionLocks]);
 
   const isVisible = useMemo(

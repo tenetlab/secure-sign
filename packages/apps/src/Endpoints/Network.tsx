@@ -19,7 +19,7 @@ interface Props {
   value: Network;
 }
 
-function NetworkDisplay({ apiUrl,  setApiUrl, settings, hasUrlChanged, value: { isChild, isUnreachable, name, nameRelay: relay, providers, ui } }: Props): React.ReactElement<Props> {
+function NetworkDisplay({ setApiUrl, settings, value: { isChild, isUnreachable, name, providers, ui } }: Props): React.ReactElement<Props> {
   const _selectUrl = useCallback(
     () => {
       const filteredProviders = providers.filter(({ url }) => !url.startsWith('light://'));
@@ -32,9 +32,6 @@ function NetworkDisplay({ apiUrl,  setApiUrl, settings, hasUrlChanged, value: { 
     },
     [name, providers, setApiUrl]
   );
-
-  console.log('', apiUrl, hasUrlChanged, relay);
-  
 
   return (
     <StyledDiv className={``}>

@@ -610,7 +610,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: var(--color-label);
     font-style: normal;
     font-weight: var(--font-weight-label);
-    line-height: 1rem;
+    // line-height: 1rem;
     vertical-align: middle;
     font-size: var(--font-size-h2);
   }

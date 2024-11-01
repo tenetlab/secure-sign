@@ -20,15 +20,12 @@ function LogoInfo({ className, logo }: Props): React.ReactElement<Props> {
   const { ipnsChain } = useIpfs();
   const canToggle = !ipnsChain;
 
-  console.log("===================logo==============", logo);
-  
-
   return (
     <StyledDiv className={className}>
       <div
         className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''}`}
       >
-        <img src={`${logo ? '/multi-signature-dark.png' : '/multi-signature-light.png'}`} alt='logo' className='multisig_logo' width={50} height={50} />
+        <img src={`${logo ? '/logo.webp' : '/logo.webp'}`} alt='logo' className='multisig_logo' width={50} height={50} />
       </div>
     </StyledDiv>
   );

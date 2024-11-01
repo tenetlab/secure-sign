@@ -70,7 +70,7 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
-  min-height: calc(100vh - 18rem);
+  min-height: calc(100vh - 25rem);
   .ui--Table-Split {
     display: flex;
     flex-wrap: nowrap;
