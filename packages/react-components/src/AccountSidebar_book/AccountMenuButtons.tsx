@@ -142,6 +142,14 @@ const StyledDiv = styled.div`
     justify-content: space-around;
     margin-bottom: 0;
   }
+  
+  @media only screen and (max-width: 1940px) {
+    width: 24%;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    width: 35%;
+  }
 `;
 
 export default React.memo(AccountMenuButtons);

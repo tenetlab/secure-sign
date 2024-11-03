@@ -131,8 +131,9 @@ function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
-  width: 20%;
-  height: calc(100vh - 187px);
+  width: 18%;
+  min-width: 112px;
+  height: calc(100vh - 152px);
   padding: 2rem 1rem 0rem 1rem;
   z-index: 220;
   // position: relative;
@@ -187,15 +188,16 @@ const StyledDiv = styled.div`
 
   .menuItems {
     list-style: none;
-    margin: 0 1rem 0 0;
-    padding: 2rem 0rem 2rem 1rem;
+    margin: 0;
+    padding: 2rem 1rem 2rem 1rem;
 
     > li {
       display: inline-block;
     }
 
     > li {
-      margin-left: 0.375rem
+      // margin-left: 0.375rem
+      width: 100%;
     }
   }
 
@@ -224,22 +226,26 @@ const StyledDiv = styled.div`
     //   }
     // }
   }
-
-  @media only screen and (max-width: 1900px) {
-    width: 22%;
-  }
   
-  @media only screen and (max-width: 1600px) {
-    width: 24%;
+  @media only screen and (max-width: 1650px) {
+    width: 21%;
+  }
+
+  @media only screen and (max-width: 1520px) {
+    width: 25%;
   }
   
   @media only screen and (max-width: 1400px) {
-    width: 30%;
-    padding: 2rem 0rem 0rem 1rem;
+    width: 28%;
+    // padding: 2rem 0rem 0rem 1rem;
+  }
+
+  @media only screen and (max-width: 1300px) {
+    width: 25%;
   }
 
   @media only screen and (max-width: 1200px) {
-    width: 14%;
+    width: 9.5%;
   }
 
   .IconContainer {

@@ -17,11 +17,11 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
         <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
             <div className='menuContainer'>
                 {/* <div className='menuSection'> */}
-                <img src='/logo-footer.webp' width={100} height={40} alt='footer' />
                 <div className='footer-item'>
-                    <span>@2021-2024. All rights reserved</span>
-                    <span>SecureSign by Crypto Lab</span>
-                    <span>Cookies Privacy & Policy</span>
+                    <span className='content-center'>@2021-2024. All rights reserved</span>
+                    <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
+                    {/* <span>Cookies Privacy & Policy</span> */}
+                    <img src='/logo-footer.webp' width={100} height={40} alt='footer' />
                 </div>
                 {/* </div> */}
             </div>
@@ -31,7 +31,10 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   width: 100%;
-  padding: 0rem 2rem 1rem 1rem;
+  // padding: 0rem 2rem 1rem 1rem;
+  .content-center {
+    align-content: center
+  }
   z-index: 220;
   position: relative;
   .smallShow {

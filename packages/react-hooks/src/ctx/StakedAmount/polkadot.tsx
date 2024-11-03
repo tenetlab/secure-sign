@@ -106,9 +106,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
       void api?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wsEndpoint]);
-
-  console.log('polkadot, 111', setSelectedAccount);
+  }, [wsEndpoint, setSelectedAccount]);
   
   async function addStake({ validator, amount, callback }: Staking) {
     if (

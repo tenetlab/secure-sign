@@ -6,7 +6,7 @@ import type { AppProps as Props } from '@polkadot/react-components/types';
 import React from 'react';
 import { Route, Routes } from 'react-router';
 
-
+import { styled } from '@polkadot/react-components';
 import Accounts from './Accounts/index.js';
 import Vanity from './Vanity/index.js';
 import useCounter from './useCounter.js';
@@ -17,7 +17,7 @@ export { useCounter };
 function NewMultisigAccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<Props> {
 
   return (
-    <main className='accounts--App'>
+    <StyledMain className='accounts--App'>
       <Routes>
         <Route path={basePath}>
           <Route
@@ -34,8 +34,12 @@ function NewMultisigAccountsApp ({ basePath, onStatusChange }: Props): React.Rea
           />
         </Route>
       </Routes>
-    </main>
+    </StyledMain>
   );
 }
+
+const StyledMain = styled.main`
+  height: 100%;
+`
 
 export default React.memo(NewMultisigAccountsApp);

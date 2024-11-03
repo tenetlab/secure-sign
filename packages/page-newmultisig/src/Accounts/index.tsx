@@ -46,8 +46,10 @@ function Overview({ className = '', onStatusChange }: Props): React.ReactElement
 
   // We use favorites only to check if it includes some element,
   // so Object is better than array for that because hashmap access is O(1).
-  console.log('', isMultisigOpen, toggleFavorite, setBalances, sortAccounts, setSortBy, sortedAccounts);
   
+  useEffect(() => {
+
+  }, [isMultisigOpen, toggleFavorite, setBalances, sortAccounts, setSortBy, sortedAccounts])
   const favoritesMap = useMemo(
     () => Object.fromEntries(favorites.map((x) => [x, true])),
     [favorites]

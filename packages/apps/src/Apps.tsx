@@ -45,7 +45,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
                 <Content />
               </Signer>
               <BottomOverlay />
-              <div id={PORTAL_ID} />
+              {/* <div id={PORTAL_ID} /> */}
             </MultisigAccountSidebar>
           </AccountSidebar>
         </div>

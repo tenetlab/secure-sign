@@ -317,9 +317,16 @@ const StyledModal = styled(Modal)`
   }
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -15.5rem;
-    top: 1.5rem;
+    top: 0.7rem;
     width: 23%;
   }
+
+  @media only screen and (max-width: 1150px) {
+    .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+      width: 27%;
+    }
+  }
+
   .ui.input.error input {
     background-color: var(--bg-modal-input) !important;
     border: none !important;

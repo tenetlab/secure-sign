@@ -40,7 +40,7 @@ const StyledSection = styled.section`
   .balanceExpander {
     font-size: var(--font-size-h3);
     justify-content: flex-start;
-    padding-left: 60px;
+    // padding-left: 60px;
     .column {
       width: auto;
       max-width: 18.57rem;

@@ -394,10 +394,10 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
           )}
         </td>
         <td className='actions button ui--Copy-Balance'>
-          <CopyToClipboard
-            text={address}
-          >
-            <span>
+          <div className='ui--Copy-Address'>
+            <CopyToClipboard
+              text={address}
+            >
               <Button.Group>
                 <Button
                   icon={isCopyShown ? 'check' : 'copy'}
@@ -406,14 +406,14 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
                   onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
                 />
               </Button.Group>
-            </span>
-          </CopyToClipboard>
-          <AddressInfo
-            address={address}
-            balancesAll={balancesAll}
-            withBalance={BAL_OPTS_DEFAULT}
-            withLabel
-          />
+            </CopyToClipboard>
+            <AddressInfo
+              address={address}
+              balancesAll={balancesAll}
+              withBalance={BAL_OPTS_DEFAULT}
+              withLabel
+            />
+          </div>
           <Button.Group>
             {(isFunction(api.tx.balances?.transferAllowDeath) || isFunction(api.tx.balances?.transfer)) && (
               <Button
@@ -446,13 +446,23 @@ const StyledTr = styled.tr`
   padding: 1rem 3rem 0 3rem;
   display: flex;
   .ui--SmallAddress-Copy-Balance {
-    display: flex;
+    // display: flex;
     width: 65% !important;
   }
   .ui--Copy-Balance {
     display: flex;
     justify-content: space-between;
     width: 35%;
+
+    .ui--Copy-Address {
+      display: flex;
+      justify-content: space-between;
+      width: 70%;
+
+      @media only screen and (max-width: 1520px) {
+        width: 75%;
+      }
+    }
   }
   .ui--Balance {
     display: flex;
@@ -468,25 +478,47 @@ const StyledTr = styled.tr`
       width: 40%;
     }
   }
-  @media only screen and (max-width: 1440px) {
+  @media only screen and (max-width: 1650px) {
     .ui--SmallAddress-Copy-Balance {
-      width: 40% !important;
-      .shortAddress {
-        display: block !important;
-        width: 56%
-      }
-    }
-    .ui--AddressSmall-info {
-      column-gap: 1rem;
-    }
-    .ui--AccountName {
-      text-overflow: ellipsis;
+      width: 55% !important;
     }
     .ui--Copy-Balance {
-      width: 40%;
+      width: 45%;
     }
-    .withPadding {
-      padding-right: 0;
+  }
+
+  @media only screen and (max-width: 1520px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 50% !important;
+    }
+    .ui--Copy-Balance {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 1460px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 50% !important;
+    }
+    .ui--Copy-Balance {
+      width: 50%;
+    }
+  }
+  @media only screen and (max-width: 1400px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 45% !important;
+    }
+    .ui--Copy-Balance {
+      width: 55%;
+    }
+  }
+
+  @media only screen and (max-width: 1280px) {
+    .ui--SmallAddress-Copy-Balance {
+      width: 45% !important;
+    }
+    .ui--Copy-Balance {
+      width: 55%;
     }
   }
 `;

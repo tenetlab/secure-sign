@@ -89,18 +89,18 @@ const StyledDiv = styled.div`
     float: right;
     border-collapse: collapse;
     border-spacing: 0;
-    max-width: 90%;
-    overflow: hidden;
-    position: relative;
+    // max-width: 90%;
+    // overflow: hidden;
+    // position: relative;
     width: 90%;
-    z-index: 1;
+    // z-index: 1;
 
     &.isFixed {
       table-layout: fixed;
     }
 
     &:not(.isInline):not(.noMargin) {
-      margin-bottom: 1.5rem;
+      // margin-bottom: 1.5rem;
     }
 
     &.isInline {
@@ -112,7 +112,7 @@ const StyledDiv = styled.div`
 
     tr {
       max-width: 100%;
-      width: 100%;
+      // width: 100%;
 
       td,
 

@@ -601,11 +601,31 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
   } = usePolkadot();
 
   async function setBondedAmount() {
-    if(api) {
-      if( apiEndpoint.runtimeChain.toString() == 'Bittensor' || apiEndpoint.runtimeChain.toString() == 'commune') {
+    if (api) {
+      if (apiEndpoint.runtimeChain.toString() == 'commune') {
         const bondedAmount = (await get_user_total_stake(api, props.address))[0]?.stake;
-        if(bondedAmount != undefined)
+        if (bondedAmount != undefined)
           setStakedAmount(BigInt(bondedAmount));
+      } else if (apiEndpoint.runtimeChain.toString() == 'Bittensor') {
+        var staked = 0;
+        const url = `https://api-prod-v2.taostats.io/api/delegation/balance/latest/v1?nominator=${props.address}`;
+        const options = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: 'YPKz80SpVlBnNWrtdbXAeB8QlIcLJW6FT80GdfHXmEEmUlANejHOgbUNYR3t1qHL'
+          }
+        };
+        fetch(url, options)
+          .then(res => res.json())
+          .then((json) => {
+            const { data } = json
+            data?.map((item: any) => {
+              staked += parseInt(item?.balance)
+            })
+            setStakedAmount(BigInt(staked))            
+          })
+          .catch(err => console.error(err));
       }
     }
   }

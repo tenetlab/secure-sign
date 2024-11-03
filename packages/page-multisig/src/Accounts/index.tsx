@@ -315,26 +315,26 @@ const StyledDiv = styled.div`
   }
   .multisig_detail {
     // border-left: 2px solid var(--border-table);
-    width: 69%;
+    width: 70%;
     padding-left: 15px !important;
     
-    @media only screen and (max-width: 1400px) {
-      width: 76%;
-    }
+    // @media only screen and (max-width: 1400px) {
+    //   width: 76%;
+    // }
 
   }
   
   .multisig_list {
-    width: 31%;
+    width: 30%;
     background-color: var(--bg-menubar);
     border-radius: 1rem;
 
     .start {
       padding-left: 0 !important;
     }
-    @media only screen and (max-width: 1400px) {
-      width: 24%;
-    }
+    // @media only screen and (max-width: 1400px) {
+    //   width: 24%;
+    // }
   }
   .empty-account {
     width: 100%;

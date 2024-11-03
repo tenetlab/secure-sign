@@ -6,13 +6,13 @@ import type { AppProps as Props } from '@polkadot/react-components/types';
 import React from 'react';
 import { Route, Routes } from 'react-router';
 
-
+import { styled } from '@polkadot/react-components';
 import Contacts from './Contacts/index.js';
 
 function AddressesApp ({ basePath, onStatusChange }: Props): React.ReactElement<Props> {
 
   return (
-    <main>
+    <StyledDiv>
       <Routes>
         <Route path={basePath}>
           <Route
@@ -23,8 +23,12 @@ function AddressesApp ({ basePath, onStatusChange }: Props): React.ReactElement<
           />
         </Route>
       </Routes>
-    </main>
+    </StyledDiv>
   );
 }
+
+const StyledDiv = styled.main`
+  height: 100%;
+`;
 
 export default React.memo(AddressesApp);

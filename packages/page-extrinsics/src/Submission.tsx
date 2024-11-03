@@ -141,7 +141,7 @@ const StyledDiv = styled.div`
     }
     .ui--Address-Extrinsic {
       width: 48%;
-      padding-right: 6rem;
+      padding-right: 3rem;
       padding-top: 4rem;
     }
     .ui--Params-Decoded-Button {

@@ -91,7 +91,7 @@ const StyledDiv = styled.div`
           left: 0rem;
           right: 0;
           text-align: left;
-          top: -1.5rem;
+          top: -2rem;
         }
       }
 

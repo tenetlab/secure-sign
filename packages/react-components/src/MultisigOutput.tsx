@@ -73,6 +73,10 @@ const StyledLabelled = styled(Labelled)`
   }
   .pendinghash {
     font-size: var(--font-size-small) !important;
+    padding-right: 7rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
   }
 `;
 

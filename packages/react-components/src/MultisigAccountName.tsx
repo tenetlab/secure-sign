@@ -242,8 +242,12 @@ function MultisigAccountName ({ children, className = '', defaultName, label, on
 const StyledSpan = styled.span`
   line-height: 5;
   vertical-align: middle;
-  white-space: nowrap;
+  // white-space: nowrap;
   padding: 6% 60% 10% 0%;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 6% 50% 10% 0%;
+  }
 
   &.withSidebar:hover {
     border-bottom-color: #333;

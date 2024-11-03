@@ -248,7 +248,7 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   background-color: var(--bg-menubar);
   border-radius: 1rem;
-  
+  height: 100%;
   .ui--Dropdown {
     width: 15rem;
   }
