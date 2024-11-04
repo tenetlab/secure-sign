@@ -15,7 +15,11 @@
   "None": "None",
   "Remove item": "Remove item",
   "Selected account": "Selected account",
+  "Send": "Send",
   "Submit Transaction": "Submit Transaction",
+  "The recipient is associated with a known phishing site on {{url}}": "The recipient is associated with a known phishing site on {{url}}",
+  "There is an existing reference count on the sender account. As such the account cannot be reaped from the state.": "There is an existing reference count on the sender account. As such the account cannot be reaped from the state.",
+  "Transfer the full account balance, reap the sender": "Transfer the full account balance, reap the sender",
   "Yes": "Yes",
   "aye: bool": "aye: bool",
   "call hash / {{section}}.{{method}}": "call hash / {{section}}.{{method}}",
@@ -36,6 +40,7 @@
   "selected account": "selected account",
   "signature {{type}}": "signature {{type}}",
   "tip": "tip",
+  "transferable minus fees": "transferable minus fees",
   "type": "type",
   "{{count}} key/value pairs encoded for submission": "{{count}} key/value pairs encoded for submission"
 }

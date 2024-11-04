@@ -35,6 +35,13 @@ function SelectMethod ({ api, className = '', defaultValue, isDisabled, isError,
   options = options.filter((option) => {
     return option.value == 'addStake' || option.value == 'register' || option.value == 'removeStake'
   })
+
+  console.log("========================", options);
+  
+  options.push({
+    key: 'transfer', value: 'transfer',
+    text: 'transfer'
+  })
   
   return (
     <Dropdown
