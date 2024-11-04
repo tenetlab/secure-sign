@@ -137,13 +137,14 @@ const StyledDiv = styled.div`
     display: flex;
     // flex-direction: column;
     margin: 0 0 1rem 1rem;
-    justify-content: center;
-    padding: 2rem 1rem 2rem 2rem;
+    justify-content: space-between;
+    padding: 2rem 2rem 2rem 2rem;
     border-radius: 1rem;
   }
 
   .ui--AddressSection {
     display: flex;
+    padding-right: 2rem;
     // flex-direction: row;
     // flex-wrap: nowrap;
     align-items: center;

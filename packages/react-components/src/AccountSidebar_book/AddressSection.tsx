@@ -108,20 +108,33 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
 
 const StyledAddressSection = styled.div`
   display: flex;
-  width: 70%;
+  width: 80%;
+  padding-right: 3rem;
 
-  @media only screen and (max-width: 1940px) {
-    width: 76%;
+  @media only screen and (max-width: 1921px) {
+    width: 78%;
+  }
+
+  @media only screen and (max-width: 1700px) {
+    width: 75%;
+  }
+  
+  @media only screen and (max-width: 1580px) {
+    width: 73%;
   }
 
   @media only screen and (max-width: 1400px) {
     width: 65%;
   }
-  
+
   .ui--AddressBook-Icon-Name {
     display: flex;
     align-items: center;
     width: 20%;
+
+    @media only screen and (max-width: 1580px) {
+      width: 16%;
+    }
 
     @media only screen and (max-width: 1400px) {
       width: 30%;
@@ -134,22 +147,13 @@ const StyledAddressSection = styled.div`
     justify-content: space-between;
     font-size: var(--font-size-account-name);
 
-    // @media only screen and (max-width: 1600px) {
-    //   font-size: var(--font-size-account-name);
-    //   padding-right: 0;
-    //   .ui--AddressMenu-addr {
-    //     width: 70%;
-    //     overflow: hidden;
-    //     text-overflow: ellipsis;
-    //   }
-    // }
-
-    @media only screen and (max-width: 1400px) {
-      width: 70%;
+    @media only screen and (max-width: 1580px) {
+      width: 84%;
     }
 
     @media only screen and (max-width: 1400px) {
-        justify-content: end;
+      width: 70%;
+      justify-content: end;
     }
 
     .ui--AddressMenu-copyaddr {
@@ -160,12 +164,20 @@ const StyledAddressSection = styled.div`
         align-items: center;
       }
       
+      @media only screen and (max-width: 1801px) {
+        width: 42%;
+      }
+
       @media only screen and (max-width: 1760px) {
         width: 45%;
       }
 
-      @media only screen and (max-width: 1600px) {
-        width: 50%;
+      @media only screen and (max-width: 1680px) {
+        width: 48%;
+      }
+
+      @media only screen and (max-width: 1580px) {
+        width: 52%;
       }
 
       @media only screen and (max-width: 1520px) {
@@ -183,12 +195,20 @@ const StyledAddressSection = styled.div`
       padding-left: 1rem;
       word-break: break-all;
 
+      @media only screen and (max-width: 1801px) {
+        width: 58%;
+      }
+      
       @media only screen and (max-width: 1760px) {
         width: 55%;
       }
 
-      @media only screen and (max-width: 1650px) {
-        width: 50%;
+      @media only screen and (max-width: 1680px) {
+        width: 52%;
+      }
+
+      @media only screen and (max-width: 1580px) {
+        width: 48%;
       }
 
       @media only screen and (max-width: 1520px) {

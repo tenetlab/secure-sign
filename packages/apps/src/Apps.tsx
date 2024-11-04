@@ -12,7 +12,7 @@ import Signer from '@polkadot/react-signer';
 
 import Content from './Content/index.js';
 import Menu from './Menu/index.js';
-import BottomOverlay from './overlays/Bottom.js';
+// import BottomOverlay from './overlays/Bottom.js';
 import WarmUp from './WarmUp.js';
 import Sidebar from './Sidebar/index.js';
 import Footer from './Footer/index.js';
@@ -44,7 +44,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
               <Signer>
                 <Content />
               </Signer>
-              <BottomOverlay />
+              {/* <BottomOverlay /> */}
               {/* <div id={PORTAL_ID} /> */}
             </MultisigAccountSidebar>
           </AccountSidebar>

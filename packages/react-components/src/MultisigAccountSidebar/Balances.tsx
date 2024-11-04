@@ -38,7 +38,7 @@ const StyledSection = styled.section`
     // column-gap: 4.2rem !important;
   }
   .balanceExpander {
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-base);
     justify-content: flex-start;
     // padding-left: 60px;
     .column {

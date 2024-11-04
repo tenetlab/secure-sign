@@ -134,17 +134,26 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 }
 
 const StyledDiv = styled.div`
-  width: 30%;
+  width: 20%;
+  padding-right: 3rem;
 
   .ui--Button-Group {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin-bottom: 0;
   }
   
-  @media only screen and (max-width: 1940px) {
-    width: 24%;
+  @media only screen and (max-width: 1921px) {
+    width: 22%;
+  }
+
+  @media only screen and (max-width: 1700px) {
+    width: 25%;
+  }
+
+  @media only screen and (max-width: 1580px) {
+    width: 27%;
   }
 
   @media only screen and (max-width: 1400px) {

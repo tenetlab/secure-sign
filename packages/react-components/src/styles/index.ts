@@ -262,6 +262,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: var(--color-text);
     border: 1px solid var(--border-button);
     border-radius: 0.5rem !important;
+    white-space: nowrap;
 
     &:hover {
       background: var(--bg-button-hover) !important;

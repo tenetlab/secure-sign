@@ -203,7 +203,7 @@ const StyledDiv = styled.div`
           justify-content: flex-end;
 
           & > * + * {
-            margin-left: 0.35rem;
+            // margin-left: 0.35rem;
           }
 
           .ui--Button {

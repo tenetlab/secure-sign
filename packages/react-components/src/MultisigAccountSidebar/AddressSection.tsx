@@ -84,7 +84,7 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
 }
 
 const StyledAddressSection = styled.div`
-  width: calc(100% - 320px);
+  // width: calc(100% - 320px);
   .copy-btn {
     margin-left: 0rem;
     .ui--Button {

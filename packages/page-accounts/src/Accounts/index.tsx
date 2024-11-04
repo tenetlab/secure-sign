@@ -252,6 +252,11 @@ const StyledDiv = styled.div`
   .ui--Dropdown {
     width: 15rem;
   }
+
+  table:not(.isInline):not(.noMargin) {
+    margin-bottom: 0 !important;
+  }
+    
   .header-box {
     .dropdown-section {
       display: flex;

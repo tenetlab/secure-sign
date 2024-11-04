@@ -131,12 +131,10 @@ function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
-  width: 18%;
-  min-width: 112px;
-  height: calc(100vh - 152px);
+  width: 300px;
+  height: calc(100vh - 140px);
   padding: 2rem 1rem 0rem 1rem;
   z-index: 220;
-  // position: relative;
   .smallShow {
     display: none;
   }
@@ -144,7 +142,6 @@ const StyledDiv = styled.div`
   .menuContainer {
     align-items: center;
     justify-content: center;
-    // padding: 0 3.5rem;
     width: 100%;
     max-width: var(--width-full);
     margin: 0 auto;
@@ -196,7 +193,6 @@ const StyledDiv = styled.div`
     }
 
     > li {
-      // margin-left: 0.375rem
       width: 100%;
     }
   }
@@ -206,9 +202,6 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (max-width: 800px) {
-    // .groupHdr {
-    //   padding: 0.857rem 0.75rem;
-    // }
 
     .smallShow {
       display: initial;
@@ -217,35 +210,10 @@ const StyledDiv = styled.div`
     .smallHide {
       display: none;
     }
-
-    // .menuItems {
-    //   margin-right: 0;
-
-    //   > li + li {
-    //     margin-left: 0.25rem;
-    //   }
-    // }
-  }
-  
-  @media only screen and (max-width: 1650px) {
-    width: 21%;
-  }
-
-  @media only screen and (max-width: 1520px) {
-    width: 25%;
-  }
-  
-  @media only screen and (max-width: 1400px) {
-    width: 28%;
-    // padding: 2rem 0rem 0rem 1rem;
-  }
-
-  @media only screen and (max-width: 1300px) {
-    width: 25%;
   }
 
   @media only screen and (max-width: 1200px) {
-    width: 9.5%;
+    width: 114px;
   }
 
   .IconContainer {
@@ -261,9 +229,9 @@ const StyledDiv = styled.div`
       
     }
     .isActive {
-        border-top-left-radius: unset;
-        border-top-right-radius: unset;
-      }
+      border-top-left-radius: unset;
+      border-top-right-radius: unset;
+    }
   }
 `;
 

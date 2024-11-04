@@ -100,7 +100,8 @@ const DEFAULT_PREFS = {
 
 // auxiliary component that helps aligning balances details, fills up the space when no icon for a balance is specified
 function IconVoid (): React.ReactElement {
-  return <span className='icon-void'>&nbsp;</span>;
+  // return <span className='icon-void'>&nbsp;</span>;
+  return <></>
 }
 
 function lookupLock (lookup: Record<string, string>, lockId: Raw): string {
@@ -380,7 +381,9 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
       />
     </React.Fragment>
   );
-  balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) && allItems.push(
+  // balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) && 
+  !(api.runtimeChain.toString() == 'Bittensor' || 'commune') &&
+  allItems?.push(
     <React.Fragment key={5}>
       {/* <Label label={t('bonded')} /> */}
       <Label label={t('Staked')} />
@@ -404,7 +407,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
     </React.Fragment>
   );
 
-  (api.runtimeChain.toString() == 'Bittensor' || 'commune') && Number(stakedAmount) > 0 && allItems.push(
+  (api.runtimeChain.toString() == 'Bittensor' || 'commune') && allItems.push(
     <React.Fragment key={5}>
       {/* <Label label={t('bonded')} /> */}
       <Label label={t('Staked')} />
@@ -412,7 +415,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
         className='result'
         formatIndex={formatIndex}
         labelPost={<IconVoid />}
-        value={Number(stakedAmount)}
+        value={Number(stakedAmount) || '0'}
       >
         {otherBonded.length !== 0 && (
           <>&nbsp;(+{otherBonded.map((bonded, index): React.ReactNode =>
@@ -680,6 +683,7 @@ export default withMulti(
     align-items: flex-start;
     display: flex;
     // flex: 1;
+    min-width: 14rem;
     white-space: nowrap;
 
     &:not(.ui--AddressInfo-expander) {
@@ -739,7 +743,7 @@ export default withMulti(
           text-align: left;
           vertical-align: middle;
           // margin-bottom: 0.25rem;
-          font-size: var(--font-size-h3);
+          font-size: var(--font-size-base);
           .help.circle.icon {
             display: none;
           }

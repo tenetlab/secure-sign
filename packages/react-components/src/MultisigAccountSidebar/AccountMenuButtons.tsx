@@ -141,7 +141,7 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 }
 
 const StyledDiv = styled.div`
-  width: 320px;
+  // width: 320px;
   // display: flex;
   // justify-content: center;
   .ui--Button-Group {

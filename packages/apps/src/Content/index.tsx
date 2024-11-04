@@ -102,30 +102,8 @@ function Content ({ className }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   flex-grow: 1;
   overflow: hidden auto;
-  padding: 2rem 2rem 2rem 2rem;
+  padding: 2rem 1rem 2rem 1rem;
   position: relative;
-
-  width: 82%;
-  
-  @media only screen and (max-width: 1650px) {
-    width: 79%;
-  }
-
-  @media only screen and (max-width: 1520px) {
-    width: 75%;
-  }
-  
-  @media only screen and (max-width: 1400px) {
-    width: 72%;
-  }
-
-  @media only screen and (max-width: 1300px) {
-    width: 75%;
-  }
-
-  @media only screen and (max-width: 1200px) {
-    width: 90.6%;
-  }
   
   margin: 0;
   border-radius: 1rem;
@@ -138,15 +116,6 @@ const StyledDiv = styled.div`
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    // padding: 0 3.5rem;
-
-    // @media only screen and (max-width: 1100px) {
-    //   padding: 0 1rem;
-    // }
-
-    // @media only screen and (max-width: 800px) {
-    //   padding: 0 0.75rem;
-    // }
   }
 `;
 

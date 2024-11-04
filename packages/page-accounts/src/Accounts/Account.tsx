@@ -445,8 +445,9 @@ const StyledTr = styled.tr`
   border-radius: 1rem;
   padding: 1rem 3rem 0 3rem;
   display: flex;
+
   .ui--SmallAddress-Copy-Balance {
-    // display: flex;
+    display: flex;
     width: 65% !important;
   }
   .ui--Copy-Balance {
@@ -461,6 +462,10 @@ const StyledTr = styled.tr`
 
       @media only screen and (max-width: 1520px) {
         width: 75%;
+      }
+
+      @media only screen and (max-width: 1400px) {
+        width: 65%;
       }
     }
   }
@@ -495,30 +500,12 @@ const StyledTr = styled.tr`
       width: 50%;
     }
   }
-
-  @media only screen and (max-width: 1460px) {
-    .ui--SmallAddress-Copy-Balance {
-      width: 50% !important;
-    }
-    .ui--Copy-Balance {
-      width: 50%;
-    }
-  }
   @media only screen and (max-width: 1400px) {
     .ui--SmallAddress-Copy-Balance {
-      width: 45% !important;
+      width: 30% !important;
     }
     .ui--Copy-Balance {
-      width: 55%;
-    }
-  }
-
-  @media only screen and (max-width: 1280px) {
-    .ui--SmallAddress-Copy-Balance {
-      width: 45% !important;
-    }
-    .ui--Copy-Balance {
-      width: 55%;
+      width: 70%;
     }
   }
 `;

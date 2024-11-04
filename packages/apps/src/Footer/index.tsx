@@ -21,7 +21,7 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
                     <span className='content-center'>@2021-2024. All rights reserved</span>
                     <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
                     {/* <span>Cookies Privacy & Policy</span> */}
-                    <img src='/logo-footer.webp' width={100} height={40} alt='footer' />
+                    <img src='/logo-footer.webp' width={100} alt='footer' />
                 </div>
                 {/* </div> */}
             </div>
@@ -47,7 +47,7 @@ const StyledDiv = styled.div`
     align-items: center;
     // display: flex;
     justify-content: space-between;
-    padding: 0 3.5rem;
+    padding: 0 1rem;
     width: 100%;
     border-radius: 1rem;
   }
