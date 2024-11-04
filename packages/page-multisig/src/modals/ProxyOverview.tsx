@@ -330,8 +330,14 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
 const StyledModal = styled(Modal)`
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -14rem;
-    top: 1.5rem;
+    top: 0.7rem;
     width: 24%;
+  }
+  
+  @media only screen and (max-width: 1080px) {
+    .ui--Labelled:not(.isSmall):not(.isOuter) >label {
+      width: 26%;
+    }
   }
   .ui--Modal-content-body {
     width: 80%;

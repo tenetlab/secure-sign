@@ -26,26 +26,26 @@ const isEditable = true;
 
 const BAL_OPTS_DEFAULT = {
   available: true,
-  bonded: false,
-  locked: false,
-  redeemable: false,
-  reserved: false,
-  total: false,
-  unlocking: false,
-  vested: false
+  bonded: true,
+  // locked: true,
+  // redeemable: false,
+  // reserved: true,
+  // total: true,
+  // unlocking: false,
+  // vested: false
 };
 
-const BAL_OPTS_EXPANDED = {
-  available: true,
-  bonded: true,
-  locked: true,
-  nonce: true,
-  redeemable: true,
-  reserved: true,
-  total: false,
-  unlocking: true,
-  vested: true
-};
+// const BAL_OPTS_EXPANDED = {
+//   available: true,
+//   bonded: true,
+//   locked: true,
+//   nonce: true,
+//   redeemable: true,
+//   reserved: true,
+//   total: false,
+//   unlocking: true,
+//   vested: true
+// };
 
 function Address ({ address, className = '', filter, isFavorite, toggleFavorite }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
@@ -252,7 +252,7 @@ function Address ({ address, className = '', filter, isFavorite, toggleFavorite 
           <AddressInfo
             address={address}
             balancesAll={balancesAll}
-            withBalance={BAL_OPTS_EXPANDED}
+            withBalance={BAL_OPTS_DEFAULT}
           />
           <Columar size='tiny'>
             <Columar.Column>

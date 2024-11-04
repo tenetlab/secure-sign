@@ -76,7 +76,7 @@ const StyledEditableSection = styled.div`
   display: flex;
   background-color: var(--bg-subCard);
   margin: 1.5rem 0 1.5rem 0;
-  padding-left: 3rem;
+  padding: 0.5rem 0 0.5rem 3rem;
   border-radius: 1rem;
 `;
 

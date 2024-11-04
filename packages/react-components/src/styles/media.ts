@@ -11,10 +11,10 @@ export default [
     }
   }
 
-  .media--${size}-noPad {
-    @media only screen and (max-width: ${size}px) {
-      min-width: 0 !important;
-      padding: 0 !important;
-    }
-  }
+  // .media--${size}-noPad {
+  //   @media only screen and (max-width: ${size}px) {
+  //     min-width: 0 !important;
+  //     padding: 0 !important;
+  //   }
+  // }
 `).join('');

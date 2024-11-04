@@ -91,7 +91,7 @@ function FormatBalance ({ children, className = '', format, formatIndex, isShort
     () => format || getFormat(api.registry, formatIndex),
     [api, format, formatIndex]
   );
-
+  
   // labelPost here looks messy, however we ensure we have one less text node
   return (
     <StyledSpan className={`${className} ui--FormatBalance`}>

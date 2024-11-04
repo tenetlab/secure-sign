@@ -66,6 +66,9 @@
     "test:one": "polkadot-dev-run-test --env browser",
     "test:skipped": "echo 'tests skipped'"
   },
+  "dependencies": {
+    "react-toastify": "^10.0.6"
+  },
   "devDependencies": {
     "@crustio/crust-pin": "^1.0.0",
     "@pinata/sdk": "^1.2.1",

@@ -12,7 +12,7 @@ interface Props {
 }
 
 // const WITH_BALANCE = { available: true, bonded: true, free: true, locked: true, reserved: true, total: true };
-const WITH_BALANCE = { total: false, locked: false, available: true };
+const WITH_BALANCE = { bonded: true, available: true };
 
 function Balances ({ address, className }: Props): React.ReactElement<Props> | null {
 
@@ -38,9 +38,9 @@ const StyledSection = styled.section`
     // column-gap: 4.2rem !important;
   }
   .balanceExpander {
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-base);
     justify-content: flex-start;
-    padding-left: 60px;
+    // padding-left: 60px;
     .column {
       width: auto;
       max-width: 18.57rem;

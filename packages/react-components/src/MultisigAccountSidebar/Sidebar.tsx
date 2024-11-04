@@ -137,21 +137,22 @@ const StyledDiv = styled.div`
     display: flex;
     // flex-direction: column;
     margin: 0 0 1rem 1rem;
-    justify-content: center;
-    padding: 2rem 1rem 2rem 2rem;
+    justify-content: space-between;
+    padding: 2rem 2rem 2rem 2rem;
     border-radius: 1rem;
   }
 
   .ui--AddressSection {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    padding-right: 2rem;
+    // flex-direction: row;
+    // flex-wrap: nowrap;
     align-items: center;
-    width: 60%;
 
     .ui--AddressSection__AddressColumn {
       flex: 1;
-      margin-left: 1rem;
+      // margin-left: 1rem;
+      padding: 0 1rem;
 
       .ui--AccountName {
         max-width: 21.5rem;
@@ -178,8 +179,11 @@ const StyledDiv = styled.div`
 
   .ui--AddressMenu-addr {
     word-break: break-all;
-    width: 24ch;
-    margin: 0.571rem 0;
+    width: 100%;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    margin: 0.5rem 0 0;
     color: var(--color-label);
   }
 
@@ -209,7 +213,7 @@ const StyledDiv = styled.div`
   }
 
   section {
-    position: relative;
+    // position: relative;
 
     &:not(:last-child) {
       margin-bottom: 1rem;

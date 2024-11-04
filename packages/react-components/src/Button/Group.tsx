@@ -15,7 +15,7 @@ function ButtonGroup ({ children, className = '', isCentered }: Props): React.Re
   return (
     <StyledDiv className={`${className} ui--Button-Group ${isCentered ? 'isCentered' : ''}`}>
       {children}
-      <div className='clear' />
+      {/* <div className='clear' /> */}
     </StyledDiv>
   );
 }

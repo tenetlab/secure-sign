@@ -2,41 +2,39 @@
 // SPDX-License-Identifier: Apache-2.0
 
 
-import React, { useState } from 'react';
+import React from 'react';
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 
-import ChainInfo from './ChainInfo.js';
-import LogoInfo from './LogoInfo.js';
-import ThemeToggle from './themeToggle.js';
-
 interface Props {
-  className?: string;
+    className?: string;
 }
 
-function Menu({ className = '' }: Props): React.ReactElement<Props> {
-  const apiProps = useApi();
-  const [logo, setLogo] = useState<boolean>(false);
+function Footer({ className = '' }: Props): React.ReactElement<Props> {
+    const apiProps = useApi();
 
-  return (
-    <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
-      <div className='menuContainer'>
-        <div className='menuSection'>
-          <LogoInfo logo={logo}/>
-          <h1 className='menuItems'>Multisig</h1>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left'}}>
-          <ThemeToggle setLogo={setLogo} logo={logo}/>
-          <ChainInfo />
-        </div>
-      </div>
-    </StyledDiv>
-  );
+    return (
+        <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
+            <div className='menuContainer'>
+                {/* <div className='menuSection'> */}
+                <div className='footer-item'>
+                    <span className='content-center'>@2021-2024. All rights reserved</span>
+                    <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
+                    {/* <span>Cookies Privacy & Policy</span> */}
+                    <img src='/logo-footer.webp' width={100} alt='footer' />
+                </div>
+                {/* </div> */}
+            </div>
+        </StyledDiv>
+    );
 }
 
 const StyledDiv = styled.div`
   width: 100%;
-  padding: 2rem 1rem 1rem 1rem;
+  // padding: 0rem 2rem 1rem 1rem;
+  .content-center {
+    align-content: center
+  }
   z-index: 220;
   position: relative;
   .smallShow {
@@ -44,17 +42,21 @@ const StyledDiv = styled.div`
   }
   background-color: var(--bg-page);
 
-  & .menuContainer {
+  .menuContainer {
     flex-direction: row;
     align-items: center;
-    display: flex;
+    // display: flex;
     justify-content: space-between;
-    padding: 0 1.5rem;
+    padding: 0 1rem;
     width: 100%;
     border-radius: 1rem;
-    background-color: var(--bg-menubar);
   }
 
+  .footer-item {
+    display: flex;
+    justify-content: space-between;
+
+  }
   &.isLoading {
     .menuActive {
       background: var(--bg-page);
@@ -126,4 +128,4 @@ const StyledDiv = styled.div`
   }
 `;
 
-export default React.memo(Menu);
+export default React.memo(Footer);

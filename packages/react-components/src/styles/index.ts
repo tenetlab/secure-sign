@@ -262,6 +262,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: var(--color-text);
     border: 1px solid var(--border-button);
     border-radius: 0.5rem !important;
+    white-space: nowrap;
 
     &:hover {
       background: var(--bg-button-hover) !important;
@@ -610,7 +611,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     color: var(--color-label);
     font-style: normal;
     font-weight: var(--font-weight-label);
-    line-height: 1rem;
+    // line-height: 1rem;
     vertical-align: middle;
     font-size: var(--font-size-h2);
   }

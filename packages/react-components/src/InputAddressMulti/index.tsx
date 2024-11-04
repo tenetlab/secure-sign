@@ -37,12 +37,10 @@ function InputAddressMulti ({ available, availableLabel, className = '', default
   const [selected, setSelected] = useState<string[]>([]);
   const filter = useDebounce(_filter);
   const isNextTick = useNextTick();
-
-  console.log("", setFilter);
   
   useEffect((): void => {
     defaultValue && setSelected(defaultValue);
-  }, [defaultValue]);
+  }, [defaultValue, setFilter]);
 
   useEffect((): void => {
     selected && onChange(selected);
@@ -149,6 +147,9 @@ const StyledDiv = styled.div`
 
           .address-text {
             width: 50%;
+            text-overflow: ellipsis;
+            overflow: hidden;
+
           }
         }
 

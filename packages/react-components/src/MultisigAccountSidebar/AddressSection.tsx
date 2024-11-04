@@ -78,23 +78,22 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
         )}
           
       </div>
-      <div>
-        <Balances address={value} />
-      </div>
+      <Balances address={value} />
     </StyledAddressSection>
   );
 }
 
 const StyledAddressSection = styled.div`
-  width: 65%;
-  .ui--AddressMenu-addr {
-    width: 100% !important;
-  }
+  // width: calc(100% - 320px);
   .copy-btn {
     margin-left: 0rem;
     .ui--Button {
       border: none !important;
     }
+  }
+  
+  @media only screen and (max-width: 1600px) {
+    width: calc(100% - 135px);
   }
 `
 

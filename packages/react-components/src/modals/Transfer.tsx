@@ -262,7 +262,7 @@ const StyledModal = styled(Modal)`
     flex-direction: column;
     row-gap: 2rem;
     .ui--Labelled:not(.isSmall):not(.isOuter) >label {
-      top: 1.5rem;
+      top: 0.7rem;
       left: -8rem;
       width: 10%;
     }

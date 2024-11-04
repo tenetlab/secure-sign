@@ -6,14 +6,14 @@ import type { AddressFlags } from '@polkadot/react-hooks/types';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import { useToggle } from '@polkadot/react-hooks';
+import { useBalancesAll, useToggle } from '@polkadot/react-hooks';
 
 import AccountName from '../AccountName.js';
 import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
-import { styled } from '@polkadot/react-components';
+import { AddressInfo, styled } from '@polkadot/react-components';
 
 interface Props {
   value: string,
@@ -24,10 +24,22 @@ interface Props {
   accountIndex: string | undefined,
 }
 
-function AddressSection ({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
+const BAL_OPTS_DEFAULT = {
+  available: true,
+  bonded: true,
+  // locked: true,
+  // redeemable: false,
+  // reserved: true,
+  // total: true,
+  // unlocking: false,
+  // vested: false
+};
+
+function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
+  const balancesAll = useBalancesAll(value);
 
   return (
     <StyledAddressSection>
@@ -82,6 +94,12 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
               </Button.Group>
             </span>
           </CopyToClipboard>
+          <AddressInfo
+            address={value}
+            balancesAll={balancesAll}
+            withBalance={BAL_OPTS_DEFAULT}
+            withLabel
+          />
         </div>
       </div>
     </StyledAddressSection>
@@ -90,55 +108,124 @@ function AddressSection ({ accountIndex, defaultValue, editingName, flags, onCha
 
 const StyledAddressSection = styled.div`
   display: flex;
-  width: 70%;
+  width: 80%;
+  padding-right: 3rem;
+
+  @media only screen and (max-width: 1921px) {
+    width: 78%;
+  }
+
+  @media only screen and (max-width: 1700px) {
+    width: 75%;
+  }
+  
+  @media only screen and (max-width: 1580px) {
+    width: 73%;
+  }
+
+  @media only screen and (max-width: 1400px) {
+    width: 65%;
+  }
+
   .ui--AddressBook-Icon-Name {
     display: flex;
     align-items: center;
-    width: 30%;
+    width: 20%;
+
+    @media only screen and (max-width: 1580px) {
+      width: 16%;
+    }
+
+    @media only screen and (max-width: 1400px) {
+      width: 30%;
+    }
   }
   .ui--AddressBook-Address-Copy {
     display: flex;
     align-items: center;
-    width: 70%;
-    padding-right: 3rem;
+    width: 80%;
     justify-content: space-between;
     font-size: var(--font-size-account-name);
 
-    @media only screen and (max-width: 1600px) {
-        font-size: var(--font-size-account-name);
-        padding-right: 0;
-        .ui--AddressMenu-addr {
-          width: 70%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
+    @media only screen and (max-width: 1580px) {
+      width: 84%;
     }
 
     @media only screen and (max-width: 1400px) {
-        justify-content: end;
+      width: 70%;
+      justify-content: end;
     }
 
+    .ui--AddressMenu-copyaddr {
+      display: flex;
+      width: 40%;
+      justify-content: space-between;
+      .ui--AddressInfo {
+        align-items: center;
+      }
+      
+      @media only screen and (max-width: 1801px) {
+        width: 42%;
+      }
+
+      @media only screen and (max-width: 1760px) {
+        width: 45%;
+      }
+
+      @media only screen and (max-width: 1680px) {
+        width: 48%;
+      }
+
+      @media only screen and (max-width: 1580px) {
+        width: 52%;
+      }
+
+      @media only screen and (max-width: 1520px) {
+        width: 55%;
+      }
+
+      @media only screen and (max-width: 1400px) {
+        width: 90%;
+      }
+    }
+
+    .ui--AddressMenu-addr {
+      width: 60%;
+      padding-right: 3rem;
+      padding-left: 1rem;
+      word-break: break-all;
+
+      @media only screen and (max-width: 1801px) {
+        width: 58%;
+      }
+      
+      @media only screen and (max-width: 1760px) {
+        width: 55%;
+      }
+
+      @media only screen and (max-width: 1680px) {
+        width: 52%;
+      }
+
+      @media only screen and (max-width: 1580px) {
+        width: 48%;
+      }
+
+      @media only screen and (max-width: 1520px) {
+        width: 45%;
+      }
+    }
   }  
   .ui--AccountName-LeftPadding {
     width: 100%;
     padding-left: 1rem;
     padding-right: 1rem;
+    word-break: break-word;
     font-size: var(--font-size-account-name);
   }
   .ui--IdentityIcon-RightPadding {
     padding-right: 1rem;
     border: none;
-  }
-  @media screen and (min-width: 1440px) and (max-width: 1919px) {
-    .ui--AddressBook-Icon-Name {
-      width: 20%;
-    }
-    .ui--AddressBook-Address-Copy {
-      width: 80%;
-      @media only screen and (max-width: 1600px) {
-        width: 75%;
-      }
-    }
   }
 `
 
