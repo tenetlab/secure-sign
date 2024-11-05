@@ -318,7 +318,7 @@ const StyledModal = styled(Modal)`
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -15.5rem;
     top: 0.7rem;
-    width: 23%;
+    width: 28%;
   }
 
   @media only screen and (max-width: 1150px) {

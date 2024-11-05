@@ -154,21 +154,21 @@ export async function get_user_total_stake(
   address: string,
 ): Promise<{ address: string; stake: string }[]> {
   const { api_at_block } = await use_last_block(api);
-  
-  if(api.runtimeChain.toString() == 'commune') {
+
+  if (api.runtimeChain.toString() == 'commune') {
     if (!api_at_block.query?.subspaceModule?.stakeTo) {
       throw new Error("StakeTo query not available");
     }
   }
-  else if(api.runtimeChain.toString() == 'Bittensor') {
+  else if (api.runtimeChain.toString() == 'Bittensor') {
     if (!api_at_block.query?.subtensorModule?.stake) {
       throw new Error("Stake query not available");
     }
   }
-  
-  const stakeEntries = api.runtimeChain.toString() == 'commune' ? 
-    await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) : 
-    (api.runtimeChain.toString() == 'Bittensor' ? await api_at_block.query?.subtensorModule?.stake?.entries(address) : []);
+
+  const stakeEntries = api.runtimeChain.toString() == 'commune' ?
+    await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
+    (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
 
   const stakes = stakeEntries.map(([key, value]) => {
     const [, stakeToAddress] = key.args;

@@ -27,7 +27,7 @@ interface Props {
   setTransfer: (value: boolean) => void;
 }
 
-function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel, setTransfer }: Props): React.ReactElement<Props> {
+function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const [optionsMethod, setOptionsMethod] = useState<DropdownOptions>(() => methodOptions(api, defaultValue.section, filter));
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
@@ -36,16 +36,11 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
-      if (newValue === undefined) {
-        setTransfer(true)
-      } else {
-        setTransfer(false)
+        
         if (value !== newValue) {
-          // set this via callback, since the we are setting a function (alternatively... we have issues)
           setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
           onChange && onChange(newValue);
         }
-      }
     },
     [onChange, value]
   );
@@ -53,8 +48,7 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
   const _onSectionChange = useCallback(
     (newSection: string): void => {
       if (newSection !== value.section) {
-        const optionsMethod = methodOptions(api, newSection, filter);
-
+        let optionsMethod = methodOptions(api, newSection, filter);
         setOptionsMethod(optionsMethod);
         _onKeyChange(api.tx[newSection][optionsMethod[0].value]);
       }

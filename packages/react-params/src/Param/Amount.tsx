@@ -8,7 +8,7 @@ import type { Props } from '../types.js';
 
 import React, { useCallback, useMemo } from 'react';
 
-import { Input, InputNumber } from '@polkadot/react-components';
+import { ExtrinsicInputNumber, Input } from '@polkadot/react-components';
 import { bnToBn, formatNumber, isUndefined } from '@polkadot/util';
 
 import Bare from './Bare.js';
@@ -65,7 +65,7 @@ function Amount ({ className = '', defaultValue: { value }, isDisabled, isError,
           />
         )
         : (
-          <InputNumber
+          <ExtrinsicInputNumber
             bitLength={bitLength}
             className='full'
             defaultValue={defaultValue}

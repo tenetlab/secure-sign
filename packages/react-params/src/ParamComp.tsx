@@ -7,6 +7,7 @@ import type { ComponentMap, RawParam, RawParamOnChangeValue, RawParams } from '.
 import React, { useCallback } from 'react';
 
 import Param from './Param/index.js';
+import { styled } from '@polkadot/react-components';
 
 interface Props {
   defaultValue: RawParam;
@@ -29,10 +30,11 @@ function ParamComp ({ defaultValue, index, isDisabled, isError, name, onChange, 
       onChange(index, value),
     [index, onChange]
   );
-
+  
   return (
-    <div className='ui--Param-composite'>
+    <StyledDiv className={`ui--Param-composite`}>
       <Param
+        className={`${name == 'dest' && 'hidden_dest'}`}
         defaultValue={defaultValue}
         isDisabled={isDisabled}
         isError={isError}
@@ -45,8 +47,13 @@ function ParamComp ({ defaultValue, index, isDisabled, isError, name, onChange, 
         registry={registry}
         type={type}
       />
-    </div>
+    </StyledDiv>
   );
 }
 
+const StyledDiv = styled.div`
+  .hidden_dest > .ui--Labelled{    
+    display: none !important;    
+  }
+`;
 export default React.memo(ParamComp);

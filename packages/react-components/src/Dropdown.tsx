@@ -47,11 +47,11 @@ export type IDropdown<Option extends DropdownItemProps> = React.ComponentType<Pr
 function DropdownBase<Option extends DropdownItemProps> ({ allowAdd = false, children, className = '', defaultValue, dropdownClassName, isButton, isDisabled, isError, isFull, isMultiple, label, labelExtra, onAdd, onBlur, onChange, onClose, onSearch, options, placeholder, renderLabel, searchInput, tabIndex, transform, value, withEllipsis, withLabel }: Props<Option>): React.ReactElement<Props<Option>> {
   const lastUpdate = useRef<string>('');
   const [stored, setStored] = useState<string | undefined>();
-
+  
   const _setStored = useCallback(
     (value: string): void => {
       const json = JSON.stringify({ v: value });
-
+      
       if (lastUpdate.current !== json) {
         lastUpdate.current = json;
 

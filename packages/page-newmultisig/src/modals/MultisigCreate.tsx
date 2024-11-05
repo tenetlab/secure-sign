@@ -7,7 +7,7 @@ import type { ModalProps } from '../types.js';
 
 import React, { useCallback, useState } from 'react';
 
-import { Button, Input, InputAddressMulti, InputNumber, styled } from '@polkadot/react-components';
+import { Button, Input, InputAddressMulti_newmultisig, InputNumber_newmultisig, styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN } from '@polkadot/util';
@@ -69,6 +69,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
     uploadedSignatories: []
   });
   const [signatories, setSignatories] = useState<string[]>(['']);
+  const [selectedSignatories, SetSelectedSignatoris] = useState<number>(0);
   const [{ isThresholdValid, threshold }, setThreshold] = useState({ isThresholdValid: true, threshold: BN_TWO });
 
   const _createMultisig = useCallback(
@@ -113,7 +114,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
   );
 
   const isValid = isNameValid && isThresholdValid;
-
+  
   return (
     <StyledDiv
       className={className}
@@ -128,20 +129,23 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
         </div>
         <span>You must choose 2 accounts at least</span>
       </div>
-      <InputAddressMulti
+      <InputAddressMulti_newmultisig
         available={availableSignatories}
         availableLabel={t('New Signatory:')}
         maxCount={MAX_SIGNATORIES}
         onChange={_onChangeAddressMulti}
         valueLabel={t('Selected signatories:')}
+        setSelectedSignatoris={SetSelectedSignatoris}
+        selectedSignatories={selectedSignatories}
       />
       <div className='input_btn input_btn_margintop'>
-        <InputNumber
+        <InputNumber_newmultisig
           isError={!isThresholdValid}
           label={t('Threshold:')}
           onChange={_onChangeThreshold}
           value={threshold}
           className='threshold'
+          totalSignatories={selectedSignatories}
         />
         <Input
           autoFocus
@@ -189,7 +193,6 @@ const StyledDiv = styled.div`
     width: 100%;
     justify-content: space-between;
     .create {
-      // margin: 1rem 2rem 0 0;
       float: right;
       background-color: var(--bg-page);
       border: 1px solid var(--border-button);
@@ -198,6 +201,9 @@ const StyledDiv = styled.div`
     .ui.input.error input {
       background-color: var(--bg-menubar) !important;
       font-size: var(--font-size-base) !important;
+    }
+    .ui.input.error>input {
+      color: var(--color-text) !important;
     }
   }
   .threshold {

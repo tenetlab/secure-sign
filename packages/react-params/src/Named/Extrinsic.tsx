@@ -120,12 +120,13 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
   );
 
   const _onChangeMethod = useCallback(
-    (fn: SubmittableExtrinsicFunction<'promise'>) =>
-      setDisplay((prev): CallState =>
+    (fn: SubmittableExtrinsicFunction<'promise'>) => {
+      setDisplay((prev): CallState => 
         fn.section === prev.extrinsic.fn.section && fn.method === prev.extrinsic.fn.method
           ? prev
           : getCallState(fn)
-      ),
+      );     
+    },
     []
   );
 
