@@ -167,19 +167,22 @@ export async function get_user_total_stake(
   }
 
   const stakeEntries = api.runtimeChain.toString() == 'commune' ?
-    await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
-    (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
+  await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
+  (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
+var tests: number = 0
+const stakes = stakeEntries.map(([key, value]) => {
+  const [, stakeToAddress] = key.args;
+  const temp = value.toString();
+  tests += parseInt(temp);
+  const stake = tests.toString()
+  return {
+    address: stakeToAddress!.toString(),
+    stake,
+  };
+});
 
-  const stakes = stakeEntries.map(([key, value]) => {
-    const [, stakeToAddress] = key.args;
-    const stake = value.toString();
+const stakeInfo = stakes?.slice(-1);
 
-    return {
-      address: stakeToAddress!.toString(),
-      stake,
-    };
-  });
-
-  // Filter out any entries with zero stake
-  return stakes.filter((stake) => stake.stake !== "0");
+// Filter out any entries with zero stake
+return stakeInfo.filter((stake) => stake.stake !== "0");
 }

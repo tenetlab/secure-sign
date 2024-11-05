@@ -22,6 +22,7 @@
   "From": "From",
   "If the recipient account is new, the balance needs to be more than the existential deposit. Likewise if the sending account balance drops below the same value, the account will be removed from the state.": "If the recipient account is new, the balance needs to be more than the existential deposit. Likewise if the sending account balance drops below the same value, the account will be removed from the state.",
   "Injected": "Injected",
+  "Integer": "Integer",
   "Judge": "Judge",
   "Make Transfer": "Make Transfer",
   "Multisig": "Multisig",
