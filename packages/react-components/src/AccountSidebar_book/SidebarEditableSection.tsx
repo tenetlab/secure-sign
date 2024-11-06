@@ -56,6 +56,7 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
         value={address}
       />
       <AccountMenuButtons
+        value={address}
         flags={flags}
         isEditing={isEditing()}
         isEditingName={isEditingName}
@@ -76,7 +77,7 @@ const StyledEditableSection = styled.div`
   display: flex;
   background-color: var(--bg-subCard);
   margin: 1.5rem 0 1.5rem 0;
-  padding: 0.5rem 0 0.5rem 3rem;
+  padding: 1rem 0 1rem 3rem;
   border-radius: 1rem;
 `;
 

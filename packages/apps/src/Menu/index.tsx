@@ -23,7 +23,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
       <div className='menuContainer'>
         <div className='menuSection'>
           <LogoInfo logo={logo}/>
-          <h1 className='menuItems'>Multisig</h1>
+          <h1 className='menuItems'>SecureSign</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left'}}>
           <ThemeToggle setLogo={setLogo} logo={logo}/>

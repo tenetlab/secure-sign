@@ -343,6 +343,7 @@
   "Inject Keys": "",
   "Inject session keys (advanced)": "",
   "Injected": "",
+  "Integer": "",
   "Is retiring": "",
   "It is recommended that you create/store your accounts securely and externally from the app. On {{yourBrowser}} the following browser extensions are available for use -": "",
   "It is recommended that you store all keys externally to the in-page browser local storage, either on browser extensions, signers operating via QR codes or hardware devices. This option is provided for advanced users with strong backup policies.": "",

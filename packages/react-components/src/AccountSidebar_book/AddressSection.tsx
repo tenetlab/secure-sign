@@ -4,12 +4,12 @@
 import type { AddressFlags } from '@polkadot/react-hooks/types';
 
 import React from 'react';
-import CopyToClipboard from 'react-copy-to-clipboard';
+// import CopyToClipboard from 'react-copy-to-clipboard';
 
-import { useBalancesAll, useToggle } from '@polkadot/react-hooks';
+import { useBalancesAll } from '@polkadot/react-hooks';
 
 import AccountName from '../AccountName.js';
-import Button from '../Button/index.js';
+// import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
@@ -37,8 +37,8 @@ const BAL_OPTS_DEFAULT = {
 
 function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
-  const [isCopyShown, toggleIsCopyShown] = useToggle();
-  const NOOP = () => undefined;
+  // const [isCopyShown, toggleIsCopyShown] = useToggle();
+  // const NOOP = () => undefined;
   const balancesAll = useBalancesAll(value);
 
   return (
@@ -79,27 +79,13 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
         <div className='ui--AddressMenu-addr media--1400'>
           {value}
         </div>
-        <div className='ui--AddressMenu-copyaddr'>
-          <CopyToClipboard
-            text={value}
-          >
-            <span>
-              <Button.Group>
-                <Button
-                  icon={isCopyShown ? 'check' : 'copy'}
-                  label={isCopyShown ? t('Copied') : t('Copy')}
-                  onClick={isCopyShown ? NOOP : toggleIsCopyShown }
-                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
-                />
-              </Button.Group>
-            </span>
-          </CopyToClipboard>
+        <div className='ui--AddressMenu-copyaddr'>      
           <AddressInfo
             address={value}
             balancesAll={balancesAll}
             withBalance={BAL_OPTS_DEFAULT}
             withLabel
-          />
+          />      
         </div>
       </div>
     </StyledAddressSection>
@@ -108,23 +94,23 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
 
 const StyledAddressSection = styled.div`
   display: flex;
-  width: 80%;
+  width: 72%;
   padding-right: 3rem;
 
   @media only screen and (max-width: 1921px) {
-    width: 78%;
+    width: 70%;
   }
 
   @media only screen and (max-width: 1700px) {
-    width: 75%;
+    width: 68%;
   }
   
   @media only screen and (max-width: 1580px) {
-    width: 73%;
+    width: 64%;
   }
 
   @media only screen and (max-width: 1400px) {
-    width: 65%;
+    width: 60%;
   }
 
   .ui--AddressBook-Icon-Name {
@@ -159,7 +145,7 @@ const StyledAddressSection = styled.div`
     .ui--AddressMenu-copyaddr {
       display: flex;
       width: 40%;
-      justify-content: space-between;
+      justify-content: center;
       .ui--AddressInfo {
         align-items: center;
       }

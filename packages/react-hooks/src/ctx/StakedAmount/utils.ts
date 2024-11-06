@@ -154,32 +154,35 @@ export async function get_user_total_stake(
   address: string,
 ): Promise<{ address: string; stake: string }[]> {
   const { api_at_block } = await use_last_block(api);
-  
-  if(api.runtimeChain.toString() == 'commune') {
+
+  if (api.runtimeChain.toString() == 'commune') {
     if (!api_at_block.query?.subspaceModule?.stakeTo) {
       throw new Error("StakeTo query not available");
     }
   }
-  else if(api.runtimeChain.toString() == 'Bittensor') {
+  else if (api.runtimeChain.toString() == 'Bittensor') {
     if (!api_at_block.query?.subtensorModule?.stake) {
       throw new Error("Stake query not available");
     }
   }
-  
-  const stakeEntries = api.runtimeChain.toString() == 'commune' ? 
-    await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) : 
-    (api.runtimeChain.toString() == 'Bittensor' ? await api_at_block.query?.subtensorModule?.stake?.entries(address) : []);
 
-  const stakes = stakeEntries.map(([key, value]) => {
-    const [, stakeToAddress] = key.args;
-    const stake = value.toString();
+  const stakeEntries = api.runtimeChain.toString() == 'commune' ?
+  await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
+  (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
+var tests: number = 0
+const stakes = stakeEntries.map(([key, value]) => {
+  const [, stakeToAddress] = key.args;
+  const temp = value.toString();
+  tests += parseInt(temp);
+  const stake = tests.toString()
+  return {
+    address: stakeToAddress!.toString(),
+    stake,
+  };
+});
 
-    return {
-      address: stakeToAddress!.toString(),
-      stake,
-    };
-  });
+const stakeInfo = stakes?.slice(-1);
 
-  // Filter out any entries with zero stake
-  return stakes.filter((stake) => stake.stake !== "0");
+// Filter out any entries with zero stake
+return stakeInfo.filter((stake) => stake.stake !== "0");
 }

@@ -22,9 +22,21 @@ interface Props {
 }
 
 function SelectMethod ({ api, className = '', defaultValue, isDisabled, isError, onChange, options, value }: Props): React.ReactElement<Props> | null {
+
   const transform = useCallback(
-    (method: string): SubmittableExtrinsicFunction<'promise'> =>
-      api.tx[value.section][method],
+    (method: string): SubmittableExtrinsicFunction<'promise'> => {      
+      if(method == 'transferKeepAlive')
+        return api.tx['balances'][method];
+      else if(method == 'addStake' || method == 'register' || method == 'removeStake') {
+        if(api.runtimeChain.toString() == 'commune')
+          return api.tx['subspaceModule'][method];
+        else
+          return api.tx['subtensorModule'][method];
+      }
+      else {
+        return api.tx[value.section][method];
+      }
+    },
     [api, value]
   );
 
@@ -33,7 +45,7 @@ function SelectMethod ({ api, className = '', defaultValue, isDisabled, isError,
   }
 
   options = options.filter((option) => {
-    return option.value == 'addStake' || option.value == 'register' || option.value == 'removeStake'
+    return option.value == 'addStake' || option.value == 'register' || option.value == 'removeStake' || option.value == 'transferKeepAlive'
   })
   
   return (

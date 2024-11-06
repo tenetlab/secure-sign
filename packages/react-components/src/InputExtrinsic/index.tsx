@@ -24,6 +24,7 @@ interface Props {
   label: React.ReactNode;
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   withLabel?: boolean;
+  setTransfer: (value: boolean) => void;
 }
 
 function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
@@ -35,11 +36,11 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
-      if (value !== newValue) {
-        // set this via callback, since the we are setting a function (alternatively... we have issues)
-        setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
-        onChange && onChange(newValue);
-      }
+        
+        if (value !== newValue) {
+          setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
+          onChange && onChange(newValue);
+        }
     },
     [onChange, value]
   );
@@ -47,8 +48,7 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
   const _onSectionChange = useCallback(
     (newSection: string): void => {
       if (newSection !== value.section) {
-        const optionsMethod = methodOptions(api, newSection, filter);
-
+        let optionsMethod = methodOptions(api, newSection, filter);
         setOptionsMethod(optionsMethod);
         _onKeyChange(api.tx[newSection][optionsMethod[0].value]);
       }

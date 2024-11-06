@@ -8,25 +8,28 @@ import React from 'react';
 
 export default function createOptions (api: ApiPromise, sectionName: string, filter?: (section: string, method?: string) => boolean): DropdownOptions {
   const section = api.tx[sectionName];
+  const sectionBalance = api.tx['balances'];
+
+  const combinedSection = { ...section, ...sectionBalance };
   const isAllowed = !filter || filter(sectionName);
 
-  if (!section || Object.keys(section).length === 0 || !isAllowed) {
+  if (!combinedSection || Object.keys(combinedSection).length === 0 || !isAllowed) {
     return [];
   }
-
+  
   return Object
-    .keys(section)
+    .keys(combinedSection)
     .filter((s) =>
       !s.startsWith('$') &&
       (!filter || filter(sectionName, s))
     )
     .sort()
     .map((value): DropdownOption => {
-      const method = section[value];
-      const inputs = method.meta.args
-        .map((arg) => arg.name.toString())
-        .join(', ');
-
+      const method = combinedSection[value];      
+      let inputs = method.meta.args
+      .map((arg) => arg.name.toString())
+      .join(', ');
+      
       return {
         className: 'ui--DropdownLinked-Item',
         key: `${sectionName}_${value}`,

@@ -56,8 +56,10 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
           value={value}
           withSidebar={false}
         />
-        <div className='ui--AddressMenu-addr'>
-          {value}
+        <div className='ui--AddressMenu-addr'
+            data-testid='short-address'
+        >
+          {value.toString().slice(0, 40)}...
           <CopyToClipboard
             text={value}
           >

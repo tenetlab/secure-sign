@@ -15,7 +15,7 @@ import { useCall } from './useCall.js';
  */
 function useBalancesAllImpl (accountAddress: string): DeriveBalancesAll | undefined {
   const { api } = useApi();
-
+  
   return useCall<DeriveBalancesAll>(api.derive.balances?.all, [accountAddress]);
 }
 

@@ -12,8 +12,10 @@ import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 interface Props {
+  value: string,
   className?: string;
   flags: AddressFlags;
   isEditingName: boolean;
@@ -28,10 +30,12 @@ interface Props {
   recipientId: string;
 }
 
-function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
+function AccountMenuButtons ({value, className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
   // const api = useApi();
+  const [isCopyShown, toggleIsCopyShown] = useToggle();
+  const NOOP = () => undefined;
 
   const _onForgetAddress = useCallback(
     (): void => {
@@ -75,6 +79,18 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
       {isEditing
         ? (
           <Button.Group className='ui--AddressMenu-buttons'>
+            <CopyToClipboard
+              text={value}
+            >
+              <Button.Group>
+                <Button
+                  icon={isCopyShown ? 'check' : 'copy'}
+                  label={isCopyShown ? t('Copied') : t('Copy')}
+                  onClick={isCopyShown ? NOOP : toggleIsCopyShown }
+                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
+                />
+              </Button.Group>
+            </CopyToClipboard>
             <Button
               icon='times'
               label={t('Cancel')}
@@ -97,6 +113,20 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
                 onClick={toggleIsTransferOpen}
               />
             )} */}
+            <CopyToClipboard
+              text={value}
+            >
+              <span>
+                <Button.Group>
+                  <Button
+                    icon={isCopyShown ? 'check' : 'copy'}
+                    label={isCopyShown ? t('Copied') : t('Copy')}
+                    onClick={isCopyShown ? NOOP : toggleIsCopyShown }
+                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
+                  />
+                </Button.Group>
+              </span>
+            </CopyToClipboard>
             {!flags.isOwned && !flags.isInContacts && (
               <Button
                 icon='plus'
@@ -134,30 +164,32 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 }
 
 const StyledDiv = styled.div`
-  width: 20%;
+  width: 28%;
   padding-right: 3rem;
-
+  align-content: center;
+  
   .ui--Button-Group {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0;
+    margin-top: 0 !important;
   }
   
   @media only screen and (max-width: 1921px) {
-    width: 22%;
+    width: 30%;
   }
 
   @media only screen and (max-width: 1700px) {
-    width: 25%;
+    width: 34%;
   }
 
   @media only screen and (max-width: 1580px) {
-    width: 27%;
+    width: 36%;
   }
 
   @media only screen and (max-width: 1400px) {
-    width: 35%;
+    width: 40%;
   }
 `;
 
