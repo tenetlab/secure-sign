@@ -75,6 +75,7 @@ export async function use_last_block(api: ApiPromise) {
 }
 
 export async function get_all_stake_out(api: ApiPromise) {
+  
   const { api_at_block, block_number, block_hash_hex } =
     await use_last_block(api);
   console.debug(`Querying StakeTo at block ${block_number}`);

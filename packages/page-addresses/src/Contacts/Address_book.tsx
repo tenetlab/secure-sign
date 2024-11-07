@@ -1,12 +1,8 @@
 // Copyright 2017-2024 @polkadot/app-addresses authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-// import type { ActionStatus } from '@polkadot/react-components/Status/types';
-// import type { HexString } from '@polkadot/util/types';
-
 import React, { useCallback, useEffect, useState, useRef } from 'react';
 
-// import { Button, ChainLock, Columar, Forget, LinkExternal, Menu, Popup, Tags, TransferModal } from '@polkadot/react-components';
 import { useApi, useDeriveAccountInfo } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { isFunction } from '@polkadot/util';

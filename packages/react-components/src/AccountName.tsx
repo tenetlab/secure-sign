@@ -9,7 +9,6 @@ import React, { useEffect, useState } from 'react';
 
 import { statics } from '@polkadot/react-api/statics';
 import { useApi, useDeriveAccountInfo } from '@polkadot/react-hooks';
-// import { AccountSidebarCtx } from '@polkadot/react-hooks/ctx/AccountSidebar';
 import { formatNumber, isCodec, isFunction, isU8a, stringToU8a, u8aEmpty, u8aEq, u8aToBn } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 

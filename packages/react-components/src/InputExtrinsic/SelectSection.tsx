@@ -6,8 +6,6 @@ import type { DropdownOptions } from '../util/types.js';
 
 import React, { useEffect } from 'react';
 
-// import Dropdown from '../Dropdown.js';
-// import { filterDropdownItems } from '../util/index.js';
 import { useApi } from '@polkadot/react-hooks';
 
 interface Props {
@@ -33,17 +31,6 @@ function setSectionFromChain (chain: string, onChange: (value: string) => void) 
   }
 }
 
-// function getSectionNameFromChain (chain: string): any {
-//   switch (chain) {
-//     case 'commune':
-//       return 'SubSpaceModule';
-//     case 'Bittensor':
-//       return 'SubtensorModule';
-//     default:
-//       return '';
-//   }
-// }
-
 function isBitOrCom (chain: string): any {
   switch (chain) {
     case 'commune':
@@ -63,17 +50,6 @@ function SelectSection ({ onChange }: Props): React.ReactElement<Props> {
   }, [])
   return (
     <></>
-    // <Dropdown
-    //   className={`${className} ui--DropdownLinked-Sections`}
-    //   defaultValue={defaultValue}
-    //   isDisabled={isDisabled}
-    //   isError={isError}
-    //   onChange={onChange}
-    //   onSearch={filterDropdownItems}
-    //   options={options}
-    //   value={value.section}
-    //   withLabel={false}
-    // />
   );
 }
 

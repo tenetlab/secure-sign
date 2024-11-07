@@ -244,7 +244,7 @@ function renderValidatorPrefs ({ stakingInfo, withValidatorPrefs = false }: Prop
 function createBalanceItems (formatIndex: number, lookup: Record<string, string>, t: TFunction, { address, balanceDisplay, balancesAll, bestNumber, convictionLocks, democracyLocks, isAllLocked, otherBonded, ownBonded, stakingInfo, votingOf, withBalanceToggle, withLabel }: { address: string; balanceDisplay: BalanceActiveType; balancesAll?: DeriveBalancesAll | DeriveBalancesAccountData; bestNumber?: BlockNumber; convictionLocks?: RefLock[]; democracyLocks?: DeriveDemocracyLock[]; isAllLocked: boolean; otherBonded: BN[]; ownBonded: BN; stakingInfo?: DeriveStakingAccount; votingOf?: Voting; withBalanceToggle: boolean, withLabel: boolean }, stakedAmount: BigInt): React.ReactNode {
   const allItems: React.ReactNode[] = [];
   const deriveBalances = balancesAll as DeriveBalancesAll;  
-
+  
   const { api } = useApi();
   
   !withBalanceToggle && balanceDisplay.total && allItems.push(
@@ -382,7 +382,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
     </React.Fragment>
   );
   // balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) && 
-  !(api.runtimeChain.toString() == 'Bittensor' || 'commune') &&
+  ((api.runtimeChain.toString() !== 'Bittensor') && (api.runtimeChain.toString() !== 'commune')) &&
   allItems?.push(
     <React.Fragment key={5}>
       {/* <Label label={t('bonded')} /> */}
@@ -407,9 +407,8 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
     </React.Fragment>
   );
 
-  (api.runtimeChain.toString() == 'Bittensor' || 'commune') && allItems.push(
+  ((api.runtimeChain.toString() === 'Bittensor') || (api.runtimeChain.toString() === 'commune')) && allItems.push(
     <React.Fragment key={5}>
-      {/* <Label label={t('bonded')} /> */}
       <Label label={t('Staked')} />
       <FormatBalance
         className='result'
@@ -598,7 +597,7 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
     'staking ': t('via Staking/Bond'),
     'vesting ': t('via Vesting')
   });
-
+  
   const {
     api,
     get_user_total_stake
@@ -630,6 +629,9 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
             setStakedAmount(BigInt(staked))            
           })
           .catch(err => console.error(err));
+      }
+      else {
+
       }
     }
   }

@@ -48,17 +48,15 @@ function ExtrinsicsTransfer({ className = '', recipientId: propRecipientId, send
   const { api } = useApi();
   const [amount, setAmount] = useState<BN | undefined>(BN_ZERO);
   const [hasAvailable] = useState(true);
-  const [isProtected, setIsProtected] = useState(true);
+  const isProtected = true;
   const [isAll, setIsAll] = useState(false);
   const [senderIdMeta, setSenderIdMeta] = useState<KeyringJson$Meta>();
   const [[maxTransfer], setMaxTransfer] = useState<[BN | null, boolean]>([null, false]);
   const [recipientId, setRecipientId] = useState<string | null>(null);
-  const [senderId, setSenderId] = useState<string | null>(null);
+  const senderId = null;
   const [[, recipientPhish], setPhishing] = useState<[string | null, string | null]>([null, null]);
   const balances = useCall<DeriveBalancesAll>(api.derive.balances?.all, [propSenderId || senderId]);
   const accountInfo = useCall<AccountInfoWithProviders | AccountInfoWithRefCount>(api.query.system.account, [propSenderId || senderId]);
-
-  console.log("", setSenderId);
 
   useEffect((): void => {
     const fromId = propSenderId || senderId;
@@ -101,8 +99,6 @@ function ExtrinsicsTransfer({ className = '', recipientId: propRecipientId, send
       : accountInfo.consumers.isZero()
     : true;
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
-
-  console.log('', setIsProtected);
 
   return (
     <StyledDiv

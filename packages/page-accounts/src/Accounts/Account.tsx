@@ -5,23 +5,17 @@
 //
 /* eslint-disable deprecation/deprecation */
 
-// import type { ApiPromise } from '@polkadot/api';
-// import type { SubmittableExtrinsic } from '@polkadot/api/types';
-import type { DeriveDemocracyLock, DeriveStakingAccount } from '@polkadot/api-derive/types';
-// import type { Ledger, LedgerGeneric } from '@polkadot/hw-ledger';
+import type { DeriveStakingAccount } from '@polkadot/api-derive/types';
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
-// import type { Option } from '@polkadot/types';
 import type { ProxyDefinition } from '@polkadot/types/interfaces';
 import type { KeyringAddress } from '@polkadot/ui-keyring/types';
 import type { AccountBalance, Delegation } from '../types.js';
 
 import React, { useCallback, useEffect, useMemo } from 'react';
 
-import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
 import { AddressInfo, AddressSmall, Button, Forget, styled, TransferModal } from '@polkadot/react-components';
-import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useStakingInfo, useToggle } from '@polkadot/react-hooks';
+import { useAccountInfo, useApi, useBalancesAll, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
-// import { settings } from '@polkadot/ui-settings';
 import { BN, BN_ZERO, isFunction } from '@polkadot/util';
 
 import Backup from '../modals/Backup.js';
@@ -36,10 +30,8 @@ import RecoverAccount from '../modals/RecoverAccount.js';
 import RecoverSetup from '../modals/RecoverSetup.js';
 import UndelegateModal from '../modals/Undelegate.js';
 import { useTranslation } from '../translate.js';
-// import { createMenuGroup } from '../util.js';
 import useMultisigApprovals from './useMultisigApprovals.js';
 import CopyToClipboard from 'react-copy-to-clipboard';
-// import useProxies from './useProxies.js';
 
 interface Props {
   account: KeyringAddress;
@@ -51,16 +43,6 @@ interface Props {
   setBalance: (address: string, value: AccountBalance) => void;
   toggleFavorite: (address: string) => void;
 }
-
-// interface DemocracyUnlockable {
-//   democracyUnlockTx: SubmittableExtrinsic<'promise'> | null;
-//   ids: BN[];
-// }
-
-// interface ReferendaUnlockable {
-//   referendaUnlockTx: SubmittableExtrinsic<'promise'> | null;
-//   ids: [classId: BN, refId: BN][];
-// }
 
 const BAL_OPTS_DEFAULT = {
   available: true,
@@ -85,7 +67,7 @@ const BAL_OPTS_DEFAULT = {
 //   vested: true
 // };
 
-function calcVisible (filter: string, name: string, tags: string[]): boolean {
+function calcVisible(filter: string, name: string, tags: string[]): boolean {
   if (filter.length === 0) {
     return true;
   }
@@ -97,7 +79,7 @@ function calcVisible (filter: string, name: string, tags: string[]): boolean {
   }, name.toLowerCase().includes(_filter));
 }
 
-function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
+function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
   if (!stakingInfo?.unlocking) {
     return BN_ZERO;
   }
@@ -110,72 +92,13 @@ function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
   return total;
 }
 
-// function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
-//   return api.tx.utility && ids.length
-//     ? api.tx.utility.batch(
-//       ids
-//         .map((id) => api.tx.democracy.removeVote(id))
-//         .concat(api.tx.democracy.unlock(address))
-//     )
-//     : null;
-// }
-
-// function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
-//   if (!api.tx.utility || !ids.length) {
-//     return null;
-//   }
-
-//   const inner = ids.map(([classId, refId]) => api.tx[palletReferenda].removeVote(classId, refId));
-
-//   ids
-//     .reduce((all: BN[], [classId]) => {
-//       if (!all.find((id) => id.eq(classId))) {
-//         all.push(classId);
-//       }
-
-//       return all;
-//     }, [])
-//     .forEach((classId): void => {
-//       inner.push(api.tx[palletReferenda].unlock(classId, address));
-//     });
-
-//   return api.tx.utility.batch(inner);
-// }
-
-// async function showLedgerAddress (getLedger: () => LedgerGeneric | Ledger, meta: KeyringJson$Meta, ss58Prefix: number): Promise<void> {
-//   const currApp = settings.get().ledgerApp;
-//   const ledger = getLedger();
-
-//   if (currApp === 'migration' || currApp === 'generic') {
-//     await (ledger as LedgerGeneric).getAddress(ss58Prefix, true, meta.accountOffset || 0, meta.addressOffset || 0);
-//   } else {
-//     // This will always be the `chainSpecific` setting if the above condition is not met
-//     await (ledger as Ledger).getAddress(true, meta.accountOffset || 0, meta.addressOffset || 0);
-//   }
-// }
-
-// const transformRecovery = {
-//   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
-// };
-
-function Account ({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
+function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  // const [isExpanded, toggleIsExpanded] = useToggle(false);
-  // const { queueExtrinsic } = useQueue();
   const { api } = useApi();
-  // const { getLedger } = useLedger();
-  const bestNumber = useBestNumber();
   const balancesAll = useBalancesAll(address);
   const stakingInfo = useStakingInfo(address);
-  const democracyLocks = useCall<DeriveDemocracyLock[]>(api.derive.democracy?.locks, [address]);
-  // const recoveryInfo = useCall<RecoveryConfig | null>(api.query.recovery?.recoverable, [address], transformRecovery);
   const multiInfos = useMultisigApprovals(address);
-  // const proxyInfo = useProxies(address);
   const { flags: { isMultisig }, name: accName, tags } = useAccountInfo(address);
-  const convictionLocks = useAccountLocks('referenda', 'convictionVoting', address);
-  // const [{ democracyUnlockTx }, setDemocracyUnlock] = useState<DemocracyUnlockable>({ democracyUnlockTx: null, ids: [] });
-  // const [{ referendaUnlockTx }, setReferandaUnlock] = useState<ReferendaUnlockable>({ ids: [], referendaUnlockTx: null });
-  // const [vestingVestTx, setVestingTx] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [isBackupOpen, toggleBackup] = useToggle();
   const [isDeriveOpen, toggleDerive] = useToggle();
   const [isForgetOpen, toggleForget] = useToggle();
@@ -193,10 +116,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
 
-  // console.log(democracyUnlockTx, referendaUnlockTx, vestingVestTx);
-  
   useEffect((): void => {
-    if (balancesAll) {
+    if (balancesAll) {      
       setBalance(address, {
         // some chains don't have "active" in the Ledger
         bonded: stakingInfo?.stakingLedger.active?.unwrap() || BN_ZERO,
@@ -206,52 +127,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
         transferable: balancesAll.transferable || balancesAll.availableBalance,
         unbonding: calcUnbonding(stakingInfo)
       });
-      
-      // api.tx.vesting?.vest && setVestingTx(() =>
-      //   balancesAll.vestingLocked.isZero()
-      //     ? null
-      //     : api.tx.vesting.vest()
-      // );
     }
   }, [address, api, balancesAll, setBalance, stakingInfo]);
-
-  useEffect((): void => {
-    // bestNumber && democracyLocks && setDemocracyUnlock(
-    //   (prev): DemocracyUnlockable => {
-    //     const ids = democracyLocks
-    //       .filter(({ isFinished, unlockAt }) => isFinished && bestNumber.gt(unlockAt))
-    //       .map(({ referendumId }) => referendumId);
-
-    //     if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
-    //       return prev;
-    //     }
-
-    //     return {
-    //       democracyUnlockTx: createClearDemocracyTx(api, address, ids),
-    //       ids
-    //     };
-    //   }
-    // );
-  }, [address, api, bestNumber, democracyLocks]);
-
-  useEffect((): void => {
-    // bestNumber && convictionLocks && setReferandaUnlock(
-    //   (prev): ReferendaUnlockable => {
-    //     const ids = convictionLocks
-    //       .filter(({ endBlock }) => endBlock.gt(BN_ZERO) && bestNumber.gt(endBlock))
-    //       .map(({ classId, refId }): [classId: BN, refId: BN] => [classId, refId]);
-
-    //     if (JSON.stringify(prev.ids) === JSON.stringify(ids)) {
-    //       return prev;
-    //     }
-
-    //     return {
-    //       ids,
-    //       referendaUnlockTx: createClearReferendaTx(api, address, ids)
-    //     };
-    //   }
-    // );
-  }, [address, api, bestNumber, convictionLocks]);
 
   const isVisible = useMemo(
     () => calcVisible(filter, accName, tags),
@@ -283,7 +160,7 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
   if (!isVisible) {
     return null;
   }
-
+  
   return (
     <>
       <StyledTr className={`${className} isExpanded isFirst packedBottom`}>
@@ -409,8 +286,8 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
                   <Button
                     icon={isCopyShown ? 'check' : 'copy'}
                     label={isCopyShown ? t('Copied') : t('Copy')}
-                    onClick={isCopyShown ? NOOP : toggleIsCopyShown }
-                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP }
+                    onClick={isCopyShown ? NOOP : toggleIsCopyShown}
+                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
                   />
                 </Button.Group>
               </span>
@@ -425,14 +302,6 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
                 onClick={toggleTransfer}
               />
             )}
-            {/* <Popup
-              isDisabled={!menuItems.length}
-              value={
-                <Menu>
-                  {menuItems}
-                </Menu>
-              }
-            /> */}
           </Button.Group>
         </td>
       </StyledTr>

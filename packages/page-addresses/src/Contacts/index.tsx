@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, styled, SummaryBox, Table_Book } from '@polkadot/react-components';
 import { useAddresses, useFavorites, useNextTick, useToggle } from '@polkadot/react-hooks';
 
-// import CreateModal from '../modals/Create.js';
 import CreateModal from '../modals_book/Create.js';
 import { useTranslation } from '../translate.js';
 import Address from './Address_book.js';

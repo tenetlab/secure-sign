@@ -41,8 +41,6 @@ function ModalBase ({ children, className = '', header, onClose, size = 'medium'
       window.removeEventListener('keydown', listenKeyboard, true);
     };
   }, [listenKeyboard]);
-
-  console.log('------------', header?.toString().charAt(0));
   
   return createPortal(
     <StyledDiv

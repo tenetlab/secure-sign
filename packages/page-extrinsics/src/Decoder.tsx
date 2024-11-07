@@ -51,8 +51,6 @@ function Decoder ({ className, defaultValue, setLast }: Props): React.ReactEleme
   const { t } = useTranslation();
   const { api } = useApi();
   const [{ decoded, extrinsicCall, extrinsicError, extrinsicFn, extrinsicKey, extrinsicPayload, isCall }, setExtrinsicInfo] = useState<ExtrinsicInfo>(DEFAULT_INFO);
-  const [isTransfer, setTrasfer] = useState<boolean>(false)
-  console.log("", isTransfer);
   
   const _setExtrinsicHex = useCallback(
     (hex: string): void => {
@@ -142,7 +140,6 @@ function Decoder ({ className, defaultValue, setLast }: Props): React.ReactEleme
             isDisabled
             key={`extrinsicKey:${extrinsicKey}`}
             label={t('decoded call')}
-            setTransfer={setTrasfer}
           />
           <CallDisplay
             className='details'

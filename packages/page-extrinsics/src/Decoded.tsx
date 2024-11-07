@@ -82,22 +82,7 @@ function Decoded ({ className, extrinsic, isCall, payload, withData = true }: Pr
             withCopy
           />
         )}
-        {/* {withHash && (
-          <Output
-            isDisabled
-            label={t('encoded call hash')}
-            value={hash}
-            withCopy
-          />
-        )} */}
       </Columar.Column>
-      {/* <Columar.Column>
-        <DecodedInspect
-          hex={hex}
-          inspect={inspect}
-          label={t('encoding details')}
-        />
-      </Columar.Column> */}
     </StyledColumar>
   );
 }

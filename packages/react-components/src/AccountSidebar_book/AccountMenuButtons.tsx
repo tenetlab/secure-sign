@@ -6,7 +6,6 @@ import type { AddressFlags } from '@polkadot/react-hooks/types';
 import React, { useCallback } from 'react';
 
 import { useToggle } from '@polkadot/react-hooks';
-// import { isFunction } from '@polkadot/util';
 
 import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
@@ -33,7 +32,6 @@ interface Props {
 function AccountMenuButtons ({value, className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
-  // const api = useApi();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
 
@@ -105,14 +103,6 @@ function AccountMenuButtons ({value, className = '', flags, isEditing, isEditing
         )
         : (
           <Button.Group className='ui--AddressMenu-buttons'>
-            {/* {(isFunction(api.api.tx.balances?.transferAllowDeath) || isFunction(api.api.tx.balances?.transfer)) && (
-              <Button
-                icon='paper-plane'
-                isDisabled={isEditing}
-                label={t('Send')}
-                onClick={toggleIsTransferOpen}
-              />
-            )} */}
             <CopyToClipboard
               text={value}
             >

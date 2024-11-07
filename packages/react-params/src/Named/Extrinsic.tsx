@@ -21,7 +21,6 @@ import { isUndefined, objectSpread } from '@polkadot/util';
 
 import paramComponents from '../Extra/index.js';
 import { balanceCalls, balanceCallsOverrides } from '../overrides.js';
-import ExtrinsicsTransfer from './ExtrinsicsTransfer.js';
 
 interface Props {
   className?: string;
@@ -91,7 +90,7 @@ function getCallState(fn: SubmittableExtrinsicFunction<'promise'>, values: RawPa
 function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isError, isPrivate, label, onChange, onEnter, onError, onEscape, withLabel, extrinsicUpper, error }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [accountId, setAccountId] = useState<string | null>(null);
-  const [isTransfer, setTrasfer] = useState<boolean>(false)
+  // const [isTransfer, setTrasfer] = useState<boolean>(false)
 
   const [{ extrinsic, values }, setDisplay] = useState<CallState>(() => getCallState(defaultValue, defaultArgs));
 
@@ -160,41 +159,35 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
           label={label}
           onChange={_onChangeMethod}
           withLabel={withLabel}
-          setTransfer={setTrasfer}
+          // setTransfer={setTrasfer}
         />
       </div>
-      {isTransfer === false ? (
-        <div className='ui--Params-Decoded-Button'>
-          <Params
-            key={`${section}.${method}:params`}
-            onChange={_setValues}
-            onEnter={onEnter}
-            onEscape={onEscape}
-            overrides={overrides}
-            params={params}
-            values={values}
-          />
-          <Decoded
+      <div className='ui--Params-Decoded-Button'>
+        <Params
+          key={`${section}.${method}:params`}
+          onChange={_setValues}
+          onEnter={onEnter}
+          onEscape={onEscape}
+          overrides={overrides}
+          params={params}
+          values={values}
+        />
+        <Decoded
+          extrinsic={extrinsicUpper}
+          isCall
+        />
+        {error && !extrinsic && (
+          <MarkError content={error} />
+        )}
+        <Button.Group>
+          <TxButton
+            accountId={accountId}
             extrinsic={extrinsicUpper}
-            isCall
+            icon='sign-in-alt'
+            label={t('Submit Transaction')}
           />
-          {error && !extrinsic && (
-            <MarkError content={error} />
-          )}
-          <Button.Group>
-            <TxButton
-              accountId={accountId}
-              extrinsic={extrinsicUpper}
-              icon='sign-in-alt'
-              label={t('Submit Transaction')}
-            />
-          </Button.Group>
-        </div>
-      ) : (
-        <div className='ui--Params-Decoded-Button'>
-          <ExtrinsicsTransfer  senderId={accountId}/>
-        </div>
-      )}
+        </Button.Group>
+      </div>
     </div>
   );
 }

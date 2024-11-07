@@ -135,7 +135,8 @@ function createWebpack (context, mode = 'production') {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(mode),
-          WS_URL: JSON.stringify(process.env.WS_URL)
+          WS_URL: JSON.stringify(process.env.WS_URL),
+          BUILD_MODE: JSON.stringify(process.env.BUILD_MODE),
         }
       }),
       new webpack.optimize.SplitChunksPlugin(),

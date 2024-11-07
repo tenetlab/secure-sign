@@ -34,14 +34,6 @@ function useInfoImpl (): State {
     api.query.gilt.queueTotals
   ], OPT_GILT);
 
-  // useEffect((): void => {
-  //   info.activeIndex &&
-  //     api.query.gilt.active
-  //       .entries()
-  //       .then((value) => console.log(JSON.stringify(value)))
-  //       .catch(console.error);
-  // }, [api, info?.activeIndex]);
-
   return useMemo(
     () => ({ info }),
     [info]
