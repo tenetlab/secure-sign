@@ -26,7 +26,7 @@ function Foot ({ className = '', footer, isEmpty }: Props): React.ReactElement<P
 const StyledTfoot = styled.tfoot`
   td {
     color: var(--color-table-foot);
-    font: var(--font-sans);
+    // font: var(--font-sans);
     font-weight: var(--font-weight-normal);
     padding: 0.75rem 1rem 0.25rem;
     text-align: right;

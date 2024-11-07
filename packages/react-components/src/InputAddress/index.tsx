@@ -366,6 +366,7 @@ const StyledDropdown = styled(Dropdown)`
 
       .name {
         margin-left: 0;
+        margin-top: 0.2rem;
 
         > .ui--AccountName {
           height: auto;

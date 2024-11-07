@@ -69,7 +69,7 @@ const StyledLi = styled.li`
       a {
         color: var(--color-text-hover) !important;
         background-color: var(--item-active) !important;
-        font-weight: var(--font-weight-bold) !important;
+        font-weight: 700 !important;
       }
     }
 

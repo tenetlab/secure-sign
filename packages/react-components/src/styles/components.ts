@@ -42,7 +42,7 @@ export default `
   }
 
   button.ui--Button {
-    font: var(--font-sans);
+    // font: var(--font-sans);
     font-size: var(--font-size-button);
   }
 
@@ -57,19 +57,12 @@ export default `
       border-top-right-radius: 0;
       min-width: 5rem;
     }
-
-    .large .ui.selection.dropdown {
-      // border-left: none;
-      // border-bottom-left-radius: 0;
-      // border-top-left-radius: 0;
-    }
   }
 
   .ui--Identicon-React-Base {
     border: 1px solid var(--border-identicon);
     border-radius: 50%;
     display: inline-block;
-    overflow: hidden;
 
     svg circle:first-child {
       fill: var(--bg-identicon-circle);

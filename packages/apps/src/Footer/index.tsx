@@ -16,14 +16,11 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
     return (
         <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
             <div className='menuContainer'>
-                {/* <div className='menuSection'> */}
-                <div className='footer-item'>
-                    <span className='content-center'>@2021-2024. All rights reserved</span>
-                    <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
-                    {/* <span>Cookies Privacy & Policy</span> */}
-                    <img src='/logo-footer.webp' width={100} alt='footer' />
-                </div>
-                {/* </div> */}
+              <div className='footer-item'>
+                  <span className='content-center'>@2021-2024. All rights reserved</span>
+                  <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
+                  <img src='/logo-footer.webp' width={100} alt='footer' />
+              </div>
             </div>
         </StyledDiv>
     );
@@ -31,7 +28,6 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   width: 100%;
-  // padding: 0rem 2rem 1rem 1rem;
   .content-center {
     align-content: center
   }
@@ -43,13 +39,10 @@ const StyledDiv = styled.div`
   background-color: var(--bg-page);
 
   .menuContainer {
-    flex-direction: row;
-    align-items: center;
-    // display: flex;
-    justify-content: space-between;
-    padding: 0 1rem;
+    background: var(--bg-footer);
+    color: var(--color-footer);
+    padding: 0.6rem 1rem;
     width: 100%;
-    border-radius: 1rem;
   }
 
   .footer-item {

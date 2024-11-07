@@ -59,19 +59,23 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
         <div className='ui--AddressMenu-addr'
             data-testid='short-address'
         >
-          {value.toString().slice(0, 40)}...
-          <CopyToClipboard
-            text={value}
-          >
-            <span className='copy-btn'>
-                <Button
-                  icon={isCopyShown ? 'check' : 'copy'}
-                  label={isCopyShown ? t('Copied') : t('')}
-                  onClick={isCopyShown ? NOOP : toggleIsCopyShown}
-                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
-                />
-            </span>
-          </CopyToClipboard>
+          <div className='ui--Value'>
+            {value.toString().slice(0, 40)}
+          </div>
+          <div className='ui--Copy'>
+            <CopyToClipboard
+              text={value}
+            >
+              <span className='copy-btn'>
+                  <Button
+                    icon={isCopyShown ? 'check' : 'copy'}
+                    label={isCopyShown ? t('Copied') : t('')}
+                    onClick={isCopyShown ? NOOP : toggleIsCopyShown}
+                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
+                  />
+              </span>
+            </CopyToClipboard>
+          </div>
         </div>
         {accountIndex && (
           <div className='ui--AddressMenu-index'>
@@ -80,13 +84,16 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
         )}
           
       </div>
-      <Balances address={value} />
+      <Balances 
+        address={value} 
+        className='ui--Balance-Info'
+      />
     </StyledAddressSection>
   );
 }
 
 const StyledAddressSection = styled.div`
-  // width: calc(100% - 320px);
+  width: calc(100% - 360px);
   .copy-btn {
     margin-left: 0rem;
     .ui--Button {
@@ -94,8 +101,26 @@ const StyledAddressSection = styled.div`
     }
   }
   
+  .ui--AddressMenu-addr {
+    display: flex;
+  }
+  .ui--Balance-Info {
+    flex-basis: 17rem;
+    padding: 0 1.5rem;
+  }
+
+  .ui--Value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-content: center;
+  }
+  .ui--Copy {
+    flex-basis: 50px;
+  }
+  
   @media only screen and (max-width: 1600px) {
-    width: calc(100% - 135px);
+    width: calc(100% - 160px);
   }
 `
 

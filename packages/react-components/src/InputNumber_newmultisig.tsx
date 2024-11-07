@@ -282,7 +282,7 @@ const StyledInput = styled(Input)`
     align-content: center;
     justify-content: center;
     right: 1.2rem;
-    top: 0.5rem;
+    top: 0.9rem;
   }
   .span-slash {
     font-size: var(--font-size-h2);

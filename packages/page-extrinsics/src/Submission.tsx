@@ -170,6 +170,7 @@ const StyledDiv = styled.div`
   }
   .address {
     width: 70%;
+    padding-top: 0.3rem;
   }
   .empty-account {
     width: 100%;

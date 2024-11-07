@@ -35,12 +35,10 @@ const StyledSection = styled.section`
   }
   .column:not(.column--expander) {
     flex: none !important;
-    // column-gap: 4.2rem !important;
   }
   .balanceExpander {
     font-size: var(--font-size-base);
-    justify-content: flex-start;
-    // padding-left: 60px;
+    justify-content: center;
     .column {
       width: auto;
       max-width: 18.57rem;

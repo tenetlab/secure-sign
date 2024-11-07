@@ -143,18 +143,15 @@ const StyledDiv = styled.div`
 
   .ui--AddressSection {
     display: flex;
-    padding-right: 2rem;
-    // flex-direction: row;
-    // flex-wrap: nowrap;
     align-items: center;
 
     .ui--AddressSection__AddressColumn {
-      flex: 1;
-      // margin-left: 1rem;
+      width: calc(100% - 82px - 17rem);
       padding: 0 1rem;
 
       .ui--AccountName {
         max-width: 21.5rem;
+        font-size: 25px;
         overflow: hidden;
         white-space: normal;
       }
@@ -179,9 +176,6 @@ const StyledDiv = styled.div`
   .ui--AddressMenu-addr {
     word-break: break-all;
     width: 100%;
-    // white-space: nowrap;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
     margin: 0.5rem 0 0;
     color: var(--color-label);
   }
@@ -212,7 +206,6 @@ const StyledDiv = styled.div`
   }
 
   section {
-    // position: relative;
 
     &:not(:last-child) {
       margin-bottom: 1rem;
@@ -232,7 +225,6 @@ const StyledDiv = styled.div`
     }
 
     &.withDivider {
-      // padding-top: 1rem;
 
       ::before {
         position: absolute;

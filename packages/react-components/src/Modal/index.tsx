@@ -114,7 +114,7 @@ const StyledDiv = styled.div`
     max-width: 80rem;
 
     color: var(--color-text);
-    font: var(--font-sans);
+    // font: var(--font-sans);
 
     h1 {
       border-bottom: 3px solid var(--border-input-hover);

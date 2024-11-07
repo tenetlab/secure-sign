@@ -76,9 +76,9 @@ const StyledDiv = styled.div`
       list-style: none;
       margin: 0 0 0 0;
       padding: 0;
-      font-size: var(--font-size-h1);
+      font-size: var(--font-size-h0);
       color: var(--color-text-hover);
-      font-weight: var(--font-weight-normal);
+      font-weight: var(--font-weight-bold);
       text-transform: uppercase;
     }
   }
