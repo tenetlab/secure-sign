@@ -126,7 +126,7 @@ const transformRecovery = {
 
 function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance, toggleMultisig, isMultisigOpen, isProxyOverviewOpen, toggleProxyOverview, multisigAddress }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
-  const { api, isDevelopment: isDevelopmentApiProps, isEthereum: isEthereumApiProps } = useApi();
+  const { api } = useApi();
   const bestNumber = useBestNumber();
   const balancesAll = useBalancesAll(address);
   const stakingInfo = useStakingInfo(address);
@@ -144,7 +144,6 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const [isForgetOpen, toggleForget] = useToggle();
   const [isIdentityMainOpen, toggleIdentityMain] = useToggle();
   const [isIdentitySubOpen, toggleIdentitySub] = useToggle();
-  // const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
   const [isPasswordOpen, togglePassword] = useToggle();
   const [isRecoverAccountOpen, toggleRecoverAccount] = useToggle();
   const [isRecoverSetupOpen, toggleRecoverSetup] = useToggle();
@@ -152,7 +151,9 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const [isDelegateOpen, toggleDelegate] = useToggle();
   const [isUndelegateOpen, toggleUndelegate] = useToggle();
 
-  console.log("", isDevelopmentApiProps, isEthereumApiProps, democracyUnlockTx, referendaUnlockTx, vestingVestTx);
+  useEffect(() => {
+    if(democracyUnlockTx && referendaUnlockTx && vestingVestTx) {}
+  },[])
 
 
   useEffect((): void => {
@@ -256,16 +257,6 @@ function Account({ account: { address, meta }, className = '', delegation, filte
             withShortAddress
             isActive={multisigAddress === address ? true : false}
           />
-          {/* <Menu.Item
-            icon='sitemap'
-            key='proxy-overview'
-            label={proxy?.[0].length
-              ? t('Manage proxies')
-              : t('Add proxy')
-            }
-            className='proxyItem'
-            onClick={toggleProxyOverview}
-          /> */}
           {isBackupOpen && (
             <Backup
               address={address}

@@ -3,22 +3,17 @@
 
 import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { KeyringAddress } from '@polkadot/ui-keyring/types';
-import type { AccountBalance, Delegation, SortedAccount } from '../types.js';
+import type { Delegation, SortedAccount } from '../types.js';
 import type { SortCategory } from '../util.js';
 
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { styled} from '@polkadot/react-components';
-import { useAccounts, useDelegations, useFavorites, useToggle } from '@polkadot/react-hooks';
+import { useAccounts, useDelegations, useFavorites } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 
 import Multisig from '../modals/MultisigCreate.js';
 import { sortAccounts } from '../util.js';
-
-interface Balances {
-  accounts: Record<string, AccountBalance>;
-  summary?: AccountBalance;
-}
 
 interface Props {
   className?: string;
@@ -37,19 +32,17 @@ const STORE_FAVS = 'accounts:favorites';
 
 function Overview({ className = '', onStatusChange }: Props): React.ReactElement<Props> {
   const { allAccounts } = useAccounts();
-  const [isMultisigOpen, toggleMultisig] = useToggle();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
-  const [balances, setBalances] = useState<Balances>({ accounts: {} });
+  const balances = { accounts: {} };
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
-  const [{ sortBy, sortFromMax }, setSortBy] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
+  const { sortBy, sortFromMax } = DEFAULT_SORT_CONTROLS;
   const delegations = useDelegations();
 
   // We use favorites only to check if it includes some element,
   // so Object is better than array for that because hashmap access is O(1).
   
-  useEffect(() => {
-
-  }, [isMultisigOpen, toggleFavorite, setBalances, sortAccounts, setSortBy, sortedAccounts])
+  console.log(toggleFavorite, sortedAccounts);
+  
   const favoritesMap = useMemo(
     () => Object.fromEntries(favorites.map((x) => [x, true])),
     [favorites]
@@ -103,7 +96,7 @@ function Overview({ className = '', onStatusChange }: Props): React.ReactElement
   return (
     <StyledDiv className={className}>
       <Multisig
-        onClose={toggleMultisig}
+        onClose={() =>{}}
         onStatusChange={onStatusChange}
       />
     </StyledDiv>

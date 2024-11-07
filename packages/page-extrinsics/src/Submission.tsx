@@ -7,12 +7,9 @@ import type { DecodedExtrinsic } from './types.js';
 
 import React, { useCallback, useState } from 'react';
 
-// import { Button, InputAddress, MarkError, TxButton } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 import { Extrinsic } from '@polkadot/react-params';
-// import { BalanceFree } from '@polkadot/react-query';
 
-// import Decoded from './Decoded.js';
 import { useTranslation } from './translate.js';
 import { styled } from '@polkadot/react-components';
 
@@ -44,7 +41,6 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
   const { t } = useTranslation();
   const { apiDefaultTxSudo } = useApi();
   const { api } = useApi();
-  // const [accountId, setAccountId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [extrinsicUpper, setExtrinsicUpper] = useState<SubmittableExtrinsic<'promise'> | null>(null);
   const [{ defaultArgs, defaultFn }] = useState<DefaultExtrinsic>(() => extractDefaults(defaultValue, apiDefaultTxSudo));
@@ -63,21 +59,9 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
 
   return (
     <StyledDiv className={className}>
-      {/* <h1>Extrinsics</h1> */}
       {
         api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
           <>
-            {/* <InputAddress
-            label={t('selected account')}
-            labelExtra={
-              <BalanceFree
-                // label={<label>{t('free balance')}</label>}
-                params={accountId}
-              />
-            }
-            onChange={setAccountId}
-            type='account'
-          /> */}
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
@@ -87,28 +71,6 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
               extrinsicUpper={extrinsicUpper}
               error={error}
             />
-            {/* <Decoded
-            extrinsic={extrinsicUpper}
-            isCall
-          /> */}
-            {/* {error && !extrinsicUpper && (
-            <MarkError content={error} />
-          )} */}
-            {/* <Button.Group>
-            <TxButton
-              extrinsic={extrinsicUpper}
-              icon='sign-in-alt'
-              isUnsigned
-              label={t('Submit Unsigned')}
-              withSpinner
-            />
-            <TxButton
-              accountId={accountId}
-              extrinsic={extrinsicUpper}
-              icon='sign-in-alt'
-              label={t('Submit Transaction')}
-            />
-          </Button.Group> */}
           </> :
           <div className='empty-account'>
             <div className='detail'>

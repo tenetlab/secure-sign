@@ -6,7 +6,6 @@ import React, { useCallback, useEffect } from 'react';
 import { useAccountInfo } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 
-// import Tags from '../Tags.js';
 import AccountMenuButtons from './AccountMenuButtons.js';
 import AddressSection from './AddressSection.js';
 import { styled } from '@polkadot/react-components';

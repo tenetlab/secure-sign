@@ -10,7 +10,6 @@ import { Modal, styled } from '@polkadot/react-components';
 import { CallExpander } from '@polkadot/react-params';
 
 import PaymentInfo from './PaymentInfo.js';
-// import { useTranslation } from './translate.js';
 
 interface Props {
   accountId?: string | null;
@@ -21,7 +20,6 @@ interface Props {
 }
 
 function Transaction ({ accountId, className, currentItem: { extrinsic, isUnsigned, payload }, onError, tip }: Props): React.ReactElement<Props> | null {
-  // const { t } = useTranslation();
 
   if (!extrinsic) {
     return null;
@@ -30,7 +28,6 @@ function Transaction ({ accountId, className, currentItem: { extrinsic, isUnsign
   return (
     <StyledModalColumns
       className={className}
-      // hint={t('The details of the transaction including the type, the description (as available from the chain metadata) as well as any parameters and fee estimations (as available) for the specific type of call.')}
     >
       <CallExpander
         isHeader

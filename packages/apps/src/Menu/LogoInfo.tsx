@@ -1,8 +1,6 @@
 // Copyright 2017-2024 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-// import type { RuntimeVersion } from '@polkadot/types/interfaces';
-
 import React from 'react';
 
 import { styled } from '@polkadot/react-components';
@@ -16,7 +14,6 @@ interface Props {
 
 function LogoInfo({ className, logo }: Props): React.ReactElement<Props> {
 
-  // const runtimeVersion = useCall<RuntimeVersion>(isApiReady && api.rpc.state.subscribeRuntimeVersion);
   const { ipnsChain } = useIpfs();
   const canToggle = !ipnsChain;
 

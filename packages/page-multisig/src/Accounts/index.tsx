@@ -68,9 +68,9 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
   const { allAccounts } = useAccounts();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [balances, setBalances] = useState<Balances>({ accounts: {} });
-  const [filterOn, setFilter] = useState<string>('');
+  const filterOn = '';
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
-  const [{ sortBy, sortFromMax }, setSortBy] = useState<SortControls>(DEFAULT_SORT_CONTROLS);
+  const { sortBy, sortFromMax } = DEFAULT_SORT_CONTROLS;
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
@@ -79,12 +79,6 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
   const { multisigAddress, onUpdateName } = useContext(AddressContext)
   const multiInfos = useMultisigApprovals(multisigAddress || '');
   const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
-
-
-
-  console.log("setFilter", setFilter);
-  console.log("setSortBy", setSortBy);
-
 
   const setBalance = useCallback(
     (account: string, balance: AccountBalance) =>

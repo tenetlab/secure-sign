@@ -7,7 +7,6 @@ import { useAccountInfo } from '@polkadot/react-hooks';
 
 import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
-// import Identity from './Identity.js';
 import MultisigPage from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
 import { MultisigOutput } from '@polkadot/react-components';

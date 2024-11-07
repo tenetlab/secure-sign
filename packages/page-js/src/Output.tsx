@@ -46,8 +46,6 @@ const renderEntry = ({ args, type }: Log, index: number): React.ReactNode => {
       </div>
     );
   } catch (error) {
-    // e.g. this would hit here -
-    // console.log(api.createType('ProxyType').__proto__)
     return (
       <div
         className={`js--Log ${type} error`}

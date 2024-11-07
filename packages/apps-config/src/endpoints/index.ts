@@ -22,7 +22,7 @@ function defaultT (keyOrText: string, text?: string | TOptions, options?: TOptio
 }
 
 export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, withSort = true): LinkOption[] {
-  return [
+  var chainList = [
     ...createCustom(t),
     {
       isDisabled: false,
@@ -54,15 +54,23 @@ export function createWsEndpoints (t: TFunction = defaultT, firstOnly = false, w
       value: ''
     },
     ...expandEndpoints(t, prodChains, firstOnly, withSort),
-    // {
-    //   isDisabled: false,
-    //   isHeader: true,
-    //   text: t('rpc.header.test', 'Test networks', { ns: 'apps-config' }),
-    //   textBy: '',
-    //   ui: {},
-    //   value: ''
-    // },
-    // ...expandEndpoints(t, testChains, firstOnly, withSort),
     ...createOwn(t)
-  ].filter(({ isDisabled }) => !isDisabled);
+  ]
+  
+  if(process.env.BUILD_MODE === 'production') {
+  chainList = [
+    {
+      isDisabled: false,
+      isHeader: true,
+      isSpaced: true,
+      text: t('rpc.header.live', 'Live networks', { ns: 'apps-config' }),
+      textBy: '',
+      ui: {},
+      value: ''
+    },
+    ...expandEndpoints(t, prodChains, firstOnly, withSort),
+    ...createOwn(t)
+  ]
+  }
+  return chainList.filter(({ isDisabled }) => !isDisabled);
 }

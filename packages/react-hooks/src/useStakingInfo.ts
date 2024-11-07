@@ -9,7 +9,7 @@ import { useCall } from './useCall.js';
 
 function useStakingInfoImpl (accountId: string | null): DeriveStakingAccount | undefined {
   const { api } = useApi();
-
+  
   return useCall<DeriveStakingAccount>(api.derive.staking?.account, [accountId]);
 }
 

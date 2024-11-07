@@ -4,12 +4,10 @@
 import type { AddressFlags } from '@polkadot/react-hooks/types';
 
 import React from 'react';
-// import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { useBalancesAll } from '@polkadot/react-hooks';
 
 import AccountName from '../AccountName.js';
-// import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
@@ -37,8 +35,6 @@ const BAL_OPTS_DEFAULT = {
 
 function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
-  // const [isCopyShown, toggleIsCopyShown] = useToggle();
-  // const NOOP = () => undefined;
   const balancesAll = useBalancesAll(value);
 
   return (

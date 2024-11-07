@@ -24,7 +24,6 @@ interface Props {
   label: React.ReactNode;
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   withLabel?: boolean;
-  setTransfer: (value: boolean) => void;
 }
 
 function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
@@ -36,7 +35,6 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
-        
         if (value !== newValue) {
           setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
           onChange && onChange(newValue);

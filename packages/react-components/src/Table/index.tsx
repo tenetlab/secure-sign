@@ -3,8 +3,6 @@
 
 import React from 'react';
 
-// import { useWindowColumns } from '@polkadot/react-hooks';
-
 import { styled } from '../styled.js';
 import Column from './Column/index.js';
 import Row from './Row/index.js';
@@ -31,21 +29,10 @@ function TableBase ({ children, className = '', empty, emptySpinner, isFixed, is
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 
-  // const headerNode = (
-  //   <Head
-  //     filter={filter}
-  //     header={header}
-  //     isEmpty={isEmpty}
-  //   >
-  //     {headerChildren}
-  //   </Head>
-  // );
-
   return (
     <StyledDiv className={`${className} ui--Table`}>
       {legend}
       <table className={`${(isFixed && !isEmpty) ? 'isFixed' : 'isNotFixed'} ${isInline ? 'isInline' : ''}`}>
-        {/* {headerNode} */}
         <Body
           empty={empty}
           emptySpinner={emptySpinner}

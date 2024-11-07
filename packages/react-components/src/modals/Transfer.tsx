@@ -54,7 +54,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
   const { api } = useApi();
   const [amount, setAmount] = useState<BN | undefined>(BN_ZERO);
   const [hasAvailable] = useState(true);
-  const [isProtected, setIsProtected] = useState(true);
+  const isProtected = true;
   const [isAll, setIsAll] = useState(false);
   const [senderIdMeta, setSenderIdMeta] = useState<KeyringJson$Meta>();
   const [[maxTransfer], setMaxTransfer] = useState<[BN | null, boolean]>([null, false]);
@@ -105,8 +105,6 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
       : accountInfo.consumers.isZero()
     : true;
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
-
-  console.log('', setIsProtected);
   
   return (
     <StyledModal
@@ -171,28 +169,11 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
                     maxValue={maxTransfer}
                     onChange={setAmount}
                   />
-                  {/* <InputBalance
-                    defaultValue={api.consts.balances?.existentialDeposit}
-                    isDisabled
-                    label={t('existential deposit')}
-                  /> */}
                 </>
               )
             }
           </Modal.Columns>
           <Modal.Columns hint={t('')}>
-            {/* {isFunction(api.tx.balances?.transferKeepAlive) && (
-              <Toggle
-                className='typeToggle'
-                label={
-                  isProtected
-                    ? t('Transfer with account keep-alive checks')
-                    : t('Normal transfer without keep-alive checks')
-                }
-                onChange={setIsProtected}
-                value={isProtected}
-              />
-            )} */}
             {canToggleAll && (
               <Toggle
                 className='typeToggle'
@@ -207,9 +188,6 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
             {!isProtected && !noReference && (
               <MarkWarning content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')} />
             )}
-            {/* {noFees && (
-              <MarkWarning content={t('The transaction, after application of the transfer fees, will drop the available balance below the existential deposit. As such the transfer will fail. The account needs more free funds to cover the transaction fees.')} />
-            )} */}
           </Modal.Columns>
         </div>
       </Modal.Content>
