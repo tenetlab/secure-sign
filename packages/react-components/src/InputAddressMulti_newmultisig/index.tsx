@@ -131,6 +131,7 @@ const StyledDiv = styled.div`
       // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
+        font-size: var(--font-size-h3) !important;
         margin-top: 1rem;
         padding: 0.5rem 2rem 0.5rem 2rem;
         background-color: var(--bg-menubar);

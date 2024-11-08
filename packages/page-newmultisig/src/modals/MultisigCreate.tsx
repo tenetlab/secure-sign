@@ -185,6 +185,16 @@ const StyledDiv = styled.div`
   }
   .button_end {
     justify-content: flex-end !important;
+    .ui--Icon {
+      background: var(--bg-base) !important;
+    }
+  }
+  .input_btn_margintop {
+    font-size: var(--font-size-base) !important;
+    .ui.input>input {
+      font-size: var(--font-size-base) !important;
+      background: var(--bg-menubar) !important;
+    }
   }
   .input_btn {
     margin-top: 1.5rem;

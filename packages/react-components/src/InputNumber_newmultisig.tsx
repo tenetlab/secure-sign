@@ -294,7 +294,7 @@ const StyledInput = styled(Input)`
   .siUnit {
     bottom: 0.85rem;
     color: var(--color-label);
-    font-size: var(--font-size-tiny);
+    // font-size: var(--font-size-tiny);
     font-weight: var(--font-weight-label);
     position: absolute;
     font-weight: var(--font-weight-bold);
