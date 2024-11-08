@@ -68,12 +68,10 @@ function SelectedAddressToggle({ address, className = '', filter, isHidden, noTo
 const StyledDiv = styled.div`
   align-items: center;
   border: 1px solid transparent; /* #eee */
-  border-radius: 0.25rem;
-  // cursor: pointer;
+  border-radius: 0.5rem;
   display: flex;
   justify-content: space-between;
-  margin: 0.125rem;
-  padding: 0.125rem 0.25rem;
+  padding: 0.5rem 0.5rem;
   text-align: left;
   vertical-align: middle;
   white-space: nowrap;
@@ -94,7 +92,6 @@ const StyledDiv = styled.div`
   }
   
   &:hover {
-    // border-color: var(--border-input-hover);
     background-color: var(--bg-menu-hover)
   }
 

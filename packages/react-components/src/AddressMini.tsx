@@ -105,7 +105,7 @@ function AddressMini ({ balance, bonded, children, className = '', iconInfo, isH
 }
 
 const StyledDiv = styled.div`
-  overflow-x: hidden;
+  // overflow-x: hidden;
   padding: 0 0.25rem 0 1rem;
   text-align: left;
   text-overflow: ellipsis;

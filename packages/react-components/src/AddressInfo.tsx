@@ -690,8 +690,7 @@ export default withMulti(
   styled(AddressInfo)`
     align-items: flex-start;
     display: flex;
-    // flex: 1;
-    min-width: 14rem;
+    min-width: 15rem;
     white-space: nowrap;
 
     &:not(.ui--AddressInfo-expander) {

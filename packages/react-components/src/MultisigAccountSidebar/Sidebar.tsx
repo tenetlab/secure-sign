@@ -94,11 +94,11 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--bg-page);
-  // max-width: 30.42rem;
-  // min-width: 30.42rem;
-  // overflow-y: hidden;
   width: 100%;
 
+  .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
+    padding-top: 1.2rem !important;
+  }
   .account_detail {
     display: flex;
     @media only screen and (max-width: 1400px) {
@@ -134,7 +134,6 @@ const StyledDiv = styled.div`
     background: var(--bg-menubar);
     border: 1px solid var(--border-card);
     display: flex;
-    // flex-direction: column;
     margin: 0 0 1rem 1rem;
     justify-content: space-between;
     padding: 2rem 2rem 2rem 2rem;
@@ -143,18 +142,15 @@ const StyledDiv = styled.div`
 
   .ui--AddressSection {
     display: flex;
-    padding-right: 2rem;
-    // flex-direction: row;
-    // flex-wrap: nowrap;
     align-items: center;
 
     .ui--AddressSection__AddressColumn {
-      flex: 1;
-      // margin-left: 1rem;
+      width: calc(100% - 82px - 17rem);
       padding: 0 1rem;
 
       .ui--AccountName {
         max-width: 21.5rem;
+        font-size: 25px;
         overflow: hidden;
         white-space: normal;
       }
@@ -179,9 +175,6 @@ const StyledDiv = styled.div`
   .ui--AddressMenu-addr {
     word-break: break-all;
     width: 100%;
-    // white-space: nowrap;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
     margin: 0.5rem 0 0;
     color: var(--color-label);
   }
@@ -212,7 +205,6 @@ const StyledDiv = styled.div`
   }
 
   section {
-    // position: relative;
 
     &:not(:last-child) {
       margin-bottom: 1rem;
@@ -232,7 +224,6 @@ const StyledDiv = styled.div`
     }
 
     &.withDivider {
-      // padding-top: 1rem;
 
       ::before {
         position: absolute;

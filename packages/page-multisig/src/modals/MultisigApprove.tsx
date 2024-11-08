@@ -317,7 +317,7 @@ const StyledModal = styled(Modal)`
   }
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -15.5rem;
-    top: 0.7rem;
+    top: 1.1rem;
     width: 28%;
   }
 
@@ -340,7 +340,7 @@ const StyledModal = styled(Modal)`
     .ui--Labelled-content{
       .ui {
         padding-left: 1rem !important;
-      
+        padding-top: 1.2rem;
       }
     }
   }

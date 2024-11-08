@@ -53,7 +53,7 @@ const StyledThead = styled.thead`
   th {
     border-radius: 1rem;
     background: var(--bg-menubar);
-    font: var(--font-sans);
+    // font: var(--font-sans);
     font-size: var(--font-size-h1) !important;
     font-weight: var(--font-weight-normal);
     padding: 3rem 2rem;

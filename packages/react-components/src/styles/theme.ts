@@ -31,9 +31,9 @@ export default `
 
     .ui--Button {
       &.isIcon:not(.isDisabled):not(.withoutLink):not(:hover) {
-        .ui--Icon {
-          color: ${colorLink};
-        }
+        // .ui--Icon {
+        //   color: ${colorLink};
+        // }
       }
     }
 

@@ -213,7 +213,7 @@ const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     .ui--Labelled:not(.isSmall):not(.isOuter) >label {
-      top: 0.7rem;
+      top: 1.1rem;
       left: -8rem;
       width: 10%;
     }

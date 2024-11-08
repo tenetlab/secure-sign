@@ -54,7 +54,7 @@ function Grouping ({ className = '', isActive, name, routes }: Props): React.Rea
 const StyledLi = styled.li`
   cursor: pointer;
   position: relative;
-line-height: .214rem;
+  line-height: .214rem; 
   .groupHdr {
     border-radius: 0.25rem;
     padding: 0.857rem 1.375rem;

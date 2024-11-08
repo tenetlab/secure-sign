@@ -141,21 +141,20 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
 }
 
 const StyledDiv = styled.div`
-  // width: 320px;
-  // display: flex;
-  // justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-basis: 360px;
   .ui--Button-Group {
     display: flex;
-    // flex-direction: row;
     justify-content: flex-start;
     margin: 0;
   }
 
   @media only screen and (max-width: 1600px) {
-    width: 135px;
     .ui--Button-Group {
       flex-direction: column;
       row-gap: 1rem;
+      flex-basis: 160px
     }
   }
 `;

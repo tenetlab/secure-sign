@@ -52,7 +52,7 @@ const StyledThead = styled.thead`
 
   th {
     background: var(--bg-table);
-    font: var(--font-sans);
+    // font: var(--font-sans);
     font-weight: var(--font-weight-normal);
     padding: 0.375rem 1rem;
     text-align: right;

@@ -130,7 +130,7 @@ const StyledSpan = styled.span`
   }
 
   .ui--FormatBalance-unit {
-    font-size: var(--font-percent-tiny);
+    font-size: var(--font-size-base);
   }
 
   .ui--FormatBalance-value {

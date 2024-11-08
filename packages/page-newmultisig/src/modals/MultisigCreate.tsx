@@ -131,7 +131,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
       </div>
       <InputAddressMulti_newmultisig
         available={availableSignatories}
-        availableLabel={t('New Signatory:')}
+        availableLabel={t('New signatory:')}
         maxCount={MAX_SIGNATORIES}
         onChange={_onChangeAddressMulti}
         valueLabel={t('Selected signatories:')}
@@ -185,6 +185,16 @@ const StyledDiv = styled.div`
   }
   .button_end {
     justify-content: flex-end !important;
+    .ui--Icon {
+      background: var(--bg-base) !important;
+    }
+  }
+  .input_btn_margintop {
+    font-size: var(--font-size-base) !important;
+    .ui.input>input {
+      font-size: var(--font-size-base) !important;
+      background: var(--bg-menubar) !important;
+    }
   }
   .input_btn {
     margin-top: 1.5rem;
@@ -223,6 +233,7 @@ const StyledDiv = styled.div`
     .detail {
       display: flex;
       font-size: var(--font-size-h3);  
+      font-weight: 600;
       p {
         padding-left: 1rem;
       }

@@ -113,9 +113,12 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     border-color: var(--border-input-hover);
   }
 
+  .ui.selection.dropdown>.dropdown.icon {
+    top: 1.3em;
+  }
   .ui.selection.dropdown .menu>.item {
     height: 48px;
-    padding: 1.2rem 1rem 0 1rem !important;
+    padding: 1rem 1rem 0 1rem !important;
     border-radius: 0.7rem;
   }
 
@@ -433,7 +436,8 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   #root {
     background: var(--bg-page);
     color: var(--color-text);
-    font: var(--font-sans);
+    // font: var(--font-sans);
+    font-family: "Nunito" !important; 
     font-weight: var(--font-weight-normal);
     height: 100%;
   }
@@ -529,7 +533,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   body {
     height: 100%;
     margin: 0;
-    font: var(--font-sans);
+    // font: var(--font-sans);
   }
 
   br {
@@ -561,7 +565,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
   h1, h2, h3, h4, h5 {
     color: var(--color-header);
-    font: var(--font-sans);
+    // font: var(--font-sans);
     font-weight: var(--font-weight-header);
     margin-bottom: 0.25rem;
   }
@@ -603,7 +607,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   label {
     box-sizing: border-box;
     display: block;
-    font: var(--font-sans);
+    // font: var(--font-sans);
   }
 
   // we treat h5 and label as equivalents
@@ -618,6 +622,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
 
   button {
     font-size: var(--font-size-small);
+    font-family: "Open Sans";
     font-weight: var(--font-weight-normal);
   }
 

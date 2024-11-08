@@ -239,7 +239,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
   const [{ isQrHashed, qrAddress, qrPayload, qrResolve }, setQrState] = useState<QrState>(() => ({ isQrHashed: false, qrAddress: '', qrPayload: new Uint8Array() }));
   const [isBusy, setBusy] = useState(false);
   const [isRenderError, toggleRenderError] = useToggle();
-  const [isSubmit, setIsSubmit] = useState(true);
+  const isSubmit = true;
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [senderInfo, setSenderInfo] = useState<AddressProxy>(() => ({ isMultiCall: false, isUnlockCached: false, multiRoot: null, proxyRoot: null, signAddress: requestAddress, signPassword: '' }));
   const [signedOptions, setSignedOptions] = useState<Partial<SignerOptions>>({});
@@ -421,8 +421,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
 
     return null;
   }
-
-  console.log(setIsSubmit);
 
   return (
     <>

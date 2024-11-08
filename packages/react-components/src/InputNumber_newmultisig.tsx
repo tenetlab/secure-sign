@@ -282,19 +282,19 @@ const StyledInput = styled(Input)`
     align-content: center;
     justify-content: center;
     right: 1.2rem;
-    top: 0.5rem;
+    top: 0.9rem;
   }
   .span-slash {
     font-size: var(--font-size-h2);
   }
   .span-sig {
-    font-size: var(--font-size-base);
-    padding-top: 0.3rem;
+    font-size: var(--font-size-h3);
+    padding-top: 0.1rem;
   }
   .siUnit {
     bottom: 0.85rem;
     color: var(--color-label);
-    font-size: var(--font-size-tiny);
+    // font-size: var(--font-size-tiny);
     font-weight: var(--font-weight-label);
     position: absolute;
     font-weight: var(--font-weight-bold);

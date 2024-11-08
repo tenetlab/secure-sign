@@ -3,7 +3,7 @@
 
 import type { BN } from '@polkadot/util';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { BN_ZERO } from '@polkadot/util';
 
@@ -13,14 +13,10 @@ interface Props {
 }
 
 function Tip ({ onChange }: Props): React.ReactElement<Props> | null {
-  const [tip, setTip] = useState<BN | undefined>();
-  const [showTip, setShowTip] = useState(false);
 
   useEffect((): void => {
-    onChange(showTip ? tip : BN_ZERO);
-  }, [onChange, showTip, tip]);
-
-  console.log(setTip, setShowTip);
+    onChange(BN_ZERO);
+  }, [onChange]);
   
   return (
     <></>

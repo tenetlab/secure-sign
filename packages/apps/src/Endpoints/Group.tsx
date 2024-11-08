@@ -63,15 +63,15 @@ function GroupDisplay ({ affinities, apiUrl, children, className = '', index, is
 const StyledDiv = styled.div`
   .groupHeader {
     border-radius: 0.25rem;
-    cursor: pointer;
+    // cursor: pointer;
     line-height: 1;
     padding: 0.75rem 1rem;
     position: relative;
     text-transform: uppercase;
 
-    &:hover {
-      background: var(--bg-table);
-    }
+    // &:hover {
+    //   background: var(--bg-table);
+    // }
 
     &.isSpaced {
       margin-top: 0.75rem;

@@ -153,6 +153,7 @@ const StyledDiv = styled.div`
         .ui--Labelled-content {
           .ui {
             padding-left: 1rem !important;
+            padding-top: 1.2rem;
           }
         }
       }
@@ -170,6 +171,7 @@ const StyledDiv = styled.div`
   }
   .address {
     width: 70%;
+    padding-top: 0.3rem;
   }
   .empty-account {
     width: 100%;

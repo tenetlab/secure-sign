@@ -40,6 +40,9 @@ function NewMultisigAccountsApp ({ basePath, onStatusChange }: Props): React.Rea
 
 const StyledMain = styled.main`
   height: 100%;
+  input::placeholder {
+    color: #888 !important;
+  }
 `
 
 export default React.memo(NewMultisigAccountsApp);
