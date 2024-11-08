@@ -70,12 +70,12 @@ function AddressToggle({ address, className = '', filter, isHidden, noToggle, on
 const StyledDiv = styled.div`
   align-items: center;
   border: 1px solid transparent; /* #eee */
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   // cursor: pointer;
   display: flex;
   justify-content: space-between;
   margin: 0.125rem;
-  padding: 0.125rem 0.25rem;
+  padding: 0.5rem 0.5rem;
   text-align: left;
   vertical-align: middle;
   white-space: nowrap;
