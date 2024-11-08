@@ -128,17 +128,14 @@ const StyledDiv = styled.div`
       min-height: 16rem;
       max-height: 16rem;
       width: 100%;
-      // padding: 0.25rem 0.5rem;
 
       .ui--InputAddressMulti-items {
-        font-size: var(--font-size-h3) !important;
         margin-top: 1rem;
         padding: 0.5rem 2rem 0.5rem 2rem;
         background-color: var(--bg-menubar);
         border-radius: 1rem;
         flex: 1;
         overflow-y: auto;
-        overflow-x: hidden;
         margin-bottom: 1.5rem;
         .ui--Spinner {
           margin-top: 2rem;
