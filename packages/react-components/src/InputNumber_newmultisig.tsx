@@ -288,8 +288,8 @@ const StyledInput = styled(Input)`
     font-size: var(--font-size-h2);
   }
   .span-sig {
-    font-size: var(--font-size-base);
-    padding-top: 0.3rem;
+    font-size: var(--font-size-h3);
+    padding-top: 0.1rem;
   }
   .siUnit {
     bottom: 0.85rem;
