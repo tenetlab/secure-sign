@@ -53,6 +53,7 @@ const StyledDiv = styled.div`
 
   .ui--DropdownLinked-Item-call {
     flex: 1 0;
+    padding-top: 0.2rem;
     margin-right: 1rem;
     text-align: left;
     text-overflow: ellipsis;

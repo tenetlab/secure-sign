@@ -62,7 +62,7 @@ function createRmProxy (api: ApiPromise, account: AccountId, type: KitchensinkRu
 }
 
 function PrevProxy ({ index, onRemove, typeOpts, value: [accountId, type] }: PrevProxyProps): React.ReactElement<PrevProxyProps> {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const _onRemove = useCallback(
     (): void => {
@@ -77,11 +77,11 @@ function PrevProxy ({ index, onRemove, typeOpts, value: [accountId, type] }: Pre
         <InputAddress
           defaultValue={accountId}
           isDisabled
-          label={t('proxy account')}
+          label={'Proxy account'}
         />
         <Dropdown
           isDisabled
-          label={'type'}
+          label={'Type'}
           options={typeOpts}
           value={type.toNumber()}
         />
@@ -122,7 +122,7 @@ function NewProxy ({ index, onChangeAccount, onChangeType, onRemove, proxiedAcco
       <div className='input-column'>
         <InputAddress
           isError={!accountId}
-          label={t('proxy account')}
+          label={'Proxy account'}
           onChange={_onChangeAccount}
           type='account'
           value={accountId}
@@ -131,7 +131,7 @@ function NewProxy ({ index, onChangeAccount, onChangeType, onRemove, proxiedAcco
           <MarkError content={t('You should not setup proxies to act as a self-proxy.')} />
         )}
         <Dropdown
-          label={'type'}
+          label={'Type'}
           onChange={_onChangeType}
           className='type-padding'
           options={typeOpts}
@@ -330,7 +330,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
 const StyledModal = styled(Modal)`
   .ui--Labelled:not(.isSmall):not(.isOuter) >label {
     left: -14rem;
-    top: 0.7rem;
+    top: 1.1rem;
     width: 24%;
   }
   
@@ -372,6 +372,7 @@ const StyledModal = styled(Modal)`
         .ui--Labelled-content {
           .ui {
             padding-left: 1rem !important;
+            padding-top: 1.2rem !important;
           }
         }
       }

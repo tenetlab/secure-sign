@@ -153,6 +153,7 @@ const StyledDiv = styled.div`
         .ui--Labelled-content {
           .ui {
             padding-left: 1rem !important;
+            padding-top: 1.2rem;
           }
         }
       }

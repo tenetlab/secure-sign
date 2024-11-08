@@ -77,11 +77,11 @@ function PrevProxy ({ index, onRemove, typeOpts, value: [accountId, type] }: Pre
         <InputAddress
           defaultValue={accountId}
           isDisabled
-          label={t('proxy account')}
+          label={t('Proxy account')}
         />
         <Dropdown
           isDisabled
-          label={'type'}
+          label={'Type'}
           options={typeOpts}
           value={type.toNumber()}
         />
@@ -122,7 +122,7 @@ function NewProxy ({ index, onChangeAccount, onChangeType, onRemove, proxiedAcco
       <div className='input-column'>
         <InputAddress
           isError={!accountId}
-          label={t('proxy account')}
+          label={'Proxy account'}
           onChange={_onChangeAccount}
           type='account'
           value={accountId}
@@ -131,7 +131,7 @@ function NewProxy ({ index, onChangeAccount, onChangeType, onRemove, proxiedAcco
           <MarkError content={t('You should not setup proxies to act as a self-proxy.')} />
         )}
         <Dropdown
-          label={'type'}
+          label={'Type'}
           onChange={_onChangeType}
           options={typeOpts}
           value={type.toNumber()}

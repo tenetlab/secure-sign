@@ -94,11 +94,11 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--bg-page);
-  // max-width: 30.42rem;
-  // min-width: 30.42rem;
-  // overflow-y: hidden;
   width: 100%;
 
+  .ui--Labelled:not(.isSmall) >.ui--Labelled-content .ui.selection.dropdown:not(.floating) {
+    padding-top: 1.2rem !important;
+  }
   .account_detail {
     display: flex;
     @media only screen and (max-width: 1400px) {
@@ -134,7 +134,6 @@ const StyledDiv = styled.div`
     background: var(--bg-menubar);
     border: 1px solid var(--border-card);
     display: flex;
-    // flex-direction: column;
     margin: 0 0 1rem 1rem;
     justify-content: space-between;
     padding: 2rem 2rem 2rem 2rem;

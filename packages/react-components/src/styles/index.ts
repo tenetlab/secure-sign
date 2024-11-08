@@ -114,11 +114,11 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
   }
 
   .ui.selection.dropdown>.dropdown.icon {
-    top: 1em;
+    top: 1.3em;
   }
   .ui.selection.dropdown .menu>.item {
     height: 48px;
-    padding: 1.2rem 1rem 0 1rem !important;
+    padding: 1rem 1rem 0 1rem !important;
     border-radius: 0.7rem;
   }
 
