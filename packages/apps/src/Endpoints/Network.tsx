@@ -10,7 +10,7 @@ import { ChainImg, styled } from '@polkadot/react-components';
 import store from 'store';
 
 interface Props {
-  affinity?: string; // unused - previous selection
+  affinity?: string;
   apiUrl: string;
   className?: string;
   setApiUrl: (network: string, apiUrl: string) => void;

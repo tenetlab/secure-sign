@@ -9,7 +9,6 @@ import type { OverrideBundleDefinition } from '@polkadot/types/types';
 const definitions: OverrideBundleDefinition = {
   types: [
     {
-      // on all versions
       minmax: [0, undefined],
       types: {
         CurvePoint: {
@@ -30,7 +29,6 @@ const definitions: OverrideBundleDefinition = {
       }
     },
     {
-      // swap to MultiAddress in runtime 13
       minmax: [13, undefined],
       types: {
         Address: 'MultiAddress',
@@ -38,14 +36,12 @@ const definitions: OverrideBundleDefinition = {
       }
     },
     {
-      // enable pallet-lockdrop in runtime 17
       minmax: [17, undefined],
       types: {
         CampaignIdentifier: '[u8; 4]'
       }
     },
     {
-      // enable pallet-atomic-swap in runtime 24
       minmax: [24, undefined],
       types: {
         HashedProof: '[u8; 32]',

@@ -13,7 +13,10 @@ import sectionOptions from './options/section.js';
 import LinkedWrapper from './LinkedWrapper.js';
 import SelectMethod from './SelectMethod.js';
 import SelectSection from './SelectSection.js';
-
+import Button from '../Button/index.js';
+import {
+  styled
+} from '@polkadot/react-components';
 interface Props {
   className?: string;
   defaultValue: SubmittableExtrinsicFunction<'promise'>;
@@ -26,7 +29,7 @@ interface Props {
   withLabel?: boolean;
 }
 
-function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
+function InputExtrinsic({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const [optionsMethod, setOptionsMethod] = useState<DropdownOptions>(() => methodOptions(api, defaultValue.section, filter));
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
@@ -35,10 +38,10 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
 
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
-        if (value !== newValue) {
-          setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
-          onChange && onChange(newValue);
-        }
+      if (value !== newValue) {
+        setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
+        onChange && onChange(newValue);
+      }
     },
     [onChange, value]
   );
@@ -55,30 +58,54 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
   );
 
   return (
-    <LinkedWrapper
-      className={`${className} ui--Input-Container`}
-      label={label}
-      withLabel={withLabel}
-    >
-      <SelectSection
-        className='small'
-        defaultValue={defaultSection}
-        isDisabled={isDisabled}
-        onChange={isDisabled ? undefined : _onSectionChange}
-        options={optionsSection}
-        value={value}
-      />
-      <SelectMethod
-        api={api}
-        className='large'
-        defaultValue={defaultMethod}
-        isDisabled={isDisabled}
-        onChange={isDisabled ? undefined : _onKeyChange}
-        options={optionsMethod}
-        value={value}
-      />
-    </LinkedWrapper>
+    <StyledDiv>
+      <LinkedWrapper
+        className={`${className} ui--Input-Container`}
+        label={label}
+        withLabel={withLabel}
+      >
+        <div className='extrinsicsBtn'>
+          <Button
+            className='nextBtn'
+            label={'User'}
+          />
+          <Button
+            className='nextBtn'
+            label={'Subnet'}
+          />
+          <Button
+            className='nextBtn'
+            label={'Validator'}
+          />
+        </div>
+        <SelectSection
+          className='small'
+          defaultValue={defaultSection}
+          isDisabled={isDisabled}
+          onChange={isDisabled ? undefined : _onSectionChange}
+          options={optionsSection}
+          value={value}
+        />
+
+        <SelectMethod
+          api={api}
+          className='large'
+          defaultValue={defaultMethod}
+          isDisabled={isDisabled}
+          onChange={isDisabled ? undefined : _onKeyChange}
+          options={optionsMethod}
+          value={value}
+        />
+      </LinkedWrapper>
+    </StyledDiv>
   );
 }
 
 export default React.memo(InputExtrinsic);
+
+const StyledDiv = styled.div`
+  .extrinsicsBtn {
+    position: absolute;
+    top: -7rem;
+  }
+`

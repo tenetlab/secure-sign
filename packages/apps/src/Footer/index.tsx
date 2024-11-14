@@ -92,16 +92,11 @@ const StyledDiv = styled.div`
     }
   }
 
-  
-
   .ui--NodeInfo {
     align-self: center;
   }
 
   @media only screen and (max-width: 800px) {
-    // .groupHdr {
-    //   padding: 0.857rem 0.75rem;
-    // }
 
     .smallShow {
       display: initial;
@@ -110,14 +105,6 @@ const StyledDiv = styled.div`
     .smallHide {
       display: none;
     }
-
-    // .menuItems {
-    //   margin-right: 0;
-
-    //   > li + li {
-    //     margin-left: 0.25rem;
-    //   }
-    // }
   }
 `;
 

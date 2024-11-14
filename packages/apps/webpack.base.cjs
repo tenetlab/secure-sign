@@ -79,19 +79,12 @@ function createWebpack (context, mode = 'production') {
       runtimeChunk: 'single',
       splitChunks: {
         cacheGroups: [
-          // this one is massive (less-frequently updated, alongside deps)
           ['type', /[\\/]packages[\\/]apps-config[\\/]src[\\/]api[\\/]typesBundle/],
-          // should just change when totally new teams are onboarded
           ['logo', /[\\/]packages[\\/]apps-config[\\/]src[\\/]ui[\\/]logos/],
-          // config cannot go in main - it has multiple users
           ['conf', /[\\/]packages[\\/]apps-config[\\/]src[\\/]/],
-          // exceptionally large - should not change at all
           ['robo', /[\\/]packages[\\/]react-components[\\/]src[\\/]IdentityIcon[\\/]RoboHash/],
-          // library split (although it probably changes alongside pages)
           ['comm', /[\\/]packages[\\/]react-.*[\\/]src[\\/]/],
-          // pages are seperated out (non-perfect, but indv. too small)
           ['page', /[\\/]packages[\\/]page-.*[\\/]src[\\/]/],
-          // all other modules
           ['modu', /[\\/]node_modules[\\/]/]
         ].reduce((result, [name, test], index) => ({
           ...result,
@@ -108,9 +101,7 @@ function createWebpack (context, mode = 'production') {
       }
     },
     output: {
-      // this is for dynamic imports
       chunkFilename: 'dyna.[contenthash].js',
-      // this is via splitChunks
       filename: ({ chunk: { name } }) =>
         ['main', 'runtime'].includes(name)
           ? `${name === 'main' ? 'main' : 'load'}.[contenthash].js`

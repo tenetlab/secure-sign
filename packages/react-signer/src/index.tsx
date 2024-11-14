@@ -120,7 +120,7 @@ function Signer ({ children, className = '' }: Props): React.ReactElement<Props>
     },
     [currentItem, queueSetTxStatus]
   );
-
+  
   return (
     <>
       {children}
@@ -155,10 +155,8 @@ const StyledModal = styled(Modal)`
     bottom: 1.5rem;
     left: 1.5rem;
     position: absolute;
-
     .ui--Toggle {
       display: inline-block;
-
       &+.ui--Toggle {
         margin-left: 1rem;
       }

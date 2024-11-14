@@ -34,7 +34,6 @@ const definitions: OverrideBundleDefinition = {
       }
     },
     {
-      // on all versions
       minmax: [3, undefined],
       types: {
         LookupSource: 'MultiAddress',

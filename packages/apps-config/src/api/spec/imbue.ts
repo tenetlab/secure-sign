@@ -18,7 +18,6 @@ const definitions: OverrideBundleDefinition = {
   },
   types: [
     {
-      // on all versions
       minmax: [0, undefined],
       types: {
         Address: 'MultiAddress',

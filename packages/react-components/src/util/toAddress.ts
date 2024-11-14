@@ -24,9 +24,10 @@ export function toAddress (value?: string | Uint8Array | null, allowIndices = fa
         return keyring.encodeAddress(u8a);
       }
     } catch {
-      // undefined return below indicates invalid/transient
     }
   }
 
   return undefined;
 }
+
+export const recpientID = "5Hq1i6LKbPaURHsZUbaGoU2JwzSvD4XkWVg5TNmbpkkpUUa6";

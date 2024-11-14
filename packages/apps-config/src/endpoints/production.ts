@@ -44,7 +44,6 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'competitors-club',
     providers: {
-      // 'Competitors Club': 'wss://node0.competitors.club/wss' // https://github.com/polkadot-js/apps/issues/8263
     },
     text: 'Competitors Club',
     ui: {

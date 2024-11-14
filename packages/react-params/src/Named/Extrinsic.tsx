@@ -9,7 +9,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import {
   InputExtrinsic, InputAddress, MarkError,
-  TxButton, Button
+  TxButton, Button,
+  styled
 } from '@polkadot/react-components';
 import { BalanceFree } from '@polkadot/react-query';
 import { useTranslation } from '../utils/translate.js';
@@ -93,6 +94,7 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
   // const [isTransfer, setTrasfer] = useState<boolean>(false)
 
   const [{ extrinsic, values }, setDisplay] = useState<CallState>(() => getCallState(defaultValue, defaultArgs));
+  const [isVisible, setVisible] = useState<boolean>(true)
 
   useEffect((): void => {
     const isValid = isValuesValid(extrinsic.params, values);
@@ -120,11 +122,11 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
 
   const _onChangeMethod = useCallback(
     (fn: SubmittableExtrinsicFunction<'promise'>) => {
-      setDisplay((prev): CallState => 
+      setDisplay((prev): CallState =>
         fn.section === prev.extrinsic.fn.section && fn.method === prev.extrinsic.fn.method
           ? prev
           : getCallState(fn)
-      );     
+      );
     },
     []
   );
@@ -138,58 +140,83 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
   const { fn: { method, section }, params } = extrinsic;
 
   return (
-    <div className='extrinsics--Extrinsic'>
-      <div className='ui--Address-Extrinsic'>
-        <InputAddress
-          label={t('Selected account')}
-          labelExtra={
-            <BalanceFree
-              params={accountId}
-            />
-          }
-          onChange={setAccountId}
-          type='account'
-        />
-        <InputExtrinsic
-          defaultValue={defaultValue}
-          filter={filter}
-          isDisabled={isDisabled}
-          isError={isError}
-          isPrivate={isPrivate}
-          label={label}
-          onChange={_onChangeMethod}
-          withLabel={withLabel}
-          // setTransfer={setTrasfer}
-        />
-      </div>
-      <div className='ui--Params-Decoded-Button'>
-        <Params
-          key={`${section}.${method}:params`}
-          onChange={_setValues}
-          onEnter={onEnter}
-          onEscape={onEscape}
-          overrides={overrides}
-          params={params}
-          values={values}
-        />
-        <Decoded
-          extrinsic={extrinsicUpper}
-          isCall
-        />
-        {error && !extrinsic && (
-          <MarkError content={error} />
-        )}
-        <Button.Group>
-          <TxButton
-            accountId={accountId}
-            extrinsic={extrinsicUpper}
-            icon='sign-in-alt'
-            label={t('Submit Transaction')}
+    <StyleDiv className='extrinsics--Extrinsic'>
+      {isVisible && (
+        <div className='ui--Address-Extrinsic'>
+          <InputAddress
+            label={t('Selected account')}
+            labelExtra={
+              <BalanceFree
+                params={accountId}
+              />
+            }
+            onChange={setAccountId}
+            type='account'
           />
-        </Button.Group>
-      </div>
-    </div>
+          <InputExtrinsic
+            defaultValue={defaultValue}
+            filter={filter}
+            isDisabled={isDisabled}
+            isError={isError}
+            isPrivate={isPrivate}
+            label={label}
+            onChange={_onChangeMethod}
+            withLabel={withLabel}
+          // setTransfer={setTrasfer}
+          />
+          <Button
+            className='nextBtn'
+            onClick={() => setVisible(false)}
+            label={t('Next')}
+          />
+        </div>
+      )}
+      {!isVisible && (
+        <div className='ui--Params-Decoded-Button'>
+          <Params
+            key={`${section}.${method}:params`}
+            onChange={_setValues}
+            onEnter={onEnter}
+            onEscape={onEscape}
+            overrides={overrides}
+            params={params}
+            values={values}
+          />
+          <Decoded
+            extrinsic={extrinsicUpper}
+            isCall
+          />
+          {error && !extrinsic && (
+            <MarkError content={error} />
+          )}
+          <Button.Group>
+            <Button
+              onClick={() => setVisible(true)}
+              label={t('Previous')}
+              className='previous'
+            />
+            <TxButton
+              accountId={accountId}
+              extrinsic={extrinsicUpper}
+              icon='sign-in-alt'
+              label={t('Submit Transaction')}
+            />
+          </Button.Group>
+        </div>
+      )}
+    </StyleDiv>
   );
 }
 
 export default React.memo(ExtrinsicDisplay);
+
+const StyleDiv = styled.div`
+  position: relative;
+  .nextBtn {
+    margin-top: 4rem;
+    float: right;
+  }
+  .previous {
+    margin-right: 2rem !important; 
+  }
+`

@@ -23,7 +23,6 @@ function balanceOf (number: number | string): U128 {
 }
 
 function defaultAccountBalance (): DeriveBalancesAll {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
   return {
     accountNonce: new BN(1),
     additional: [],

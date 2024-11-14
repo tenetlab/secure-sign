@@ -35,22 +35,21 @@ function transform (file, enc, done) {
 module.exports = {
   input: [
     'packages/*/src/**/*.{ts,tsx}',
-    // Use ! to filter out files or directories
     '!packages/*/src/**/*.spec.{ts,tsx}',
     '!packages/*/src/i18n/**',
     '!**/node_modules/**'
   ],
   options: {
-    debug: false, // true to print config
+    debug: false,
     defaultLng: 'en',
     func: {
       extensions: ['.tsx', '.ts'],
       list: ['t', 'i18next.t', 'i18n.t']
     },
-    keySeparator: false, // key separator
+    keySeparator: false, 
     lngs: ['en'],
     ns: findPackages().map(({ dir }) => dir.replace('page-', 'app-')),
-    nsSeparator: false, // namespace separator
+    nsSeparator: false,
     resource: {
       jsonIndent: 2,
       lineEnding: '\n',
