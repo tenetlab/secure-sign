@@ -213,7 +213,7 @@ export default React.memo(ExtrinsicDisplay);
 const StyleDiv = styled.div`
   position: relative;
   .nextBtn {
-    margin-top: 4rem;
+    margin-top: 2rem;
     float: right;
   }
   .previous {
