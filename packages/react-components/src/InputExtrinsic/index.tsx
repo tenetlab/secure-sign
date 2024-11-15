@@ -66,29 +66,25 @@ function InputExtrinsic({ className = '', defaultValue, filter, isDisabled, labe
       >
         <div className='extrinsicsBtn'>
           <Button
-            className='nextBtn'
+            className={`nextBtn ${methodType === 'User' ? 'active' : ''}`}
             label={'User'}
             onClick={() => setMethodType('User')}
+            // isSelected={methodType === 'User' ? true : false}
           />
           <Button
-            className='nextBtn'
+            className={`nextBtn ${methodType === 'Subnet' ? 'active' : ''}`}
             label={'Subnet'}
             onClick={() => setMethodType('Subnet')}
+            // isSelected={methodType === 'Subnet' ? true : false}
           />
           <Button
-            className='nextBtn'
+            className={`nextBtn ${methodType === 'Validator' ? 'active' : ''}`}
             label={'Validator'}
             onClick={() => setMethodType('Validator')}
+            // isSelected={methodType === 'Validator' ? true : false}
           />
-          {/* <button style={{ width: '6rem', backgroundColor: 'var(--bg-subCard)', color: 'var(--color-text)', paddingTop: '0.2rem', paddingBottom: '0.2rem'}} className='nextBtn'>User</button>
-          <button style={{ width: '6rem', backgroundColor: 'var(--bg-subCard)', color: 'var(--color-text)', paddingTop: '0.2rem', paddingBottom: '0.2rem'}} className='nextBtn'>Subnet</button>
-          <button style={{ width: '6rem', backgroundColor: 'var(--bg-subCard)', color: 'var(--color-text)', paddingTop: '0.2rem', paddingBottom: '0.2rem'}} className='nextBtn'>Validator</button> */}
+          
         </div>
-        {/* <div className="button-group extrinsicsBtn">
-          <button className="button active">Validator</button>
-          <button className="button">Subnet</button>
-          <button className="button">User</button>
-        </div> */}
         <SelectSection
           className='small'
           defaultValue={defaultSection}
@@ -124,6 +120,9 @@ const StyledDiv = styled.div`
   .nextBtn {
     width: 6rem;
     margin-left: 0.2rem;
+  }
+  .nextBtn.active {
+    background-color: var(--item-active) !important;
   }
 //   .button-group {
 //     position: absolute;

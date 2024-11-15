@@ -104,11 +104,11 @@ function SelectMethod({ api, onChange, options, value, methodType }: Props): Rea
           </div>
           <div className='description'>
             <div>
-              {item?.value === 'addStake' && 'Adds stake to a hotkey. The call is made from the'}
-              {item?.value === 'register' && 'Registers a new neuron to the subnetwork.'}
-              {item?.value === 'removeStake' && 'Remove stake from the staking account. The call must be made'}
-              {item?.value === 'transferKeepAlive' && 'Same as the [`transfer_allow_death`] call, but with a check that the transfer will not'}
-              {item?.value === 'setWeights' && 'Sets the caller weights for the incentive mechanism. The call can be'}
+              {item?.value === 'addStake' && 'Adds a specified amount of tokens to increase the stake for staking operations.'}
+              {item?.value === 'register' && 'Registers an account, identity, or specific operation within the blockchain.'}
+              {item?.value === 'removeStake' && 'Removes a specified amount of tokens from the stake.'}
+              {item?.value === 'transferKeepAlive' && 'Used for payments, token distribution, or funding other accounts.'}
+              {item?.value === 'setWeights' && 'Adjusts or specifies the weight of an action or transaction.'}
             </div>
             <div
               style={{
