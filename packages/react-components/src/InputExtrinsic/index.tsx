@@ -27,7 +27,7 @@ interface Props {
   label: React.ReactNode;
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   withLabel?: boolean;
-  setBtnDisable: (isBtnDisable: boolean) => void;
+  setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
 function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {

@@ -19,7 +19,7 @@ interface Props {
   options: DropdownOptions;
   value: SubmittableExtrinsicFunction<'promise'>;
   methodType: string;
-  setBtnDisable: (isBtnDisable: boolean) => void;
+  setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
 function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable }: Props): React.ReactElement<Props> | null {
@@ -27,7 +27,7 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
   const lastUpdate = useRef<string>('');
   const handleRowClick = (index: number) => {
     setSelectedIndex(index);
-    setBtnDisable(false)
+    setBtnDisable && setBtnDisable(false)
   };
 
   const transform = useCallback(
