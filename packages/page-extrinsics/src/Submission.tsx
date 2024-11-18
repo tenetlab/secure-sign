@@ -142,6 +142,9 @@ const StyledDiv = styled.div`
           }
         }
       }
+      .ui--Labelled label {
+        width: 50%;
+      }
     }
     .is50 {
       .ui--Column {

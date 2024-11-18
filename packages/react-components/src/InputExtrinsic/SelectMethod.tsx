@@ -19,13 +19,15 @@ interface Props {
   options: DropdownOptions;
   value: SubmittableExtrinsicFunction<'promise'>;
   methodType: string;
+  setBtnDisable: (isBtnDisable: boolean) => void;
 }
 
-function SelectMethod({ api, onChange, options, value, methodType }: Props): React.ReactElement<Props> | null {
+function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const lastUpdate = useRef<string>('');
   const handleRowClick = (index: number) => {
     setSelectedIndex(index);
+    setBtnDisable(false)
   };
 
   const transform = useCallback(
@@ -100,15 +102,15 @@ function SelectMethod({ api, onChange, options, value, methodType }: Props): Rea
           }}
         >
           <div className='nickname'>
-            {item?.value}
+            {item?.value === 'register' ? 'regiserNetwork' : (item?.value === 'setWeights' ? 'setRootWeights' : item?.value)}
           </div>
           <div className='description'>
             <div>
-              {item?.value === 'addStake' && 'Adds a specified amount of tokens to increase the stake for staking operations.'}
-              {item?.value === 'register' && 'Registers an account, identity, or specific operation within the blockchain.'}
-              {item?.value === 'removeStake' && 'Removes a specified amount of tokens from the stake.'}
-              {item?.value === 'transferKeepAlive' && 'Used for payments, token distribution, or funding other accounts.'}
-              {item?.value === 'setWeights' && 'Adjusts or specifies the weight of an action or transaction.'}
+              {item?.value === 'addStake' && 'Adds a stake to a specified hotkey.'}
+              {item?.value === 'register' && 'Registers a new subnet.'}
+              {item?.value === 'removeStake' && 'Removes a stake from the staking account (hotkey).'}
+              {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
+              {item?.value === 'setWeights' && `Assigns weights to active subnets using their 'netuid'.`}
             </div>
             <div
               style={{

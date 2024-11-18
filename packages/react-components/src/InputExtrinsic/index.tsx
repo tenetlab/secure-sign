@@ -27,9 +27,10 @@ interface Props {
   label: React.ReactNode;
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   withLabel?: boolean;
+  setBtnDisable: (isBtnDisable: boolean) => void;
 }
 
-function InputExtrinsic({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
+function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const [optionsMethod, setOptionsMethod] = useState<DropdownOptions>(() => methodOptions(api, defaultValue.section, filter));
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
@@ -103,6 +104,7 @@ function InputExtrinsic({ className = '', defaultValue, filter, isDisabled, labe
           options={optionsMethod}
           value={value}
           methodType={methodType}
+          setBtnDisable={setBtnDisable}
         />
       </LinkedWrapper>
     </StyledDiv>
@@ -120,10 +122,12 @@ const StyledDiv = styled.div`
   .nextBtn {
     width: 6rem;
     margin-left: 0.2rem;
-    padding: 0.7rem 1rem !important;
+    margin-right: 0.2rem;
+    padding: 0.7rem 1rem;
   }
   .nextBtn.active {
-    background-color: var(--item-active) !important;
+    background-color: var(--item-actives) !important;
+    color: white !important;
   }
 //   .button-group {
 //     position: absolute;

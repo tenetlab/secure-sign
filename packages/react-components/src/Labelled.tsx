@@ -31,7 +31,7 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
 
   return (
     <StyledDiv className={`${className} ui--Labelled ${isSmall ? 'isSmall' : ''} ${isFull ? 'isFull' : ''} ${isOuter ? 'isOuter' : ''}`}>
-      <label style={{width: '70%'}}>{withEllipsis
+      <label>{withEllipsis
         ? <div className='withEllipsis'>{label == 'None' ? '': label}</div>
         : label == 'None' ? '': label
       }</label>
@@ -44,7 +44,7 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
 }
 
 const StyledDiv = styled.div`
-  &.ui--Labelled {
+  &.ui--Labelled { 
     display: block;
     position: relative;
 

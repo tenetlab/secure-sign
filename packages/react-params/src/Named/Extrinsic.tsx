@@ -91,7 +91,7 @@ function getCallState(fn: SubmittableExtrinsicFunction<'promise'>, values: RawPa
 function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isError, isPrivate, label, onChange, onEnter, onError, onEscape, withLabel, extrinsicUpper, error }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [accountId, setAccountId] = useState<string | null>(null);
-  // const [isTransfer, setTrasfer] = useState<boolean>(false)
+  const [isBtnDisable, setBtnDisable] = useState<boolean>(true)
 
   const [{ extrinsic, values }, setDisplay] = useState<CallState>(() => getCallState(defaultValue, defaultArgs));
   const [isVisible, setVisible] = useState<boolean>(true)
@@ -162,12 +162,13 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
             label={label}
             onChange={_onChangeMethod}
             withLabel={withLabel}
-          // setTransfer={setTrasfer}
+            setBtnDisable={setBtnDisable}
           />
           <Button
             className='nextBtn'
             onClick={() => setVisible(false)}
             label={t('Next')}
+            isDisabled={isBtnDisable}
           />
         </div>
       )}
@@ -215,6 +216,10 @@ const StyleDiv = styled.div`
   .nextBtn {
     margin-top: 2rem;
     float: right;
+    width: 6rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    padding: 0.7rem 1rem;
   }
   .previous {
     margin-right: 2rem !important; 
