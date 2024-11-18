@@ -120,6 +120,7 @@ const StyledDiv = styled.div`
   .nextBtn {
     width: 6rem;
     margin-left: 0.2rem;
+    padding: 0.7rem 1rem !important;
   }
   .nextBtn.active {
     background-color: var(--item-active) !important;
