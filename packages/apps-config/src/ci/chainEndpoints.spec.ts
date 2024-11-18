@@ -22,7 +22,6 @@ interface DnsResponse {
 const TIMEOUT = 60_000;
 
 function noopHandler () {
-  // ignore
 }
 
 describe('check endpoints', (): void => {

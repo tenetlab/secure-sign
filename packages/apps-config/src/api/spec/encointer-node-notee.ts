@@ -9,21 +9,17 @@ import type { OverrideBundleDefinition } from '@polkadot/types/types';
 const definitions: OverrideBundleDefinition = {
   types: [
     {
-      // Metadata v14 was introduced here. Hence, we don't need type overrides anymore.
       minmax: [9, undefined],
       types: {
-        // Types for the signed extensions still need to be declared.
         CommunityIdentifier: {
           geohash: 'GeoHash',
           digest: 'CidDigest'
         },
         GeoHash: '[u8; 5]',
-        // We need to call it `CidDigest` because plain `Digest` is already a substrate type.
         CidDigest: '[u8; 4]'
       }
     },
     {
-      // until v14
       minmax: [0, 8],
       types: {
         ShardIdentifier: 'Hash',

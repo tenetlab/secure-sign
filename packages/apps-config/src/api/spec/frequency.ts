@@ -11,7 +11,6 @@ export default {
   signedExtensions,
   types: [
     {
-      // on all versions
       minmax: [0, undefined],
       types
     }

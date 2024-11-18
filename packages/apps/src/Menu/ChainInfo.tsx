@@ -46,7 +46,6 @@ const StyledDiv = styled.div`
   box-sizing: border-box;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   margin: 0;
-  // font-family: cursive;
 
   &:hover {
     border-color: var(--border-input-hover) !important;
@@ -75,7 +74,6 @@ const StyledDiv = styled.div`
     .ui--Icon.dropdown {
       flex: 0;
       margin: 0;
-      // width: 1rem;
       display: none;
     }
 

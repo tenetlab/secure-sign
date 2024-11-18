@@ -20,7 +20,7 @@ import type { AddressFlags, AddressProxy, QrState } from './types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { web3FromSource } from '@polkadot/extension-dapp';
-import { Button, ErrorBoundary, Modal, Output, styled} from '@polkadot/react-components';
+import { Button, ErrorBoundary, Modal, Output, styled } from '@polkadot/react-components';
 import { useApi, useLedger, useQueue, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { settings } from '@polkadot/ui-settings';
@@ -55,7 +55,7 @@ const EMPTY_INNER: InnerTx = { innerHash: null, innerTx: null };
 
 let qrId = 0;
 
-function unlockAccount ({ isUnlockCached, signAddress, signPassword }: AddressProxy): string | null {
+function unlockAccount({ isUnlockCached, signAddress, signPassword }: AddressProxy): string | null {
   let publicKey;
 
   try {
@@ -84,7 +84,7 @@ function unlockAccount ({ isUnlockCached, signAddress, signPassword }: AddressPr
   return null;
 }
 
-async function fakeSignForChopsticks (api: ApiPromise, tx: SubmittableExtrinsic<'promise'>, sender: string): Promise<void> {
+async function fakeSignForChopsticks(api: ApiPromise, tx: SubmittableExtrinsic<'promise'>, sender: string): Promise<void> {
   const account = await api.query.system.account(sender);
   const options = {
     blockHash: api.genesisHash,
@@ -100,7 +100,7 @@ async function fakeSignForChopsticks (api: ApiPromise, tx: SubmittableExtrinsic<
   tx.signature.set(mockSignature);
 }
 
-async function signAndSend (queueSetTxStatus: QueueTxMessageSetStatus, currentItem: QueueTx, tx: SubmittableExtrinsic<'promise'>, pairOrAddress: KeyringPair | string, options: Partial<SignerOptions>, api: ApiPromise, isMockSign: boolean): Promise<void> {
+async function signAndSend(queueSetTxStatus: QueueTxMessageSetStatus, currentItem: QueueTx, tx: SubmittableExtrinsic<'promise'>, pairOrAddress: KeyringPair | string, options: Partial<SignerOptions>, api: ApiPromise, isMockSign: boolean): Promise<void> {
   currentItem.txStartCb && currentItem.txStartCb();
 
   try {
@@ -125,7 +125,7 @@ async function signAndSend (queueSetTxStatus: QueueTxMessageSetStatus, currentIt
   }
 }
 
-async function signAsync (queueSetTxStatus: QueueTxMessageSetStatus, { id, txFailedCb = NOOP, txStartCb = NOOP }: QueueTx, tx: SubmittableExtrinsic<'promise'>, pairOrAddress: KeyringPair | string, options: Partial<SignerOptions>, api: ApiPromise, isMockSign: boolean): Promise<string | null> {
+async function signAsync(queueSetTxStatus: QueueTxMessageSetStatus, { id, txFailedCb = NOOP, txStartCb = NOOP }: QueueTx, tx: SubmittableExtrinsic<'promise'>, pairOrAddress: KeyringPair | string, options: Partial<SignerOptions>, api: ApiPromise, isMockSign: boolean): Promise<string | null> {
   txStartCb();
 
   try {
@@ -146,7 +146,7 @@ async function signAsync (queueSetTxStatus: QueueTxMessageSetStatus, { id, txFai
   return null;
 }
 
-async function wrapTx (api: ApiPromise, currentItem: QueueTx, { isMultiCall, multiRoot, proxyRoot, signAddress }: AddressProxy): Promise<SubmittableExtrinsic<'promise'>> {
+async function wrapTx(api: ApiPromise, currentItem: QueueTx, { isMultiCall, multiRoot, proxyRoot, signAddress }: AddressProxy): Promise<SubmittableExtrinsic<'promise'>> {
   let tx = currentItem.extrinsic as SubmittableExtrinsic<'promise'>;
 
   if (proxyRoot) {
@@ -194,7 +194,7 @@ async function wrapTx (api: ApiPromise, currentItem: QueueTx, { isMultiCall, mul
   return tx;
 }
 
-async function extractParams (api: ApiPromise, address: string, options: Partial<SignerOptions>, getLedger: () => LedgerGeneric | Ledger, setQrState: (state: QrState) => void): Promise<['qr' | 'signing', string, Partial<SignerOptions>, boolean]> {
+async function extractParams(api: ApiPromise, address: string, options: Partial<SignerOptions>, getLedger: () => LedgerGeneric | Ledger, setQrState: (state: QrState) => void): Promise<['qr' | 'signing', string, Partial<SignerOptions>, boolean]> {
   const pair = keyring.getPair(address);
   const { meta: { accountOffset, addressOffset, isExternal, isHardware, isInjected, isLocal, isProxied, source } } = pair;
 
@@ -221,7 +221,7 @@ async function extractParams (api: ApiPromise, address: string, options: Partial
   return ['signing', address, { ...options, signer: new AccountSigner(api.registry, pair) }, false];
 }
 
-function tryExtract (address: string | null): AddressFlags {
+function tryExtract(address: string | null): AddressFlags {
   try {
     return extractExternal(address);
   } catch {
@@ -229,7 +229,7 @@ function tryExtract (address: string | null): AddressFlags {
   }
 }
 
-function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAddress }: Props): React.ReactElement<Props> | null {
+function TxSigned({ className, currentItem, isQueueSubmit, queueSize, requestAddress }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const { getLedger } = useLedger();
@@ -253,7 +253,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
     setPasswordError(null);
   }, [senderInfo]);
 
-  // when we are sending the hash only, get the wrapped call for display (proxies if required)
   useEffect((): void => {
     const method = currentItem.extrinsic && (
       senderInfo.proxyRoot
@@ -284,7 +283,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
   const _unlock = useCallback(
     async (): Promise<boolean> => {
       let passwordError: string | null = null;
-
       if (senderInfo.signAddress) {
         if (flags.isUnlockable) {
           passwordError = unlockAccount(senderInfo);
@@ -292,21 +290,16 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           try {
             const currApp = settings.get().ledgerApp;
             const ledger = getLedger();
-
             if (currApp === 'migration' || currApp === 'generic') {
               const { address } = await (ledger as LedgerGeneric).getAddress(api.consts.system.ss58Prefix.toNumber(), false, flags.accountOffset, flags.addressOffset);
-
               console.log(`Signing with Ledger address ${address}`);
             } else {
               const { address } = await (ledger as Ledger).getAddress(false, flags.accountOffset, flags.addressOffset);
-
               console.log(`Signing with Ledger address ${address}`);
             }
           } catch (error) {
             console.error(error);
-
             const errorMessage = (error as Error).message;
-
             passwordError = t('Unable to connect to the Ledger, ensure support is enabled in settings and no other app is using it. {{errorMessage}}', { replace: { errorMessage } });
           }
         }
@@ -418,7 +411,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
   if (!isBusy && isAutoCapable && initialIsQueueSubmit) {
     setBusy(true);
     setTimeout(_doStart, 1000);
-
     return null;
   }
 
@@ -441,11 +433,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
             )
             : (
               <>
-                {/* <Transaction
-                  accountId={senderInfo.signAddress}
-                  currentItem={currentItem}
-                  onError={toggleRenderError}
-                /> */}
                 <Address
                   currentItem={currentItem}
                   onChange={setSenderInfo}
@@ -464,9 +451,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   />
                 )}
                 {isSubmit && !senderInfo.isMultiCall && innerTx && (
-                  <Modal.Columns 
-                    // hint={t('The full call data that can be supplied to a final call to multi approvals')}
-                  >
+                  <Modal.Columns>
                     <Output
                       isDisabled
                       isTrimmed
@@ -477,9 +462,7 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
                   </Modal.Columns>
                 )}
                 {isSubmit && innerHash && (
-                  <Modal.Columns 
-                    // hint={t('The call hash as calculated for this transaction')}
-                  >
+                  <Modal.Columns>
                     <Output
                       isDisabled
                       isTrimmed
@@ -507,31 +490,6 @@ function TxSigned ({ className, currentItem, isQueueSubmit, queueSize, requestAd
           onClick={_doStart}
           tabIndex={2}
         />
-        {/* <div className='signToggle'>
-          {!isBusy && (
-            <Toggle
-              isDisabled={!!currentItem.payload}
-              label={
-                isSubmit
-                  ? t('Sign and Submit')
-                  : t('Sign (no submission)')
-              }
-              onChange={setIsSubmit}
-              value={isSubmit}
-            />
-          )}
-          {isAutoCapable && (
-            <Toggle
-              label={
-                isQueueSubmit
-                  ? t('Submit {{queueSize}} items', { replace: { queueSize } })
-                  : t('Submit individual')
-              }
-              onChange={setIsQueueSubmit}
-              value={isQueueSubmit}
-            />
-          )}
-        </div> */}
       </Modal.Actions>
     </>
   );
@@ -542,7 +500,6 @@ const StyledModalContent = styled(Modal.Content)`
     width: 100%;
     text-align: right;
   }
-
   .ui--Checks {
     margin-top: 0.75rem;
   }

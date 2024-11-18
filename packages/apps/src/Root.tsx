@@ -36,8 +36,6 @@ function Root ({ isElectron, store }: Props): React.ReactElement<Props> {
     settings.on('change', (settings) => setTheme(createTheme(settings)));
   }, []);
 
-  // The ordering here is critical. It defines the hierarchy of dependencies,
-  // i.e. Block* depends on Api. Certainly no cross-deps allowed
   return (
     <Suspense fallback='...'>
       <ThemeProvider theme={theme}>

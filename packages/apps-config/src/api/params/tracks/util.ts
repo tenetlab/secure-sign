@@ -14,8 +14,6 @@ interface FormatOptions {
 
 export function formatSpendFactory (options: FormatOptions): (mul: number, value: BN) => string {
   return (mul: number, value: BN): string => {
-    // We lose the decimals here... depending on chain config, this could be non-optimal
-    // (A simple formatBalance(value.muln(mul), FMT_OPTS) formats to 4 decimals)
     return `${formatBalance(value.muln(mul), options).split('.')[0]} ${options.withUnit}`;
   };
 }

@@ -9,7 +9,6 @@ import type { OverrideBundleDefinition } from '@polkadot/types/types';
 const definitions: OverrideBundleDefinition = {
   types: [
     {
-      // metadata v14 was introduced here. Hence, we don't need type overrides anymore.
       minmax: [3, undefined],
       types: {
         CommunityIdentifier: {
@@ -17,12 +16,10 @@ const definitions: OverrideBundleDefinition = {
           digest: 'CidDigest'
         },
         GeoHash: '[u8; 5]',
-        // We need to call it `CidDigest` because plain `Digest` is already a substrate type.
         CidDigest: '[u8; 4]'
       }
     },
     {
-      // until metadata v14
       minmax: [0, 2],
       types: {
         ShardIdentifier: 'Hash',
@@ -191,7 +188,6 @@ const definitions: OverrideBundleDefinition = {
         RegistrationType: {
           _enum: ['Bootstrapper', 'Reputable', 'Endorsee', 'Newbie']
         },
-        // Todo: remove this type does no longer exist in ceremonies, but it still exists in the trusted stuff.
         Attestation: {
           claim: 'ClaimOfAttendance',
           signature: 'MultiSignature',
@@ -210,14 +206,10 @@ const definitions: OverrideBundleDefinition = {
           digest: 'CidDigest'
         },
         GeoHash: '[u8; 5]',
-        // We need to call it `CidDigest` because plain `Digest` is already a substrate type.
         CidDigest: '[u8; 4]',
         CommunityCeremony: '(CommunityIdentifier,CeremonyIndexType)',
         NominalIncomeType: 'BalanceType',
-        // This is used when handling fixed-point numbers that have been serialized with `serialize_fixed` on rusts end,
-        // which is the case when we call any rpc-getters.
         DegreeRpc: 'Text',
-        // This is used when we need to encode fixed-point numbers with scale-codec, e.g., when using it in an extrinsic.
         DegreeFixed: 'i128',
         Location: {
           lat: 'DegreeFixed',

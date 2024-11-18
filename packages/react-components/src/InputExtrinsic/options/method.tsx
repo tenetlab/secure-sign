@@ -6,7 +6,7 @@ import type { DropdownOption, DropdownOptions } from '../../util/types.js';
 
 import React from 'react';
 
-export default function createOptions (api: ApiPromise, sectionName: string, filter?: (section: string, method?: string) => boolean): DropdownOptions {
+export default function createOptions(api: ApiPromise, sectionName: string, filter?: (section: string, method?: string) => boolean): DropdownOptions {
   const section = api.tx[sectionName];
   const sectionBalance = api.tx['balances'];
 
@@ -16,7 +16,7 @@ export default function createOptions (api: ApiPromise, sectionName: string, fil
   if (!combinedSection || Object.keys(combinedSection).length === 0 || !isAllowed) {
     return [];
   }
-  
+
   return Object
     .keys(combinedSection)
     .filter((s) =>
@@ -25,11 +25,11 @@ export default function createOptions (api: ApiPromise, sectionName: string, fil
     )
     .sort()
     .map((value): DropdownOption => {
-      const method = combinedSection[value];      
+      const method = combinedSection[value];
       let inputs = method.meta.args
-      .map((arg) => arg.name.toString())
-      .join(', ');
-      
+        .map((arg) => arg.name.toString())
+        .join(', ');
+
       return {
         className: 'ui--DropdownLinked-Item',
         key: `${sectionName}_${value}`,
@@ -40,12 +40,12 @@ export default function createOptions (api: ApiPromise, sectionName: string, fil
           >
             {value}({inputs})
           </div>,
-          // <div
-          //   className='ui--DropdownLinked-Item-text'
-          //   key={`${sectionName}_${value}:text`}
-          // >
-          //   {(method.meta.docs[0] || value).toString()}
-          // </div>
+          <div
+            className='ui--DropdownLinked-Item-text'
+            key={`${sectionName}_${value}:text`}
+          >
+            {(method.meta.docs[0] || value).toString()}
+          </div>
         ],
         value
       };

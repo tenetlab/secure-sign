@@ -141,7 +141,6 @@ import zeitgeist from './zeitgeist.js';
 import zenlink from './zenlink.js';
 import zero from './zero.js';
 
-// NOTE: The mapping is done from specName in state.getRuntimeVersion
 const spec: Record<string, OverrideBundleDefinition> = {
   Equilibrium: equilibrium,
   Genshiro: genshiro,
@@ -196,9 +195,6 @@ const spec: Record<string, OverrideBundleDefinition> = {
   'encointer-node-teeproxy': encointerNodeTeeproxy,
   'encointer-parachain': encointerPara,
   fantour,
-  // See https://github.com/polkadot-js/apps/pull/9243
-  // fragnova,
-  // 'fragnova-testnet': fragnova,
   'ferrum-parachain': ferrum,
   foucoco: pendulum,
   frequency,

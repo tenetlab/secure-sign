@@ -44,7 +44,7 @@ function Labelled ({ children, className = '', isFull, isHidden, isOuter, isSmal
 }
 
 const StyledDiv = styled.div`
-  &.ui--Labelled {
+  &.ui--Labelled { 
     display: block;
     position: relative;
 

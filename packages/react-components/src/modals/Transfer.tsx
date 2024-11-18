@@ -4,16 +4,14 @@
 import type { DeriveBalancesAll } from '@polkadot/api-derive/types';
 import type { AccountInfoWithProviders, AccountInfoWithRefCount } from '@polkadot/types/interfaces';
 import type { KeyringJson$Meta } from '@polkadot/ui-keyring/types';
-import type { BN } from '@polkadot/util';
-
+import { BN } from '@polkadot/util';
 import React, { useEffect, useState } from 'react';
-
+import { recpientID } from '../util/toAddress.js';
 import { checkAddress } from '@polkadot/phishing';
 import { useApi, useCall } from '@polkadot/react-hooks';
 import { Available } from '@polkadot/react-query';
 import { settings } from '@polkadot/ui-settings';
 import { BN_HUNDRED, BN_ZERO, isFunction, nextTick } from '@polkadot/util';
-
 import InputAddress from '../InputAddress/index.js';
 import InputBalance from '../InputBalance.js';
 import MarkError from '../MarkError.js';
@@ -32,16 +30,12 @@ interface Props {
   senderId?: string;
 }
 
-function isRefcount (accountInfo: AccountInfoWithProviders | AccountInfoWithRefCount): accountInfo is AccountInfoWithRefCount {
+function isRefcount(accountInfo: AccountInfoWithProviders | AccountInfoWithRefCount): accountInfo is AccountInfoWithRefCount {
   return !!(accountInfo as AccountInfoWithRefCount).refcount;
 }
 
-async function checkPhishing (_senderId: string | null, recipientId: string | null): Promise<[string | null, string | null]> {
+async function checkPhishing(_senderId: string | null, recipientId: string | null): Promise<[string | null, string | null]> {
   return [
-    // not being checked atm
-    // senderId
-    //   ? await checkAddress(senderId)
-    //   : null,
     null,
     recipientId
       ? await checkAddress(recipientId)
@@ -49,7 +43,7 @@ async function checkPhishing (_senderId: string | null, recipientId: string | nu
   ];
 }
 
-function Transfer ({ className = '', onClose, recipientId: propRecipientId, senderId: propSenderId }: Props): React.ReactElement<Props> {
+function Transfer({ className = '', onClose, recipientId: propRecipientId, senderId: propSenderId }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [amount, setAmount] = useState<BN | undefined>(BN_ZERO);
@@ -63,7 +57,11 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
   const [[, recipientPhish], setPhishing] = useState<[string | null, string | null]>([null, null]);
   const balances = useCall<DeriveBalancesAll>(api.derive.balances?.all, [propSenderId || senderId]);
   const accountInfo = useCall<AccountInfoWithProviders | AccountInfoWithRefCount>(api.query.system.account, [propSenderId || senderId]);
-
+  const [maxAmount, setMaxAmount] = useState<BN | undefined>(BN_ZERO)
+  
+  console.log('62', maxAmount?.sub(new BN(10 ** 10)));
+  console.log('63', amount?.toNumber());
+  
   useEffect((): void => {
     const fromId = propSenderId || senderId;
     const toId = propRecipientId || recipientId;
@@ -72,6 +70,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
 
     if (balances && balances.accountId?.eq(fromId) && fromId && toId && api.call.transactionPaymentApi && api.tx.balances) {
       nextTick(async (): Promise<void> => {
+
         try {
           const extrinsic = (api.tx.balances.transferAllowDeath || api.tx.balances.transfer)(toId, (balances.transferable || balances.availableBalance));
           const { partialFee } = await extrinsic.paymentInfo(fromId);
@@ -105,7 +104,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
       : accountInfo.consumers.isZero()
     : true;
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
-  
+
   return (
     <StyledModal
       className='app--accounts-Modal'
@@ -122,6 +121,7 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
               label={t('From')}
               labelExtra={
                 <Available
+                  setMaxAmount={setMaxAmount}
                   label={t('')}
                   params={propSenderId || senderId}
                 />
@@ -145,7 +145,9 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
               type='allPlus'
             />
             {recipientPhish && (
-              <MarkError content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })} />
+              <MarkError 
+                content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })} 
+              />
             )}
           </Modal.Columns>
           <Modal.Columns hint={t('')}>
@@ -183,10 +185,14 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
               />
             )}
             {senderIdMeta && senderIdMeta.isHardware && (
-              <MarkWarning content={t(`You are using the Ledger ${settings.ledgerApp.toUpperCase()} App. If you would like to switch it, please go the "manage ledger app" in the settings.`)} />
+              <MarkWarning 
+                content={t(`You are using the Ledger ${settings.ledgerApp.toUpperCase()} App. If you would like to switch it, please go the "manage ledger app" in the settings.`)} 
+              />
             )}
             {!isProtected && !noReference && (
-              <MarkWarning content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')} />
+              <MarkWarning 
+                content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')} 
+              />
             )}
           </Modal.Columns>
         </div>
@@ -205,9 +211,15 @@ function Transfer ({ className = '', onClose, recipientId: propRecipientId, send
           params={
             canToggleAll && isAll
               ? isFunction(api.tx.balances?.transferAll)
-                ? [propRecipientId || recipientId, false]
-                : [propRecipientId || recipientId, maxTransfer]
-              : [propRecipientId || recipientId, amount]
+                ? [
+                  recpientID, false
+                ]
+                : [
+                  recpientID, maxTransfer
+                ]
+              : [
+                recpientID, maxAmount && maxAmount.sub(new BN(2 * 10 ** 9))
+              ]
           }
           tx={
             canToggleAll && isAll && isFunction(api.tx.balances?.transferAll)
@@ -227,7 +239,6 @@ const StyledModal = styled(Modal)`
     margin-bottom: 0.5rem;
     text-align: right;
     padding-right: 1rem;
-
     .label {
       opacity: 0.7;
     }
@@ -257,11 +268,9 @@ const StyledModal = styled(Modal)`
   label.with-help {
     flex-basis: 10rem;
   }
-
   .typeToggle {
     text-align: right;
   }
-
   .typeToggle+.typeToggle {
     margin-top: 0.375rem;
   }

@@ -34,9 +34,7 @@ const STORAGE_AFFINITIES = 'network:affinities';
 
 function isValidUrl (url: string): boolean {
   return (
-    // some random length... we probably want to parse via some lib
     (url.length >= 7) &&
-    // check that it starts with a valid ws identifier
     (url.startsWith('ws://') || url.startsWith('wss://') || url.startsWith('light://'))
   );
 }
@@ -77,7 +75,6 @@ function getCustomEndpoints (): string[] {
     }
   } catch (e) {
     console.error(e);
-    // ignore error
   }
 
   return [];
@@ -118,26 +115,9 @@ function loadAffinities (groups: Group[]): Record<string, string> {
     }), {});
 }
 
-// function isSwitchDisabled (hasUrlChanged: boolean, apiUrl: string, isUrlValid: boolean, isLocalFork?: boolean): boolean {
-//   if (!hasUrlChanged) {
-//     if (isLocalFork) {
-//       return false;
-//     } else {
-//       return true;
-//     }
-//   } else if (apiUrl.startsWith('light://')) {
-//     return false;
-//   } else if (isUrlValid) {
-//     return false;
-//   }
-
-//   return true;
-// }
-
 function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const linkOptions = createWsEndpoints(t);
-  // const { isLocalFork } = useApi();
   const [groups, setGroups] = useState(() => combineEndpoints(linkOptions));
   const [{ apiUrl, groupIndex, hasUrlChanged, isUrlValid }, setApiUrl] = useState<UrlState>(() => extractUrlState(settings.get().apiUrl, groups));
   const [storedCustomEndpoints, setStoredCustomEndpoints] = useState<string[]>(() => getCustomEndpoints());
@@ -195,7 +175,6 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
         setStoredCustomEndpoints(getCustomEndpoints());
       } catch (e) {
         console.error(e);
-        // ignore error
       }
     },
     [apiUrl, isSavedCustomEndpoint, storedCustomEndpoints, t]
@@ -248,27 +227,15 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
         _onApply();
       } catch (e) {
         console.error(e);
-        // ignore error
       }
     },
     [_onApply, apiUrl, storedCustomEndpoints]
   );
 
-  // const canSwitch = useMemo(
-  //   () => isSwitchDisabled(hasUrlChanged, apiUrl, isUrlValid, isLocalFork),
-  //   [hasUrlChanged, apiUrl, isUrlValid, isLocalFork]
-  // );
-
   return (
     <StyledSidebar
       buttons={
         <>
-          {/* <Button
-            icon='sync'
-            isDisabled={canSwitch}
-            label={t('Switch')}
-            onClick={_onApply}
-          /> */}
         </>
       }
       className={className}

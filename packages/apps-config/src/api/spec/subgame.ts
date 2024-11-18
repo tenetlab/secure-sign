@@ -9,7 +9,6 @@ import type { OverrideBundleDefinition } from '@polkadot/types/types';
 const definitions: OverrideBundleDefinition = {
   types: [
     {
-      // on all versions
       minmax: [0, undefined],
       types: {
         GameIndex: 'u32',

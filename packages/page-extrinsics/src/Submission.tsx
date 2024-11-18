@@ -62,6 +62,7 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
       {
         api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
           <>
+            <h1 style={{ paddingLeft: '2rem'}}>Fill in the below fields</h1>
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
@@ -102,14 +103,18 @@ const StyledDiv = styled.div`
       }
     }
     .ui--Address-Extrinsic {
-      width: 48%;
-      padding-right: 3rem;
-      padding-top: 4rem;
+      width: 100%;
+      background-color: var(--bg-menubar);
+      padding: 5rem;
+      margin: 2rem;
+      border-radius: 1rem;
+
     }
     .ui--Params-Decoded-Button {
-      width: 52%;
+      width: 100%;
       background-color: var(--bg-menubar);
       padding: 4rem 5rem 3rem 5rem;
+      margin: 2rem;
       border-radius: 1rem;
       display: flex;
       flex-direction: column;
@@ -136,6 +141,9 @@ const StyledDiv = styled.div`
             padding-left: 1rem !important;
           }
         }
+      }
+      .ui--Labelled label {
+        width: 50%;
       }
     }
     .is50 {

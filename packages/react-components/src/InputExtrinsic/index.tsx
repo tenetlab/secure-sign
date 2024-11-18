@@ -13,7 +13,10 @@ import sectionOptions from './options/section.js';
 import LinkedWrapper from './LinkedWrapper.js';
 import SelectMethod from './SelectMethod.js';
 import SelectSection from './SelectSection.js';
-
+import Button from '../Button/index.js';
+import {
+  styled
+} from '@polkadot/react-components';
 interface Props {
   className?: string;
   defaultValue: SubmittableExtrinsicFunction<'promise'>;
@@ -24,21 +27,22 @@ interface Props {
   label: React.ReactNode;
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   withLabel?: boolean;
+  setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
-function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
+function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, isDisabled, label, onChange, withLabel }: Props): React.ReactElement<Props> {
   const { api } = useApi();
   const [optionsMethod, setOptionsMethod] = useState<DropdownOptions>(() => methodOptions(api, defaultValue.section, filter));
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
   const [value, setValue] = useState<SubmittableExtrinsicFunction<'promise'>>((): SubmittableExtrinsicFunction<'promise'> => defaultValue);
   const [{ defaultMethod, defaultSection }] = useState(() => ({ defaultMethod: defaultValue.method, defaultSection: defaultValue.section }));
-
+  const [methodType, setMethodType] = useState<string>('Validator')
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
-        if (value !== newValue) {
-          setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
-          onChange && onChange(newValue);
-        }
+      if (value !== newValue) {
+        setValue((): SubmittableExtrinsicFunction<'promise'> => newValue);
+        onChange && onChange(newValue);
+      }
     },
     [onChange, value]
   );
@@ -55,30 +59,111 @@ function InputExtrinsic ({ className = '', defaultValue, filter, isDisabled, lab
   );
 
   return (
-    <LinkedWrapper
-      className={`${className} ui--Input-Container`}
-      label={label}
-      withLabel={withLabel}
-    >
-      <SelectSection
-        className='small'
-        defaultValue={defaultSection}
-        isDisabled={isDisabled}
-        onChange={isDisabled ? undefined : _onSectionChange}
-        options={optionsSection}
-        value={value}
-      />
-      <SelectMethod
-        api={api}
-        className='large'
-        defaultValue={defaultMethod}
-        isDisabled={isDisabled}
-        onChange={isDisabled ? undefined : _onKeyChange}
-        options={optionsMethod}
-        value={value}
-      />
-    </LinkedWrapper>
+    <StyledDiv>
+      <LinkedWrapper
+        className={`${className} ui--Input-Container`}
+        label={label}
+        withLabel={withLabel}
+      >
+        <div className='extrinsicsBtn'>
+          <Button
+            className={`nextBtn ${methodType === 'User' ? 'active' : ''}`}
+            label={'User'}
+            onClick={() => setMethodType('User')}
+            // isSelected={methodType === 'User' ? true : false}
+          />
+          <Button
+            className={`nextBtn ${methodType === 'Subnet' ? 'active' : ''}`}
+            label={'Subnet'}
+            onClick={() => setMethodType('Subnet')}
+            // isSelected={methodType === 'Subnet' ? true : false}
+          />
+          <Button
+            className={`nextBtn ${methodType === 'Validator' ? 'active' : ''}`}
+            label={'Validator'}
+            onClick={() => setMethodType('Validator')}
+            // isSelected={methodType === 'Validator' ? true : false}
+          />
+          
+        </div>
+        <SelectSection
+          className='small'
+          defaultValue={defaultSection}
+          isDisabled={isDisabled}
+          onChange={isDisabled ? undefined : _onSectionChange}
+          options={optionsSection}
+          value={value}
+        />
+
+        <SelectMethod
+          api={api}
+          className='large'
+          defaultValue={defaultMethod}
+          isDisabled={isDisabled}
+          onChange={isDisabled ? undefined : _onKeyChange}
+          options={optionsMethod}
+          value={value}
+          methodType={methodType}
+          setBtnDisable={setBtnDisable}
+        />
+      </LinkedWrapper>
+    </StyledDiv>
   );
 }
 
 export default React.memo(InputExtrinsic);
+
+const StyledDiv = styled.div`
+  .extrinsicsBtn {
+    position: absolute;
+    top: -5rem;
+    width: 20rem;
+  }
+  .nextBtn {
+    width: 6rem;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    padding: 0.7rem 1rem;
+  }
+  .nextBtn.active {
+    background-color: var(--item-actives) !important;
+    color: white !important;
+  }
+//   .button-group {
+//     position: absolute;
+//     top: -5rem;
+//     width: 20rem !important;
+//     display: flex;
+//     border: 1px solid #ccc;
+//     border-radius: 4px;
+//     float: right;
+//   }
+
+// .button {
+//   flex: 1;
+//   padding: 8px 16px;
+//   background-color: #f1f1f1;
+//   border: none;
+//   outline: none;
+//   cursor: pointer;
+//   transition: background-color 0.3s;
+//   float: right;
+// }
+
+// .button.active {
+//   background-color: #007bff;
+//   color: #fff;
+//   float: right;
+// }
+
+// .button:not(:last-child) {
+//   border-right: 1px solid #ccc;
+//   float: right;
+// }
+
+// .button:hover:not(.active) {
+//   background-color: #e6e6e6;
+//   float: right;
+// }
+
+`

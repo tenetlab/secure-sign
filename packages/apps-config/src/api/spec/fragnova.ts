@@ -11,7 +11,6 @@ export default {
   ...options,
   types: [
     {
-      // on all versions
       minmax: [0, undefined],
       types: options.types
     }

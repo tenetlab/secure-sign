@@ -62,7 +62,6 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  // height: 100%;
 
   ${[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,

@@ -14,7 +14,6 @@ function WarmUp (): React.ReactElement {
 
   useEffect((): void => {
     setHasValues(!!indexes || !!issuance || !!registrars);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
