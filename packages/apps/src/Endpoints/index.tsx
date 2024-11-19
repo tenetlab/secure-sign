@@ -32,14 +32,14 @@ interface UrlState {
 
 const STORAGE_AFFINITIES = 'network:affinities';
 
-function isValidUrl (url: string): boolean {
+function isValidUrl(url: string): boolean {
   return (
     (url.length >= 7) &&
     (url.startsWith('ws://') || url.startsWith('wss://') || url.startsWith('light://'))
   );
 }
 
-function combineEndpoints (endpoints: LinkOption[]): Group[] {
+function combineEndpoints(endpoints: LinkOption[]): Group[] {
   return endpoints.reduce((result: Group[], e): Group[] => {
     if (e.isHeader) {
       result.push({ header: e.text, isDevelopment: e.isDevelopment, isSpaced: e.isSpaced, networks: [] });
@@ -66,7 +66,7 @@ function combineEndpoints (endpoints: LinkOption[]): Group[] {
   }, []);
 }
 
-function getCustomEndpoints (): string[] {
+function getCustomEndpoints(): string[] {
   try {
     const storedAsset = localStorage.getItem(CUSTOM_ENDPOINT_KEY);
 
@@ -80,7 +80,7 @@ function getCustomEndpoints (): string[] {
   return [];
 }
 
-function extractUrlState (apiUrl: string, groups: Group[]): UrlState {
+function extractUrlState(apiUrl: string, groups: Group[]): UrlState {
   let groupIndex = groups.findIndex(({ networks }) =>
     networks.some(({ providers }) =>
       providers.some(({ url }) => url === apiUrl)
@@ -99,7 +99,7 @@ function extractUrlState (apiUrl: string, groups: Group[]): UrlState {
   };
 }
 
-function loadAffinities (groups: Group[]): Record<string, string> {
+function loadAffinities(groups: Group[]): Record<string, string> {
   return Object
     .entries<string>(store.get(STORAGE_AFFINITIES) as Record<string, string> || {})
     .filter(([network, apiUrl]) =>
@@ -115,7 +115,7 @@ function loadAffinities (groups: Group[]): Record<string, string> {
     }), {});
 }
 
-function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElement<Props> {
+function Endpoints({ className = '', offset, onClose }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const linkOptions = createWsEndpoints(t);
   const [groups, setGroups] = useState(() => combineEndpoints(linkOptions));

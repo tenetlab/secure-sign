@@ -13,7 +13,7 @@ interface Props {
   className?: string;
 }
 
-function ChainInfo ({ className }: Props): React.ReactElement<Props> {
+function ChainInfo({ className }: Props): React.ReactElement<Props> {
   const { ipnsChain } = useIpfs();
   const [isEndpointsVisible, toggleEndpoints] = useToggle();
   const canToggle = !ipnsChain;
@@ -32,6 +32,7 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
           <Icon
             className='dropdown'
             icon={isEndpointsVisible ? 'caret-right' : 'caret-down'}
+          // icon='caret-down'
           />
         )}
       </div>

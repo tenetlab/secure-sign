@@ -75,7 +75,7 @@ export async function use_last_block(api: ApiPromise) {
 }
 
 export async function get_all_stake_out(api: ApiPromise) {
-  
+
   const { api_at_block, block_number, block_hash_hex } =
     await use_last_block(api);
   console.debug(`Querying StakeTo at block ${block_number}`);
@@ -168,22 +168,22 @@ export async function get_user_total_stake(
   }
 
   const stakeEntries = api.runtimeChain.toString() == 'commune' ?
-  await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
-  (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
-var tests: number = 0
-const stakes = stakeEntries.map(([key, value]) => {
-  const [, stakeToAddress] = key.args;
-  const temp = value.toString();
-  tests += parseInt(temp);
-  const stake = tests.toString()
-  return {
-    address: stakeToAddress!.toString(),
-    stake,
-  };
-});
+    await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
+    (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
+  var tests: number = 0
+  const stakes = stakeEntries.map(([key, value]) => {
+    const [, stakeToAddress] = key.args;
+    const temp = value.toString();
+    tests += parseInt(temp);
+    const stake = tests.toString()
+    return {
+      address: stakeToAddress!.toString(),
+      stake,
+    };
+  });
 
-const stakeInfo = stakes?.slice(-1);
+  const stakeInfo = stakes?.slice(-1);
 
-// Filter out any entries with zero stake
-return stakeInfo.filter((stake) => stake.stake !== "0");
+  // Filter out any entries with zero stake
+  return stakeInfo.filter((stake) => stake.stake !== "0");
 }
