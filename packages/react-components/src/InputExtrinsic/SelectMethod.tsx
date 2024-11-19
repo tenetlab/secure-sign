@@ -51,41 +51,41 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
     return null;
   }
 
-    if(methodType === 'Validator') {
-      options = options.filter((option) => {
-        return option.value == 'addStake' ||
-          option.value == 'removeStake' ||
-          option.value == 'transferKeepAlive' ||
-          option.value == 'setWeights'
-      })
-    } else if(methodType === 'Subnet') {
-      options = options.filter((option) => {
-        return option.value == 'addStake' ||
-          option.value == 'register' ||
-          option.value == 'removeStake' ||
-          option.value == 'transferKeepAlive'
-      })
-    } else {
-      options = options.filter((option) => {
-        return option.value == 'addStake' ||
-          option.value == 'removeStake' ||
-          option.value == 'transferKeepAlive'
-      })
-    } 
+  if (methodType === 'Validator') {
+    options = options.filter((option) => {
+      return option.value == 'addStake' ||
+        option.value == 'removeStake' ||
+        option.value == 'transferKeepAlive' ||
+        option.value == 'setWeights'
+    })
+  } else if (methodType === 'Subnet') {
+    options = options.filter((option) => {
+      return option.value == 'addStake' ||
+        option.value == 'register' ||
+        option.value == 'removeStake' ||
+        option.value == 'transferKeepAlive'
+    })
+  } else {
+    options = options.filter((option) => {
+      return option.value == 'addStake' ||
+        option.value == 'removeStake' ||
+        option.value == 'transferKeepAlive'
+    })
+  }
 
 
   const onSelect = (value: any) => {
     const json = JSON.stringify({ v: value });
-      
-      if (lastUpdate.current !== json) {
-        lastUpdate.current = json;
 
-        onChange && onChange(
-          transform
-            ? transform(value)
-            : value
-        );
-      }
+    if (lastUpdate.current !== json) {
+      lastUpdate.current = json;
+
+      onChange && onChange(
+        transform
+          ? transform(value)
+          : value
+      );
+    }
   }
   return (
     <StyleDiv className=''>
@@ -102,13 +102,13 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
           }}
         >
           <div className='nickname'>
-            {item?.value === 'register' ? 'regiserNetwork' : (item?.value === 'setWeights' ? 'setRootWeights' : item?.value)}
+            {item?.value === 'register' ? 'registerNetwork' : (item?.value === 'setWeights' ? 'setRootWeights' : item?.value)}
           </div>
           <div className='description'>
             <div>
               {item?.value === 'addStake' && 'Adds a stake to a specified hotkey.'}
               {item?.value === 'register' && 'Registers a new subnet.'}
-              {item?.value === 'removeStake' && 'Removes a stake from the staking account (hotkey).'}
+              {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
               {item?.value === 'setWeights' && `Assigns weights to active subnets using their 'netuid'.`}
             </div>
