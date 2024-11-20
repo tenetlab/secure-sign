@@ -100,7 +100,7 @@ const StyledDiv = styled.div`
 
   .ui--Param-Vector-buttons {
     text-align: right;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
 
   .ui--Param-BTreeMap-buttons {
