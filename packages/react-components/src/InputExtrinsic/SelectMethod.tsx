@@ -23,11 +23,18 @@ interface Props {
 }
 
 function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable }: Props): React.ReactElement<Props> | null {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
+    const saved = localStorage.getItem('selectedMethodIndex');
+    if (saved && setBtnDisable) {
+      setBtnDisable(false);
+    }
+    return saved ? parseInt(saved) : null;
+  });
   const lastUpdate = useRef<string>('');
   const handleRowClick = (index: number) => {
     setSelectedIndex(index);
-    setBtnDisable && setBtnDisable(false)
+    localStorage.setItem('selectedMethodIndex', index.toString());
+    setBtnDisable?.(false);
   };
 
   const transform = useCallback(
