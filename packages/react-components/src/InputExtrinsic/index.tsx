@@ -36,7 +36,15 @@ function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, i
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
   const [value, setValue] = useState<SubmittableExtrinsicFunction<'promise'>>((): SubmittableExtrinsicFunction<'promise'> => defaultValue);
   const [{ defaultMethod, defaultSection }] = useState(() => ({ defaultMethod: defaultValue.method, defaultSection: defaultValue.section }));
-  const [methodType, setMethodType] = useState<string>('Validator')
+  const [methodType, setMethodType] = useState<string>(() => {
+    return localStorage.getItem('methodType') || 'Validator';
+  });
+
+  const handleMethodTypeChange = useCallback((newMethodType: string) => {
+    setMethodType(newMethodType);
+    localStorage.setItem('methodType', newMethodType);
+  }, []);
+
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
       if (value !== newValue) {
@@ -69,22 +77,18 @@ function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, i
           <Button
             className={`nextBtn ${methodType === 'User' ? 'active' : ''}`}
             label={'User'}
-            onClick={() => setMethodType('User')}
-            // isSelected={methodType === 'User' ? true : false}
+            onClick={() => handleMethodTypeChange('User')}
           />
           <Button
             className={`nextBtn ${methodType === 'Subnet' ? 'active' : ''}`}
             label={'Subnet'}
-            onClick={() => setMethodType('Subnet')}
-            // isSelected={methodType === 'Subnet' ? true : false}
+            onClick={() => handleMethodTypeChange('Subnet')}
           />
           <Button
             className={`nextBtn ${methodType === 'Validator' ? 'active' : ''}`}
             label={'Validator'}
-            onClick={() => setMethodType('Validator')}
-            // isSelected={methodType === 'Validator' ? true : false}
+            onClick={() => handleMethodTypeChange('Validator')}
           />
-          
         </div>
         <SelectSection
           className='small'
