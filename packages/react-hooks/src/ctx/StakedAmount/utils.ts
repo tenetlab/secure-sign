@@ -169,7 +169,7 @@ export async function get_user_total_stake(
 
   const stakeEntries = api.runtimeChain.toString() == 'commune' ?
     await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
-    (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
+    (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries(address) : []);
   var tests: number = 0
   const stakes = stakeEntries.map(([key, value]) => {
     const [, stakeToAddress] = key.args;

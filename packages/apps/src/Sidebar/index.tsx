@@ -21,7 +21,7 @@ interface Props {
   className?: string;
 }
 
-function checkVisible ({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
+function checkVisible({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
   if (isHidden) {
     return false;
   } else if (needsAccounts && !hasAccounts) {
@@ -41,7 +41,7 @@ function checkVisible ({ api, isApiConnected, isApiReady, isDevelopment: isApiDe
   return findMissingApis(api, needsApi, needsApiInstances, needsApiCheck).length === 0;
 }
 
-function extractGroups (routing: Routes, groupNames: Record<string, string>, apiProps: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean): Group[] {
+function extractGroups(routing: Routes, groupNames: Record<string, string>, apiProps: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean): Group[] {
   return Object
     .values(
       routing.reduce((all: Groups, route): Groups => {
@@ -66,7 +66,7 @@ function extractGroups (routing: Routes, groupNames: Record<string, string>, api
     .filter(({ routes }) => routes.length);
 }
 
-function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
+function Sidebar({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts, hasAccounts } = useAccounts();
   const apiProps = useApi();
@@ -131,8 +131,8 @@ function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
-  width: 300px;
-  height: calc(100vh - 151.5px);
+  width: 350px;
+  height: calc(100vh - 151px);
   padding: 2rem 1rem 0rem 1rem;
   z-index: 220;
   .smallShow {
