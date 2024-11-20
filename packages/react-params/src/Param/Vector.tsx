@@ -112,6 +112,7 @@ function Vector ({ className = '', defaultValue, isDisabled = false, label, onCh
             icon='plus'
             label={t('Add item')}
             onClick={_rowAdd}
+            className='ui--Param-Vector-button'
           />
           <Button
             icon='minus'

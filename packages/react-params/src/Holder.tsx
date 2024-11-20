@@ -94,8 +94,13 @@ const StyledDiv = styled.div`
     margin-left: 0.5rem;
   }
 
+  .ui--Param-Vector-button {
+    margin-right: 0.5rem;
+  }
+
   .ui--Param-Vector-buttons {
     text-align: right;
+    margin-bottom: 2rem;
   }
 
   .ui--Param-BTreeMap-buttons {
