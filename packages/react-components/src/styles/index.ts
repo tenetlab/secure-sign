@@ -267,7 +267,7 @@ export default createGlobalStyle<Props>(({ uiHighlight }: Props) => `
     border-radius: 0.5rem !important;
     white-space: nowrap;
 
-    &:hover {
+    &:hover:not(.isDisabled) {
       background: var(--bg-button-hover) !important;
       color: var(--button-color) !important;
       .ui--Icon {

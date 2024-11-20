@@ -192,7 +192,10 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
           )}
           <Button.Group>
             <Button
-              onClick={() => setVisible(true)}
+              onClick={() => {
+                setVisible(true)
+                setBtnDisable(true)
+              }}
               label={t('Previous')}
               className='previous'
             />
