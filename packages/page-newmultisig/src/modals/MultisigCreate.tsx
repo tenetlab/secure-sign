@@ -114,7 +114,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
   );
 
   const isValid = isNameValid && isThresholdValid;
-  
+
   return (
     <StyledDiv
       className={className}
@@ -125,7 +125,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
             <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
             <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
           </svg>
-          <p>The Members of a mutisig are called singatories</p>
+          <p>Members of a mutisig are called signatories</p>
         </div>
         <span>You must choose 2 accounts at least</span>
       </div>

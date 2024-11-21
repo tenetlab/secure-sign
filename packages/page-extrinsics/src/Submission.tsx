@@ -62,7 +62,7 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
       {
         api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
           <>
-            <h1 style={{ paddingLeft: '2rem'}}>Fill in the below fields</h1>
+            <h1 style={{ paddingLeft: '2rem' }}>Fill in the fields below</h1>
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
