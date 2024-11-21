@@ -41,7 +41,7 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
       if (method == 'transferKeepAlive')
         return api.tx['balances'][method];
-      else if (method == 'addStake' || method == 'register' || method == 'removeStake' || method == 'setWeights') {
+      else if (method == 'addStake' || method == 'register' || method == 'removeStake' || method == 'setWeights' || method == 'setRootWeights') {
         if (api.runtimeChain.toString() == 'commune')
           return api.tx['subspaceModule'][method];
         else
@@ -63,12 +63,13 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
       return option.value == 'addStake' ||
         option.value == 'removeStake' ||
         option.value == 'transferKeepAlive' ||
+        option.value == 'setRootWeights' ||
         option.value == 'setWeights'
     })
   } else if (methodType === 'Subnet') {
     options = options.filter((option) => {
       return option.value == 'addStake' ||
-        option.value == 'register' ||
+        option.value == 'registerNetwork' ||
         option.value == 'removeStake' ||
         option.value == 'transferKeepAlive'
     })
@@ -109,14 +110,16 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
           }}
         >
           <div className='nickname'>
-            {item?.value === 'register' ? 'registerNetwork' : (item?.value === 'setWeights' ? 'setRootWeights' : item?.value)}
+            {item?.value}
+            {/* {item?.value === 'register' ? 'registerNetwork' : (item?.value === 'setWeights' ? 'setRootWeights' : item?.value)} */}
           </div>
           <div className='description'>
             <div>
-              {item?.value === 'addStake' && 'Adds a stake to a specified hotkey.'}
-              {item?.value === 'register' && 'Registers a new subnet.'}
+              {item?.value === 'addStake' && 'Adds stake to a specified hotkey.'}
+              {item?.value === 'registerNetwork' && 'Registers a new subnet.'}
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
+              {item?.value === 'setRootWeights' && `Assigns weights to active subnets using their 'netuid'.`}
               {item?.value === 'setWeights' && `Assigns weights to active subnets using their 'netuid'.`}
             </div>
             <div
