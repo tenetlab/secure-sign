@@ -120,7 +120,7 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
               {item?.value === 'setRootWeights' && `Assigns weights to active subnets using their 'netuid'.`}
-              {item?.value === 'setWeights' && `Assigns weights to active subnets using their 'netuid'.`}
+              {item?.value === 'setWeights' && `Sets miner weights on a subnet.`}
             </div>
             <div
               style={{
