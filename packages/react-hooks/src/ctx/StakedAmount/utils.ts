@@ -163,7 +163,7 @@ export async function get_user_total_stake(
     }
   }
   else if (api.runtimeChain.toString() == 'Bittensor') {
-    if (!api_at_block.query?.subtensorModule?.stake) {
+    if (!api_at_block.query?.subtensorModule?.totalColdkeyStake) {
       throw new Error("Stake query not available");
     }
   }

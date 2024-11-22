@@ -587,7 +587,7 @@ function AddressInfo(props: Props): React.ReactElement<Props> {
   const bestNumber = useBestNumber();
   const { children, className = '', extraInfo, withBalanceToggle, withHexSessionId, balancesAll } = props;
   const [stakedAmount, setStakedAmount] = useState<BigInt>(0n)
-  const { api: apiEndpoint } = useApi();
+  // const { api: apiEndpoint } = useApi();
   const deriveBalances = balancesAll as DeriveBalancesAll;
 
   const lookup = useRef<Record<string, string>>({
