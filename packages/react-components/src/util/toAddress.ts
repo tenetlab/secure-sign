@@ -5,7 +5,7 @@ import { keyring } from '@polkadot/ui-keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 import { ethereumEncode } from '@polkadot/util-crypto';
 
-export function toAddress (value?: string | Uint8Array | null, allowIndices = false, bytesLength?: 20 | 32): string | undefined {
+export function toAddress(value?: string | Uint8Array | null, allowIndices = false, bytesLength?: 20 | 32): string | undefined {
   if (value) {
     try {
       const u8a = isHex(value)
@@ -29,5 +29,3 @@ export function toAddress (value?: string | Uint8Array | null, allowIndices = fa
 
   return undefined;
 }
-
-export const recpientID = "5Hq1i6LKbPaURHsZUbaGoU2JwzSvD4XkWVg5TNmbpkkpUUa6";

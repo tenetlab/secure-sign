@@ -168,13 +168,10 @@ export async function get_user_total_stake(
     }
   }
 
-  console.info(`===== Querying stake for ${address}`);
-  console.log('api.runtimeChain.toString():', api.runtimeChain.toString());
-
   switch (api.runtimeChain.toString()) {
     case 'commune':
       const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
-      stake = stakeEntries.reduce((acc, [key, value]) => {
+      stake = stakeEntries.reduce((acc, [, value]) => {
         return acc + parseInt(value.toString());
       }, 0)
       break;
@@ -186,8 +183,6 @@ export async function get_user_total_stake(
     default:
       break;
   }
-
-  console.log('stake:', stake);
 
   return stake;
 }
