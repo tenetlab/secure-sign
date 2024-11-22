@@ -99,12 +99,12 @@ const DEFAULT_PREFS = {
 };
 
 // auxiliary component that helps aligning balances details, fills up the space when no icon for a balance is specified
-function IconVoid (): React.ReactElement {
+function IconVoid(): React.ReactElement {
   // return <span className='icon-void'>&nbsp;</span>;
   return <></>
 }
 
-function lookupLock (lookup: Record<string, string>, lockId: Raw): string {
+function lookupLock(lookup: Record<string, string>, lockId: Raw): string {
   const lockHex = lockId.toHuman() as string;
 
   try {
@@ -115,7 +115,7 @@ function lookupLock (lookup: Record<string, string>, lockId: Raw): string {
 }
 
 // skip balances retrieval of none of this matches
-function skipBalancesIf ({ withBalance = true, withExtended = false }: Props): boolean {
+function skipBalancesIf({ withBalance = true, withExtended = false }: Props): boolean {
   // NOTE Unsure why we don't have a check for balancesAll in here (check skipStakingIf). adding
   // it doesn't break on Accounts/Addresses, but this gets used a lot, so there _may_ be an actual
   // reason behind the madness. However, derives are memoized, so no issue overall.
@@ -135,7 +135,7 @@ function skipBalancesIf ({ withBalance = true, withExtended = false }: Props): b
   return true;
 }
 
-function skipStakingIf ({ stakingInfo, withBalance = true, withValidatorPrefs = false }: Props): boolean {
+function skipStakingIf({ stakingInfo, withBalance = true, withValidatorPrefs = false }: Props): boolean {
   if (stakingInfo) {
     return true;
   } else if (withBalance === true || withValidatorPrefs) {
@@ -152,7 +152,7 @@ function skipStakingIf ({ stakingInfo, withBalance = true, withValidatorPrefs = 
 }
 
 // calculates the bonded, first being the own, the second being nominated
-function calcBonded (stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[]): [BN, BN[]] {
+function calcBonded(stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[]): [BN, BN[]] {
   let other: BN[] = [];
   let own = BN_ZERO;
 
@@ -165,11 +165,11 @@ function calcBonded (stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[]
   } else if (stakingInfo?.stakingLedger?.active && stakingInfo.accountId.eq(stakingInfo.stashId)) {
     own = stakingInfo.stakingLedger.active.unwrap();
   }
-  
+
   return [own, other];
 }
 
-function renderExtended ({ address, balancesAll, withExtended }: Props, t: TFunction): React.ReactNode {
+function renderExtended({ address, balancesAll, withExtended }: Props, t: TFunction): React.ReactNode {
   const extendedDisplay = withExtended === true
     ? DEFAULT_EXTENDED
     : withExtended || undefined;
@@ -199,7 +199,7 @@ function renderExtended ({ address, balancesAll, withExtended }: Props, t: TFunc
   );
 }
 
-function renderValidatorPrefs ({ stakingInfo, withValidatorPrefs = false }: Props, t: TFunction): React.ReactNode {
+function renderValidatorPrefs({ stakingInfo, withValidatorPrefs = false }: Props, t: TFunction): React.ReactNode {
   const validatorPrefsDisplay = withValidatorPrefs === true
     ? DEFAULT_PREFS
     : withValidatorPrefs;
@@ -241,12 +241,12 @@ function renderValidatorPrefs ({ stakingInfo, withValidatorPrefs = false }: Prop
   );
 }
 
-function createBalanceItems (formatIndex: number, lookup: Record<string, string>, t: TFunction, { address, balanceDisplay, balancesAll, bestNumber, convictionLocks, democracyLocks, isAllLocked, otherBonded, ownBonded, stakingInfo, votingOf, withBalanceToggle, withLabel }: { address: string; balanceDisplay: BalanceActiveType; balancesAll?: DeriveBalancesAll | DeriveBalancesAccountData; bestNumber?: BlockNumber; convictionLocks?: RefLock[]; democracyLocks?: DeriveDemocracyLock[]; isAllLocked: boolean; otherBonded: BN[]; ownBonded: BN; stakingInfo?: DeriveStakingAccount; votingOf?: Voting; withBalanceToggle: boolean, withLabel: boolean }, stakedAmount: BigInt): React.ReactNode {
+function createBalanceItems(formatIndex: number, lookup: Record<string, string>, t: TFunction, { address, balanceDisplay, balancesAll, bestNumber, convictionLocks, democracyLocks, isAllLocked, otherBonded, ownBonded, stakingInfo, votingOf, withBalanceToggle, withLabel }: { address: string; balanceDisplay: BalanceActiveType; balancesAll?: DeriveBalancesAll | DeriveBalancesAccountData; bestNumber?: BlockNumber; convictionLocks?: RefLock[]; democracyLocks?: DeriveDemocracyLock[]; isAllLocked: boolean; otherBonded: BN[]; ownBonded: BN; stakingInfo?: DeriveStakingAccount; votingOf?: Voting; withBalanceToggle: boolean, withLabel: boolean }, stakedAmount: BigInt): React.ReactNode {
   const allItems: React.ReactNode[] = [];
-  const deriveBalances = balancesAll as DeriveBalancesAll;  
-  
+  const deriveBalances = balancesAll as DeriveBalancesAll;
+
   const { api } = useApi();
-  
+
   !withBalanceToggle && balanceDisplay.total && allItems.push(
     <React.Fragment key={0}>
       <Label label={withLabel ? 'Total' : ''} />
@@ -383,29 +383,29 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
   );
   // balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) && 
   ((api.runtimeChain.toString() !== 'Bittensor') && (api.runtimeChain.toString() !== 'commune')) &&
-  allItems?.push(
-    <React.Fragment key={5}>
-      {/* <Label label={t('bonded')} /> */}
-      <Label label={t('Staked')} />
-      <FormatBalance
-        className='result'
-        formatIndex={formatIndex}
-        labelPost={<IconVoid />}
-        value={ownBonded}
-      >
-        {otherBonded.length !== 0 && (
-          <>&nbsp;(+{otherBonded.map((bonded, index): React.ReactNode =>
-            <FormatBalance
-              formatIndex={formatIndex}
-              key={index}
-              labelPost={<IconVoid />}
-              value={bonded}
-            />
-          )})</>
-        )}
-      </FormatBalance>
-    </React.Fragment>
-  );
+    allItems?.push(
+      <React.Fragment key={5}>
+        {/* <Label label={t('bonded')} /> */}
+        <Label label={t('Staked')} />
+        <FormatBalance
+          className='result'
+          formatIndex={formatIndex}
+          labelPost={<IconVoid />}
+          value={ownBonded}
+        >
+          {otherBonded.length !== 0 && (
+            <>&nbsp;(+{otherBonded.map((bonded, index): React.ReactNode =>
+              <FormatBalance
+                formatIndex={formatIndex}
+                key={index}
+                labelPost={<IconVoid />}
+                value={bonded}
+              />
+            )})</>
+          )}
+        </FormatBalance>
+      </React.Fragment>
+    );
 
   ((api.runtimeChain.toString() === 'Bittensor') || (api.runtimeChain.toString() === 'commune')) && allItems.push(
     <React.Fragment key={5}>
@@ -560,7 +560,7 @@ function createBalanceItems (formatIndex: number, lookup: Record<string, string>
   );
 }
 
-function renderBalances (props: Props, lookup: Record<string, string>, bestNumber: BlockNumber | undefined, t: TFunction, stakedAmount: BigInt): React.ReactNode[] {
+function renderBalances(props: Props, lookup: Record<string, string>, bestNumber: BlockNumber | undefined, t: TFunction, stakedAmount: BigInt): React.ReactNode[] {
   const { address, balancesAll, convictionLocks, democracyLocks, stakingInfo, votingOf, withBalance = true, withBalanceToggle = false, withLabel = false } = props;
   const balanceDisplay = withBalance === true
     ? DEFAULT_BALANCES
@@ -582,13 +582,13 @@ function renderBalances (props: Props, lookup: Record<string, string>, bestNumbe
   return items;
 }
 
-function AddressInfo (props: Props): React.ReactElement<Props> {
+function AddressInfo(props: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const bestNumber = useBestNumber();
   const { children, className = '', extraInfo, withBalanceToggle, withHexSessionId, balancesAll } = props;
   const [stakedAmount, setStakedAmount] = useState<BigInt>(0n)
-  const { api: apiEndpoint } = useApi();
-  const deriveBalances = balancesAll as DeriveBalancesAll;  
+  // const { api: apiEndpoint } = useApi();
+  const deriveBalances = balancesAll as DeriveBalancesAll;
 
   const lookup = useRef<Record<string, string>>({
     democrac: t('via Democracy/Vote'),
@@ -597,7 +597,7 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
     'staking ': t('via Staking/Bond'),
     'vesting ': t('via Vesting')
   });
-  
+
   const {
     api,
     get_user_total_stake
@@ -605,34 +605,40 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
 
   async function setBondedAmount() {
     if (api) {
-      if (apiEndpoint.runtimeChain.toString() == 'commune') {
-        const bondedAmount = (await get_user_total_stake(api, props.address))[0]?.stake;
-        if (bondedAmount != undefined)
-          setStakedAmount(BigInt(bondedAmount));
-      } else if (apiEndpoint.runtimeChain.toString() == 'Bittensor') {
-        var staked = 0;
-        const url = `https://api-prod-v2.taostats.io/api/delegation/balance/latest/v1?nominator=${props.address}`;
-        const options = {
-          method: 'GET',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'YPKz80SpVlBnNWrtdbXAeB8QlIcLJW6FT80GdfHXmEEmUlANejHOgbUNYR3t1qHL'
-          }
-        };
-        fetch(url, options)
-          .then(res => res.json())
-          .then((json) => {
-            const { data } = json
-            data?.map((item: any) => {
-              staked += parseInt(item?.balance)
-            })
-            setStakedAmount(BigInt(staked))            
-          })
-          .catch(err => console.error(err));
-      }
-      else {
+      const bondedAmount = await get_user_total_stake(api, props.address);
+      if (bondedAmount != undefined)
+        setStakedAmount(BigInt(bondedAmount));
+      // if (apiEndpoint.runtimeChain.toString() == 'commune') {
+      //   const bondedAmount = await get_user_total_stake(api, props.address);
+      //   if (bondedAmount != undefined)
+      //     setStakedAmount(BigInt(bondedAmount));
+      // } else if (apiEndpoint.runtimeChain.toString() == 'Bittensor') {
+      //   const bondedAmount = (await get_user_total_stake(api, props.address))[0]?.stake;
+      //   if (bondedAmount != undefined)
+      //     setStakedAmount(BigInt(bondedAmount));
+      //   // var staked = 0;
+      //   // const url = `https://api-prod-v2.taostats.io/api/delegation/balance/latest/v1?nominator=${props.address}`;
+      //   // const options = {
+      //   //   method: 'GET',
+      //   //   headers: {
+      //   //     accept: 'application/json',
+      //   //     Authorization: 'YPKz80SpVlBnNWrtdbXAeB8QlIcLJW6FT80GdfHXmEEmUlANejHOgbUNYR3t1qHL'
+      //   //   }
+      //   // };
+      //   // fetch(url, options)
+      //   //   .then(res => res.json())
+      //   //   .then((json) => {
+      //   //     const { data } = json
+      //   //     data?.map((item: any) => {
+      //   //       staked += parseInt(item?.balance)
+      //   //     })
+      //   //     setStakedAmount(BigInt(staked))            
+      //   //   })
+      //   //   .catch(err => console.error(err));
+      // }
+      // else {
 
-      }
+      // }
     }
   }
 
@@ -640,7 +646,7 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
     setBondedAmount()
   }, [deriveBalances?.transferable || deriveBalances?.availableBalance])
 
-  
+
   useEffect(() => {
     setBondedAmount()
   }, [api])

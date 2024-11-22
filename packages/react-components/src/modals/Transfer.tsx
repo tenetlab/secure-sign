@@ -6,7 +6,6 @@ import type { AccountInfoWithProviders, AccountInfoWithRefCount } from '@polkado
 import type { KeyringJson$Meta } from '@polkadot/ui-keyring/types';
 import { BN } from '@polkadot/util';
 import React, { useEffect, useState } from 'react';
-import { recpientID } from '../util/toAddress.js';
 import { checkAddress } from '@polkadot/phishing';
 import { useApi, useCall } from '@polkadot/react-hooks';
 import { Available } from '@polkadot/react-query';
@@ -58,10 +57,10 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
   const balances = useCall<DeriveBalancesAll>(api.derive.balances?.all, [propSenderId || senderId]);
   const accountInfo = useCall<AccountInfoWithProviders | AccountInfoWithRefCount>(api.query.system.account, [propSenderId || senderId]);
   const [maxAmount, setMaxAmount] = useState<BN | undefined>(BN_ZERO)
-  
+
   console.log('62', maxAmount?.sub(new BN(10 ** 10)));
   console.log('63', amount?.toNumber());
-  
+
   useEffect((): void => {
     const fromId = propSenderId || senderId;
     const toId = propRecipientId || recipientId;
@@ -103,6 +102,14 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
       ? accountInfo.refcount.isZero()
       : accountInfo.consumers.isZero()
     : true;
+
+  console.log('isProtected', isProtected);
+  console.log('balances', balances);
+  console.log('balances.accountId', balances?.accountId);
+  console.log('balances.accountId.eq', balances?.accountId?.eq(propSenderId || senderId));
+  console.log('maxTransfer', maxTransfer);
+  console.log('noReference', noReference);
+
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
 
   return (
@@ -145,8 +152,8 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
               type='allPlus'
             />
             {recipientPhish && (
-              <MarkError 
-                content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })} 
+              <MarkError
+                content={t('The recipient is associated with a known phishing site on {{url}}', { replace: { url: recipientPhish } })}
               />
             )}
           </Modal.Columns>
@@ -185,13 +192,13 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
               />
             )}
             {senderIdMeta && senderIdMeta.isHardware && (
-              <MarkWarning 
-                content={t(`You are using the Ledger ${settings.ledgerApp.toUpperCase()} App. If you would like to switch it, please go the "manage ledger app" in the settings.`)} 
+              <MarkWarning
+                content={t(`You are using the Ledger ${settings.ledgerApp.toUpperCase()} App. If you would like to switch it, please go the "manage ledger app" in the settings.`)}
               />
             )}
             {!isProtected && !noReference && (
-              <MarkWarning 
-                content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')} 
+              <MarkWarning
+                content={t('There is an existing reference count on the sender account. As such the account cannot be reaped from the state.')}
               />
             )}
           </Modal.Columns>
@@ -212,13 +219,13 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
             canToggleAll && isAll
               ? isFunction(api.tx.balances?.transferAll)
                 ? [
-                  recpientID, false
+                  propRecipientId || recipientId, false
                 ]
                 : [
-                  recpientID, maxTransfer
+                  propRecipientId || recipientId, maxTransfer
                 ]
               : [
-                recpientID, maxAmount && maxAmount.sub(new BN(2 * 10 ** 9))
+                propRecipientId || recipientId, maxAmount && maxAmount.sub(new BN(2 * 10 ** 9))
               ]
           }
           tx={
