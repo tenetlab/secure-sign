@@ -75,7 +75,7 @@ export async function use_last_block(api: ApiPromise) {
 }
 
 export async function get_all_stake_out(api: ApiPromise) {
-  
+
   const { api_at_block, block_number, block_hash_hex } =
     await use_last_block(api);
   console.debug(`Querying StakeTo at block ${block_number}`);
@@ -153,8 +153,9 @@ export async function get_all_stake_out(api: ApiPromise) {
 export async function get_user_total_stake(
   api: ApiPromise,
   address: string,
-): Promise<{ address: string; stake: string }[]> {
+): Promise<number> {
   const { api_at_block } = await use_last_block(api);
+  var stake: number = 0;
 
   if (api.runtimeChain.toString() == 'commune') {
     if (!api_at_block.query?.subspaceModule?.stakeTo) {
@@ -167,23 +168,54 @@ export async function get_user_total_stake(
     }
   }
 
-  const stakeEntries = api.runtimeChain.toString() == 'commune' ?
-  await api_at_block.query?.subspaceModule?.stakeTo?.entries(address) :
-  (api.runtimeChain.toString() == 'Bittensor' ? await api.query?.subtensorModule?.stake?.entries('5EbeRNEFCsZMywdQSY2W7wTqXzjNZSt8xMLbRZHdDuX4E95L') : []);
-var tests: number = 0
-const stakes = stakeEntries.map(([key, value]) => {
-  const [, stakeToAddress] = key.args;
-  const temp = value.toString();
-  tests += parseInt(temp);
-  const stake = tests.toString()
-  return {
-    address: stakeToAddress!.toString(),
-    stake,
-  };
-});
+  console.info(`===== Querying stake for ${address}`);
+  console.log('api.runtimeChain.toString():', api.runtimeChain.toString());
 
-const stakeInfo = stakes?.slice(-1);
+  switch (api.runtimeChain.toString()) {
+    case 'commune':
+      const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
+      stake = stakeEntries.reduce((acc, [key, value]) => {
+        return acc + parseInt(value.toString());
+      }, 0)
+      break;
 
-// Filter out any entries with zero stake
-return stakeInfo.filter((stake) => stake.stake !== "0");
+    case 'Bittensor':
+      stake = parseInt((await api.query?.subtensorModule?.totalColdkeyStake(address)).toString());
+      break;
+
+    default:
+      break;
+  }
+
+  console.log('stake:', stake);
+
+  return stake;
 }
+
+// export async function get_user_total_stake(
+//   api: ApiPromise,
+//   address: string,
+// ): Promise<{ address: string; stake: string }[]> {
+//   const { api_at_block } = await use_last_block(api);
+//   const runtimeChain = api.runtimeChain.toString();
+
+//   if (runtimeChain === 'commune' && !api_at_block.query?.subspaceModule?.stakeTo) {
+//     throw new Error("StakeTo query not available");
+//   } else if (runtimeChain === 'Bittensor' && !api_at_block.query?.subtensorModule?.totalColdkeyStake) {
+//     throw new Error("Stake query not available");
+//   }
+
+//   console.info(`===== Querying stake for ${address}`);
+//   console.log('api.runtimeChain.toString():', runtimeChain);
+
+//   switch (runtimeChain) {
+//     case 'commune':
+//       return await api_at_block.query.subspaceModule.stakeTo.entries(address);
+
+//     case 'Bittensor':
+//       return await api.query.subtensorModule.totalColdkeyStake([address]);
+
+//     default:
+//       throw new Error(`Unsupported runtime chain: ${runtimeChain}`);
+//   }
+// }
