@@ -225,7 +225,7 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
                   propRecipientId || recipientId, maxTransfer
                 ]
               : [
-                propRecipientId || recipientId, maxAmount && maxAmount.sub(new BN(2 * 10 ** 9))
+                propRecipientId || recipientId, amount
               ]
           }
           tx={
