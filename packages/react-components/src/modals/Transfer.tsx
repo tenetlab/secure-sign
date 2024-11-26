@@ -103,12 +103,12 @@ function Transfer({ className = '', onClose, recipientId: propRecipientId, sende
       : accountInfo.consumers.isZero()
     : true;
 
-  console.log('isProtected', isProtected);
-  console.log('balances', balances);
-  console.log('balances.accountId', balances?.accountId);
-  console.log('balances.accountId.eq', balances?.accountId?.eq(propSenderId || senderId));
-  console.log('maxTransfer', maxTransfer);
-  console.log('noReference', noReference);
+  // console.log('isProtected', isProtected);
+  // console.log('balances', balances);
+  // console.log('balances.accountId', balances?.accountId);
+  // console.log('balances.accountId.eq', balances?.accountId?.eq(propSenderId || senderId));
+  // console.log('maxTransfer', maxTransfer);
+  // console.log('noReference', noReference);
 
   const canToggleAll = !isProtected && balances && balances.accountId?.eq(propSenderId || senderId) && maxTransfer && noReference;
 
