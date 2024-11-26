@@ -13,6 +13,7 @@ echo -n > $TARGET
 declare -a vars=(
   "WS_URL"
   "SAMPLE"
+  "BUILD_MODE"
 )
 
 echo "window.process_env = {" >> $TARGET

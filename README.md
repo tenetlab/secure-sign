@@ -38,16 +38,54 @@ To get started -
 You can run a docker container via -
 
 ```docker
-docker run --rm -it --name polkadot-ui -e WS_URL=ws://someip:9944 -p 80:80 jacogr/polkadot-js-apps:latest
+docker run --rm -it --name tcl-secure-sign -e WS_URL=ws://someip:9944 -p 80:80 tcl/secure-sign:latest
+```
+
+or if you want to load your `.env` file
+
+```docker
+docker run --rm -it --name tcl-secure-sign --env-file .env -p 80:80 tcl/secure-sign:latest
 ```
 
 To build a docker container containing local changes -
 
 ```dockers
-docker build -t jacogr/polkadot-js-apps -f docker/Dockerfile .
+docker build -t tcl/secure-sign -f docker/Dockerfile .
 ```
 
 When using these Docker commands, you can access the UI via <http://localhost:80> (or just <http://localhost>)
+
+### Docker Image Management
+
+#### Pushing an Image to Docker Hub
+
+1. **Log in to Docker Hub**:
+
+   ```bash
+   docker login
+   ```
+
+2. **Tag Your Image**:
+
+   ```bash
+   docker tag tcl/secure-sign <yourusername>/tcl-secure-sign:latest
+   ```
+
+3. **Push the Image**:
+
+   ```bash
+   docker push <yourusername>/tcl-secure-sign:latest
+   ```
+
+#### Pulling an Image from Docker Hub
+
+1. **Pull the Image**:
+
+   ```bash
+   docker pull <yourusername>/tcl-secure-sign:latest
+   ```
+
+Replace `yourusername` with your Docker Hub username. Ensure you are logged in to Docker Hub before pushing or pulling images, especially if your repository is private.
 
 ## Contributions
 

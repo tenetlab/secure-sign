@@ -21,6 +21,7 @@ FROM nginx:stable-alpine
 
 # The following is mainly for doc purpose to show which ENV is supported
 ENV WS_URL=
+ENV BUILD_MODE=production
 
 WORKDIR /usr/share/nginx/html
 
