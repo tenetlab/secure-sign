@@ -6,14 +6,14 @@ import type { KeyringJson$Meta } from '@polkadot/ui-keyring/types';
 import React from 'react';
 
 import AddressMini from '../AddressMini.js';
-import {styled} from '../styled.js';
+import { styled } from '../styled.js';
 
 interface Props {
   isMultisig: boolean;
   meta?: KeyringJson$Meta;
 }
 
-function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
+function Multisig({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
 
   if (!isMultisig || !meta) {
     return null;
@@ -53,15 +53,19 @@ export default React.memo(Multisig);
 
 const StyledSection = styled.section`
   background-color: var(--bg-subCard);
+  height: 20rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  overflow: hidden; /* Make the section not scrollable */
+  
   .signatories {
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-cardBtn);
   }
-  height: 20rem;
-  border-radius: 1rem;
+
   .threshold {
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     .subTitle {
       margin-right: 1rem;
     } 

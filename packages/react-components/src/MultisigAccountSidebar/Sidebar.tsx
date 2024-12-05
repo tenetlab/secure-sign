@@ -70,7 +70,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           />
         </div>
         <div className='hash'>
-          <h1 >Pending Transaction</h1>
+          <h1 >Pending Transactions</h1>
           <div className='subCard'>
             {hashes?.map((item, key) =>
               <MultisigOutput
@@ -117,6 +117,7 @@ const StyledDiv = styled.div`
       border-radius: 1rem;
       height: 20rem;
       padding: 0.5rem;
+      margin-top: 1rem;
     }
     @media only screen and (max-width: 1400px) {
       width: 98%;
