@@ -22,7 +22,7 @@ interface Props {
   onUpdateName?: (() => void) | null;
 }
 
-function FullSidebar ({ address, className = '', dataTestId, onClose, onUpdateName }: Props): React.ReactElement<Props> {
+function FullSidebar({ address, className = '', dataTestId, onClose, onUpdateName }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
   const { accountIndex, flags, identity, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);

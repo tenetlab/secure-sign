@@ -59,7 +59,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
       </div>
       <div className='account_detail'>
         <div className='ui--ScrollSection'>
-          <h1 >Account Detail</h1>
+          <h1 >Account Details</h1>
           {/* <Identity
           address={address}
           identity={identity}
@@ -268,6 +268,7 @@ const StyledDiv = styled.div`
 
         .td {
           overflow: hidden;
+          scroll-y: auto;
           padding: 1rem;
           text-overflow: ellipsis;
           text-align: left;

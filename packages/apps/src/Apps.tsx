@@ -29,28 +29,28 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
       : apiEndpoint?.ui.color,
     [apiEndpoint, isDevelopment]
   );
-  
+
   return (
     <>
-    <PolkadotProvider wsEndpoint={apiEndpoint?.providers !== undefined ? apiEndpoint.providers[0] : ''}>
-      <GlobalStyle uiHighlight={uiHighlight} />
-      <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
-        <Menu />
-        <div style={{ display: 'flex' }}>
-          <Sidebar />
-          <AccountSidebar>
-            <MultisigAccountSidebar>
-              <Signer>
-                <Content />
-              </Signer>
-              {/* <BottomOverlay /> */}
-              {/* <div id={PORTAL_ID} /> */}
-            </MultisigAccountSidebar>
-          </AccountSidebar>
-        </div>
-        <Footer />
-      </StyledDiv>
-      <WarmUp />
+      <PolkadotProvider wsEndpoint={apiEndpoint?.providers !== undefined ? apiEndpoint.providers[0] : ''}>
+        <GlobalStyle uiHighlight={uiHighlight} />
+        <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
+          <Menu />
+          <div style={{ display: 'flex' }}>
+            <Sidebar />
+            <AccountSidebar>
+              <MultisigAccountSidebar>
+                <Signer>
+                  <Content />
+                </Signer>
+                {/* <BottomOverlay /> */}
+                {/* <div id={PORTAL_ID} /> */}
+              </MultisigAccountSidebar>
+            </AccountSidebar>
+          </div>
+          <Footer />
+        </StyledDiv>
+        <WarmUp />
       </PolkadotProvider>
     </>
   );

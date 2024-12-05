@@ -34,8 +34,8 @@ function Multisig({ isMultisig, meta }: Props): React.ReactElement<Props> | null
           </div>
         </div>
         <div className='tr'>
-          <div className='th signatories'>Signatories:</div>
-          <div className='td'>
+          <div className='th signatories-head'>Signatories:</div>
+          <div className='td signatories'>
             {who?.map((address) => (
               <AddressMini
                 key={address}
@@ -56,11 +56,16 @@ const StyledSection = styled.section`
   height: 20rem;
   border-radius: 1rem;
   margin-top: 1rem;
-  overflow: hidden; /* Make the section not scrollable */
   
-  .signatories {
+  .signatories-head {
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--border-cardBtn);
+  }
+
+  .signatories {
+    padding-bottom: 0.5rem;
+    overflow-y: auto;
+    max-height: 10rem;
   }
 
   .threshold {
