@@ -31,7 +31,7 @@ interface Props {
 
 type AddrMatcher = (addr: unknown) => string | null;
 
-function createAllMatcher (prefix: string, name: string): AddrMatcher {
+function createAllMatcher(prefix: string, name: string): AddrMatcher {
   const test = statics.registry.createType('AccountId', stringToU8a(prefix.padEnd(32, '\0')));
 
   return (addr: unknown) =>
@@ -40,7 +40,7 @@ function createAllMatcher (prefix: string, name: string): AddrMatcher {
       : null;
 }
 
-function createNumMatcher (prefix: string, name: string, add?: string): AddrMatcher {
+function createNumMatcher(prefix: string, name: string, add?: string): AddrMatcher {
   const test = stringToU8a(prefix);
 
   // 4 bytes for u32 (more should not hurt, LE)
@@ -82,11 +82,11 @@ const displayCache = new Map<string, React.ReactNode>();
 const indexCache = new Map<string, string>();
 const parentCache = new Map<string, string>();
 
-export function getParentAccount (value: string): string | undefined {
+export function getParentAccount(value: string): string | undefined {
   return parentCache.get(value);
 }
 
-function defaultOrAddr (defaultName = '', _address: AccountId | AccountIndex | Address | string | Uint8Array, _accountIndex?: AccountIndex | null): [displayName: React.ReactNode, isLocal: boolean, isAddress: boolean, isSpecial: boolean] {
+function defaultOrAddr(defaultName = '', _address: AccountId | AccountIndex | Address | string | Uint8Array, _accountIndex?: AccountIndex | null): [displayName: React.ReactNode, isLocal: boolean, isAddress: boolean, isSpecial: boolean] {
   let known: string | null = null;
 
   for (let i = 0; known === null && i < MATCHERS.length; i++) {
@@ -115,7 +115,7 @@ function defaultOrAddr (defaultName = '', _address: AccountId | AccountIndex | A
   return [extracted, !isAddressExtracted, isAddressExtracted, false];
 }
 
-function defaultOrAddrNode (defaultName = '', address: AccountId | AccountIndex | Address | string | Uint8Array, accountIndex?: AccountIndex | null): React.ReactNode {
+function defaultOrAddrNode(defaultName = '', address: AccountId | AccountIndex | Address | string | Uint8Array, accountIndex?: AccountIndex | null): React.ReactNode {
   const [node, , isAddress] = defaultOrAddr(defaultName, address, accountIndex);
 
   return isAddress
@@ -123,7 +123,7 @@ function defaultOrAddrNode (defaultName = '', address: AccountId | AccountIndex 
     : node;
 }
 
-function extractName (address: string, accountIndex?: AccountIndex, defaultName?: string): React.ReactNode {
+function extractName(address: string, accountIndex?: AccountIndex, defaultName?: string): React.ReactNode {
   const displayCached = displayCache.get(address);
 
   if (displayCached) {
@@ -146,7 +146,7 @@ function extractName (address: string, accountIndex?: AccountIndex, defaultName?
   );
 }
 
-function createIdElem (nameElem: React.ReactNode, color: 'green' | 'red' | 'gray', icon: IconName): React.ReactNode {
+function createIdElem(nameElem: React.ReactNode, color: 'green' | 'red' | 'gray', icon: IconName): React.ReactNode {
   return (
     <span className='via-identity'>
       <Badge
@@ -159,7 +159,7 @@ function createIdElem (nameElem: React.ReactNode, color: 'green' | 'red' | 'gray
   );
 }
 
-function extractIdentity (address: string, identity: DeriveAccountRegistration): React.ReactNode {
+function extractIdentity(address: string, identity: DeriveAccountRegistration): React.ReactNode {
   const judgements = identity.judgements.filter(([, judgement]) => !judgement.isFeePaid);
   const isGood = judgements.some(([, judgement]) => judgement.isKnownGood || judgement.isReasonable);
   const isBad = judgements.some(([, judgement]) => judgement.isErroneous || judgement.isLowQuality);
@@ -185,7 +185,7 @@ function extractIdentity (address: string, identity: DeriveAccountRegistration):
   return elem;
 }
 
-function AccountName ({ children, className = '', defaultName, label, override, toggle, value }: Props): React.ReactElement<Props> {
+function AccountName({ children, className = '', defaultName, label, override, toggle, value }: Props): React.ReactElement<Props> {
   const { apiIdentity } = useApi();
   const info = useDeriveAccountInfo(value);
   const [name, setName] = useState<React.ReactNode>(() => extractName((value || '').toString(), undefined, defaultName));
@@ -227,11 +227,11 @@ function AccountName ({ children, className = '', defaultName, label, override, 
     <StyledSpan
       className={`${className}  ui--AccountName `}
       data-testid='account-name'
-      // onClick={
-      //   withSidebar
-      //     ? _onToggleSidebar
-      //     : onClick
-      // }
+    // onClick={
+    //   withSidebar
+    //     ? _onToggleSidebar
+    //     : onClick
+    // }
     >
       {label || ''}{override || name}{children}
     </StyledSpan>
@@ -268,7 +268,7 @@ const StyledSpan = styled.span`
       line-height: 1;
       overflow: hidden;
       text-overflow: ellipsis;
-
+      
       &:not(.isAddress) {
         text-transform: uppercase;
       }

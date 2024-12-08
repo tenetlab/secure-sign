@@ -341,9 +341,17 @@ const StyledDiv = styled.div`
   }
 
   .name--input {
+    width: 100%; /* Ensure full width */
+    padding: 0; /* Match padding */
+    margin: 0; /* Match margin */
+    font-size: inherit; /* Match font size */
+    border: none; /* Remove border */
+    background: transparent; /* Match background */
+    outline: none; /* Remove outline */
+    display: inline-block; /* Match display type */
+    
     .ui.input {
       margin: 0 !important;
-
       > input {
       }
     }
