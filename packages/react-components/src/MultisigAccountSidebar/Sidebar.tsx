@@ -267,7 +267,7 @@ const StyledDiv = styled.div`
         }
 
         .td {
-          overflow: hidden;
+          // overflow: hidden;
           scroll-y: auto;
           padding: 1rem;
           text-overflow: ellipsis;
