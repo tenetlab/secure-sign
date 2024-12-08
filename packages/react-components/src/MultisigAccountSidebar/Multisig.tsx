@@ -58,7 +58,7 @@ const StyledSection = styled.section`
   margin-top: 1rem;
   
   .signatories-head {
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-cardBtn);
   }
 
@@ -70,7 +70,8 @@ const StyledSection = styled.section`
 
   .threshold {
     display: flex;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     .subTitle {
       margin-right: 1rem;
     } 
