@@ -12,7 +12,7 @@ interface ParentAccountProps {
   className?: string
 }
 
-function ParentAccount ({ address, className }: ParentAccountProps): React.ReactElement<ParentAccountProps> {
+function ParentAccount({ address, className }: ParentAccountProps): React.ReactElement<ParentAccountProps> {
   return (
     <StyledDiv
       className={className}

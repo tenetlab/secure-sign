@@ -6,14 +6,14 @@ import type { KeyringJson$Meta } from '@polkadot/ui-keyring/types';
 import React from 'react';
 
 import AddressMini from '../AddressMini.js';
-import {styled} from '../styled.js';
+import { styled } from '../styled.js';
 
 interface Props {
   isMultisig: boolean;
   meta?: KeyringJson$Meta;
 }
 
-function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
+function Multisig({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
 
   if (!isMultisig || !meta) {
     return null;
@@ -34,8 +34,8 @@ function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | nul
           </div>
         </div>
         <div className='tr'>
-          <div className='th signatories'>Signatories:</div>
-          <div className='td'>
+          <div className='th signatories-head'>Signatories:</div>
+          <div className='td signatories'>
             {who?.map((address) => (
               <AddressMini
                 key={address}
@@ -53,15 +53,25 @@ export default React.memo(Multisig);
 
 const StyledSection = styled.section`
   background-color: var(--bg-subCard);
-  .signatories {
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-cardBtn);
-  }
   height: 20rem;
   border-radius: 1rem;
+  margin-top: 1rem;
+  
+  .signatories-head {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-cardBtn);
+  }
+
+  .signatories {
+    padding-bottom: 0.5rem;
+    overflow-y: auto;
+    max-height: 10rem;
+  }
+
   .threshold {
     display: flex;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
     .subTitle {
       margin-right: 1rem;
     } 

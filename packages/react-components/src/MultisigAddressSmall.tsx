@@ -24,11 +24,11 @@ interface Props {
   isActive: boolean;
 }
 
-function MultisigAddressSmall ({ children, className = '', defaultName, onClickName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true, isActive }: Props): React.ReactElement<Props> {
+function MultisigAddressSmall({ children, className = '', defaultName, onClickName, overrideName, parentAddress, toggle, value, withShortAddress = false, withSidebar = true, isActive }: Props): React.ReactElement<Props> {
   return (
     <StyledDiv className={`${className} ui--AddressSmall ${(parentAddress || withShortAddress) ? 'withPadding' : ''} ${isActive ? 'selected' : ''}`}>
       <span className='ui--AddressSmall-icon'>
-        <IdentityIcon value={value as Uint8Array} size={50}/>
+        <IdentityIcon value={value as Uint8Array} size={50} />
       </span>
       <span className='ui--AddressSmall-info'>
         {parentAddress && (
@@ -114,13 +114,13 @@ const StyledDiv = styled.div`
     .shortAddress {
       bottom: -0.95rem;
       color: #8B8B8B;
-      display: inline-block;
+      display: inline-block; // Use inline-block for layout
       left: 0;
-      min-width: 100%;
-      max-width: 100%;
+      max-width: 80%; // Ensure it doesn't exceed the container
       position: absolute;
       overflow: hidden;
-      text-overflow: ellipsis;
+      text-overflow: ellipsis; // Ensure text is clipped with ellipsis
+      white-space: nowrap; // Prevent text from wrapping
       color: var(--color-input);
     }
   }

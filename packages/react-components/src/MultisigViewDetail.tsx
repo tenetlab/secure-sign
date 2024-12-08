@@ -21,7 +21,7 @@ interface Props {
 }
 
 
-function MultisigViewDetail ({ children, className = '', value, toggleMultisig}: Props): React.ReactElement<Props> | null {
+function MultisigViewDetail({ children, className = '', value, toggleMultisig }: Props): React.ReactElement<Props> | null {
 
 
   if (!isString(value)) {
@@ -30,19 +30,19 @@ function MultisigViewDetail ({ children, className = '', value, toggleMultisig}:
 
   return (
     <StyledDiv className={`${className} ui--CopyButton`}>
-        <div className='copyContainer'>
-          {children}
-          <span className='copySpan'>
-            {/* <Button
+      <div className='copyContainer'>
+        {children}
+        <span className='copySpan'>
+          {/* <Button
               className='icon-button show-on-hover review'
               // icon={``}
               isDisabled={!value}
               label={'Review'}
               onClick={toggleMultisig}
             /> */}
-            <button className='review' onClick={toggleMultisig}>Review</button>
-          </span>
-        </div>
+          <button className='review' onClick={toggleMultisig}>Review</button>
+        </span>
+      </div>
     </StyledDiv>
   );
 }

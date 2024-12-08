@@ -59,7 +59,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
       </div>
       <div className='account_detail'>
         <div className='ui--ScrollSection'>
-          <h1 >Account Detail</h1>
+          <h1 >Account Details</h1>
           {/* <Identity
           address={address}
           identity={identity}
@@ -70,7 +70,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           />
         </div>
         <div className='hash'>
-          <h1 >Pending Transaction</h1>
+          <h1 >Pending Approvals</h1>
           <div className='subCard'>
             {hashes?.map((item, key) =>
               <MultisigOutput
@@ -117,6 +117,7 @@ const StyledDiv = styled.div`
       border-radius: 1rem;
       height: 20rem;
       padding: 0.5rem;
+      margin-top: 1rem;
     }
     @media only screen and (max-width: 1400px) {
       width: 98%;
@@ -266,7 +267,8 @@ const StyledDiv = styled.div`
         }
 
         .td {
-          overflow: hidden;
+          // overflow: hidden;
+          scroll-y: auto;
           padding: 1rem;
           text-overflow: ellipsis;
           text-align: left;
@@ -339,9 +341,17 @@ const StyledDiv = styled.div`
   }
 
   .name--input {
+    width: 100%; /* Ensure full width */
+    padding: 0; /* Match padding */
+    margin: 0; /* Match margin */
+    font-size: inherit; /* Match font size */
+    border: none; /* Remove border */
+    background: transparent; /* Match background */
+    outline: none; /* Remove outline */
+    display: inline-block; /* Match display type */
+    
     .ui.input {
       margin: 0 !important;
-
       > input {
       }
     }

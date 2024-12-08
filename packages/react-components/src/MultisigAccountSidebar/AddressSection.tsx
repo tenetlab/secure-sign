@@ -50,29 +50,30 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
                 />
               )
               : flags.isEditable
-                ? (defaultValue.toUpperCase() || t('<unknown>'))
+                ? <span>{defaultValue.toUpperCase()}</span> || t('<unknown>')
                 : undefined
           }
           value={value}
           withSidebar={false}
         />
         <div className='ui--AddressMenu-addr'
-            data-testid='short-address'
+          data-testid='short-address'
         >
           <div className='ui--Value'>
-            {value.toString().slice(0, 40)}
+            {/* {value.toString().slice(0, 40)} */}
+            {value.toString()}
           </div>
           <div className='ui--Copy'>
             <CopyToClipboard
               text={value}
             >
               <span className='copy-btn'>
-                  <Button
-                    icon={isCopyShown ? 'check' : 'copy'}
-                    label={isCopyShown ? t('Copied') : t('')}
-                    onClick={isCopyShown ? NOOP : toggleIsCopyShown}
-                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
-                  />
+                <Button
+                  icon={isCopyShown ? 'check' : 'copy'}
+                  label={isCopyShown ? t('Copied') : t('')}
+                  onClick={isCopyShown ? NOOP : toggleIsCopyShown}
+                  onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
+                />
               </span>
             </CopyToClipboard>
           </div>
@@ -82,10 +83,10 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
             <label>{t('index')}:</label> {accountIndex}
           </div>
         )}
-          
+
       </div>
-      <Balances 
-        address={value} 
+      <Balances
+        address={value}
         className='ui--Balance-Info'
       />
     </StyledAddressSection>

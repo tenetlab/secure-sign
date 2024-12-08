@@ -152,8 +152,8 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const [isUndelegateOpen, toggleUndelegate] = useToggle();
 
   useEffect(() => {
-    if(democracyUnlockTx && referendaUnlockTx && vestingVestTx) {}
-  },[])
+    if (democracyUnlockTx && referendaUnlockTx && vestingVestTx) { }
+  }, [])
 
 
   useEffect((): void => {
@@ -428,7 +428,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
               <Badge
                 className='important'
                 color='purple'
-                // hover={t('Multisig approvals pending')}
+                hover={t('Multisig approvals pending')}
                 // hoverAction={t('View pending approvals')}
                 icon='file-signature'
                 onClick={() => { }}

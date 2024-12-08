@@ -252,31 +252,18 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
           </div>
           <div className='multisig_detail'>
             {multisigAddress !== null ? (
-              <>
-                {multiInfos && multiInfos.length !== 0 ? (
-                  <Sidebar
-                    address={multisigAddress || ''}
-                    dataTestId='account-sidebar'
-                    ongoing={multiInfos}
-                    onUpdateName={onUpdateName}
-                    toggleMultisig={toggleMultisig}
-                    toggleProxyOverview={toggleProxyOverview}
-                  />
-                ) : (
-                  <>
-                    <Sidebar
-                      address={multisigAddress || ''}
-                      dataTestId='account-sidebar'
-                      ongoing={[]}
-                      onUpdateName={onUpdateName}
-                      toggleMultisig={toggleMultisig}
-                      toggleProxyOverview={toggleProxyOverview}
-                    />
-                  </>
-                )}
-              </>
+              <Sidebar
+                address={multisigAddress || ''}
+                dataTestId='account-sidebar'
+                ongoing={multiInfos || []}
+                onUpdateName={onUpdateName}
+                toggleMultisig={toggleMultisig}
+                toggleProxyOverview={toggleProxyOverview}
+              />
             ) : (
-              <></>
+              <div className='detail'>
+                <p>Select a multisig account to view details</p>
+              </div>
             )}
 
           </div>
@@ -351,6 +338,15 @@ const StyledDiv = styled.div`
       color: var(--subcolor-text);
     }
   }
+  .detail {
+      display: flex;
+      font-size: var(--font-size-h3);  
+      font-weight: 600;
+      p {
+        padding-left: 1rem;
+        color: var(--subcolor-text);
+      }
+    }
 `;
 
 export default React.memo(Overview);
