@@ -5,7 +5,7 @@ import type { ActionStatus } from '@polkadot/react-components/Status/types';
 import type { HexString } from '@polkadot/util/types';
 import type { ModalProps } from '../types.js';
 
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { Button, Input, InputAddressMulti_newmultisig, InputNumber_newmultisig, styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
@@ -68,17 +68,30 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
     uploadedFileError: '',
     uploadedSignatories: []
   });
+  const [reset, setReset] = useState<boolean>(false);
   const [signatories, setSignatories] = useState<string[]>(['']);
-  const [selectedSignatories, SetSelectedSignatoris] = useState<number>(0);
+  const [selectedSignatories, setSelectedSignatories] = useState<number>(0);
   const [{ isThresholdValid, threshold }, setThreshold] = useState({ isThresholdValid: true, threshold: BN_TWO });
+
+  useEffect(() => {
+    if (reset) {
+      setThreshold({ isThresholdValid: true, threshold: BN_TWO });
+      setName({ isNameValid: false, name: '' });
+      setReset(false); // Ensure this is set to false to prevent repeated resets
+    }
+  }, [reset]);
 
   const _createMultisig = useCallback(
     (): void => {
+      // create a new multisig
       const options = { genesisHash: isDevelopment ? undefined : api.genesisHash.toHex(), name: name.trim() };
       const status = createMultisig(signatories, threshold, options, t('created multisig'));
 
       onStatusChange(status);
       onClose();
+
+      // reset state after creation
+      setReset(true);
     },
     [api.genesisHash, isDevelopment, name, onClose, onStatusChange, signatories, t, threshold]
   );
@@ -125,38 +138,40 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
             <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
             <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
           </svg>
-          <p>Members of a mutisig are called signatories</p>
+          <p>Members of a multisig are called signatories</p>
         </div>
         <span>You must choose 2 accounts at least</span>
       </div>
       <InputAddressMulti_newmultisig
         available={availableSignatories}
-        availableLabel={t('New signatory:')}
+        availableLabel={t('Available signatories') + ` (${availableSignatories.length - selectedSignatories})`}
         maxCount={MAX_SIGNATORIES}
         onChange={_onChangeAddressMulti}
-        valueLabel={t('Selected signatories:')}
-        setSelectedSignatoris={SetSelectedSignatoris}
+        valueLabel={t('Selected signatories') + ` (${selectedSignatories})`}
+        setSelectedSignatories={setSelectedSignatories}
         selectedSignatories={selectedSignatories}
+        reset={reset}
       />
       <div className='input_btn input_btn_margintop'>
         <InputNumber_newmultisig
-          isError={!isThresholdValid}
-          label={t('Threshold:')}
-          onChange={_onChangeThreshold}
-          value={threshold}
           className='threshold'
-          totalSignatories={selectedSignatories}
+          isError={!isThresholdValid}
+          label={t('Threshold') + ` (${threshold}/${selectedSignatories})`}
+          value={threshold}
+          onChange={_onChangeThreshold}
+          // totalSignatories={selectedSignatories}
+          key={'multisig-threshold-key'}
         />
         <Input
           autoFocus
           className='full name'
           isError={!isNameValid}
-          label={t('Name:')}
+          label={t('Name')}
+          value={name}
           onChange={_onChangeName}
           placeholder='Multisig name'
-
+          key={'multisig-name-key'}
         />
-
       </div>
       <div className='input_btn button_end'>
         <Button
