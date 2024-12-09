@@ -17,58 +17,64 @@ interface Props {
   defaultValue?: string[];
   maxCount: number;
   onChange: (values: string[]) => void;
-  setSelectedSignatoris: (values: number) => void;
+  setSelectedSignatories: (values: number) => void;
   selectedSignatories: number;
   valueLabel: React.ReactNode;
+  reset: boolean;
 }
 
-function exclude (prev: string[], address: string): string[] {
+function exclude(prev: string[], address: string): string[] {
   return prev.includes(address)
     ? prev.filter((a) => a !== address)
     : prev;
 }
 
-function include (prev: string[], address: string, maxCount: number): string[] {
+function include(prev: string[], address: string, maxCount: number): string[] {
   return !prev.includes(address) && (prev.length < maxCount)
     ? prev.concat(address)
     : prev;
 }
 
-function InputAddressMulti ({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel, setSelectedSignatoris, selectedSignatories }: Props): React.ReactElement<Props> {
+function InputAddressMulti({ available, availableLabel, className = '', defaultValue, maxCount, onChange, valueLabel, setSelectedSignatories, selectedSignatories, reset }: Props): React.ReactElement<Props> {
   const [_filter, setFilter] = useState<string>('');
   const [selected, setSelected] = useState<string[]>([]);
   const filter = useDebounce(_filter);
   const isNextTick = useNextTick();
-  
+
   useEffect((): void => {
     defaultValue && setSelected(defaultValue);
   }, [defaultValue, setFilter]);
+
+  useEffect((): void => {
+    setSelected([]);
+    setSelectedSignatories(0);
+  }, [reset]);
 
   useEffect((): void => {
     selected && onChange(selected);
   }, [onChange, selected]);
 
   const onSelects = useCallback(
-    (address: string) => { 
+    (address: string) => {
       setSelected((prev) => include(prev, address, maxCount));
     },
     [maxCount]
   );
 
   const onDeselects = useCallback(
-    (address: string) => { 
+    (address: string) => {
       setSelected((prev) => exclude(prev, address));
     },
     []
   );
 
   const onDeselect = (address: string) => {
-    setSelectedSignatoris( selectedSignatories - 1 );
+    setSelectedSignatories(selectedSignatories - 1);
     onDeselects(address)
   }
 
   const onSelect = (address: string) => {
-    setSelectedSignatoris( selectedSignatories + 1 );
+    setSelectedSignatories(selectedSignatories + 1);
     onSelects(address)
   }
 
