@@ -159,7 +159,7 @@ function Multisig({ className = '', onClose, onStatusChange }: Props): React.Rea
           label={t('Threshold') + ` (${threshold}/${selectedSignatories})`}
           value={threshold}
           onChange={_onChangeThreshold}
-          totalSignatories={selectedSignatories}
+          // totalSignatories={selectedSignatories}
           key={'multisig-threshold-key'}
         />
         <Input

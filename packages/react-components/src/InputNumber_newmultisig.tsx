@@ -45,7 +45,7 @@ interface Props {
   withEllipsis?: boolean;
   withLabel?: boolean;
   withMax?: boolean;
-  totalSignatories: number;
+  // totalSignatories: number;
 }
 
 const DEFAULT_BITLENGTH = 32;
@@ -155,7 +155,7 @@ function getValues(api: ApiPromise, value: BN | string = BN_ZERO, si: SiDef | nu
     : getValuesFromString(api, value, si, bitLength, isSigned, isZeroable, maxValue, decimals);
 }
 
-function InputNumber({ autoFocus, bitLength = DEFAULT_BITLENGTH, children, className = '', defaultValue, isDecimal, isDisabled, isError = false, isFull, isLoading, isSi, isSigned = false, isWarning, isZeroable = true, label, labelExtra, maxLength, maxValue, onChange, onEnter, onEscape, placeholder, siDecimals, siDefault, siSymbol, value: propsValue, totalSignatories }: Props): React.ReactElement<Props> {
+function InputNumber({ autoFocus, bitLength = DEFAULT_BITLENGTH, children, className = '', defaultValue, isDecimal, isDisabled, isError = false, isFull, isLoading, isSi, isSigned = false, isWarning, isZeroable = true, label, labelExtra, maxLength, maxValue, onChange, onEnter, onEscape, placeholder, siDecimals, siDefault, siSymbol, value: propsValue/*, totalSignatories */ }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { api } = useApi();
   const [si] = useState<SiDef | null>(() =>
