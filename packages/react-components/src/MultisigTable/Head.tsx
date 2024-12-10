@@ -15,7 +15,7 @@ interface Props {
   isEmpty: boolean;
 }
 
-function Head ({ children, className = '', filter, header, isEmpty }: Props): React.ReactElement<Props> | null {
+function Head({ children, className = '', filter, header, isEmpty }: Props): React.ReactElement<Props> | null {
   if (!header?.length) {
     return null;
   }
@@ -56,7 +56,7 @@ const StyledThead = styled.thead`
     // font: var(--font-sans);
     font-size: var(--font-size-h1) !important;
     font-weight: var(--font-weight-normal);
-    padding: 3rem 2rem;
+    padding: 1rem 1rem;
     text-align: right;
     vertical-align: middle;
     white-space: nowrap;

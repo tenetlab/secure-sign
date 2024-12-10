@@ -26,8 +26,7 @@ interface Props {
   noBodyTag?: boolean;
 }
 
-function TableBase ({ children, className = '', empty, emptySpinner, filter, header, headerChildren, legend, noBodyTag }: Props): React.ReactElement<Props> {
-  
+function TableBase({ children, className = '', empty, emptySpinner, filter, header, headerChildren, legend, noBodyTag }: Props): React.ReactElement<Props> {
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 
@@ -65,9 +64,13 @@ const BORDER_TOP = `${BASE_BORDER * 2}rem solid var(--bg-page)`;
 const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 
 const StyledDiv = styled.div`
-  max-width: 100%;
-  width: 100%;
   // margin-left: 2rem;
+
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  max-width: 100%;
 
   .ui--Table-Split {
     display: flex;
@@ -89,11 +92,12 @@ const StyledDiv = styled.div`
     float: right;
     border-collapse: collapse;
     border-spacing: 0;
-    // max-width: 90%;
-    // overflow: hidden;
     // position: relative;
-    width: 90%;
     // z-index: 1;
+    width: 90%;
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
 
     &.isFixed {
       table-layout: fixed;
@@ -151,7 +155,16 @@ const StyledDiv = styled.div`
   }
 
   tbody {
-    position: relative;
+    // position: relative;
+    max-height: calc(100vh - 20rem);
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+
+    tr {
+      width: 100%;
+      display: table;
+    }
 
     td {
       // background: var(--bg-table);

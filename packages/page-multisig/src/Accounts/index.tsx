@@ -276,8 +276,9 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   display: flex;
-  height: 100%;
+  height: calc(100vh - 160px);
   // border: 1px solid var(--border-card);
+
   border-radius: 1rem;
   padding-top: 0px !important;
   .ui--Dropdown {
