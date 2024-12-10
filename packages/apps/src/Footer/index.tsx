@@ -19,7 +19,7 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
         <div className='footer-item'>
           <span className='content-center'>@2023-2024. All rights reserved</span>
           <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
-          <img src='/logo-footer.webp' width={100} alt='footer' />
+          <img src='/logo-footer.webp' width={150} alt='footer' />
         </div>
       </div>
     </StyledDiv>
@@ -64,7 +64,7 @@ const StyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
-    font-size: var(--font-size-h3);
+    font-size: var(--font-size-h2);
   }
   &.isLoading {
     .menuActive {
