@@ -56,7 +56,7 @@ const StyledThead = styled.thead`
     // font: var(--font-sans);
     font-size: var(--font-size-h1) !important;
     font-weight: var(--font-weight-normal);
-    padding: 1rem 1rem;
+    padding: 2rem 1rem;
     text-align: right;
     vertical-align: middle;
     white-space: nowrap;

@@ -124,7 +124,6 @@ const StyledDiv = styled.div`
       margin: 1rem 0rem 0rem 1rem;
     }
   }
-  padding: 0 0 3.286rem;
 
   input {
     width: auto !important;

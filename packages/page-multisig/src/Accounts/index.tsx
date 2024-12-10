@@ -276,7 +276,7 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   display: flex;
-  height: calc(100vh - 160px);
+  height: 100%;
   // border: 1px solid var(--border-card);
 
   border-radius: 1rem;
@@ -298,7 +298,7 @@ const StyledDiv = styled.div`
   .multisig_detail {
     // border-left: 2px solid var(--border-table);
     width: 70%;
-    padding-left: 15px !important;
+    // padding-left: 15px !important;
     
     // @media only screen and (max-width: 1400px) {
     //   width: 76%;

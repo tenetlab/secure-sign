@@ -64,13 +64,10 @@ const BORDER_TOP = `${BASE_BORDER * 2}rem solid var(--bg-page)`;
 const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 
 const StyledDiv = styled.div`
-  // margin-left: 2rem;
-
   width: 100%;
   height: 100%;
   max-height: 100%;
   min-height: 100%;
-  max-width: 100%;
 
   .ui--Table-Split {
     display: flex;
@@ -98,7 +95,7 @@ const StyledDiv = styled.div`
     height: 100%;
     max-height: 100%;
     min-height: 100%;
-
+    
     &.isFixed {
       table-layout: fixed;
     }

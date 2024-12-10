@@ -7,48 +7,64 @@ import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 
 interface Props {
-    className?: string;
+  className?: string;
 }
 
 function Footer({ className = '' }: Props): React.ReactElement<Props> {
-    const apiProps = useApi();
+  const apiProps = useApi();
 
-    return (
-        <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
-            <div className='menuContainer'>
-              <div className='footer-item'>
-                  <span className='content-center'>@2021-2024. All rights reserved</span>
-                  <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
-                  <img src='/logo-footer.webp' width={100} alt='footer' />
-              </div>
-            </div>
-        </StyledDiv>
-    );
+  return (
+    <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
+      <div className='menuContainer'>
+        <div className='footer-item'>
+          <span className='content-center'>@2023-2024. All rights reserved</span>
+          <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
+          <img src='/logo-footer.webp' width={100} alt='footer' />
+        </div>
+      </div>
+    </StyledDiv>
+  );
 }
 
 const StyledDiv = styled.div`
   width: 100%;
+  z-index: 220;
+  position: relative;
+  padding: 0.5rem 1rem 1rem 1rem;
+  background-color: var(--bg-page);
+
   .content-center {
     align-content: center
   }
-  z-index: 220;
-  position: relative;
   .smallShow {
     display: none;
   }
   background-color: var(--bg-page);
 
+
   .menuContainer {
-    background: var(--bg-footer);
-    color: var(--color-footer);
-    padding: 0.6rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--bg-menubar);
   }
+
+  // .menuContainer {
+  //   background: var(--bg-footer);
+  //   color: var(--color-footer);
+  //   padding: 0.5rem;
+  //   width: 100%;
+  // }
 
   .footer-item {
     display: flex;
     justify-content: space-between;
-
+    width: 100%;
+    font-size: var(--font-size-h3);
   }
   &.isLoading {
     .menuActive {

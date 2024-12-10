@@ -36,7 +36,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <GlobalStyle uiHighlight={uiHighlight} />
         <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
           <Menu />
-          <div style={{ display: 'flex' }}>
+          <div style={{ display: 'flex', flex: 1 }}>
             <Sidebar />
             <AccountSidebar>
               <MultisigAccountSidebar>
