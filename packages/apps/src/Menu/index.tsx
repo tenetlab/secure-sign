@@ -22,11 +22,11 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
       <div className='menuContainer'>
         <div className='menuSection'>
-          <LogoInfo logo={logo}/>
+          <LogoInfo logo={logo} />
           <h1 className='menuItems'>SecureSign</h1>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left'}}>
-          <ThemeToggle setLogo={setLogo} logo={logo}/>
+        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left' }}>
+          <ThemeToggle setLogo={setLogo} logo={logo} />
           <ChainInfo />
         </div>
       </div>
@@ -36,7 +36,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   width: 100%;
-  padding: 2rem 1rem 1rem 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   z-index: 220;
   position: relative;
   .smallShow {
