@@ -62,7 +62,7 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
       {
         api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
           <>
-            <h1 style={{ paddingLeft: '2rem' }}>Fill in the fields below</h1>
+            <h1>Fill in the fields below</h1>
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
@@ -92,6 +92,7 @@ export default React.memo(Selection);
 const StyledDiv = styled.div`
   .extrinsics--Extrinsic {
     display: flex;
+    
     .ui.selection.dropdown {
       word-wrap: normal !important;
     }
@@ -105,10 +106,8 @@ const StyledDiv = styled.div`
     .ui--Address-Extrinsic {
       width: 100%;
       background-color: var(--bg-menubar);
-      padding: 5rem;
-      margin: 2rem;
+      padding: 2rem;
       border-radius: 1rem;
-
     }
     .ui--Params-Decoded-Button {
       width: 100%;
