@@ -343,6 +343,11 @@ const StyledDiv = styled.div`
       display: flex;
       font-size: var(--font-size-h3);  
       font-weight: 600;
+      background-color: var(--bg-menubar);
+      border-radius: 1rem;
+      height: 100%;
+      padding: 1rem;
+      margin-left: 1rem;
       p {
         padding-left: 1rem;
         color: var(--subcolor-text);
