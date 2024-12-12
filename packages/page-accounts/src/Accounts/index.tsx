@@ -42,7 +42,7 @@ const STORE_FAVS = 'accounts:favorites';
 
 const GROUP_ORDER: GroupName[] = ['accounts', 'injected', 'qr', 'hardware', 'proxied', 'multisig', 'testing', 'chopsticks'];
 
-function groupAccounts(accounts: SortedAccount[]): Record<GroupName, string[]> {
+function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> {
   const ret: Record<GroupName, string[]> = {
     accounts: [],
     chopsticks: [],
@@ -57,20 +57,22 @@ function groupAccounts(accounts: SortedAccount[]): Record<GroupName, string[]> {
   for (let i = 0, count = accounts.length; i < count; i++) {
     const { address } = accounts[i];
     const cryptoType = getAccountCryptoType(address);
+
     if (cryptoType !== 'multisig') {
       ret.accounts.push(address);
     }
   }
+
   return ret;
 }
 
-function Overview({ className = '' }: Props): React.ReactElement<Props> {
+function Overview ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts } = useAccounts();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
   const [balances, setBalances] = useState<Balances>({ accounts: {} });
   const [sortedAccounts, setSorted] = useState<SortedAccount[]>([]);
-  const { sortBy, sortFromMax } = DEFAULT_SORT_CONTROLS
+  const { sortBy, sortFromMax } = DEFAULT_SORT_CONTROLS;
   const delegations = useDelegations();
   const proxies = useProxies();
   const isNextTick = useNextTick();
@@ -214,9 +216,19 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
       {!isNextTick || !sortedAccounts.length
         ? (
           <div className='detail'>
-            <svg width="25" height="25" viewBox="0 0 25 25">
-              <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
-              <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+            <svg
+              height='25'
+              viewBox='0 0 25 25'
+              width='25'
+            >
+              <path
+                d='M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z'
+                fill='var(--color-icon)'
+              />
+              <path
+                d='M11.5 8h2v7h-2zM11.5 16h2v2h-2z'
+                fill='var(--bg-page)'
+              />
             </svg>
             <p>No Accounts</p>
           </div>
@@ -266,7 +278,7 @@ const StyledDiv = styled.div`
       height: 4rem;
       align-items: center;
       text-align: center;
-      justity-content: center;
+      // justify-content: center;
       display: flex;
       font-size: var(--font-size-h3);  
       p {

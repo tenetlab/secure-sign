@@ -3,7 +3,7 @@
 
 import type { EndpointOption } from './types.js';
 
-import {  chainsBittensorPNG, chainsCommuneaiPNG } from '../ui/logos/chains/index.js';
+import { chainsBittensorPNG, chainsCommuneaiPNG } from '../ui/logos/chains/index.js';
 import { nodesCompetitorsClubPNG } from '../ui/logos/nodes/index.js';
 
 export * from './productionRelayKusama.js';
@@ -50,5 +50,5 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
       color: '#213830',
       logo: nodesCompetitorsClubPNG
     }
-  },
+  }
 ];
