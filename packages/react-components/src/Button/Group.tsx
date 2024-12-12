@@ -23,6 +23,17 @@ function ButtonGroup ({ children, className = '', isCentered }: Props): React.Re
 const StyledDiv = styled.div`
   margin: 1rem 0;
   text-align: right;
+  display: flex;
+  
+  @media (max-width: 900px) {
+    flex-direction: column;
+    row-gap: 0.25rem;
+  }
+
+  @media (min-width: 901px) {
+    flex-direction: row;
+    column-gap: 0.5rem;
+  }
 
   & .clear {
     clear: both;
