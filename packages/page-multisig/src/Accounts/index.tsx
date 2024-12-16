@@ -9,18 +9,18 @@ import type { SortCategory } from '../util.js';
 
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { styled, MultisigTable } from '@polkadot/react-components';
+import { MultisigTable, styled } from '@polkadot/react-components';
+import { AddressContext } from '@polkadot/react-components/MultisigAccountSidebar/index';
+import Sidebar from '@polkadot/react-components/MultisigAccountSidebar/Sidebar';
 import { getAccountCryptoType } from '@polkadot/react-components/util';
 import { useAccounts, useDelegations, useFavorites, useNextTick, useProxies, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN_ZERO } from '@polkadot/util';
 
+import useMultisigApprovals from '../../../page-multisig/src/Accounts/useMultisigApprovals.js';
 import { useTranslation } from '../translate.js';
 import { sortAccounts } from '../util.js';
 import Account from './Account.js';
-import Sidebar from '@polkadot/react-components/MultisigAccountSidebar/Sidebar';
-import { AddressContext } from '@polkadot/react-components/MultisigAccountSidebar/index';
-import useMultisigApprovals from '../../../page-multisig/src/Accounts/useMultisigApprovals.js';
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
@@ -45,7 +45,7 @@ const STORE_FAVS = 'accounts:favorites';
 
 const GROUP_ORDER: GroupName[] = ['hardware', 'multisig', 'testing'];
 
-function groupAccounts(accounts: SortedAccount[]): Record<GroupName, string[]> {
+function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> {
   const ret: Record<GroupName, string[]> = {
     hardware: [],
     multisig: [],
@@ -55,6 +55,7 @@ function groupAccounts(accounts: SortedAccount[]): Record<GroupName, string[]> {
   for (let i = 0, count = accounts.length; i < count; i++) {
     const { address } = accounts[i];
     const cryptoType = getAccountCryptoType(address);
+
     if (cryptoType === 'multisig') {
       ret.multisig.push(address);
     }
@@ -63,7 +64,7 @@ function groupAccounts(accounts: SortedAccount[]): Record<GroupName, string[]> {
   return ret;
 }
 
-function Overview({ className = '' }: Props): React.ReactElement<Props> {
+function Overview ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts } = useAccounts();
   const [favorites, toggleFavorite] = useFavorites(STORE_FAVS);
@@ -76,7 +77,7 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
   const isNextTick = useNextTick();
   const [isMultisigOpen, toggleMultisig] = useToggle();
 
-  const { multisigAddress, onUpdateName } = useContext(AddressContext)
+  const { multisigAddress, onUpdateName } = useContext(AddressContext);
   const multiInfos = useMultisigApprovals(multisigAddress || '');
   const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
 
@@ -167,15 +168,15 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
           delegation={delegation}
           filter={filterOn}
           isFavorite={isFavorite}
+          isMultisigOpen={isMultisigOpen}
+          isProxyOverviewOpen={isProxyOverviewOpen}
           key={address}
+          multisigAddress={multisigAddress}
           proxy={proxies?.[index]}
           setBalance={setBalance}
           toggleFavorite={toggleFavorite}
-          isMultisigOpen={isMultisigOpen}
           toggleMultisig={toggleMultisig}
           toggleProxyOverview={toggleProxyOverview}
-          isProxyOverviewOpen={isProxyOverviewOpen}
-          multisigAddress={multisigAddress}
         />
       );
 
@@ -216,59 +217,73 @@ function Overview({ className = '' }: Props): React.ReactElement<Props> {
 
   return (
     <StyledDiv className={className}>
-      {grouped['multisig'][0] === undefined ? (
-        <div className='empty-account'>
-          <div className='detail'>
-            <svg width="25" height="25" viewBox="0 0 25 25">
-              <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
-              <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
-            </svg>
-            <p>No Multisig accounts</p>
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className='multisig_list'>
-            {!isNextTick || !sortedAccounts.length
-              ? (
-                <MultisigTable
-                  empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
-                  header={header.multisig}
+      {grouped.multisig[0] === undefined
+        ? (
+          <div className='empty-account'>
+            <div className='detail'>
+              <svg
+                height='25'
+                viewBox='0 0 25 25'
+                width='25'
+              >
+                <path
+                  d='M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z'
+                  fill='var(--color-icon)'
                 />
-              )
-              : GROUP_ORDER.map((group) =>
-                groups[group] && (
+                <path
+                  d='M11.5 8h2v7h-2zM11.5 16h2v2h-2z'
+                  fill='var(--bg-page)'
+                />
+              </svg>
+              <p>No Multisig accounts</p>
+            </div>
+          </div>
+        )
+        : (
+          <>
+            <div className='multisig_list'>
+              {!isNextTick || !sortedAccounts.length
+                ? (
                   <MultisigTable
-                    empty={t('No accounts')}
-                    header={header[group]}
-                    isSplit
-                    key={group}
-                  >
-                    {groups[group]}
-                  </MultisigTable>
+                    empty={isNextTick && sortedAccounts && t("You don't have any accounts. Some features are currently hidden and will only become available once you have accounts.")}
+                    header={header.multisig}
+                  />
                 )
-              )
-            }
-          </div>
-          <div className='multisig_detail'>
-            {multisigAddress !== null ? (
-              <Sidebar
-                address={multisigAddress || ''}
-                dataTestId='account-sidebar'
-                ongoing={multiInfos || []}
-                onUpdateName={onUpdateName}
-                toggleMultisig={toggleMultisig}
-                toggleProxyOverview={toggleProxyOverview}
-              />
-            ) : (
-              <div className='detail'>
-                <p>Select a multisig account to view details</p>
-              </div>
-            )}
+                : GROUP_ORDER.map((group) =>
+                  groups[group] && (
+                    <MultisigTable
+                      empty={t('No accounts')}
+                      header={header[group]}
+                      isSplit
+                      key={group}
+                    >
+                      {groups[group]}
+                    </MultisigTable>
+                  )
+                )
+              }
+            </div>
+            <div className='multisig_detail'>
+              {multisigAddress !== null
+                ? (
+                  <Sidebar
+                    address={multisigAddress || ''}
+                    dataTestId='account-sidebar'
+                    onUpdateName={onUpdateName}
+                    ongoing={multiInfos || []}
+                    toggleMultisig={toggleMultisig}
+                    toggleProxyOverview={toggleProxyOverview}
+                  />
+                )
+                : (
+                  <div className='detail'>
+                    <p>Select a multisig account to view details</p>
+                  </div>
+                )}
 
-          </div>
-        </>
-      )}
+            </div>
+          </>
+        )}
 
     </StyledDiv>
   );
@@ -320,9 +335,8 @@ const StyledDiv = styled.div`
   }
   .empty-account {
     width: 100%;
-    height: 4rem;
+    height: 100%;
     display: flex;
-    padding: 1rem 2rem 1rem 1rem;
     border-radius: 1rem;
     background-color: var(--bg-menubar);
     justify-content: space-between;
@@ -342,15 +356,12 @@ const StyledDiv = styled.div`
   .detail {
       display: flex;
       font-size: var(--font-size-h3);  
-      font-weight: 600;
       background-color: var(--bg-menubar);
       border-radius: 1rem;
       height: 100%;
       padding: 1rem;
-      margin-left: 1rem;
       p {
         padding-left: 1rem;
-        color: var(--subcolor-text);
       }
     }
 `;

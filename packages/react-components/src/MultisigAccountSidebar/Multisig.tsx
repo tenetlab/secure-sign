@@ -13,8 +13,7 @@ interface Props {
   meta?: KeyringJson$Meta;
 }
 
-function Multisig({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
-
+function Multisig ({ isMultisig, meta }: Props): React.ReactElement<Props> | null {
   if (!isMultisig || !meta) {
     return null;
   }
@@ -65,6 +64,7 @@ const StyledSection = styled.section`
   .signatories {
     padding-bottom: 0.5rem;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 10rem;
   }
 
@@ -76,4 +76,4 @@ const StyledSection = styled.section`
       margin-right: 1rem;
     } 
   }
-`
+`;

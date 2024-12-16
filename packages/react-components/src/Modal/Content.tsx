@@ -22,13 +22,18 @@ function Content ({ children, className = '' }: Props): React.ReactElement<Props
 
 const StyledDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  
   .ui--Modal-content-body {
     display: flex;
     flex-direction: column;
-    row-gap: 2rem;
-    padding-top: 2rem;
+    row-gap: 1rem;
     width: 88%;
+  }
+
+  .ui--Row-children {
+    display: block;
+    padding: 0rem !important;
   }
 `;
 

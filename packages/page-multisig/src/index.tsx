@@ -5,6 +5,7 @@ import type { AppProps as Props } from '@polkadot/react-components/types';
 
 import React from 'react';
 import { Route, Routes } from 'react-router';
+
 import { styled } from '@polkadot/react-components';
 
 import Accounts from './Accounts/index.js';
@@ -13,9 +14,7 @@ import useCounter from './useCounter.js';
 
 export { useCounter };
 
-
 function MultisigAccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<Props> {
-
   return (
     <StyledMain className='accounts--App'>
       <Routes>
@@ -40,6 +39,6 @@ function MultisigAccountsApp ({ basePath, onStatusChange }: Props): React.ReactE
 
 const StyledMain = styled.main`
   height: 100%;
-`
+`;
 
 export default React.memo(MultisigAccountsApp);

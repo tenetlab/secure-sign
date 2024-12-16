@@ -26,7 +26,7 @@ interface Props {
   noBodyTag?: boolean;
 }
 
-function TableBase({ children, className = '', empty, emptySpinner, filter, header, headerChildren, legend, noBodyTag }: Props): React.ReactElement<Props> {
+function TableBase ({ children, className = '', empty, emptySpinner, filter, header, headerChildren, legend, noBodyTag }: Props): React.ReactElement<Props> {
   const isArray = Array.isArray(children);
   const isEmpty = !children || (isArray && children.length === 0);
 
@@ -43,7 +43,7 @@ function TableBase({ children, className = '', empty, emptySpinner, filter, head
   return (
     <StyledDiv className={`${className} ui--Table`}>
       {legend}
-      <table className={``}>
+      <table className={''}>
         {headerNode}
         <Body
           empty={empty}

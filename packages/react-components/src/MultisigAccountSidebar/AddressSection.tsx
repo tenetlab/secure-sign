@@ -6,6 +6,7 @@ import type { AddressFlags } from '@polkadot/react-hooks/types';
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 
+import { styled } from '@polkadot/react-components';
 import { useToggle } from '@polkadot/react-hooks';
 
 import AccountName from '../AccountName.js';
@@ -13,7 +14,6 @@ import Button from '../Button/index.js';
 import IdentityIcon from '../IdentityIcon/index.js';
 import Input from '../Input.js';
 import { useTranslation } from '../translate.js';
-import { styled } from '@polkadot/react-components';
 import Balances from './Balances.js';
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
   accountIndex: string | undefined,
 }
 
-function AddressSection({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
+function AddressSection ({ accountIndex, defaultValue, editingName, flags, onChange, value }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
@@ -56,7 +56,8 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
           value={value}
           withSidebar={false}
         />
-        <div className='ui--AddressMenu-addr'
+        <div
+          className='ui--AddressMenu-addr'
           data-testid='short-address'
         >
           <div className='ui--Value'>
@@ -123,6 +124,6 @@ const StyledAddressSection = styled.div`
   @media only screen and (max-width: 1600px) {
     width: calc(100% - 160px);
   }
-`
+`;
 
 export default React.memo(AddressSection);

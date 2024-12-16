@@ -3,11 +3,12 @@
 
 import React, { useCallback, useEffect } from 'react';
 
-import { useAccountInfo} from '@polkadot/react-hooks';
+import { useAccountInfo } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 
 import AccountMenuButtons from './AccountMenuButtons.js';
 import AddressSection from './AddressSection.js';
+
 interface Props {
   accountIndex: string | undefined;
   address: string;
@@ -18,7 +19,7 @@ interface Props {
 }
 
 function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdateName, toggleProxyOverview }: Props): React.ReactElement<Props> {
-  const { flags, isEditing, isEditingName, name, onForgetAddress, onSaveName, onSaveTags, setIsEditingName, setIsEditingTags, setName, setTags, toggleIsEditingName, toggleIsEditingTags } = useAccountInfo(address);
+  const { flags, isEditing, isEditingName, name, onForgetAccount, onForgetAddress, onSaveName, onSaveTags, setIsEditingName, setIsEditingTags, setName, setTags, toggleIsEditingName, toggleIsEditingTags } = useAccountInfo(address);
 
   useEffect((): void => {
     isBeingEdited(isEditing());
@@ -55,6 +56,7 @@ function SidebarEditableSection ({ accountIndex, address, isBeingEdited, onUpdat
         isEditing={isEditing()}
         isEditingName={isEditingName}
         onCancel={onCancel}
+        onForgetAccount={onForgetAccount}
         onForgetAddress={onForgetAddress}
         onSaveName={onSaveName}
         onSaveTags={onSaveTags}
