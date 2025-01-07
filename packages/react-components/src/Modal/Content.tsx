@@ -22,7 +22,7 @@ function Content ({ children, className = '' }: Props): React.ReactElement<Props
 
 const StyledDiv = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   
   .ui--Modal-content-body {
     display: flex;
