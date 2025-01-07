@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 
 import { MultisigAccountSidebarCtx } from '@polkadot/react-hooks/ctx/MultisigAccountSidebar';
 
-type AddressContextType = {
+interface AddressContextType {
   multisigAddress: string | null;
   onUpdateName: (() => void) | null;
-};
+}
 
 // Create context with default values
 export const AddressContext = React.createContext<AddressContextType>({

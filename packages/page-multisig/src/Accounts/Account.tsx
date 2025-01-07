@@ -3,7 +3,6 @@
 
 // This is for the use of `Ledger`
 //
-/* eslint-disable deprecation/deprecation */
 
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsic } from '@polkadot/api/types';
@@ -17,7 +16,7 @@ import type { AccountBalance, Delegation } from '../types.js';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useAccountLocks from '@polkadot/app-referenda/useAccountLocks';
-import { MultisigAddressSmall, Badge, Forget, styled, TransferModal } from '@polkadot/react-components';
+import { Badge, Forget, MultisigAddressSmall, styled, TransferModal } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useBestNumber, useCall, useStakingInfo, useToggle } from '@polkadot/react-hooks';
 import { keyring } from '@polkadot/ui-keyring';
 import { BN, BN_ZERO, formatBalance, formatNumber } from '@polkadot/util';
@@ -63,7 +62,7 @@ interface ReferendaUnlockable {
   ids: [classId: BN, refId: BN][];
 }
 
-function calcVisible(filter: string, name: string, tags: string[]): boolean {
+function calcVisible (filter: string, name: string, tags: string[]): boolean {
   if (filter.length === 0) {
     return true;
   }
@@ -75,7 +74,7 @@ function calcVisible(filter: string, name: string, tags: string[]): boolean {
   }, name.toLowerCase().includes(_filter));
 }
 
-function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
+function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
   if (!stakingInfo?.unlocking) {
     return BN_ZERO;
   }
@@ -88,7 +87,7 @@ function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
   return total;
 }
 
-function createClearDemocracyTx(api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
+function createClearDemocracyTx (api: ApiPromise, address: string, ids: BN[]): SubmittableExtrinsic<'promise'> | null {
   return api.tx.utility && ids.length
     ? api.tx.utility.batch(
       ids
@@ -98,7 +97,7 @@ function createClearDemocracyTx(api: ApiPromise, address: string, ids: BN[]): Su
     : null;
 }
 
-function createClearReferendaTx(api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
+function createClearReferendaTx (api: ApiPromise, address: string, ids: [BN, BN][], palletReferenda = 'convictionVoting'): SubmittableExtrinsic<'promise'> | null {
   if (!api.tx.utility || !ids.length) {
     return null;
   }
@@ -124,7 +123,7 @@ const transformRecovery = {
   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 };
 
-function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance, toggleMultisig, isMultisigOpen, isProxyOverviewOpen, toggleProxyOverview, multisigAddress }: Props): React.ReactElement<Props> | null {
+function Account ({ account: { address, meta }, className = '', delegation, filter, isMultisigOpen, isProxyOverviewOpen, multisigAddress, proxy, setBalance, toggleMultisig, toggleProxyOverview }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const bestNumber = useBestNumber();
@@ -152,9 +151,8 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const [isUndelegateOpen, toggleUndelegate] = useToggle();
 
   useEffect(() => {
-    if (democracyUnlockTx && referendaUnlockTx && vestingVestTx) { }
-  }, [])
-
+    if (democracyUnlockTx && referendaUnlockTx && vestingVestTx) { /* empty */ }
+  }, [democracyUnlockTx, referendaUnlockTx, vestingVestTx]);
 
   useEffect((): void => {
     if (balancesAll) {
@@ -242,7 +240,6 @@ function Account({ account: { address, meta }, className = '', delegation, filte
     [address, t]
   );
 
-
   if (!isVisible) {
     return null;
   }
@@ -252,10 +249,10 @@ function Account({ account: { address, meta }, className = '', delegation, filte
       <StyledTr className={`${className} isExpanded isFirst packedBottom`}>
         <td className='address all relative'>
           <MultisigAddressSmall
+            isActive={multisigAddress === address}
             parentAddress={meta.parentAddress}
             value={address}
             withShortAddress
-            isActive={multisigAddress === address ? true : false}
           />
           {isBackupOpen && (
             <Backup
@@ -389,9 +386,9 @@ function Account({ account: { address, meta }, className = '', delegation, filte
                     <div>
                       {recoveryInfo.friends.map((friend, index): React.ReactNode => (
                         <MultisigAddressSmall
+                          isActive={multisigAddress === address}
                           key={index}
                           value={friend}
-                          isActive={multisigAddress === address ? true : false}
                         />
                       ))}
                     </div>
@@ -429,7 +426,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
                 className='important'
                 color='purple'
                 hover={t('Multisig approvals pending')}
-                // hoverAction={t('View pending approvals')}
+                hoverAction={t('View pending approvals')}
                 icon='file-signature'
                 onClick={() => { }}
               />

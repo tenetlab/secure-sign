@@ -209,6 +209,25 @@ function useAccountInfoImpl (value: string | null, isContract = false): UseAccou
     [isContract, tags, value]
   );
 
+  const onForgetAccount = useCallback(
+    (): void => {
+      if (isEditingName) {
+        toggleIsEditingName();
+      }
+
+      if (isEditingTags) {
+        toggleIsEditingTags();
+      }
+
+      try {
+        value && keyring.forgetAccount(value);
+      } catch (e) {
+        console.error(e);
+      }
+    },
+    [isEditingName, isEditingTags, toggleIsEditingName, toggleIsEditingTags, value]
+  );
+
   const onForgetAddress = useCallback(
     (): void => {
       if (isEditingName) {
@@ -259,6 +278,7 @@ function useAccountInfoImpl (value: string | null, isContract = false): UseAccou
     isNull: !value,
     meta,
     name,
+    onForgetAccount,
     onForgetAddress,
     onSaveName,
     onSaveTags,
@@ -270,7 +290,7 @@ function useAccountInfoImpl (value: string | null, isContract = false): UseAccou
     tags,
     toggleIsEditingName,
     toggleIsEditingTags
-  }), [accountIndex, flags, genesisHash, identity, isEditing, isEditingName, isEditingTags, meta, name, onForgetAddress, onSaveName, onSaveTags, onSetGenesisHash, setIsEditingName, setIsEditingTags, setName, setTags, tags, toggleIsEditingName, toggleIsEditingTags, value]);
+  }), [accountIndex, flags, genesisHash, identity, isEditing, isEditingName, isEditingTags, meta, name, onForgetAccount, onForgetAddress, onSaveName, onSaveTags, onSetGenesisHash, setIsEditingName, setIsEditingTags, setTags, tags, toggleIsEditingName, toggleIsEditingTags, value]);
 }
 
 export const useAccountInfo = createNamedHook('useAccountInfo', useAccountInfoImpl);

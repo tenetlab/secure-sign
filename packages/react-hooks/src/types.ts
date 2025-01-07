@@ -136,6 +136,7 @@ export interface UseAccountInfo {
   onSaveName: () => void;
   onSaveTags: () => void;
   onSetGenesisHash: (genesisHash: HexString | null) => void;
+  onForgetAccount: () => void;
   onForgetAddress: () => void;
   setIsEditingName: (isEditing: boolean) => void;
   setIsEditingTags: (isEditing: boolean) => void;
