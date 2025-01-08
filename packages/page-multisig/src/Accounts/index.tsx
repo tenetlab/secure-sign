@@ -319,7 +319,18 @@ const StyledDiv = styled.div`
     // @media only screen and (max-width: 1400px) {
     //   width: 76%;
     // }
-
+    .detail {
+        display: flex;
+        font-size: var(--font-size-h3);  
+        background-color: var(--bg-menubar);
+        border-radius: 1rem;
+        height: 100%;
+        padding: 1rem;
+        margin-left: 1rem;
+        p {
+          padding-left: 1rem;
+        }
+      }
   }
   
   .multisig_list {
@@ -345,6 +356,9 @@ const StyledDiv = styled.div`
     text-align: center;
     .detail {
       display: flex;
+      height: 100%;
+      padding: 1rem;
+      border-radius: 1rem;
       font-size: var(--font-size-h3);  
       p {
         padding-left: 1rem;
@@ -354,18 +368,6 @@ const StyledDiv = styled.div`
       color: var(--subcolor-text);
     }
   }
-  .detail {
-      display: flex;
-      font-size: var(--font-size-h3);  
-      background-color: var(--bg-menubar);
-      border-radius: 1rem;
-      height: 100%;
-      padding: 1rem;
-      margin: 0 0 1rem 1rem;
-      p {
-        padding-left: 1rem;
-      }
-    }
 `;
 
 export default React.memo(Overview);
