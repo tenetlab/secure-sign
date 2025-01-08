@@ -7,6 +7,7 @@ import Button from './Button/index.js';
 import Modal from './Modal/index.js';
 import AddressRow from './AddressRow.js';
 import { useTranslation } from './translate.js';
+import { styled } from '../src/styled.js';
 
 type Mode = 'account' | 'address' | 'contract' | 'code';
 
@@ -85,7 +86,7 @@ function Forget (props: Props): React.ReactElement<Props> {
   const { children, mode = 'account', onClose, onForget } = props;
 
   return (
-    <Modal
+    <StyledModal
       className='app--accounts-Modal'
       header={getHeaderText(mode, t)}
       onClose={onClose}
@@ -98,8 +99,18 @@ function Forget (props: Props): React.ReactElement<Props> {
           onClick={onForget}
         />
       </Modal.Actions>
-    </Modal>
+    </StyledModal>
   );
 }
+
+const StyledModal = styled(Modal)`
+  .ui--Button-Group {
+    margin: 1rem 0 !important;
+  }
+
+  .ui--Modal-Content {
+    justify-content: center;
+  }
+`;
 
 export default React.memo(Forget);
