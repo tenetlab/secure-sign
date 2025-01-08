@@ -296,7 +296,6 @@ const StyledDiv = styled.div`
 
   border-radius: 1rem;
   padding-top: 0px !important;
-  gap: 1rem;
 
   .ui--Dropdown {
     width: 15rem;
@@ -362,6 +361,7 @@ const StyledDiv = styled.div`
       border-radius: 1rem;
       height: 100%;
       padding: 1rem;
+      margin: 0 0 1rem 1rem;
       p {
         padding-left: 1rem;
       }
