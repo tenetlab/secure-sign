@@ -4,7 +4,7 @@
 import type { AddressFlags } from '@polkadot/react-hooks/types';
 import type { ActionStatus } from '../Status/types.js';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import { Forget } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
@@ -14,6 +14,8 @@ import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
+
+import { MultisigAccountSidebarCtx } from '@polkadot/react-hooks/ctx/MultisigAccountSidebar';
 
 interface Props {
   className?: string;
@@ -38,6 +40,8 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
   const api = useApi();
 
   const [isForgetOpen, toggleForget] = useToggle();
+
+  const setAddress = useContext(MultisigAccountSidebarCtx);
 
   const toggleIsEditing = useCallback(() => {
     flags.isEditable && toggleIsEditingName();
@@ -92,6 +96,7 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
         onForgetAccount();
         status.status = 'success';
         status.message = t('account forgotten');
+        setAddress && setAddress([null, onUpdateName ?? null]);
       } catch (error) {
         status.status = 'error';
         status.message = (error as Error).message;
