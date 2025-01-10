@@ -18,11 +18,10 @@ interface Props {
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   options: DropdownOptions;
   value: SubmittableExtrinsicFunction<'promise'>;
-  methodType: string;
   setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
-function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable }: Props): React.ReactElement<Props> | null {
+function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
     if (saved && setBtnDisable) {
@@ -58,29 +57,13 @@ function SelectMethod({ api, onChange, options, value, methodType, setBtnDisable
     return null;
   }
 
-  if (methodType === 'Validator') {
-    options = options.filter((option) => {
-      return option.value == 'addStake' ||
-        option.value == 'removeStake' ||
-        option.value == 'transferKeepAlive' ||
-        option.value == 'setRootWeights' ||
-        option.value == 'setWeights'
-    })
-  } else if (methodType === 'Subnet') {
-    options = options.filter((option) => {
-      return option.value == 'addStake' ||
-        option.value == 'registerNetwork' ||
-        option.value == 'removeStake' ||
-        option.value == 'transferKeepAlive'
-    })
-  } else {
-    options = options.filter((option) => {
-      return option.value == 'addStake' ||
-        option.value == 'removeStake' ||
-        option.value == 'transferKeepAlive'
-    })
-  }
-
+  options = options.filter((option) => {
+    return option.value == 'addStake' ||
+      option.value == 'removeStake' ||
+      option.value == 'transferKeepAlive' ||
+      option.value == 'setRootWeights' ||
+      option.value == 'setWeights'
+  })
 
   const onSelect = (value: any) => {
     const json = JSON.stringify({ v: value });
