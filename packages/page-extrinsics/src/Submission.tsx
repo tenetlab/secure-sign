@@ -112,8 +112,7 @@ const StyledDiv = styled.div`
     .ui--Params-Decoded-Button {
       width: 100%;
       background-color: var(--bg-menubar);
-      padding: 4rem 5rem 3rem 5rem;
-      margin: 2rem;
+      padding: 4rem 3rem 3rem 3rem;
       border-radius: 1rem;
       display: flex;
       flex-direction: column;
