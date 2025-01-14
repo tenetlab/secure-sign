@@ -12,6 +12,7 @@ import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { Forget } from '@polkadot/react-components';
 
 interface Props {
   value: string,
@@ -32,6 +33,7 @@ interface Props {
 function AccountMenuButtons ({value, className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
+  const [isForgetOpen, toggleIsForgetOpen] = useToggle();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
 
@@ -130,7 +132,7 @@ function AccountMenuButtons ({value, className = '', flags, isEditing, isEditing
                 icon='ban'
                 isDisabled={isEditing}
                 label={t('Remove')}
-                onClick={_onForgetAddress}
+                onClick={toggleIsForgetOpen}
               />
             )}
             <Button
@@ -147,6 +149,15 @@ function AccountMenuButtons ({value, className = '', flags, isEditing, isEditing
           key='modal-transfer'
           onClose={toggleIsTransferOpen}
           recipientId={recipientId}
+        />
+      )}
+      {isForgetOpen && (
+        <Forget
+          address={recipientId}
+          key='modal-forget-account'
+          mode='address'
+          onClose={toggleIsForgetOpen}
+          onForget={_onForgetAddress}
         />
       )}
     </StyledDiv>
