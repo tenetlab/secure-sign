@@ -198,7 +198,6 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
             <Button
               onClick={() => {
                 setVisible(true)
-                setBtnDisable(true)
               }}
               label={t('Previous')}
               className='previous'

@@ -5,7 +5,7 @@ import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import type { DropdownOptions } from '../util/types.js';
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
 
 import { styled } from '@polkadot/react-components';
 
@@ -24,11 +24,31 @@ interface Props {
 function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
-    if (saved && setBtnDisable) {
-      setBtnDisable(false);
-    }
     return saved ? parseInt(saved) : null;
   });
+  const numberOfExtrinsic = 5;
+
+  options = options.filter((option) => {
+    return option.value == 'addStake' ||
+      option.value == 'removeStake' ||
+      option.value == 'transferKeepAlive' ||
+      option.value == 'setRootWeights' ||
+      option.value == 'setWeights'
+  })
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (options.length == numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
+        setBtnDisable(false);
+        onSelect(options[selectedIndex].value);
+      }
+    }, 0);
+  
+    return () => clearTimeout(timer);
+  }, [selectedIndex, setBtnDisable, options]);
+
+
   const lastUpdate = useRef<string>('');
   const handleRowClick = (index: number) => {
     setSelectedIndex(index);
@@ -56,14 +76,6 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
   if (!options.length) {
     return null;
   }
-
-  options = options.filter((option) => {
-    return option.value == 'addStake' ||
-      option.value == 'removeStake' ||
-      option.value == 'transferKeepAlive' ||
-      option.value == 'setRootWeights' ||
-      option.value == 'setWeights'
-  })
 
   const onSelect = (value: any) => {
     const json = JSON.stringify({ v: value });
