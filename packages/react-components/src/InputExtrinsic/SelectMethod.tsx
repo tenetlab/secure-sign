@@ -26,12 +26,13 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
     const saved = localStorage.getItem('selectedMethodIndex');
     return saved ? parseInt(saved) : null;
   });
-  const numberOfExtrinsic = 5;
+  const numberOfExtrinsic = 6;
 
   options = options.filter((option) => {
     return option.value == 'addStake' ||
       option.value == 'removeStake' ||
       option.value == 'transferKeepAlive' ||
+      option.value == 'transferAllowDeath' ||
       option.value == 'setRootWeights' ||
       option.value == 'setWeights'
   })
@@ -58,7 +59,7 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
 
   const transform = useCallback(
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
-      if (method == 'transferKeepAlive')
+      if (method == 'transferKeepAlive' || method == 'transferAllowDeath')
         return api.tx['balances'][method];
       else if (method == 'addStake' || method == 'register' || method == 'removeStake' || method == 'setWeights' || method == 'setRootWeights') {
         if (api.runtimeChain.toString() == 'commune')
@@ -114,6 +115,7 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
               {item?.value === 'registerNetwork' && 'Registers a new subnet.'}
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
+              {item?.value === 'transferAllowDeath' && `Transfers free balance to another account which can lead to be reaped.`}
               {item?.value === 'setRootWeights' && `Assigns weights to active subnets using their 'netuid'.`}
               {item?.value === 'setWeights' && `Sets miner weights on a subnet.`}
             </div>
