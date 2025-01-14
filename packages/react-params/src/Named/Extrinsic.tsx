@@ -113,9 +113,6 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
     onChange(method);
   }, [extrinsic, onChange, onError, values]);
 
-  useEffect(() => {
-    setBtnDisable(!accountId || isBtnDisable);
-  }, [accountId, isBtnDisable]);
 
   const overrides = useMemo(
     () => balanceCalls.includes(`${extrinsic.fn.section}.${extrinsic.fn.method}`)

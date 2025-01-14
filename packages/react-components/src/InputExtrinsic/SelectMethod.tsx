@@ -39,14 +39,10 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
 
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (options.length == numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
-        setBtnDisable(false);
-        onSelect(options[selectedIndex].value);
-      }
-    }, 0);
-  
-    return () => clearTimeout(timer);
+    if (options.length == numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
+      setBtnDisable(false);
+      onSelect(options[selectedIndex].value);
+    }
   }, [selectedIndex, setBtnDisable, options]);
 
 
