@@ -761,7 +761,6 @@ export default withMulti(
 
         .result {
           grid-column: 2;
-          text-align: right;
 
           .ui--Icon,
           .icon-void {
