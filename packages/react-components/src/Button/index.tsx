@@ -87,7 +87,6 @@ const StyledButton = styled.button`
   position: relative;
   vertical-align: middle;
   text-align: center;
-  display: flex;
 
   &:not(.hasLabel) {
     padding: 0.7em;
