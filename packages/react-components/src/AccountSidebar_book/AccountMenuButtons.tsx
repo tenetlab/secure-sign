@@ -175,6 +175,12 @@ const StyledDiv = styled.div`
     justify-content: space-between;
     margin-bottom: 0;
     margin-top: 0 !important;
+
+    @media only screen and (max-width: 1400px) {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+    }
   }
   
   @media only screen and (max-width: 1921px) {
@@ -190,7 +196,8 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (max-width: 1400px) {
-    width: 40%;
+    width: 20%;
+    min-width: 160px;
   }
 `;
 
