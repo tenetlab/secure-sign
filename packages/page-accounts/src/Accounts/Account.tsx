@@ -315,34 +315,48 @@ const StyledTr = styled.tr`
   .devBadge {
     opacity: var(--opacity-light);
   }
+
   .ui--SmallAddress {
     display: flex;
     width: 70% !important;
   }
+
   .ui--Balance {
     display: flex;
     width: 15%;
     padding: 1rem;
   }
+
   .ui--Actions-Group {
     display: flex;
     width: 15%;
     justify-content: flex-end;
+
+    .ui--Button-Group {
+      gap: 1rem;
+
+      @media only screen and (max-width: 900px) {
+        flex-direction: column;
+      }
+    }
   }
+
   .ui--FormatBalance-value {
     font-size: var(--font-size-balance) !important;
   }
+
   @media only screen and (max-width: 1920px) {
     .ui--SmallAddress {
-      width: 70% !important;
+      width: 65% !important;
     }
     .ui--Balance {
       width: 15%;
     }
     .ui--Actions-Group {
-      width: 15%;
+      width: 20%;
     }
   }
+
   @media only screen and (max-width: 1650px) {
     .ui--SmallAddress {
       width: 60% !important;
@@ -355,20 +369,22 @@ const StyledTr = styled.tr`
     }
   }
 
-  @media only screen and (max-width: 1520px) {
-    .ui--SmallAddress {
-      width: 50% !important;
-    }
-    .ui--Balance {
-      width: 25%;
-    }
-    .ui--Actions-Group {
-      width: 25%;
-    }
-  }
+  // @media only screen and (max-width: 1520px) {
+  //   .ui--SmallAddress {
+  //     width: 50% !important;
+  //   }
+  //   .ui--Balance {
+  //     width: 25%;
+  //   }
+  //   .ui--Actions-Group {
+  //     width: 25%;
+  //   }
+  // }
+
   @media only screen and (max-width: 1400px) {
     .ui--SmallAddress {
       width: 40% !important;
+      min-width: 200px;
     }
     .ui--Balance {
       width: 30%;
