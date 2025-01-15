@@ -41,7 +41,7 @@ function ModalBase ({ children, className = '', header, onClose, size = 'medium'
       window.removeEventListener('keydown', listenKeyboard, true);
     };
   }, [listenKeyboard]);
-  
+
   return createPortal(
     <StyledDiv
       className={`${className} ui--Modal ${size}Size ${themeClassName} `}
@@ -130,7 +130,7 @@ const StyledDiv = styled.div`
   }
 
   &.smallSize .ui--Modal__body {
-    max-width: 80rem;
+    max-width: 50rem;
   }
 
   &.largeSize .ui--Modal__body {

@@ -5,12 +5,13 @@ import type { DeriveBalancesAccountData, DeriveBalancesAll, DeriveDemocracyLock,
 import type { Raw } from '@polkadot/types';
 import type { BlockNumber, ValidatorPrefsTo145, Voting } from '@polkadot/types/interfaces';
 import type { PalletBalancesReserveData } from '@polkadot/types/lookup';
-import { BN } from '@polkadot/util';
+import type { BN } from '@polkadot/util';
 
 import React, { useEffect, useRef, useState } from 'react';
 
 import { withCalls, withMulti } from '@polkadot/react-api/hoc';
-import { useBestNumber } from '@polkadot/react-hooks';
+import { useApi, useBestNumber } from '@polkadot/react-hooks';
+import { usePolkadot } from '@polkadot/react-hooks/ctx/StakedAmount/polkadot';
 import { BlockToTime, FormatBalance } from '@polkadot/react-query';
 import { BN_MAX_INTEGER, BN_ZERO, bnMax, formatBalance, formatNumber, isObject } from '@polkadot/util';
 
@@ -24,9 +25,6 @@ import StakingUnbonding from './StakingUnbonding.js';
 import { styled } from './styled.js';
 import Tooltip from './Tooltip.js';
 import { useTranslation } from './translate.js';
-
-import { usePolkadot } from '@polkadot/react-hooks/ctx/StakedAmount/polkadot';
-import { useApi } from '@polkadot/react-hooks';
 
 // true to display, or (for bonded) provided values [own, ...all extras]
 export interface BalanceActiveType {
@@ -99,12 +97,12 @@ const DEFAULT_PREFS = {
 };
 
 // auxiliary component that helps aligning balances details, fills up the space when no icon for a balance is specified
-function IconVoid(): React.ReactElement {
+function IconVoid (): React.ReactElement {
   // return <span className='icon-void'>&nbsp;</span>;
-  return <></>
+  return <></>;
 }
 
-function lookupLock(lookup: Record<string, string>, lockId: Raw): string {
+function lookupLock (lookup: Record<string, string>, lockId: Raw): string {
   const lockHex = lockId.toHuman() as string;
 
   try {
@@ -115,7 +113,7 @@ function lookupLock(lookup: Record<string, string>, lockId: Raw): string {
 }
 
 // skip balances retrieval of none of this matches
-function skipBalancesIf({ withBalance = true, withExtended = false }: Props): boolean {
+function skipBalancesIf ({ withBalance = true, withExtended = false }: Props): boolean {
   // NOTE Unsure why we don't have a check for balancesAll in here (check skipStakingIf). adding
   // it doesn't break on Accounts/Addresses, but this gets used a lot, so there _may_ be an actual
   // reason behind the madness. However, derives are memoized, so no issue overall.
@@ -135,7 +133,7 @@ function skipBalancesIf({ withBalance = true, withExtended = false }: Props): bo
   return true;
 }
 
-function skipStakingIf({ stakingInfo, withBalance = true, withValidatorPrefs = false }: Props): boolean {
+function skipStakingIf ({ stakingInfo, withBalance = true, withValidatorPrefs = false }: Props): boolean {
   if (stakingInfo) {
     return true;
   } else if (withBalance === true || withValidatorPrefs) {
@@ -152,7 +150,7 @@ function skipStakingIf({ stakingInfo, withBalance = true, withValidatorPrefs = f
 }
 
 // calculates the bonded, first being the own, the second being nominated
-function calcBonded(stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[]): [BN, BN[]] {
+function calcBonded (stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[]): [BN, BN[]] {
   let other: BN[] = [];
   let own = BN_ZERO;
 
@@ -169,7 +167,7 @@ function calcBonded(stakingInfo?: DeriveStakingAccount, bonded?: boolean | BN[])
   return [own, other];
 }
 
-function renderExtended({ address, balancesAll, withExtended }: Props, t: TFunction): React.ReactNode {
+function renderExtended ({ address, balancesAll, withExtended }: Props, t: TFunction): React.ReactNode {
   const extendedDisplay = withExtended === true
     ? DEFAULT_EXTENDED
     : withExtended || undefined;
@@ -199,7 +197,7 @@ function renderExtended({ address, balancesAll, withExtended }: Props, t: TFunct
   );
 }
 
-function renderValidatorPrefs({ stakingInfo, withValidatorPrefs = false }: Props, t: TFunction): React.ReactNode {
+function renderValidatorPrefs ({ stakingInfo, withValidatorPrefs = false }: Props, t: TFunction): React.ReactNode {
   const validatorPrefsDisplay = withValidatorPrefs === true
     ? DEFAULT_PREFS
     : withValidatorPrefs;
@@ -241,7 +239,7 @@ function renderValidatorPrefs({ stakingInfo, withValidatorPrefs = false }: Props
   );
 }
 
-function createBalanceItems(formatIndex: number, lookup: Record<string, string>, t: TFunction, { address, balanceDisplay, balancesAll, bestNumber, convictionLocks, democracyLocks, isAllLocked, otherBonded, ownBonded, stakingInfo, votingOf, withBalanceToggle, withLabel }: { address: string; balanceDisplay: BalanceActiveType; balancesAll?: DeriveBalancesAll | DeriveBalancesAccountData; bestNumber?: BlockNumber; convictionLocks?: RefLock[]; democracyLocks?: DeriveDemocracyLock[]; isAllLocked: boolean; otherBonded: BN[]; ownBonded: BN; stakingInfo?: DeriveStakingAccount; votingOf?: Voting; withBalanceToggle: boolean, withLabel: boolean }, stakedAmount: BigInt): React.ReactNode {
+function createBalanceItems (formatIndex: number, lookup: Record<string, string>, t: TFunction, { address, balanceDisplay, balancesAll, bestNumber, convictionLocks, democracyLocks, isAllLocked, otherBonded, ownBonded, stakingInfo, votingOf, withBalanceToggle, withLabel }: { address: string; balanceDisplay: BalanceActiveType; balancesAll?: DeriveBalancesAll | DeriveBalancesAccountData; bestNumber?: BlockNumber; convictionLocks?: RefLock[]; democracyLocks?: DeriveDemocracyLock[]; isAllLocked: boolean; otherBonded: BN[]; ownBonded: BN; stakingInfo?: DeriveStakingAccount; votingOf?: Voting; withBalanceToggle: boolean, withLabel: boolean }, stakedAmount: bigint): React.ReactNode {
   const allItems: React.ReactNode[] = [];
   const deriveBalances = balancesAll as DeriveBalancesAll;
 
@@ -381,7 +379,7 @@ function createBalanceItems(formatIndex: number, lookup: Record<string, string>,
       />
     </React.Fragment>
   );
-  // balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) && 
+  // balanceDisplay.bonded && (ownBonded.gtn(0) || otherBonded.length !== 0) &&
   ((api.runtimeChain.toString() !== 'Bittensor') && (api.runtimeChain.toString() !== 'commune')) &&
     allItems?.push(
       <React.Fragment key={5}>
@@ -560,7 +558,7 @@ function createBalanceItems(formatIndex: number, lookup: Record<string, string>,
   );
 }
 
-function renderBalances(props: Props, lookup: Record<string, string>, bestNumber: BlockNumber | undefined, t: TFunction, stakedAmount: BigInt): React.ReactNode[] {
+function renderBalances (props: Props, lookup: Record<string, string>, bestNumber: BlockNumber | undefined, t: TFunction, stakedAmount: bigint): React.ReactNode[] {
   const { address, balancesAll, convictionLocks, democracyLocks, stakingInfo, votingOf, withBalance = true, withBalanceToggle = false, withLabel = false } = props;
   const balanceDisplay = withBalance === true
     ? DEFAULT_BALANCES
@@ -582,13 +580,13 @@ function renderBalances(props: Props, lookup: Record<string, string>, bestNumber
   return items;
 }
 
-function AddressInfo(props: Props): React.ReactElement<Props> {
+function AddressInfo (props: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const bestNumber = useBestNumber();
-  const { children, className = '', extraInfo, withBalanceToggle, withHexSessionId, balancesAll } = props;
-  const [stakedAmount, setStakedAmount] = useState<BigInt>(0n)
+  const { balancesAll, children, className = '', extraInfo, withBalanceToggle, withHexSessionId } = props;
+  const [stakedAmount, setStakedAmount] = useState<bigint>(0n);
   // const { api: apiEndpoint } = useApi();
-  const deriveBalances = balancesAll as DeriveBalancesAll;
+  const deriveBalances = balancesAll!;
 
   const lookup = useRef<Record<string, string>>({
     democrac: t('via Democracy/Vote'),
@@ -598,16 +596,16 @@ function AddressInfo(props: Props): React.ReactElement<Props> {
     'vesting ': t('via Vesting')
   });
 
-  const {
-    api,
-    get_user_total_stake
-  } = usePolkadot();
+  const { api,
+    get_user_total_stake } = usePolkadot();
 
-  async function setBondedAmount() {
+  async function setBondedAmount () {
     if (api) {
       const bondedAmount = await get_user_total_stake(api, props.address);
-      if (bondedAmount != undefined)
+
+      if (bondedAmount !== undefined) {
         setStakedAmount(BigInt(bondedAmount));
+      }
       // if (apiEndpoint.runtimeChain.toString() == 'commune') {
       //   const bondedAmount = await get_user_total_stake(api, props.address);
       //   if (bondedAmount != undefined)
@@ -632,7 +630,7 @@ function AddressInfo(props: Props): React.ReactElement<Props> {
       //   //     data?.map((item: any) => {
       //   //       staked += parseInt(item?.balance)
       //   //     })
-      //   //     setStakedAmount(BigInt(staked))            
+      //   //     setStakedAmount(BigInt(staked))
       //   //   })
       //   //   .catch(err => console.error(err));
       // }
@@ -643,13 +641,12 @@ function AddressInfo(props: Props): React.ReactElement<Props> {
   }
 
   useEffect(() => {
-    setBondedAmount()
-  }, [deriveBalances?.transferable || deriveBalances?.availableBalance])
-
+    setBondedAmount();
+  }, [deriveBalances?.transferable || deriveBalances?.availableBalance]);
 
   useEffect(() => {
-    setBondedAmount()
-  }, [api])
+    setBondedAmount();
+  }, [api]);
 
   return (
     <div className={`${className} ui--AddressInfo ${withBalanceToggle ? 'ui--AddressInfo-expander' : ''}`}>
@@ -696,7 +693,7 @@ export default withMulti(
   styled(AddressInfo)`
     align-items: flex-start;
     display: flex;
-    min-width: 15rem;
+    min-width: 5rem;
     white-space: nowrap;
 
     &:not(.ui--AddressInfo-expander) {
@@ -764,11 +761,10 @@ export default withMulti(
 
         .result {
           grid-column: 2;
-          text-align: right;
 
           .ui--Icon,
           .icon-void {
-            margin-left: 0.25rem;
+            margin-left: 0.1rem;
             margin-right: 0;
             padding-right: 0 !important;
           }

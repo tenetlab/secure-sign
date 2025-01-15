@@ -2,9 +2,11 @@
 // SPDX-License-Identifier: Apache-2.0
 
 import type { AddressFlags } from '@polkadot/react-hooks/types';
+import type { ActionStatus } from '../Status/types.js';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
+import { Forget } from '@polkadot/react-components';
 import { useApi, useToggle } from '@polkadot/react-hooks';
 import { isFunction } from '@polkadot/util';
 
@@ -12,6 +14,8 @@ import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
+
+import { MultisigAccountSidebarCtx } from '@polkadot/react-hooks/ctx/MultisigAccountSidebar';
 
 interface Props {
   className?: string;
@@ -23,24 +27,21 @@ interface Props {
   onCancel: () => void;
   onSaveName: () => void;
   onSaveTags: () => void;
+  onForgetAccount: () => void;
   onForgetAddress: () => void;
   onUpdateName?: (() => void) | null;
   recipientId: string;
   toggleProxyOverview: () => void;
 }
 
-function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags, toggleProxyOverview }: Props): React.ReactElement<Props> {
+function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAccount, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
   const api = useApi();
 
-  const _onForgetAddress = useCallback(
-    (): void => {
-      onForgetAddress();
-      onUpdateName && onUpdateName();
-    },
-    [onForgetAddress, onUpdateName]
-  );
+  const [isForgetOpen, toggleForget] = useToggle();
+
+  const setAddress = useContext(MultisigAccountSidebarCtx);
 
   const toggleIsEditing = useCallback(() => {
     flags.isEditable && toggleIsEditingName();
@@ -53,6 +54,57 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
       onUpdateName && onUpdateName();
     },
     [onSaveName, onUpdateName]
+  );
+
+  const _onForgetAddress = useCallback(
+    (): void => {
+      if (!recipientId) {
+        return;
+      }
+
+      const status: Partial<ActionStatus> = {
+        account: recipientId,
+        action: 'forget'
+      };
+
+      try {
+        onForgetAddress();
+        status.status = 'success';
+        status.message = t('address forgotten');
+      } catch (error) {
+        status.status = 'error';
+        status.message = (error as Error).message;
+      }
+
+      toggleForget();
+    },
+    [onForgetAddress, recipientId, t, toggleForget]
+  );
+
+  const _onForgetAccount = useCallback(
+    (): void => {
+      if (!recipientId) {
+        return;
+      }
+
+      const status: Partial<ActionStatus> = {
+        account: recipientId,
+        action: 'forget'
+      };
+
+      try {
+        onForgetAccount();
+        status.status = 'success';
+        status.message = t('account forgotten');
+        setAddress && setAddress([null, onUpdateName ?? null]);
+      } catch (error) {
+        status.status = 'error';
+        status.message = (error as Error).message;
+      }
+
+      toggleForget();
+    },
+    [onForgetAccount, recipientId, t, toggleForget]
   );
 
   const updateName = useCallback(() => {
@@ -85,6 +137,11 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
               icon='save'
               label={t('Save')}
               onClick={onEdit}
+            />
+            <Button
+              icon='trash'
+              label={t('Forget')}
+              onClick={toggleForget}
             />
           </Button.Group>
         )
@@ -121,11 +178,11 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
               onClick={onEdit}
             />
             <Button
-                icon='sitemap'
-                isDisabled={isEditing}
-                label={t('Add proxy')}
-                onClick={toggleProxyOverview}
-              />
+              icon='sitemap'
+              isDisabled={isEditing}
+              label={t('Add proxy')}
+              onClick={toggleProxyOverview}
+            />
           </Button.Group>
         )
       }
@@ -134,6 +191,14 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
           key='modal-transfer'
           onClose={toggleIsTransferOpen}
           senderId={recipientId}
+        />
+      )}
+      {isForgetOpen && (
+        <Forget
+          address={recipientId}
+          key='modal-forget-account'
+          onClose={toggleForget}
+          onForget={_onForgetAccount}
         />
       )}
     </StyledDiv>

@@ -1,16 +1,17 @@
 // Copyright 2017-2024 @polkadot/react-components authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
+import type { H256, Multisig } from '@polkadot/types/interfaces';
+
 import React, { useMemo, useRef, useState } from 'react';
 
+import { MultisigOutput } from '@polkadot/react-components';
 import { useAccountInfo } from '@polkadot/react-hooks';
 
 import { styled } from '../styled.js';
 import { colorLink } from '../styles/theme.js';
 import MultisigPage from './Multisig.js';
 import SidebarEditableSection from './SidebarEditableSection.js';
-import { MultisigOutput } from '@polkadot/react-components';
-import type { H256, Multisig } from '@polkadot/types/interfaces';
 
 interface Props {
   address: string;
@@ -23,14 +24,12 @@ interface Props {
   toggleProxyOverview: () => void;
 }
 
-
 interface Option {
   text: string;
   value: string;
 }
 
-
-function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMultisig, ongoing, toggleProxyOverview }: Props): React.ReactElement<Props> {
+function MultisigFullSidebar ({ address, className = '', onUpdateName, ongoing, toggleMultisig, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
   const { accountIndex, flags, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -59,7 +58,7 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
       </div>
       <div className='account_detail'>
         <div className='ui--ScrollSection'>
-          <h1 >Account Details</h1>
+          <h1>Account Details</h1>
           {/* <Identity
           address={address}
           identity={identity}
@@ -70,19 +69,18 @@ function MultisigFullSidebar({ address, className = '', onUpdateName, toggleMult
           />
         </div>
         <div className='hash'>
-          <h1 >Pending Approvals</h1>
+          <h1>Pending Approvals</h1>
           <div className='subCard'>
             {hashes?.map((item, key) =>
               <MultisigOutput
-                key={key}
                 isDisabled
+                key={key}
+                toggleMultisig={toggleMultisig}
                 value={item.value}
                 withCopy
-                toggleMultisig={toggleMultisig}
               />
             )}
           </div>
-
         </div>
       </div>
 

@@ -72,7 +72,7 @@ function AddressSection({ accountIndex, defaultValue, editingName, flags, onChan
         )}
       </div>
       <div className='ui--AddressBook-Address-Copy'>
-        <div className='ui--AddressMenu-addr media--1400'>
+        <div className='ui--AddressMenu-addr'>
           {value}
         </div>
         <div className='ui--AddressMenu-copyaddr'>      
@@ -106,7 +106,7 @@ const StyledAddressSection = styled.div`
   }
 
   @media only screen and (max-width: 1400px) {
-    width: 60%;
+    width: 80%;
   }
 
   .ui--AddressBook-Icon-Name {
@@ -115,11 +115,12 @@ const StyledAddressSection = styled.div`
     width: 20%;
 
     @media only screen and (max-width: 1580px) {
-      width: 16%;
+      width: 28%;
     }
 
-    @media only screen and (max-width: 1400px) {
-      width: 30%;
+    @media only screen and (max-width: 1020px) {
+      width: 40%;
+      min-width: 120px;
     }
   }
   .ui--AddressBook-Address-Copy {
@@ -130,11 +131,11 @@ const StyledAddressSection = styled.div`
     font-size: var(--font-size-account-name);
 
     @media only screen and (max-width: 1580px) {
-      width: 84%;
+      width: 72%;
     }
 
-    @media only screen and (max-width: 1400px) {
-      width: 70%;
+    @media only screen and (max-width: 1020px) {
+      width: 60%;
       justify-content: end;
     }
 
@@ -150,51 +151,22 @@ const StyledAddressSection = styled.div`
         width: 42%;
       }
 
-      @media only screen and (max-width: 1760px) {
-        width: 45%;
-      }
-
-      @media only screen and (max-width: 1680px) {
-        width: 48%;
-      }
-
-      @media only screen and (max-width: 1580px) {
-        width: 52%;
-      }
-
-      @media only screen and (max-width: 1520px) {
-        width: 55%;
-      }
-
-      @media only screen and (max-width: 1400px) {
+      @media only screen and (max-width: 1020px) {
         width: 90%;
       }
     }
 
     .ui--AddressMenu-addr {
       width: 60%;
-      padding-right: 3rem;
+      padding-right: 1rem;
       padding-left: 1rem;
       word-break: break-all;
 
       @media only screen and (max-width: 1801px) {
         width: 58%;
       }
-      
-      @media only screen and (max-width: 1760px) {
-        width: 55%;
-      }
-
-      @media only screen and (max-width: 1680px) {
-        width: 52%;
-      }
-
-      @media only screen and (max-width: 1580px) {
-        width: 48%;
-      }
-
-      @media only screen and (max-width: 1520px) {
-        width: 45%;
+      @media only screen and (max-width: 1020px) {
+        display: none;
       }
     }
   }  

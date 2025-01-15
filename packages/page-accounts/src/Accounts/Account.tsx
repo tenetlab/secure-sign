@@ -12,6 +12,7 @@ import type { KeyringAddress } from '@polkadot/ui-keyring/types';
 import type { AccountBalance, Delegation } from '../types.js';
 
 import React, { useCallback, useEffect, useMemo } from 'react';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 import { AddressInfo, AddressSmall, Button, Forget, styled, TransferModal } from '@polkadot/react-components';
 import { useAccountInfo, useApi, useBalancesAll, useStakingInfo, useToggle } from '@polkadot/react-hooks';
@@ -31,7 +32,6 @@ import RecoverSetup from '../modals/RecoverSetup.js';
 import UndelegateModal from '../modals/Undelegate.js';
 import { useTranslation } from '../translate.js';
 import useMultisigApprovals from './useMultisigApprovals.js';
-import CopyToClipboard from 'react-copy-to-clipboard';
 
 interface Props {
   account: KeyringAddress;
@@ -46,7 +46,7 @@ interface Props {
 
 const BAL_OPTS_DEFAULT = {
   available: true,
-  bonded: true,
+  bonded: true
   // locked: true,
   // redeemable: false,
   // reserved: true,
@@ -67,7 +67,7 @@ const BAL_OPTS_DEFAULT = {
 //   vested: true
 // };
 
-function calcVisible(filter: string, name: string, tags: string[]): boolean {
+function calcVisible (filter: string, name: string, tags: string[]): boolean {
   if (filter.length === 0) {
     return true;
   }
@@ -79,7 +79,7 @@ function calcVisible(filter: string, name: string, tags: string[]): boolean {
   }, name.toLowerCase().includes(_filter));
 }
 
-function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
+function calcUnbonding (stakingInfo?: DeriveStakingAccount) {
   if (!stakingInfo?.unlocking) {
     return BN_ZERO;
   }
@@ -92,7 +92,7 @@ function calcUnbonding(stakingInfo?: DeriveStakingAccount) {
   return total;
 }
 
-function Account({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
+function Account ({ account: { address, meta }, className = '', delegation, filter, proxy, setBalance }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const balancesAll = useBalancesAll(address);
@@ -117,7 +117,7 @@ function Account({ account: { address, meta }, className = '', delegation, filte
   const NOOP = () => undefined;
 
   useEffect((): void => {
-    if (balancesAll) {      
+    if (balancesAll) {
       setBalance(address, {
         // some chains don't have "active" in the Ledger
         bonded: stakingInfo?.stakingLedger.active?.unwrap() || BN_ZERO,
@@ -157,14 +157,15 @@ function Account({ account: { address, meta }, className = '', delegation, filte
     },
     [address, t]
   );
+
   if (!isVisible) {
     return null;
   }
-  
+
   return (
     <>
-      <StyledTr className={`${className} isExpanded isFirst packedBottom`}>
-        <td className='address all ui--SmallAddress-Copy-Balance'>
+      <StyledTr className={`${className} isExpanded isFirst`}>
+        <td className='address all ui--SmallAddress'>
           <AddressSmall
             parentAddress={meta.parentAddress}
             value={address}
@@ -270,30 +271,26 @@ function Account({ account: { address, meta }, className = '', delegation, filte
             />
           )}
         </td>
-        <td className='actions button ui--Copy-Balance'>
-          <div className='ui--Copy-Address'>
-            <AddressInfo
-              address={address}
-              balancesAll={balancesAll}
-              withBalance={BAL_OPTS_DEFAULT}
-              withLabel
-            />
+        <td className='actions ui--Balance'>
+          <AddressInfo
+            address={address}
+            balancesAll={balancesAll}
+            withBalance={BAL_OPTS_DEFAULT}
+            withLabel
+          />
+        </td>
+        <td className='actions button ui--Actions-Group'>
+          <Button.Group>
             <CopyToClipboard
               text={address}
             >
-              <span>
-                <Button.Group>
-                  <Button
-                    icon={isCopyShown ? 'check' : 'copy'}
-                    label={isCopyShown ? t('Copied') : t('Copy')}
-                    onClick={isCopyShown ? NOOP : toggleIsCopyShown}
-                    onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
-                  />
-                </Button.Group>
-              </span>
+              <Button
+                icon={isCopyShown ? 'check' : 'copy'}
+                label={isCopyShown ? t('Copied') : t('Copy')}
+                onClick={isCopyShown ? NOOP : toggleIsCopyShown}
+                onMouseLeave={isCopyShown ? toggleIsCopyShown : NOOP}
+              />
             </CopyToClipboard>
-          </div>
-          <Button.Group>
             {(isFunction(api.tx.balances?.transferAllowDeath) || isFunction(api.tx.balances?.transfer)) && (
               <Button
                 className='send-button'
@@ -310,73 +307,74 @@ function Account({ account: { address, meta }, className = '', delegation, filte
 }
 
 const StyledTr = styled.tr`
-  .devBadge {
-    opacity: var(--opacity-light);
-  }
   border-radius: 1rem;
   padding: 1rem 3rem 0 3rem;
   display: flex;
+  width: 100%;
 
-  .ui--SmallAddress-Copy-Balance {
-    display: flex;
-    width: 65% !important;
+  .devBadge {
+    opacity: var(--opacity-light);
   }
-  .ui--Copy-Balance {
+  .ui--SmallAddress {
     display: flex;
-    justify-content: space-between;
-    width: 35%;
-
-    .ui--Copy-Address {
-      display: flex;
-      justify-content: space-between;
-      width: 70%;
-
-      @media only screen and (max-width: 1520px) {
-        width: 75%;
-      }
-
-      @media only screen and (max-width: 1400px) {
-        width: 65%;
-      }
-    }
+    width: 70% !important;
   }
   .ui--Balance {
     display: flex;
+    width: 15%;
+    padding: 1rem;
+  }
+  .ui--Actions-Group {
+    display: flex;
+    width: 15%;
+    justify-content: flex-end;
   }
   .ui--FormatBalance-value {
     font-size: var(--font-size-balance) !important;
   }
   @media only screen and (max-width: 1920px) {
-    .ui--SmallAddress-Copy-Balance {
-      width: 60% !important;
+    .ui--SmallAddress {
+      width: 70% !important;
     }
-    .ui--Copy-Balance {
-      width: 40%;
+    .ui--Balance {
+      width: 15%;
+    }
+    .ui--Actions-Group {
+      width: 15%;
     }
   }
   @media only screen and (max-width: 1650px) {
-    .ui--SmallAddress-Copy-Balance {
-      width: 55% !important;
+    .ui--SmallAddress {
+      width: 60% !important;
     }
-    .ui--Copy-Balance {
-      width: 45%;
+    .ui--Balance {
+      width: 20%;
+    }
+    .ui--Actions-Group {
+      width: 20%;
     }
   }
 
   @media only screen and (max-width: 1520px) {
-    .ui--SmallAddress-Copy-Balance {
+    .ui--SmallAddress {
       width: 50% !important;
     }
-    .ui--Copy-Balance {
-      width: 50%;
+    .ui--Balance {
+      width: 25%;
+    }
+    .ui--Actions-Group {
+      width: 25%;
     }
   }
   @media only screen and (max-width: 1400px) {
-    .ui--SmallAddress-Copy-Balance {
-      width: 30% !important;
+    .ui--SmallAddress {
+      width: 40% !important;
     }
-    .ui--Copy-Balance {
-      width: 70%;
+    .ui--Balance {
+      width: 30%;
+    }
+    .ui--Actions-Group {
+      width: 30%;
     }
   }
 `;

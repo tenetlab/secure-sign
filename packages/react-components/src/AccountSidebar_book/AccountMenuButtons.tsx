@@ -12,6 +12,7 @@ import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { Forget } from '@polkadot/react-components';
 
 interface Props {
   value: string,
@@ -32,6 +33,7 @@ interface Props {
 function AccountMenuButtons ({value, className = '', flags, isEditing, isEditingName, onCancel, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
+  const [isForgetOpen, toggleIsForgetOpen] = useToggle();
   const [isCopyShown, toggleIsCopyShown] = useToggle();
   const NOOP = () => undefined;
 
@@ -130,7 +132,7 @@ function AccountMenuButtons ({value, className = '', flags, isEditing, isEditing
                 icon='ban'
                 isDisabled={isEditing}
                 label={t('Remove')}
-                onClick={_onForgetAddress}
+                onClick={toggleIsForgetOpen}
               />
             )}
             <Button
@@ -149,6 +151,15 @@ function AccountMenuButtons ({value, className = '', flags, isEditing, isEditing
           recipientId={recipientId}
         />
       )}
+      {isForgetOpen && (
+        <Forget
+          address={recipientId}
+          key='modal-forget-account'
+          mode='address'
+          onClose={toggleIsForgetOpen}
+          onForget={_onForgetAddress}
+        />
+      )}
     </StyledDiv>
   );
 }
@@ -164,6 +175,12 @@ const StyledDiv = styled.div`
     justify-content: space-between;
     margin-bottom: 0;
     margin-top: 0 !important;
+
+    @media only screen and (max-width: 1400px) {
+      display: flex;
+      flex-direction: column;
+      row-gap: 1rem;
+    }
   }
   
   @media only screen and (max-width: 1921px) {
@@ -179,7 +196,8 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (max-width: 1400px) {
-    width: 40%;
+    width: 20%;
+    min-width: 160px;
   }
 `;
 

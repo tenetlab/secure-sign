@@ -143,7 +143,7 @@ const StyledDiv = styled.div`
 
     td {
       background: var(--bg-subCard);
-      padding: 1rem 2rem 1rem 3rem;
+      padding: 1rem;
       text-align: left;
       vertical-align: middle;
 
