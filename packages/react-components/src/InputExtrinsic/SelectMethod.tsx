@@ -110,14 +110,14 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
               {item?.value === 'addStake' && 'Adds stake to a specified hotkey.'}
               {item?.value === 'registerNetwork' && 'Registers a new subnet.'}
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
-              {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the extrinsic's success.`}
-              {item?.value === 'transferAllowDeath' && `Transfers free balance to another account which can lead to be reaped.`}
+              {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the existence of the account after the transfer.`}
+              {item?.value === 'transferAllowDeath' && `Transfers free balance to another account while it can be reaped.`}
               {item?.value === 'setRootWeights' && `Assigns weights to active subnets using their 'netuid'.`}
               {item?.value === 'setWeights' && `Sets miner weights on a subnet.`}
             </div>
             <div
               style={{
-                width: '16px',
+                minWidth: '16px',
                 height: '16px',
                 borderRadius: '50%',
                 border: '2px solid #2563eb',
