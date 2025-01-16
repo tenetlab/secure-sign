@@ -21,6 +21,7 @@ import useMultisigApprovals from '../../../page-multisig/src/Accounts/useMultisi
 import { useTranslation } from '../translate.js';
 import { sortAccounts } from '../util.js';
 import Account from './Account.js';
+import ProxyOverview from '../modals/ProxyOverview.js';
 
 interface Balances {
   accounts: Record<string, AccountBalance>;
@@ -62,6 +63,11 @@ function groupAccounts (accounts: SortedAccount[]): Record<GroupName, string[]> 
   }
 
   return ret;
+}
+
+function getProxyIndex(accounts: string[], multisigAddress: string | null): number {
+  const index = accounts.findIndex((account) => account === multisigAddress);
+  return index;
 }
 
 function Overview ({ className = '' }: Props): React.ReactElement<Props> {
@@ -198,6 +204,11 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
     [grouped, accounts]
   );
 
+  const proxyIndex = useMemo(
+    () => getProxyIndex(allAccounts, multisigAddress),
+    [allAccounts, multisigAddress]
+  );
+
   useEffect((): void => {
     setSorted((prev) => [
       ...prev
@@ -266,14 +277,24 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
             <div className='multisig_detail'>
               {multisigAddress !== null
                 ? (
-                  <Sidebar
-                    address={multisigAddress || ''}
-                    dataTestId='account-sidebar'
-                    onUpdateName={onUpdateName}
-                    ongoing={multiInfos || []}
-                    toggleMultisig={toggleMultisig}
-                    // toggleProxyOverview={toggleProxyOverview}
-                  />
+                  <>
+                    <Sidebar
+                      address={multisigAddress || ''}
+                      dataTestId='account-sidebar'
+                      onUpdateName={onUpdateName}
+                      ongoing={multiInfos || []}
+                      toggleMultisig={toggleMultisig}
+                      toggleProxyOverview={toggleProxyOverview}
+                    />
+                    {isProxyOverviewOpen && (
+                      <ProxyOverview
+                        key='modal-proxy-overview'
+                        onClose={toggleProxyOverview}
+                        previousProxy={proxies?.[proxyIndex]}
+                        proxiedAccount={multisigAddress}
+                      />
+                    )}
+                  </>
                 )
                 : (
                   <div className='detail'>

@@ -21,7 +21,7 @@ interface Props {
   onUpdateName?: (() => void) | null;
   toggleMultisig: () => void;
   ongoing: [H256, Multisig][];
-  // toggleProxyOverview: () => void;
+  toggleProxyOverview: () => void;
 }
 
 interface Option {
@@ -29,7 +29,7 @@ interface Option {
   value: string;
 }
 
-function MultisigFullSidebar ({ address, className = '', onUpdateName, ongoing, toggleMultisig }: Props): React.ReactElement<Props> {
+function MultisigFullSidebar ({ address, className = '', onUpdateName, ongoing, toggleMultisig, toggleProxyOverview }: Props): React.ReactElement<Props> {
   const [inEditMode, setInEditMode] = useState<boolean>(false);
   const { accountIndex, flags, meta } = useAccountInfo(address);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -53,7 +53,7 @@ function MultisigFullSidebar ({ address, className = '', onUpdateName, ongoing, 
           isBeingEdited={setInEditMode}
           onUpdateName={onUpdateName}
           sidebarRef={sidebarRef}
-          // toggleProxyOverview={toggleProxyOverview}
+          toggleProxyOverview={toggleProxyOverview}
         />
       </div>
       <div className='account_detail'>
