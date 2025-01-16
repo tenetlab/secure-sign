@@ -14,8 +14,12 @@ import Button from '../Button/index.js';
 import { TransferModal } from '../modals/index.js';
 import { styled } from '../styled.js';
 import { useTranslation } from '../translate.js';
+import { useProxies, useAccounts } from '@polkadot/react-hooks';
+// import useProxies from '../../../page-multisig/src/Accounts/useProxies.js';
 
 import { MultisigAccountSidebarCtx } from '@polkadot/react-hooks/ctx/MultisigAccountSidebar';
+
+import ProxyOverview from '../../../page-multisig/src/modals/ProxyOverview.js'
 
 interface Props {
   className?: string;
@@ -31,15 +35,21 @@ interface Props {
   onForgetAddress: () => void;
   onUpdateName?: (() => void) | null;
   recipientId: string;
-  toggleProxyOverview: () => void;
+  // toggleProxyOverview: () => void;
 }
 
-function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAccount, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags, toggleProxyOverview }: Props): React.ReactElement<Props> {
+function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, onCancel, onForgetAccount, onForgetAddress, onSaveName, onSaveTags, onUpdateName, recipientId, toggleIsEditingName, toggleIsEditingTags }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const [isTransferOpen, toggleIsTransferOpen] = useToggle();
   const api = useApi();
+  const proxy = useProxies();
+  const accounts = useAccounts();
 
   const [isForgetOpen, toggleForget] = useToggle();
+  const [isProxyOverviewOpen, toggleProxyOverview] = useToggle();
+
+  const proxyIndex: number = accounts.allAccounts.findIndex((address) => address === recipientId);
+  const previousProxy = Array.isArray(proxy) ? proxy[proxyIndex] : undefined;
 
   const setAddress = useContext(MultisigAccountSidebarCtx);
 
@@ -199,6 +209,14 @@ function AccountMenuButtons ({ className = '', flags, isEditing, isEditingName, 
           key='modal-forget-account'
           onClose={toggleForget}
           onForget={_onForgetAccount}
+        />
+      )}
+      {isProxyOverviewOpen && (
+        <ProxyOverview
+          key='modal-proxy-overview'
+          onClose={toggleProxyOverview}
+          previousProxy={previousProxy}
+          proxiedAccount={recipientId}
         />
       )}
     </StyledDiv>

@@ -172,6 +172,10 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
   const [previous, setPrevious] = useState<PrevProxyProp[]>(() => existing.map(({ delegate, proxyType }) => [delegate, proxyType]));
   const [added, setAdded] = useState<PrevProxyProp[]>([]);
   const extrinsics = useTxBatch(txs, BATCH_OPTS);
+  
+  console.log('Proxied account: ', proxiedAccount);
+  console.log('Previous: ', previous);
+  console.log('Existing: ', existing);
 
   const reservedAmount = useMemo(
     () => api.consts.proxy.proxyDepositFactor

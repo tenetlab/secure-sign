@@ -314,14 +314,14 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               senderId={address}
             />
           )}
-          {isProxyOverviewOpen && (
+          {/* {isProxyOverviewOpen && (
             <ProxyOverview
               key='modal-proxy-overview'
               onClose={toggleProxyOverview}
               previousProxy={proxy}
               proxiedAccount={address}
             />
-          )}
+          )} */}
           {isMultisig && isMultisigOpen && multiInfos && multiInfos.length !== 0 && (
             <MultisigApprove
               address={address}

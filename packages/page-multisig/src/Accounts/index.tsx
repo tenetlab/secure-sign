@@ -272,7 +272,7 @@ function Overview ({ className = '' }: Props): React.ReactElement<Props> {
                     onUpdateName={onUpdateName}
                     ongoing={multiInfos || []}
                     toggleMultisig={toggleMultisig}
-                    toggleProxyOverview={toggleProxyOverview}
+                    // toggleProxyOverview={toggleProxyOverview}
                   />
                 )
                 : (
