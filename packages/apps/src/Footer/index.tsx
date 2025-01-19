@@ -13,11 +13,13 @@ interface Props {
 function Footer({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
 
+  const currentYear = new Date().getFullYear();
+
   return (
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
       <div className='menuContainer'>
         <div className='footer-item'>
-          <span className='content-center'>@2023-2024. All rights reserved</span>
+          <span className='content-center'>@2023-{currentYear}. All rights reserved</span>
           <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
           <img src='/logo-footer.webp' width={150} alt='footer' />
         </div>
