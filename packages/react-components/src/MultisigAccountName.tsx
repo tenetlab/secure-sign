@@ -10,6 +10,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { statics } from '@polkadot/react-api/statics';
 import { useApi, useDeriveAccountInfo } from '@polkadot/react-hooks';
 import { MultisigAccountSidebarCtx } from '@polkadot/react-hooks/ctx/MultisigAccountSidebar';
+import { AddressContext } from '@polkadot/react-components/MultisigAccountSidebar/index';
 import { formatNumber, isCodec, isFunction, isU8a, stringToU8a, u8aEmpty, u8aEq, u8aToBn } from '@polkadot/util';
 import { decodeAddress } from '@polkadot/util-crypto';
 
@@ -191,6 +192,7 @@ function MultisigAccountName({ children, className = '', defaultName, label, onC
   const info = useDeriveAccountInfo(value);
   const [name, setName] = useState<React.ReactNode>(() => extractName((value || '').toString(), undefined, defaultName));
   const toggleSidebar = useContext(MultisigAccountSidebarCtx);
+  const { multisigAddress } = useContext(AddressContext);
 
   // set the actual nickname, local name, accountIndex, accountId
   useEffect((): void => {
@@ -223,6 +225,12 @@ function MultisigAccountName({ children, className = '', defaultName, label, onC
     () => toggleSidebar && value && toggleSidebar([value.toString(), _onNameEdit]),
     [_onNameEdit, toggleSidebar, value]
   );
+
+  useEffect(() => {
+    if ( multisigAddress && value && multisigAddress == value.toString() ) {
+      toggleSidebar?.([value.toString(), _onNameEdit])
+    }
+  }, []);
 
   return (
     <StyledSpan
