@@ -28,7 +28,6 @@ import Derive from '../modals/Derive.js';
 import IdentityMain from '../modals/IdentityMain.js';
 import IdentitySub from '../modals/IdentitySub.js';
 import MultisigApprove from '../modals/MultisigApprove.js';
-import ProxyOverview from '../modals/ProxyOverview.js';
 import RecoverAccount from '../modals/RecoverAccount.js';
 import RecoverSetup from '../modals/RecoverSetup.js';
 import UndelegateModal from '../modals/Undelegate.js';
@@ -123,7 +122,7 @@ const transformRecovery = {
   transform: (opt: Option<RecoveryConfig>) => opt.unwrapOr(null)
 };
 
-function Account ({ account: { address, meta }, className = '', delegation, filter, isMultisigOpen, isProxyOverviewOpen, multisigAddress, proxy, setBalance, toggleMultisig, toggleProxyOverview }: Props): React.ReactElement<Props> | null {
+function Account ({ account: { address, meta }, className = '', delegation, filter, isMultisigOpen, multisigAddress, proxy, setBalance, toggleMultisig, toggleProxyOverview }: Props): React.ReactElement<Props> | null {
   const { t } = useTranslation();
   const { api } = useApi();
   const bestNumber = useBestNumber();
@@ -314,14 +313,14 @@ function Account ({ account: { address, meta }, className = '', delegation, filt
               senderId={address}
             />
           )}
-          {isProxyOverviewOpen && (
+          {/* {isProxyOverviewOpen && (
             <ProxyOverview
               key='modal-proxy-overview'
               onClose={toggleProxyOverview}
               previousProxy={proxy}
               proxiedAccount={address}
             />
-          )}
+          )} */}
           {isMultisig && isMultisigOpen && multiInfos && multiInfos.length !== 0 && (
             <MultisigApprove
               address={address}

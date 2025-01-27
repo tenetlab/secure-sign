@@ -172,7 +172,7 @@ function ProxyOverview ({ className, onClose, previousProxy: [existing] = EMPTY_
   const [previous, setPrevious] = useState<PrevProxyProp[]>(() => existing.map(({ delegate, proxyType }) => [delegate, proxyType]));
   const [added, setAdded] = useState<PrevProxyProp[]>([]);
   const extrinsics = useTxBatch(txs, BATCH_OPTS);
-
+  
   const reservedAmount = useMemo(
     () => api.consts.proxy.proxyDepositFactor
       .muln(batchPrevious.length + batchAdded.length)
