@@ -27,21 +27,23 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
 
     return saved ? parseInt(saved) : null;
   });
-  const numberOfExtrinsic = 6;
+  
+  const supportedMethods = [
+    'addStake',
+    'removeStake',
+    'registerNetwork',
+    'registerSubnet',
+    'setRootWeights',
+    'transferKeepAlive',
+    'transferAllowDeath',
+    'setWeights'
+  ];
+  const numberOfExtrinsic = supportedMethods.length;
 
-  options = options.filter((option) => {
-    return option.value === 'addStake' ||
-      option.value === 'removeStake' ||
-      option.value === 'registerNetwork' ||
-      option.value === 'registerSubnet' ||
-      option.value === 'setRootWeights' ||
-      option.value === 'transferKeepAlive' ||
-      option.value === 'transferAllowDeath' ||
-      option.value === 'setWeights';
-  });
+  options = options.filter((option) => option.value in supportedMethods);
 
   useEffect(() => {
-    if (options.length == numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
+    if (options.length === numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
       setBtnDisable(false);
       onSelect(options[selectedIndex].value);
     }
