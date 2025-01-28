@@ -32,6 +32,8 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
   options = options.filter((option) => {
     return option.value === 'addStake' ||
       option.value === 'removeStake' ||
+      option.value === 'registerNetwork' ||
+      option.value === 'registerSubnet' ||
       option.value === 'setRootWeights' ||
       option.value === 'transferKeepAlive' ||
       option.value === 'transferAllowDeath' ||
@@ -55,12 +57,12 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
 
   const transform = useCallback(
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
-      if (method == 'transferKeepAlive' || method == 'transferAllowDeath') {
+      if (method === 'transferKeepAlive' || method === 'transferAllowDeath') {
         return api.tx.balances[method];
-      } else if (method == 'addStake' || method == 'register' || method == 'removeStake' || method == 'setWeights' || method == 'setRootWeights') {
-        if (api.runtimeChain.toString() == 'commune') {
+      } else if (method === 'addStake' || method === 'register' || method === 'removeStake' || method === 'setWeights' || method === 'setRootWeights' || method === 'registerNetwork' || method === 'registerSubnet') {
+        if (api.runtimeChain.toString() === 'commune') {
           return api.tx.subspaceModule[method];
-        } else {
+        } else if (api.runtimeChain.toString() === 'Bittensor') {
           return api.tx.subtensorModule[method];
         }
       } else {
@@ -109,7 +111,8 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
           <div className='description'>
             <div>
               {item?.value === 'addStake' && 'Adds stake to a specified hotkey.'}
-              {item?.value === 'registerNetwork' && 'Registers a new subnet.'}
+              {item?.value === 'registerNetwork' && 'Registers a new subnetwork.'}
+              {item?.value === 'registerSubnet' && 'Registers a new subnetwork.'}
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && 'Transfers free balance to another account while ensuring the existence of the account after the transfer.'}
               {item?.value === 'transferAllowDeath' && 'Transfers free balance to another account while it can be reaped.'}

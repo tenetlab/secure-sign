@@ -31,7 +31,7 @@ function setSectionFromChain (chain: string, onChange: (value: string) => void) 
   }
 }
 
-function isBitOrCom (chain: string): any {
+function isChainSupported (chain: string): any {
   switch (chain) {
     case 'commune':
       return true;
@@ -44,10 +44,12 @@ function isBitOrCom (chain: string): any {
 
 function SelectSection ({ onChange }: Props): React.ReactElement<Props> {
   const { api } = useApi();
+
   useEffect(() => {
-    onChange && isBitOrCom(api.runtimeChain.toString()) &&
+    onChange && isChainSupported(api.runtimeChain.toString()) &&
     setSectionFromChain(api.runtimeChain.toString(), onChange);
-  }, [])
+  }, []);
+
   return (
     <></>
   );
