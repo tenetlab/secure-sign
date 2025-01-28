@@ -27,7 +27,7 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
 
     return saved ? parseInt(saved) : null;
   });
-  
+
   const supportedMethods = [
     'addStake',
     'removeStake',
@@ -40,7 +40,7 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
   ];
   const numberOfExtrinsic = supportedMethods.length;
 
-  options = options.filter((option) => option.value in supportedMethods);
+  options = options.filter((option) => supportedMethods.includes(option.value));
 
   useEffect(() => {
     if (options.length === numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
