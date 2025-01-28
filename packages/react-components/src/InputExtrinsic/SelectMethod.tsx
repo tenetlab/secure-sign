@@ -64,6 +64,8 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
           return api.tx.subspaceModule[method];
         } else if (api.runtimeChain.toString() === 'Bittensor') {
           return api.tx.subtensorModule[method];
+        } else {
+          return api.tx.subspaceModule[method];
         }
       } else {
         return api.tx[value.section][method];
