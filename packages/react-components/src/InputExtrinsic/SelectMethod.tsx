@@ -1,11 +1,11 @@
-// Copyright 2017-2024 @polkadot/react-components authors & contributors
+// Copyright 2017-2025 @polkadot/react-components authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
 import type { ApiPromise } from '@polkadot/api';
 import type { SubmittableExtrinsicFunction } from '@polkadot/api/types';
 import type { DropdownOptions } from '../util/types.js';
 
-import React, { useCallback, useRef, useState, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { styled } from '@polkadot/react-components';
 
@@ -21,32 +21,36 @@ interface Props {
   setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
-function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): React.ReactElement<Props> | null {
+function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
+
     return saved ? parseInt(saved) : null;
   });
-  const numberOfExtrinsic = 6;
 
-  options = options.filter((option) => {
-    return option.value == 'addStake' ||
-      option.value == 'removeStake' ||
-      option.value == 'transferKeepAlive' ||
-      option.value == 'transferAllowDeath' ||
-      option.value == 'setRootWeights' ||
-      option.value == 'setWeights'
-  })
+  const supportedMethods = [
+    'addStake',
+    'removeStake',
+    'registerNetwork',
+    'registerSubnet',
+    'setRootWeights',
+    'transferKeepAlive',
+    'transferAllowDeath',
+    'setWeights'
+  ];
+  const numberOfExtrinsic = supportedMethods.length;
 
+  options = options.filter((option) => supportedMethods.includes(option.value));
 
   useEffect(() => {
-    if (options.length == numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
+    if (options.length === numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
       setBtnDisable(false);
       onSelect(options[selectedIndex].value);
     }
   }, [selectedIndex, setBtnDisable, options]);
 
-
   const lastUpdate = useRef<string>('');
+
   const handleRowClick = (index: number) => {
     setSelectedIndex(index);
     localStorage.setItem('selectedMethodIndex', index.toString());
@@ -55,15 +59,17 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
 
   const transform = useCallback(
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
-      if (method == 'transferKeepAlive' || method == 'transferAllowDeath')
-        return api.tx['balances'][method];
-      else if (method == 'addStake' || method == 'register' || method == 'removeStake' || method == 'setWeights' || method == 'setRootWeights') {
-        if (api.runtimeChain.toString() == 'commune')
-          return api.tx['subspaceModule'][method];
-        else
-          return api.tx['subtensorModule'][method];
-      }
-      else {
+      if (method === 'transferKeepAlive' || method === 'transferAllowDeath') {
+        return api.tx.balances[method];
+      } else if (method === 'addStake' || method === 'register' || method === 'removeStake' || method === 'setWeights' || method === 'setRootWeights' || method === 'registerNetwork' || method === 'registerSubnet') {
+        if (api.runtimeChain.toString() === 'commune') {
+          return api.tx.subspaceModule[method];
+        } else if (api.runtimeChain.toString() === 'Bittensor') {
+          return api.tx.subtensorModule[method];
+        } else {
+          return api.tx.subspaceModule[method];
+        }
+      } else {
         return api.tx[value.section][method];
       }
     },
@@ -86,19 +92,20 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
           : value
       );
     }
-  }
+  };
+
   return (
     <StyleDiv className=''>
       {options?.map((item, index) => (
         <div
+          className='item'
           key={index}
+          onClick={() => {
+            handleRowClick(index);
+            onSelect(item?.value);
+          }}
           style={{
             backgroundColor: selectedIndex === index ? 'var(--item-active)' : ''
-          }}
-          className='item'
-          onClick={() => {
-            handleRowClick(index)
-            onSelect(item?.value)
           }}
         >
           <div className='nickname'>
@@ -108,12 +115,13 @@ function SelectMethod({ api, onChange, options, value, setBtnDisable }: Props): 
           <div className='description'>
             <div>
               {item?.value === 'addStake' && 'Adds stake to a specified hotkey.'}
-              {item?.value === 'registerNetwork' && 'Registers a new subnet.'}
+              {item?.value === 'registerNetwork' && 'Registers a new subnetwork.'}
+              {item?.value === 'registerSubnet' && 'Registers a new subnetwork.'}
               {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
-              {item?.value === 'transferKeepAlive' && `Transfers free balance to another account while ensuring the existence of the account after the transfer.`}
-              {item?.value === 'transferAllowDeath' && `Transfers free balance to another account while it can be reaped.`}
-              {item?.value === 'setRootWeights' && `Assigns weights to active subnets using their 'netuid'.`}
-              {item?.value === 'setWeights' && `Sets miner weights on a subnet.`}
+              {item?.value === 'transferKeepAlive' && 'Transfers free balance to another account while ensuring the existence of the account after the transfer.'}
+              {item?.value === 'transferAllowDeath' && 'Transfers free balance to another account while it can be reaped.'}
+              {item?.value === 'setRootWeights' && 'Assigns weights to active subnets using their \'netuid\'.'}
+              {item?.value === 'setWeights' && 'Sets miner weights on a subnet.'}
             </div>
             <div
               style={{
@@ -159,4 +167,4 @@ const StyleDiv = styled.div`
     align-items: center;
     justify-content: space-between; 
   }
-`
+`;

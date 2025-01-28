@@ -1,28 +1,15 @@
-// Copyright 2017-2024 @polkadot/react-components authors & contributors
+// Copyright 2017-2025 @polkadot/react-components authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import { toast } from "react-toastify";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import {
-  calculate_amount,
-  // get_all_stake_out,
-  get_balance,
-  get_user_total_stake,
-} from "./utils.js";
+import { ApiPromise, type SubmittableResult, WsProvider } from '@polkadot/api';
+import { type InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
+import { type DispatchError } from '@polkadot/types/interfaces';
 
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { ApiPromise, type SubmittableResult, WsProvider } from "@polkadot/api";
-
-import {
-  type Staking,
-  type Transfer,
-  // type StakeData,
-  type TransferStake,
-  type PolkadotApiState,
-  type PolkadotProviderProps,
-} from "./types.js";
-import { type DispatchError } from "@polkadot/types/interfaces";
-import { type InjectedAccountWithMeta } from "@polkadot/extension-inject/types";
+import { type PolkadotApiState, type PolkadotProviderProps, type Staking, type Transfer, type TransferStake } from './types.js';
+import { calculate_amount, get_balance, get_user_total_stake } from './utils.js';
 
 interface PolkadotContextType {
   api: ApiPromise | null;
@@ -50,13 +37,11 @@ interface PolkadotContextType {
 }
 
 const PolkadotContext = createContext<PolkadotContextType | undefined>(
-  undefined,
+  undefined
 );
 
-export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
-  children,
-  wsEndpoint,
-}) => {
+export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({ children,
+  wsEndpoint }) => {
   // const [openModal, setOpenModal] = useState(false);
 
   const [api, setApi] = useState<ApiPromise | null>(null);
@@ -64,7 +49,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
   const [polkadotApi, setPolkadotApi] = useState<PolkadotApiState>({
     web3Enable: null,
     web3Accounts: null,
-    web3FromAddress: null,
+    web3FromAddress: null
   });
 
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
@@ -80,15 +65,15 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
   const [blockNumber, setBlockNumber] = useState(0);
   const [userTotalStake, setUserTotalStake] = useState<number>(0);
 
-  async function loadPolkadotApi() {
+  async function loadPolkadotApi () {
     const { web3Accounts, web3Enable, web3FromAddress } = await import(
-      "@polkadot/extension-dapp"
+      '@polkadot/extension-dapp'
     );
 
     setPolkadotApi({
       web3Accounts,
       web3Enable,
-      web3FromAddress,
+      web3FromAddress
     });
 
     const provider = new WsProvider(wsEndpoint);
@@ -100,20 +85,22 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
 
   useEffect(() => {
     void loadPolkadotApi();
+
     return () => {
       void api?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wsEndpoint, setSelectedAccount]);
 
-  async function addStake({ validator, amount, callback }: Staking) {
+  async function addStake ({ amount, callback, validator }: Staking) {
     if (
       !api ||
       !selectedAccount ||
       !polkadotApi.web3FromAddress ||
       !api.tx.subspaceModule?.addStake
-    )
+    ) {
       return;
+    }
 
     const injector = await polkadotApi.web3FromAddress(selectedAccount.address);
 
@@ -126,18 +113,19 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
           if (result.status.isInBlock) {
             callback?.({
               finalized: false,
-              status: "PENDING",
-              message: "Staking in progress",
+              status: 'PENDING',
+              message: 'Staking in progress'
             });
           }
+
           if (result.status.isFinalized) {
             result.events.forEach(({ event }) => {
               if (api.events.system?.ExtrinsicSuccess?.is(event)) {
-                toast.success("Transaction successful");
+                toast.success('Transaction successful');
                 callback?.({
                   finalized: true,
-                  status: "SUCCESS",
-                  message: "Staked successfully",
+                  status: 'SUCCESS',
+                  message: 'Staked successfully'
                 });
               } else if (api.events.system?.ExtrinsicFailed?.is(event)) {
                 const [dispatchError] = event.data as unknown as [
@@ -145,12 +133,14 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 ];
 
                 let msg;
+
                 if (dispatchError.isModule) {
                   const mod = dispatchError.asModule;
                   const error = api.registry.findMetaError(mod);
 
                   if (error.section && error.name && error.docs) {
                     const errorMessage = `${error.name}`;
+
                     msg = `Staking failed: ${errorMessage}`;
                   } else {
                     msg = `Staking failed: ${dispatchError.type}`;
@@ -158,30 +148,32 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 } else {
                   msg = `Staking failed: ${dispatchError.toString()}`;
                 }
+
                 toast.error(msg);
                 callback?.({
                   finalized: true,
-                  status: "ERROR",
-                  message: msg,
+                  status: 'ERROR',
+                  message: msg
                 });
               }
             });
           }
-        },
+        }
       )
       .catch((err) => {
         toast.error(err as string);
       });
   }
 
-  async function removeStake({ validator, amount, callback }: Staking) {
+  async function removeStake ({ amount, callback, validator }: Staking) {
     if (
       !api ||
       !selectedAccount ||
       !polkadotApi.web3FromAddress ||
       !api.tx.subspaceModule?.removeStake
-    )
+    ) {
       return;
+    }
 
     const injector = await polkadotApi.web3FromAddress(selectedAccount.address);
 
@@ -194,18 +186,19 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
           if (result.status.isInBlock) {
             callback?.({
               finalized: false,
-              status: "PENDING",
-              message: "Unstaking in progress",
+              status: 'PENDING',
+              message: 'Unstaking in progress'
             });
           }
+
           if (result.status.isFinalized) {
             result.events.forEach(({ event }) => {
               if (api.events.system?.ExtrinsicSuccess?.is(event)) {
-                toast.success("Unstaking successful");
+                toast.success('Unstaking successful');
                 callback?.({
                   finalized: true,
-                  status: "SUCCESS",
-                  message: "Unstaked successfully",
+                  status: 'SUCCESS',
+                  message: 'Unstaked successfully'
                 });
               } else if (api.events.system?.ExtrinsicFailed?.is(event)) {
                 const [dispatchError] = event.data as unknown as [
@@ -213,12 +206,14 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 ];
 
                 let msg;
+
                 if (dispatchError.isModule) {
                   const mod = dispatchError.asModule;
                   const error = api.registry.findMetaError(mod);
 
                   if (error.section && error.name && error.docs) {
                     const errorMessage = `${error.name}`;
+
                     msg = `Unstaking failed: ${errorMessage}`;
                   } else {
                     msg = `Unstaking failed: ${dispatchError.type}`;
@@ -226,30 +221,32 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 } else {
                   msg = `Unstaking failed: ${dispatchError.toString()}`;
                 }
+
                 toast.error(msg);
                 callback?.({
                   finalized: true,
-                  status: "ERROR",
-                  message: msg,
+                  status: 'ERROR',
+                  message: msg
                 });
               }
             });
           }
-        },
+        }
       )
       .catch((err) => {
         toast.error(err as string);
       });
   }
 
-  async function transfer({ to, amount, callback }: Transfer) {
+  async function transfer ({ amount, callback, to }: Transfer) {
     if (
       !api ||
       !selectedAccount ||
       !polkadotApi.web3FromAddress ||
       !api.tx.balances?.transferAllowDeath
-    )
+    ) {
       return;
+    }
 
     const injector = await polkadotApi.web3FromAddress(selectedAccount.address);
 
@@ -262,18 +259,19 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
           if (result.status.isInBlock) {
             callback?.({
               finalized: false,
-              status: "PENDING",
-              message: "Transfer in progress",
+              status: 'PENDING',
+              message: 'Transfer in progress'
             });
           }
+
           if (result.status.isFinalized) {
             result.events.forEach(({ event }) => {
               if (api.events.system?.ExtrinsicSuccess?.is(event)) {
-                toast.success("Transfer successful");
+                toast.success('Transfer successful');
                 callback?.({
                   finalized: true,
-                  status: "SUCCESS",
-                  message: "Transfer successful",
+                  status: 'SUCCESS',
+                  message: 'Transfer successful'
                 });
               } else if (api.events.system?.ExtrinsicFailed?.is(event)) {
                 const [dispatchError] = event.data as unknown as [
@@ -281,12 +279,14 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 ];
 
                 let msg;
+
                 if (dispatchError.isModule) {
                   const mod = dispatchError.asModule;
                   const error = api.registry.findMetaError(mod);
 
                   if (error.section && error.name && error.docs) {
                     const errorMessage = `${error.name}`;
+
                     msg = `Transfer failed: ${errorMessage}`;
                   } else {
                     msg = `Transfer failed: ${dispatchError.type}`;
@@ -294,36 +294,36 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 } else {
                   msg = `Transfer failed: ${dispatchError.toString()}`;
                 }
+
                 toast.error(msg);
                 callback?.({
                   finalized: true,
-                  status: "ERROR",
-                  message: msg,
+                  status: 'ERROR',
+                  message: msg
                 });
               }
             });
           }
-        },
+        }
       )
       .catch((err) => {
         toast.error(err as string);
       });
   }
 
-  async function transferStake({
-    fromValidator,
-    toValidator,
-    amount,
-
+  async function transferStake ({ amount,
     callback,
-  }: TransferStake) {
+    fromValidator,
+
+    toValidator }: TransferStake) {
     if (
       !api ||
       !selectedAccount ||
       !polkadotApi.web3FromAddress ||
       !api.tx.subspaceModule?.transferStake
-    )
+    ) {
       return;
+    }
 
     const injector = await polkadotApi.web3FromAddress(selectedAccount.address);
 
@@ -336,18 +336,19 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
           if (result.status.isInBlock) {
             callback?.({
               finalized: false,
-              status: "PENDING",
-              message: "Transfer in progress",
+              status: 'PENDING',
+              message: 'Transfer in progress'
             });
           }
+
           if (result.status.isFinalized) {
             result.events.forEach(({ event }) => {
               if (api.events.system?.ExtrinsicSuccess?.is(event)) {
-                toast.success("Transfer successful");
+                toast.success('Transfer successful');
                 callback?.({
                   finalized: true,
-                  status: "SUCCESS",
-                  message: "Transfer successful",
+                  status: 'SUCCESS',
+                  message: 'Transfer successful'
                 });
               } else if (api.events.system?.ExtrinsicFailed?.is(event)) {
                 const [dispatchError] = event.data as unknown as [
@@ -355,12 +356,14 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 ];
 
                 let msg;
+
                 if (dispatchError.isModule) {
                   const mod = dispatchError.asModule;
                   const error = api.registry.findMetaError(mod);
 
                   if (error.section && error.name && error.docs) {
                     const errorMessage = `${error.name}`;
+
                     msg = `Transfer failed: ${errorMessage}`;
                   } else {
                     msg = `Transfer failed: ${dispatchError.type}`;
@@ -368,16 +371,17 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
                 } else {
                   msg = `Transfer failed: ${dispatchError.toString()}`;
                 }
+
                 toast.error(msg);
                 callback?.({
                   finalized: true,
-                  status: "ERROR",
-                  message: msg,
+                  status: 'ERROR',
+                  message: msg
                 });
               }
             });
           }
-        },
+        }
       )
       .catch((err) => {
         toast.error(err as string);
@@ -389,7 +393,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
       void get_user_total_stake(api, selectedAccount.address).then(
         (user_total_stake) => {
           setUserTotalStake(user_total_stake);
-        },
+        }
       );
     }
   }, [api, selectedAccount?.address]);
@@ -416,13 +420,15 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
       if (!api || !selectedAccount?.address) {
         // console.error("API or user address is not defined");
         setIsBalanceLoading(false);
+
         return;
       }
 
       const fetchedBalance = await get_balance({
         api,
-        address: selectedAccount.address,
+        address: selectedAccount.address
       });
+
       setBalance(fetchedBalance);
       setIsBalanceLoading(false);
     };
@@ -453,7 +459,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
         transferStake,
 
         addStake,
-        removeStake,
+        removeStake
       }}
     >
       {children}
@@ -463,8 +469,10 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({
 
 export const usePolkadot = (): PolkadotContextType => {
   const context = useContext(PolkadotContext);
+
   if (context === undefined) {
-    throw new Error("usePolkadot must be used within a PolkadotProvider");
+    throw new Error('usePolkadot must be used within a PolkadotProvider');
   }
+
   return context;
 };
