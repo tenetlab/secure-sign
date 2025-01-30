@@ -54,13 +54,17 @@ const BORDER_RADIUS = `${BASE_BORDER * 4}rem`;
 const StyledDiv = styled.div`
   max-width: 100%;
   width: 100%;
-  min-height: calc(100vh - 19rem);
+  height: 100%;
+  padding-bottom: 25px;
+  padding-top: 25px;
+  .isNotFixed {
+    height: 100%
+  }
   .ui--Table-Body {
-    padding: 1rem 0 2rem 0;
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
-    max-height: 75vh;
+    height: 100%;
     overflow-y: scroll;
   }
   .ui--Table-Split {
