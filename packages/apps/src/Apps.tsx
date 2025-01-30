@@ -36,7 +36,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <GlobalStyle uiHighlight={uiHighlight} />
         <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
           <Menu />
-          <div style={{ display: 'grid', 'gridTemplateColumns': '350px 1fr' }}>
+          <div style={{ display: 'grid', 'gridTemplateColumns': 'min-content 1fr' }}>
             <Sidebar />
             <AccountSidebar>
               <MultisigAccountSidebar>
