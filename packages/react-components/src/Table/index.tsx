@@ -60,6 +60,8 @@ const StyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     row-gap: 1rem;
+    max-height: 75vh;
+    overflow-y: scroll;
   }
   .ui--Table-Split {
     display: flex;

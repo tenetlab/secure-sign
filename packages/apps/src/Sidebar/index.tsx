@@ -132,7 +132,8 @@ function Sidebar({ className = '' }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   width: 350px;
-  height: 100%;
+  height: calc(100vh - 180px);
+  overflow: hidden;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   z-index: 220;
   
