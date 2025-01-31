@@ -116,6 +116,9 @@ const StyledDiv = styled.div`
     width: 100%;
     overflow: hidden;
   }
+  & main {
+  height: 78vh;
+  }
 `;
 
 export default React.memo(Content);
