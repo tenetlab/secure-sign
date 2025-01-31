@@ -106,6 +106,8 @@ const StyledDiv = styled.div`
   .address-book-table {
     border-radius: 1rem;
     padding: 0 3rem;
+    overflow: auto;
+    height: calc(100% - 65px);
     table {
       margin-bottom: 0 !important;
       border-radius: 5px;
