@@ -117,7 +117,7 @@ const StyledDiv = styled.div`
     overflow: hidden;
   }
   & main {
-  height: 79vh;
+  height: 80vh;
   }
 `;
 
