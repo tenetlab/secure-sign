@@ -134,7 +134,9 @@ const StyledDiv = styled.div`
   width: min-content;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   z-index: 220;
-  
+  @media (min-width: 1200px) {
+    width: 350px;
+  }
   .smallShow {
     display: none;
   }
