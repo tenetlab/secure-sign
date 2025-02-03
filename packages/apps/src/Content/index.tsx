@@ -101,7 +101,7 @@ function Content({ className }: Props): React.ReactElement<Props> {
 
 const StyledDiv = styled.div`
   flex-grow: 1;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  padding: 0.5rem 1rem 0 0.5rem;
   position: relative;
   overflow-y: auto;
   margin: 0;
@@ -117,7 +117,7 @@ const StyledDiv = styled.div`
     overflow: hidden;
   }
   & main {
-  height: 78vh;
+  height: 79vh;
   }
 `;
 
