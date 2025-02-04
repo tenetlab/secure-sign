@@ -167,6 +167,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
               {item?.value === 'sudoSetImmunityPeriod' && 'Sets the immunity period for a subnet.'}
               {item?.value === 'sudoSetKappa' && 'Sets the kappa for a subnet.'}
               {item?.value === 'sudoSetTempo' && 'Sets the tempo for a subnet.'}
+              {item?.value === 'sudoSetAdjustmentAlpha' && 'Sets the adjustment alpha for a subnet.'}
               {item?.value === 'setWeightsEncrypted' && 'commit-reveal version of setWeights.'}
               {item?.value === 'updateSubnet' && 'Updates subnet metadata.'}
               {item?.value === 'addStakeMultiple' && 'batch-version for addStake.'}
