@@ -18,36 +18,60 @@ interface Props {
   onChange?: (value: SubmittableExtrinsicFunction<'promise'>) => void;
   options: DropdownOptions;
   value: SubmittableExtrinsicFunction<'promise'>;
+  methodType: string;
   setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
-function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
+function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
 
     return saved ? parseInt(saved) : null;
   });
 
-  const supportedMethods = [
-    'addStake',
-    'removeStake',
-    'registerNetwork',
-    'registerSubnet',
-    'setRootWeights',
-    'transferKeepAlive',
-    'transferAllowDeath',
-    'setWeights'
-  ];
-  const numberOfExtrinsic = supportedMethods.length;
+  const methodMappings = {
+    Bittensor: {
+      User: {
+        balances: ['transferAll', 'transferAllowDeath', 'transferKeepAlive'],
+        subtensorModule: ['addStake', 'removeStake', 'setIdentity', 'swapColdkey', 'scheduleSwapColdkey', 'swapHotkey']
+      },
+      Validator: {
+        subtensorModule: ['rootRegister', 'setWeights', 'setRootWeights', 'setChildren', 'setChildkeyTake']
+      },
+      Subnet: {
+        subtensorModule: ['registerNetwork', 'dissolveNetwork', 'scheduleDissolveNetwork', 'setSubnetIdentity'],
+        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo']
+      }
+    },
+    commune: {
+      User: {
+        balances: ['transferAll', 'transferAllowDeath', 'transferKeepAlive'],
+        subspaceModule: ['transferMultiple', 'addStake', 'addStakeMultiple', 'removeStake', 'removeStakeMultiple', 'transferStake', 'register', 'deregister', 'updateModule']
+      },
+      Validator: {
+        subnetEmissionModule: ['setWeights', 'setWeightsEncrypted']
+      },
+      Subnet: {
+        subspaceModule: ['registerSubnet', 'updateSubnet']
+      }
+    }
+  };
 
-  options = options.filter((option) => supportedMethods.includes(option.value));
+  const runtime = api.runtimeChain.toString(); 
+
+  options = options.filter(option =>
+    Object.values(methodMappings[runtime]?.[methodType] || {}).flat().includes(option.value)
+  );
 
   useEffect(() => {
-    if (options.length === numberOfExtrinsic && selectedIndex != null && setBtnDisable) {
+    const numberOfExtrinsic = Object.values(methodMappings[runtime]?.[methodType] || {}).flat().length;
+    if (options.length === numberOfExtrinsic && options.length > selectedIndex && selectedIndex != null && setBtnDisable) {
       setBtnDisable(false);
       onSelect(options[selectedIndex].value);
+    } else {
+      setBtnDisable(true);
     }
-  }, [selectedIndex, setBtnDisable, options]);
+  }, [selectedIndex, setBtnDisable, options, methodType]);
 
   const lastUpdate = useRef<string>('');
 
@@ -59,19 +83,15 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
 
   const transform = useCallback(
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
-      if (method === 'transferKeepAlive' || method === 'transferAllowDeath') {
-        return api.tx.balances[method];
-      } else if (method === 'addStake' || method === 'register' || method === 'removeStake' || method === 'setWeights' || method === 'setRootWeights' || method === 'registerNetwork' || method === 'registerSubnet') {
-        if (api.runtimeChain.toString() === 'commune') {
-          return api.tx.subspaceModule[method];
-        } else if (api.runtimeChain.toString() === 'Bittensor') {
-          return api.tx.subtensorModule[method];
-        } else {
-          return api.tx.subspaceModule[method];
+      for (const [category, modules] of Object.entries(methodMappings[runtime])) {
+        for (const [module, methods] of Object.entries(modules)) {
+          if (methods.includes(method)) {
+            return api.tx[module][method];
+          }
         }
-      } else {
-        return api.tx[value.section][method];
       }
+  
+      return api.tx[value.section][method];
     },
     [api, value]
   );
@@ -122,6 +142,32 @@ function SelectMethod ({ api, onChange, options, setBtnDisable, value }: Props):
               {item?.value === 'transferAllowDeath' && 'Transfers free balance to another account while it can be reaped.'}
               {item?.value === 'setRootWeights' && 'Assigns weights to active subnets using their \'netuid\'.'}
               {item?.value === 'setWeights' && 'Sets miner weights on a subnet.'}
+              {item?.value === 'transferAll' && 'Transfers the entire transferable balance from the caller account.'}
+              {item?.value === 'setIdentity' && 'Sets prometheus information for the neuron.'}
+              {item?.value === 'swapColdkey' && 'Changes the coldkey associated with their account.'}
+              {item?.value === 'scheduleSwapColdkey' && 'Schedules a coldkey swap operation to be executed at a future block.'}
+              {item?.value === 'swapHotkey' && 'Changes the hotkey associated with their account'}
+              {item?.value === 'rootRegister' && 'Registers the hotkey to root network'}
+              {item?.value === 'setChildren' && 'Sets child hotkeys for a given hotkey on a specified subnet.'}
+              {item?.value === 'setChildkeyTake' && 'Sets the childkey take for a given hotkey.'}
+              {item?.value === 'dissolveNetwork' && "Removes a user's subnetwork"}
+              {item?.value === 'scheduleDissolveNetwork' && 'Schedules the dissolution of a network at a specified block number.'}
+              {item?.value === 'setSubnetIdentity' && 'Sets the identity information for a subnet.'}
+              {item?.value === 'sudoSetMinBurn' && 'Sets the minimum burn for a subnet.'}
+              {item?.value === 'sudoSetMaxBurn' && 'Sets the maximum burn for a subnet.'}
+              {item?.value === 'sudoSetNetworkRegistrationAllowed' && 'Allows neuron registration on a subnet'}
+              {item?.value === 'sudoSetImmunityPeriod' && 'Sets the immunity period for a subnet.'}
+              {item?.value === 'sudoSetKappa' && 'Sets the kappa for a subnet.'}
+              {item?.value === 'sudoSetTempo' && 'Sets the tempo for a subnet.'}
+              {item?.value === 'setWeightsEncrypted' && 'commit-reveal version of setWeights.'}
+              {item?.value === 'updateSubnet' && 'Updates subnet metadata.'}
+              {item?.value === 'addStakeMultiple' && 'batch-version for addStake.'}
+              {item?.value === 'deregister' && 'Deregisters a module.'}
+              {item?.value === 'register' && 'Registers a module.'}
+              {item?.value === 'removeStakeMultiple' && 'Batch version of remove-stake.'}
+              {item?.value === 'transferMultiple' && 'Batch version of transfer.'}
+              {item?.value === 'transferStake' && 'Moves stake from one module to another.'}
+              {item?.value === 'updateModule' && 'Updates module metadatas.'}
             </div>
             <div
               style={{
