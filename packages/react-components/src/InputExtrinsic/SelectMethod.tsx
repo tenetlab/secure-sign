@@ -22,6 +22,14 @@ interface Props {
   setBtnDisable?: (isBtnDisable: boolean) => void;
 }
 
+interface MethodDetails {
+  balances?: string[];
+  subtensorModule?: string[];
+  adminUtils?: string[];
+  subspaceModule?: string[];
+  subnetEmissionModule?: string[];
+}
+
 function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
@@ -29,7 +37,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
     return saved ? parseInt(saved) : null;
   });
 
-  const methodMappings = {
+  const methodMappings: Record<string, Record<string, MethodDetails>> = {
     Bittensor: {
       User: {
         balances: ['transferAll', 'transferAllowDeath', 'transferKeepAlive'],
@@ -60,16 +68,16 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
   const runtime = api.runtimeChain.toString(); 
 
   options = options.filter(option =>
-    Object.values(methodMappings[runtime]?.[methodType] || {}).flat().includes(option.value)
+    Object.values(methodMappings[runtime as keyof typeof methodMappings]?.[methodType] || {}).flat().includes(option.value)
   );
 
   useEffect(() => {
     const numberOfExtrinsic = Object.values(methodMappings[runtime]?.[methodType] || {}).flat().length;
-    if (options.length === numberOfExtrinsic && options.length > selectedIndex && selectedIndex != null && setBtnDisable) {
+    if (options.length === numberOfExtrinsic && options.length > (selectedIndex ?? -1) && selectedIndex !== null && setBtnDisable) {
       setBtnDisable(false);
       onSelect(options[selectedIndex].value);
     } else {
-      setBtnDisable(true);
+      setBtnDisable?.(true);
     }
   }, [selectedIndex, setBtnDisable, options, methodType]);
 
@@ -83,7 +91,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
 
   const transform = useCallback(
     (method: string): SubmittableExtrinsicFunction<'promise'> => {
-      for (const [category, modules] of Object.entries(methodMappings[runtime])) {
+      for (const [, modules] of Object.entries(methodMappings[runtime])) {
         for (const [module, methods] of Object.entries(modules)) {
           if (methods.includes(method)) {
             return api.tx[module][method];
