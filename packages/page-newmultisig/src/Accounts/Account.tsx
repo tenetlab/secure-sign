@@ -657,7 +657,6 @@ function NewMultisigAccount ({ account: { address, meta }, className = '', deleg
                 className='important'
                 color='purple'
                 hover={t('Multisig approvals pending')}
-                hoverAction={t('View pending approvals')}
                 icon='file-signature'
                 onClick={toggleMultisig}
               />
