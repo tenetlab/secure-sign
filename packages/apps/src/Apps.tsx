@@ -36,7 +36,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <GlobalStyle uiHighlight={uiHighlight} />
         <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
           <Menu />
-          <div style={{ display: 'grid', 'gridTemplateColumns': 'min-content 1fr' }}>
+          <div style={{ display: "flex", flex: 1  }}>
             <Sidebar />
             <AccountSidebar>
               <MultisigAccountSidebar>
@@ -59,8 +59,8 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
 const StyledDiv = styled.div`
   background: var(--bg-page);
   box-sizing: border-box;
-  display: grid;
-  grid-template-rows: 95px 1fr 80px;
+  display: flex;
+  justify-content: space-between;
   height: 100vh;
   flex-direction: column;
   min-height: 100vh;

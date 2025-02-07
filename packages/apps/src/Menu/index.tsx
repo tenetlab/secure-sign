@@ -35,7 +35,9 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
-  width: 100%;
+flex: 0 0 auto; 
+height: 95px;
+width: 100%;
   padding: 1rem 1rem 0.5rem 1rem;
   z-index: 220;
   position: relative;
