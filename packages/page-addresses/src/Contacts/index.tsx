@@ -107,7 +107,7 @@ const StyledDiv = styled.div`
     border-radius: 1rem;
     padding: 0 3rem;
     overflow: auto;
-    height: calc(100% - 80px);
+    height: calc(100% - 80px); // height 
     table {
       margin-bottom: 0 !important;
       border-radius: 5px;
