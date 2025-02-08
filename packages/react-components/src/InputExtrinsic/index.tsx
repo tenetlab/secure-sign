@@ -13,6 +13,7 @@ import sectionOptions from './options/section.js';
 import LinkedWrapper from './LinkedWrapper.js';
 import SelectMethod from './SelectMethod.js';
 import SelectSection from './SelectSection.js';
+import Button from '../Button/index.js';
 import {
   styled
 } from '@polkadot/react-components';
@@ -35,6 +36,14 @@ function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, i
   const [optionsSection] = useState<DropdownOptions>(() => sectionOptions(api, filter));
   const [value, setValue] = useState<SubmittableExtrinsicFunction<'promise'>>((): SubmittableExtrinsicFunction<'promise'> => defaultValue);
   const [{ defaultMethod, defaultSection }] = useState(() => ({ defaultMethod: defaultValue.method, defaultSection: defaultValue.section }));
+  const [methodType, setMethodType] = useState<string>(() => {
+    return localStorage.getItem('methodType') || 'Validator';
+  });
+
+  const handleMethodTypeChange = useCallback((newMethodType: string) => {
+    setMethodType(newMethodType);
+    localStorage.setItem('methodType', newMethodType);
+  }, []);
 
   const _onKeyChange = useCallback(
     (newValue: SubmittableExtrinsicFunction<'promise'>): void => {
@@ -64,6 +73,23 @@ function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, i
         label={label}
         withLabel={withLabel}
       >
+        <div className='extrinsicsBtn'>
+          <Button
+            className={`nextBtn ${methodType === 'User' ? 'active' : ''}`}
+            label={'User'}
+            onClick={() => handleMethodTypeChange('User')}
+          />
+          <Button
+            className={`nextBtn ${methodType === 'Subnet' ? 'active' : ''}`}
+            label={'Subnet'}
+            onClick={() => handleMethodTypeChange('Subnet')}
+          />
+          <Button
+            className={`nextBtn ${methodType === 'Validator' ? 'active' : ''}`}
+            label={'Validator'}
+            onClick={() => handleMethodTypeChange('Validator')}
+          />
+        </div>
         <SelectSection
           className='small'
           defaultValue={defaultSection}
@@ -81,6 +107,7 @@ function InputExtrinsic({ className = '', setBtnDisable, defaultValue, filter, i
           onChange={isDisabled ? undefined : _onKeyChange}
           options={optionsMethod}
           value={value}
+          methodType={methodType}
           setBtnDisable={setBtnDisable}
         />
       </LinkedWrapper>

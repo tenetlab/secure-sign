@@ -204,6 +204,7 @@ function ExtrinsicDisplay({ defaultArgs, defaultValue, filter, isDisabled, isErr
               extrinsic={extrinsicUpper}
               icon='sign-in-alt'
               label={t('Submit Transaction')}
+              onSuccess={() => setVisible(true)}
             />
           </Button.Group>
         </div>
