@@ -60,9 +60,8 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
   return (
     <StyledDiv className={className}>
       {
-        api.runtimeChain.toString() == 'commune' || api.runtimeChain.toString() == 'Bittensor' ?
+        api.runtimeChain.toString() === 'commune' || api.runtimeChain.toString() === 'Bittensor' ?
           <>
-            <h1>Fill in the fields below</h1>
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
