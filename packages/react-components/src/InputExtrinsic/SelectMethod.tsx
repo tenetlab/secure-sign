@@ -30,7 +30,7 @@ interface MethodDetails {
   subnetEmissionModule?: string[];
 }
 
-function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
+function SelectMethod({ api, onChange, options, methodType, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
 
@@ -48,7 +48,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
       },
       Subnet: {
         subtensorModule: ['registerNetwork', 'dissolveNetwork', 'scheduleDissolveNetwork', 'setSubnetIdentity'],
-        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo']
+        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo', 'sudoSetMaxRegistrationsPerBlock', 'sudoSetTargetRegistrationsPerInterval']
       }
     },
     commune: {
@@ -65,7 +65,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
     }
   };
 
-  const runtime = api.runtimeChain.toString(); 
+  const runtime = api.runtimeChain.toString();
 
   options = options.filter(option =>
     Object.values(methodMappings[runtime as keyof typeof methodMappings]?.[methodType] || {}).flat().includes(option.value)
@@ -98,7 +98,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
           }
         }
       }
-  
+
       return api.tx[value.section][method];
     },
     [api, value]
@@ -168,6 +168,8 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
               {item?.value === 'sudoSetKappa' && 'Sets the kappa for a subnet.'}
               {item?.value === 'sudoSetTempo' && 'Sets the tempo for a subnet.'}
               {item?.value === 'sudoSetAdjustmentAlpha' && 'Sets the adjustment alpha for a subnet.'}
+              {item?.value === 'sudoSetMaxRegistrationsPerBlock' && 'Sets the maximum number of registrations allowed per block for a subnet.'}
+              {item?.value === 'sudoSetTargetRegistrationsPerInterval' && 'Sets the target number of registrations per interval for a subnet.'}
               {item?.value === 'setWeightsEncrypted' && 'commit-reveal version of setWeights.'}
               {item?.value === 'updateSubnet' && 'Updates subnet metadata.'}
               {item?.value === 'addStakeMultiple' && 'batch-version for addStake.'}
@@ -176,7 +178,7 @@ function SelectMethod ({ api, onChange, options, methodType, setBtnDisable, valu
               {item?.value === 'removeStakeMultiple' && 'Batch version of remove-stake.'}
               {item?.value === 'transferMultiple' && 'Batch version of transfer.'}
               {item?.value === 'transferStake' && 'Moves stake from one module to another.'}
-              {item?.value === 'updateModule' && 'Updates module metadatas.'}
+              {item?.value === 'updateModule' && 'Updates module metadata.'}
             </div>
             <div
               style={{
