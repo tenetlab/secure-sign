@@ -217,11 +217,15 @@ const StyleDiv = styled.div`
   
   .nickname {
     width: 30%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .description {
     width: 70%;
     display: flex;
     align-items: center;
     justify-content: space-between; 
+    margin-left: 1rem;
   }
 `;
