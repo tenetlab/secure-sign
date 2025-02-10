@@ -36,7 +36,7 @@ function Apps({ className = '' }: Props): React.ReactElement<Props> {
         <GlobalStyle uiHighlight={uiHighlight} />
         <StyledDiv className={`${className} apps--Wrapper ${themeClassName}`}>
           <Menu />
-          <div style={{ display: 'flex', flex: 1 }}>
+          <div style={{ display: "flex", flex: 1  }}>
             <Sidebar />
             <AccountSidebar>
               <MultisigAccountSidebar>
@@ -60,9 +60,11 @@ const StyledDiv = styled.div`
   background: var(--bg-page);
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
+  height: 100vh;
   flex-direction: column;
   min-height: 100vh;
-
+  overflow: hidden;
   ${[
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
     10, 11, 12, 13, 14, 15, 16, 17, 18, 19,

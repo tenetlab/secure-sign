@@ -100,11 +100,10 @@ function Content({ className }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
-  flex-grow: 1;
-  overflow: hidden auto;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  flex: 0 0 calc(100% - 350px);
+  padding: 0.5rem 1rem 0 0.5rem;
   position: relative;
-  
+  overflow-y: auto;
   margin: 0;
   border-radius: 1rem;
   .connecting {
@@ -115,6 +114,10 @@ const StyledDiv = styled.div`
     margin-right: auto;
     margin-left: auto;
     width: 100%;
+    overflow: hidden;
+  }
+  & main {
+  height: 81vh
   }
 `;
 

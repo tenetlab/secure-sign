@@ -29,6 +29,7 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
 }
 
 const StyledDiv = styled.div`
+  height: 85px;
   width: 100%;
   z-index: 220;
   position: relative;
