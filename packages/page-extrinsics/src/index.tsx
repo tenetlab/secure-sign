@@ -7,10 +7,8 @@ import type { DecodedExtrinsic } from './types.js';
 import React, { useState } from 'react';
 import { Route, Routes } from 'react-router';
 
-
 import Decoder from './Decoder.js';
 import Submission from './Submission.js';
-
 
 function ExtrinsicsApp ({ basePath }: Props): React.ReactElement<Props> {
   const [decoded, setDecoded] = useState<DecodedExtrinsic | null>(null);

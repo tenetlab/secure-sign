@@ -7,11 +7,11 @@ import type { DecodedExtrinsic } from './types.js';
 
 import React, { useCallback, useState } from 'react';
 
+import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 import { Extrinsic } from '@polkadot/react-params';
 
 import { useTranslation } from './translate.js';
-import { styled } from '@polkadot/react-components';
 
 interface Props {
   className?: string;
@@ -23,7 +23,7 @@ interface DefaultExtrinsic {
   defaultFn: SubmittableExtrinsicFunction<'promise'>;
 }
 
-function extractDefaults(value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
+function extractDefaults (value: DecodedExtrinsic | null, defaultFn: SubmittableExtrinsicFunction<'promise'>): DefaultExtrinsic {
   if (!value) {
     return { defaultFn };
   }
@@ -37,7 +37,7 @@ function extractDefaults(value: DecodedExtrinsic | null, defaultFn: SubmittableE
   };
 }
 
-function Selection({ className, defaultValue }: Props): React.ReactElement<Props> {
+function Selection ({ className, defaultValue }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { apiDefaultTxSudo } = useApi();
   const { api } = useApi();
@@ -60,23 +60,33 @@ function Selection({ className, defaultValue }: Props): React.ReactElement<Props
   return (
     <StyledDiv className={className}>
       {
-        api.runtimeChain.toString() === 'commune' || api.runtimeChain.toString() === 'Bittensor' ?
-          <>
+        api.runtimeChain.toString() === 'commune' || api.runtimeChain.toString() === 'Bittensor'
+          ? <>
             <Extrinsic
               defaultArgs={defaultArgs}
               defaultValue={defaultFn}
+              error={error}
+              extrinsicUpper={extrinsicUpper}
               label={t('Extrinsic')}
               onChange={_onExtrinsicChange}
               onError={_onExtrinsicError}
-              extrinsicUpper={extrinsicUpper}
-              error={error}
             />
-          </> :
-          <div className='empty-account'>
+          </>
+          : <div className='empty-account'>
             <div className='detail'>
-              <svg width="25" height="25" viewBox="0 0 25 25">
-                <path fill="var(--color-icon)" d="M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z" />
-                <path fill="var(--bg-page)" d="M11.5 8h2v7h-2zM11.5 16h2v2h-2z" />
+              <svg
+                height='25'
+                viewBox='0 0 25 25'
+                width='25'
+              >
+                <path
+                  d='M12.5 2c0.5 0 1 0.15 1.4 0.4l7.6 4.4c0.9 0.5 1.4 1.4 1.4 2.4v6.4c0 1-0.5 1.9-1.4 2.4l-7.6 4.4c-0.4 0.25-0.9 0.4-1.4 0.4s-1-0.15-1.4-0.4l-7.6-4.4c-0.9-0.5-1.4-1.4-1.4-2.4v-6.4c0-1 0.5-1.9 1.4-2.4l7.6-4.4c0.4-0.25 0.9-0.4 1.4-0.4z'
+                  fill='var(--color-icon)'
+                />
+                <path
+                  d='M11.5 8h2v7h-2zM11.5 16h2v2h-2z'
+                  fill='var(--bg-page)'
+                />
               </svg>
               <p>Extrinsics does not support this network.</p>
             </div>
@@ -202,4 +212,4 @@ const StyledDiv = styled.div`
       margin-left: 2rem;
     }
   }
-`
+`;
