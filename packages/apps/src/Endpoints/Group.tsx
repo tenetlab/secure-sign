@@ -23,7 +23,7 @@ interface Props {
   value: Group;
 }
 
-function GroupDisplay ({ affinities, apiUrl, children, className = '', index, isSelected, setApiUrl, setGroup, settings, hasUrlChanged, value: { header, isSpaced, networks } }: Props): React.ReactElement<Props> {
+function GroupDisplay ({ affinities, apiUrl, children, className = '', hasUrlChanged, index, isSelected, setApiUrl, setGroup, settings, value: { header, isSpaced, networks } }: Props): React.ReactElement<Props> {
   const _setGroup = useCallback(
     () => setGroup(isSelected ? -1 : index),
     [index, isSelected, setGroup]
@@ -42,20 +42,20 @@ function GroupDisplay ({ affinities, apiUrl, children, className = '', index, is
       >
         {header}
       </div>
-          <div className='groupNetworks'>
-            {filtered.map((network, index): React.ReactNode => (
-              <Network
-                affinity={affinities[network.name]}
-                apiUrl={apiUrl}
-                key={index}
-                setApiUrl={setApiUrl}
-                value={network}
-                settings={settings}
-                hasUrlChanged={hasUrlChanged}
-              />
-            ))}
-          </div>
-          {children}
+      <div className='groupNetworks'>
+        {filtered.map((network, index): React.ReactNode => (
+          <Network
+            affinity={affinities[network.name]}
+            apiUrl={apiUrl}
+            hasUrlChanged={hasUrlChanged}
+            key={index}
+            setApiUrl={setApiUrl}
+            settings={settings}
+            value={network}
+          />
+        ))}
+      </div>
+      {children}
     </StyledDiv>
   );
 }
