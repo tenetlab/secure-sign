@@ -51,7 +51,7 @@ function Decoder ({ className, defaultValue, setLast }: Props): React.ReactEleme
   const { t } = useTranslation();
   const { api } = useApi();
   const [{ decoded, extrinsicCall, extrinsicError, extrinsicFn, extrinsicKey, extrinsicPayload, isCall }, setExtrinsicInfo] = useState<ExtrinsicInfo>(DEFAULT_INFO);
-  
+
   const _setExtrinsicHex = useCallback(
     (hex: string): void => {
       try {

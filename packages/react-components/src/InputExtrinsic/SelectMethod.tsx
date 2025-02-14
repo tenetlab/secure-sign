@@ -30,7 +30,7 @@ interface MethodDetails {
   subnetEmissionModule?: string[];
 }
 
-function SelectMethod({ api, onChange, options, methodType, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
+function SelectMethod ({ api, methodType, onChange, options, setBtnDisable, value }: Props): React.ReactElement<Props> | null {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(() => {
     const saved = localStorage.getItem('selectedMethodIndex');
 
@@ -39,40 +39,41 @@ function SelectMethod({ api, onChange, options, methodType, setBtnDisable, value
 
   const methodMappings: Record<string, Record<string, MethodDetails>> = {
     Bittensor: {
+      Subnet: {
+        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo', 'sudoSetMaxRegistrationsPerBlock', 'sudoSetTargetRegistrationsPerInterval'],
+        subtensorModule: ['registerNetwork', 'dissolveNetwork', 'scheduleDissolveNetwork', 'setSubnetIdentity']
+      },
       User: {
         balances: ['transferAll', 'transferAllowDeath', 'transferKeepAlive'],
-        subtensorModule: ['addStake', 'removeStake', 'setIdentity', 'swapColdkey', 'scheduleSwapColdkey', 'swapHotkey']
+        subtensorModule: ['addStake', 'removeStake', 'swapStake', 'transferStake', 'unstakeAll', 'unstakeAllAlpha', 'setIdentity', 'swapColdkey', 'scheduleSwapColdkey', 'swapHotkey']
       },
       Validator: {
-        subtensorModule: ['rootRegister', 'setWeights', 'setRootWeights', 'setChildren', 'setChildkeyTake']
-      },
-      Subnet: {
-        subtensorModule: ['registerNetwork', 'dissolveNetwork', 'scheduleDissolveNetwork', 'setSubnetIdentity'],
-        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo', 'sudoSetMaxRegistrationsPerBlock', 'sudoSetTargetRegistrationsPerInterval']
+        subtensorModule: ['rootRegister', 'setWeights', 'setChildren', 'setChildkeyTake']
       }
     },
     commune: {
+      Subnet: {
+        subspaceModule: ['registerSubnet', 'updateSubnet']
+      },
       User: {
         balances: ['transferAll', 'transferAllowDeath', 'transferKeepAlive'],
         subspaceModule: ['transferMultiple', 'addStake', 'addStakeMultiple', 'removeStake', 'removeStakeMultiple', 'transferStake', 'register', 'deregister', 'updateModule']
       },
       Validator: {
         subnetEmissionModule: ['setWeights', 'setWeightsEncrypted']
-      },
-      Subnet: {
-        subspaceModule: ['registerSubnet', 'updateSubnet']
       }
     }
   };
 
   const runtime = api.runtimeChain.toString();
 
-  options = options.filter(option =>
-    Object.values(methodMappings[runtime as keyof typeof methodMappings]?.[methodType] || {}).flat().includes(option.value)
+  options = options.filter((option) =>
+    Object.values(methodMappings[runtime]?.[methodType] || {}).flat().includes(option.value)
   );
 
   useEffect(() => {
     const numberOfExtrinsic = Object.values(methodMappings[runtime]?.[methodType] || {}).flat().length;
+
     if (options.length === numberOfExtrinsic && options.length > (selectedIndex ?? -1) && selectedIndex !== null && setBtnDisable) {
       setBtnDisable(false);
       onSelect(options[selectedIndex].value);
@@ -145,7 +146,6 @@ function SelectMethod({ api, onChange, options, methodType, setBtnDisable, value
               {item?.value === 'addStake' && 'Adds stake to a specified hotkey.'}
               {item?.value === 'registerNetwork' && 'Registers a new subnetwork.'}
               {item?.value === 'registerSubnet' && 'Registers a new subnetwork.'}
-              {item?.value === 'removeStake' && 'Removes stake from the staking account (hotkey).'}
               {item?.value === 'transferKeepAlive' && 'Transfers free balance to another account while ensuring the existence of the account after the transfer.'}
               {item?.value === 'transferAllowDeath' && 'Transfers free balance to another account while it can be reaped.'}
               {item?.value === 'setRootWeights' && 'Assigns weights to active subnets using their \'netuid\'.'}
@@ -171,22 +171,26 @@ function SelectMethod({ api, onChange, options, methodType, setBtnDisable, value
               {item?.value === 'sudoSetMaxRegistrationsPerBlock' && 'Sets the maximum number of registrations allowed per block for a subnet.'}
               {item?.value === 'sudoSetTargetRegistrationsPerInterval' && 'Sets the target number of registrations per interval for a subnet.'}
               {item?.value === 'setWeightsEncrypted' && 'commit-reveal version of setWeights.'}
+              {item?.value === 'swapStake' && 'Swaps stake from one subnet to another.'}
+              {item?.value === 'unstakeAllAlpha' && 'Unstakes all stake from a specified hotkey.'}
+              {item?.value === 'unstakeAll' && 'Unstakes all stake from a specified hotkey.'}
               {item?.value === 'updateSubnet' && 'Updates subnet metadata.'}
               {item?.value === 'addStakeMultiple' && 'batch-version for addStake.'}
               {item?.value === 'deregister' && 'Deregisters a module.'}
               {item?.value === 'register' && 'Registers a module.'}
+              {item?.value === 'removeStake' && 'Removes stake from the staking account.'}
               {item?.value === 'removeStakeMultiple' && 'Batch version of remove-stake.'}
               {item?.value === 'transferMultiple' && 'Batch version of transfer.'}
-              {item?.value === 'transferStake' && 'Moves stake from one module to another.'}
+              {item?.value === 'transferStake' && 'Moves stake from one coldkey/module to another.'}
               {item?.value === 'updateModule' && 'Updates module metadata.'}
             </div>
             <div
               style={{
-                minWidth: '16px',
-                height: '16px',
-                borderRadius: '50%',
+                backgroundColor: selectedIndex === index ? '#2563eb' : '#ffffff',
                 border: '2px solid #2563eb',
-                backgroundColor: selectedIndex === index ? '#2563eb' : '#ffffff'
+                borderRadius: '50%',
+                height: '16px',
+                minWidth: '16px'
               }}
             />
           </div>
