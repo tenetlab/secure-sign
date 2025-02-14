@@ -30,7 +30,7 @@ const NOT_FOUND: Route = {
   text: 'Unknown'
 };
 
-function Content({ className }: Props): React.ReactElement<Props> {
+function Content ({ className }: Props): React.ReactElement<Props> {
   const location = useLocation();
   const { t } = useTranslation();
   const { api, isApiConnected, isApiReady, isDevelopment } = useApi();

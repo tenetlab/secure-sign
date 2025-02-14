@@ -8,18 +8,18 @@ import React, { useMemo } from 'react';
 import { AccountSidebar, MultisigAccountSidebar, styled } from '@polkadot/react-components';
 import GlobalStyle from '@polkadot/react-components/styles';
 import { useApi, useTheme } from '@polkadot/react-hooks';
+import { PolkadotProvider } from '@polkadot/react-hooks/ctx/StakedAmount/polkadot';
 import Signer from '@polkadot/react-signer';
 
 import Content from './Content/index.js';
-import Menu from './Menu/index.js';
-import WarmUp from './WarmUp.js';
-import Sidebar from './Sidebar/index.js';
 import Footer from './Footer/index.js';
+import Menu from './Menu/index.js';
+import Sidebar from './Sidebar/index.js';
+import WarmUp from './WarmUp.js';
 
-import { PolkadotProvider } from '@polkadot/react-hooks/ctx/StakedAmount/polkadot';
 export const PORTAL_ID = 'portals';
 
-function Apps({ className = '' }: Props): React.ReactElement<Props> {
+function Apps ({ className = '' }: Props): React.ReactElement<Props> {
   const { themeClassName } = useTheme();
   const { apiEndpoint, isDevelopment } = useApi();
 
