@@ -1,7 +1,7 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { ChainImg, Icon, styled } from '@polkadot/react-components';
 import { useIpfs, useToggle } from '@polkadot/react-hooks';
@@ -17,9 +17,29 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   const { ipnsChain } = useIpfs();
   const [isEndpointsVisible, toggleEndpoints] = useToggle();
   const canToggle = !ipnsChain;
+  const divRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (event: MouseEvent) => {
+      if (divRef.current && !divRef.current.contains(event.target as Node)) {
+        toggleEndpoints();
+      }
+    };
+
+    if (isEndpointsVisible) {
+      document.addEventListener('click', handleClick);
+    } else {
+      document.removeEventListener('click', handleClick);
+    }
+
+    // Cleanup function to remove the event listener
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+  }, [isEndpointsVisible, toggleEndpoints]);
 
   return (
-    <StyledDiv className={`${className}`}>
+    <StyledDiv ref={divRef} className={`${className}`}>
       <div
         className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} `}
         onClick={toggleEndpoints}
