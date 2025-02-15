@@ -20,21 +20,32 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Close Network selection layer on click outside.
     const handleClick = (event: MouseEvent) => {
       if (divRef.current && !divRef.current.contains(event.target as Node)) {
         toggleEndpoints();
       }
     };
 
+    // Close Network selection layer on ESC key.
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        toggleEndpoints();
+      }
+    };
+
     if (isEndpointsVisible) {
       document.addEventListener('click', handleClick);
+      document.addEventListener('keydown', handleKeyDown);
     } else {
       document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleKeyDown);
     }
 
-    // Cleanup function to remove the event listener
+    // Cleanup function to remove the event listeners.
     return () => {
       document.removeEventListener('click', handleClick);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [isEndpointsVisible, toggleEndpoints]);
 
