@@ -39,7 +39,10 @@ function ChainInfo ({ className }: Props): React.ReactElement<Props> {
   }, [isEndpointsVisible, toggleEndpoints]);
 
   return (
-    <StyledDiv ref={divRef} className={`${className}`}>
+    <StyledDiv
+      className={`${className}`}
+      ref={divRef}
+    >
       <div
         className={`apps--SideBar-logo-inner${canToggle ? ' isClickable' : ''} `}
         onClick={toggleEndpoints}
