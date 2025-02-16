@@ -248,14 +248,14 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
         <GroupDisplay
           affinities={affinities}
           apiUrl={apiUrl}
+          hasUrlChanged={hasUrlChanged}
           index={index}
           isSelected={groupIndex === index}
           key={index}
           setApiUrl={_setApiUrl}
           setGroup={_changeGroup}
-          value={group}
           settings={settings}
-          hasUrlChanged={hasUrlChanged}
+          value={group}
         >
           {group.isDevelopment && (
             <div className='endpointCustomWrapper'>

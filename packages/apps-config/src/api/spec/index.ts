@@ -125,6 +125,7 @@ import substrateContractsNode from './substrateContractsNode.js';
 import swapdex from './swapdex.js';
 import t0rn from './t0rn.js';
 import ternoa from './ternoa.js';
+import torus from './torus.js';
 import trustbase from './trustbase.js';
 import turing from './turing.js';
 import uart from './uart.js';
@@ -299,6 +300,7 @@ const spec: Record<string, OverrideBundleDefinition> = {
   ternoa,
   'testnet-interlay': interbtc,
   'testnet-kintsugi': interbtc,
+  torus,
   trustbase,
   turing,
   uart,
