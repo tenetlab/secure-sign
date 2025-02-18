@@ -1,8 +1,8 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-
 import React from 'react';
+
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 
@@ -10,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-function Footer({ className = '' }: Props): React.ReactElement<Props> {
+function Footer ({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
 
   const currentYear = new Date().getFullYear();
@@ -21,7 +21,11 @@ function Footer({ className = '' }: Props): React.ReactElement<Props> {
         <div className='footer-item'>
           <span className='content-center'>@2023-{currentYear}. All rights reserved</span>
           <span className='content-center'>SecureSign by Tenet Crypto Lab</span>
-          <img src='/logo-footer.webp' width={150} alt='footer' />
+          <img
+            alt='footer'
+            src='/logo-footer.webp'
+            width={150}
+          />
         </div>
       </div>
     </StyledDiv>

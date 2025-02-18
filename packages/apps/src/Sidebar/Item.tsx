@@ -115,7 +115,7 @@ const StyledLi = styled.li`
   .sidebarItem {
     font-size: var(--font-size-h1);
   }
-  
+
   a:hover {
     background-color: var(--item-active) !important;
     color: var(--color-text-hover) !important;

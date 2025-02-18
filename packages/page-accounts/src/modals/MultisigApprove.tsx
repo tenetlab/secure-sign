@@ -170,7 +170,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
       size='large'
     >
       <Modal.Content>
-        <Modal.Columns 
+        <Modal.Columns
           // hint={t('The call hash from the list of available and unapproved calls.')}
         >
           <Dropdown
@@ -184,7 +184,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
         </Modal.Columns>
         {multisig && (
           <>
-            <Modal.Columns 
+            <Modal.Columns
               // hint={t('The creator for this multisig call')}
             >
               <InputAddress
@@ -193,7 +193,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
                 label={t('Creator')}
               />
             </Modal.Columns>
-            <Modal.Columns 
+            <Modal.Columns
             // hint={t('The current approvals applied to this multisig')}
             >
               <Expander
@@ -216,7 +216,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
             </Modal.Columns>
           </>
         )}
-        <Modal.Columns 
+        <Modal.Columns
         // hint={t('The operation type to apply. For approvals both non-final and final approvals are supported.')}
         >
           <Dropdown
@@ -228,7 +228,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
         </Modal.Columns>
         {whoFilter.length !== 0 && (
           <>
-            <Modal.Columns 
+            <Modal.Columns
             // hint={t('For approvals outstanding approvers will be shown, for hashes that should be cancelled the first approver is required.')}
             >
               <InputAddress
@@ -240,7 +240,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
             {type === 'aye' && isMultiCall && (
               <>
                 {isCallOverride && (
-                  <Modal.Columns 
+                  <Modal.Columns
                   // hint={t('The call data for this transaction matching the hash. Once sent, the multisig will be executed against this.')}
                   >
                     {callData && callInfo
@@ -269,7 +269,7 @@ function MultisigApprove ({ className = '', onClose, ongoing, threshold = 0, who
                     )}
                   </Modal.Columns>
                 )}
-                <Modal.Columns 
+                <Modal.Columns
                 // hint={t('Swap to a non-executing approval type, with subsequent calls providing the actual call data.')}
                 >
                   <Toggle

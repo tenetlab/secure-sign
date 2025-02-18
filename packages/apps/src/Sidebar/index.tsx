@@ -21,7 +21,7 @@ interface Props {
   className?: string;
 }
 
-function checkVisible({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
+function checkVisible ({ api, isApiConnected, isApiReady, isDevelopment: isApiDevelopment }: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean, { isDevelopment, isHidden, needsAccounts, needsApi, needsApiCheck, needsApiInstances, needsSudo, needsTeleport }: Route['display']): boolean {
   if (isHidden) {
     return false;
   } else if (needsAccounts && !hasAccounts) {
@@ -41,7 +41,7 @@ function checkVisible({ api, isApiConnected, isApiReady, isDevelopment: isApiDev
   return findMissingApis(api, needsApi, needsApiInstances, needsApiCheck).length === 0;
 }
 
-function extractGroups(routing: Routes, groupNames: Record<string, string>, apiProps: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean): Group[] {
+function extractGroups (routing: Routes, groupNames: Record<string, string>, apiProps: ApiProps, allowTeleport: boolean, hasAccounts: boolean, hasSudo: boolean): Group[] {
   return Object
     .values(
       routing.reduce((all: Groups, route): Groups => {
@@ -66,7 +66,7 @@ function extractGroups(routing: Routes, groupNames: Record<string, string>, apiP
     .filter(({ routes }) => routes.length);
 }
 
-function Sidebar({ className = '' }: Props): React.ReactElement<Props> {
+function Sidebar ({ className = '' }: Props): React.ReactElement<Props> {
   const { t } = useTranslation();
   const { allAccounts, hasAccounts } = useAccounts();
   const apiProps = useApi();
@@ -135,7 +135,7 @@ const StyledDiv = styled.div`
   height: 100%;
   padding: 0.5rem 0.5rem 0.5rem 1rem;
   z-index: 220;
-  
+
   .smallShow {
     display: none;
   }
@@ -227,7 +227,6 @@ const StyledDiv = styled.div`
       padding: 1.5rem;
       align-items: center;
       text-align: center;
-      
     }
     .isActive {
       border-top-left-radius: unset;
