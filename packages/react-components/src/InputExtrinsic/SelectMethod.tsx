@@ -40,7 +40,7 @@ function SelectMethod ({ api, methodType, onChange, options, setBtnDisable, valu
   const methodMappings: Record<string, Record<string, MethodDetails>> = {
     Bittensor: {
       Subnet: {
-        adminUtils: ['sudoSetMinBurn', 'sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa', 'sudoSetTempo', 'sudoSetMaxRegistrationsPerBlock', 'sudoSetTargetRegistrationsPerInterval'],
+        adminUtils: ['sudoSetMaxBurn', 'sudoSetNetworkRegistrationAllowed', 'sudoSetAdjustmentAlpha', 'sudoSetImmunityPeriod', 'sudoSetKappa'],
         subtensorModule: ['registerNetwork', 'dissolveNetwork', 'scheduleDissolveNetwork', 'setSubnetIdentity']
       },
       User: {
