@@ -3,7 +3,7 @@
 
 import type { SettingsStruct } from '@polkadot/ui-settings/types';
 
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { save } from '@polkadot/app-settings/util';
 import { settings } from '@polkadot/ui-settings';
@@ -32,12 +32,17 @@ function ThemeToggle ({ className = '', setLogo }: Props): React.ReactElement<Pr
     save(state);
   }, [state]);
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-    setSettings((state) => ({ ...state, uiTheme: isDark ? 'light' : 'dark' }));
-    save(state);
-    setLogo(!isDark);
-  };
+  const toggleTheme = useCallback(() => {
+    setIsDark((prevIsDark) => {
+      const newIsDark = !prevIsDark;
+
+      setSettings((state) => ({ ...state, uiTheme: newIsDark ? 'dark' : 'light' }));
+      save({ ...state, uiTheme: newIsDark ? 'dark' : 'light' });
+      setLogo(newIsDark);
+
+      return newIsDark;
+    });
+  }, [setLogo, state]);
 
   const styles = {
     icon: {

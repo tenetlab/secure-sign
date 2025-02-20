@@ -1,7 +1,7 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { Group } from './types.js';
+import type { Group, NetworkSettings } from './types.js';
 
 import React, { useCallback, useMemo } from 'react';
 
@@ -18,7 +18,7 @@ interface Props {
   isSelected: boolean;
   setApiUrl: (network: string, apiUrl: string) => void;
   setGroup: (groupIndex: number) => void;
-  settings: any;
+  settings: NetworkSettings;
   hasUrlChanged: boolean;
   value: Group;
 }
@@ -50,8 +50,8 @@ function GroupDisplay ({ affinities, apiUrl, children, className = '', hasUrlCha
             hasUrlChanged={hasUrlChanged}
             key={index}
             setApiUrl={setApiUrl}
-            value={network}
             settings={settings}
+            value={network}
           />
         ))}
       </div>

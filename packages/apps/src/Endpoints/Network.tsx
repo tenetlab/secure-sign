@@ -1,7 +1,7 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import type { Network } from './types.js';
+import type { Network, NetworkSettings } from './types.js';
 
 import React, { useCallback } from 'react';
 import store from 'store';
@@ -13,7 +13,7 @@ interface Props {
   apiUrl: string;
   className?: string;
   setApiUrl: (network: string, apiUrl: string) => void;
-  settings: any;
+  settings: NetworkSettings;
   hasUrlChanged: boolean;
   value: Network;
 }
