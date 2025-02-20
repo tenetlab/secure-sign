@@ -39,5 +39,5 @@ export const testChains: Omit<EndpointOption, 'teleport'>[] = [
       color: '#00CCAB',
       logo: chainsBittensorPNG
     }
-  },
+  }
 ];

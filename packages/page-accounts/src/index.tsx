@@ -7,15 +7,14 @@ import React from 'react';
 import { Route, Routes } from 'react-router';
 
 import { styled } from '@polkadot/react-components';
+
 import Accounts from './Accounts/index.js';
 import Vanity from './Vanity/index.js';
 import useCounter from './useCounter.js';
 
 export { useCounter };
 
-
 function AccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<Props> {
-
   return (
     <StyledMain className='accounts--App'>
       <Routes>
@@ -40,6 +39,6 @@ function AccountsApp ({ basePath, onStatusChange }: Props): React.ReactElement<P
 
 const StyledMain = styled.main`
   height: 100%;
-`
+`;
 
 export default React.memo(AccountsApp);

@@ -3,6 +3,11 @@
 
 import type React from 'react';
 
+export interface NetworkSettings {
+  get: () => any;
+  set: (settings: any) => void;
+}
+
 export interface Network {
   isChild?: boolean;
   isLightClient?: boolean;
