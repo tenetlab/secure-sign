@@ -1,10 +1,13 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
+import { web3Enable } from '@polkadot/extension-dapp';
+import { keyring } from '@polkadot/ui-keyring';
+import { Button } from '@polkadot/react-components';
 
 import ChainInfo from './ChainInfo.js';
 import LogoInfo from './LogoInfo.js';
@@ -14,9 +17,45 @@ interface Props {
   className?: string;
 }
 
-function Menu ({ className = '' }: Props): React.ReactElement<Props> {
+const DISCONNECT_KEY = 'walletDisconnected';
+
+function Menu({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
   const [logo, setLogo] = useState<boolean>(false);
+  const [isConnected, setIsConnected] = useState(() => 
+    localStorage.getItem(DISCONNECT_KEY) !== 'true'
+  );
+
+  const handleConnect = useCallback(() => {
+    web3Enable('polkadot-js/apps')
+      .then((injected) => {
+        if (injected.length > 0) {
+          setIsConnected(true);
+          localStorage.removeItem(DISCONNECT_KEY);
+          // Reload page to reinitialize with wallet
+          window.location.reload();
+        }
+      })
+      .catch(console.error);
+  }, []);
+
+  const handleDisconnect = useCallback(() => {
+    // Clear all accounts from keyring
+    keyring.getAccounts().forEach((account) => {
+      try {
+        keyring.forgetAccount(account.address);
+      } catch (e) {
+        console.error('Error removing account:', e);
+      }
+    });
+
+    // Update connection state
+    setIsConnected(false);
+    localStorage.setItem(DISCONNECT_KEY, 'true');
+
+    // Force a page reload to clear any cached account data
+    window.location.reload();
+  }, []);
 
   return (
     <StyledDiv className={`${className}${(!apiProps.isApiReady || !apiProps.isApiConnected) ? ' isLoading' : ''}`}>
@@ -26,6 +65,11 @@ function Menu ({ className = '' }: Props): React.ReactElement<Props> {
           <h1 className='menuItems'>SecureSign</h1>
         </div>
         <div style={{ alignItems: 'center', display: 'flex', textAlign: 'left' }}>
+          <Button
+            onClick={isConnected ? handleDisconnect : handleConnect}
+          >
+            {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
+          </Button>
           <ThemeToggle
             logo={logo}
             setLogo={setLogo}

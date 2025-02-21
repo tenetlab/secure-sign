@@ -10,7 +10,7 @@ import type { ApiProps, ApiState, InjectedAccountExt } from './types.js';
 
 import { ChopsticksProvider, setStorage } from '@acala-network/chopsticks-core';
 import * as Sc from '@substrate/connect';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import store from 'store';
 
 import { ApiPromise, ScProvider, WsProvider } from '@polkadot/api';
@@ -58,7 +58,10 @@ export const DEFAULT_AUX = ['Aux1', 'Aux2', 'Aux3', 'Aux4', 'Aux5', 'Aux6', 'Aux
 const DISALLOW_EXTENSIONS: string[] = [];
 const EMPTY_STATE = { hasInjectedAccounts: false, isApiReady: false } as unknown as ApiState;
 
-function isKeyringLoaded () {
+const DAPP_NAME = 'polkadot-js/apps';
+const DISCONNECT_KEY = 'walletDisconnected';
+
+function isKeyringLoaded() {
   try {
     return !!keyring.keyring;
   } catch {
@@ -66,7 +69,7 @@ function isKeyringLoaded () {
   }
 }
 
-function getDevTypes (): Record<string, Record<string, string>> {
+function getDevTypes(): Record<string, Record<string, string>> {
   const types = decodeUrlTypes() || store.get('types', {}) as Record<string, Record<string, string>>;
   const names = Object.keys(types);
 
@@ -75,7 +78,7 @@ function getDevTypes (): Record<string, Record<string, string>> {
   return types;
 }
 
-async function getInjectedAccounts (injectedPromise: Promise<InjectedExtension[]>): Promise<InjectedAccountExt[]> {
+async function getInjectedAccounts(injectedPromise: Promise<InjectedExtension[]>): Promise<InjectedAccountExt[]> {
   try {
     await injectedPromise;
 
@@ -95,7 +98,7 @@ async function getInjectedAccounts (injectedPromise: Promise<InjectedExtension[]
   }
 }
 
-function makeCreateLink (baseApiUrl: string, isElectron: boolean): (path: string) => string {
+function makeCreateLink(baseApiUrl: string, isElectron: boolean): (path: string) => string {
   return (path: string, apiUrl?: string): string =>
     `${isElectron
       ? 'https://polkadot.js.org/apps/'
@@ -103,7 +106,7 @@ function makeCreateLink (baseApiUrl: string, isElectron: boolean): (path: string
     }?rpc=${encodeURIComponent(apiUrl || baseApiUrl)}#${path}`;
 }
 
-async function retrieve (api: ApiPromise, injectedPromise: Promise<InjectedExtension[]>): Promise<ChainData> {
+async function retrieve(api: ApiPromise, injectedPromise: Promise<InjectedExtension[]>): Promise<ChainData> {
   const [systemChain, systemChainType, systemName, systemVersion, injectedAccounts] = await Promise.all([
     api.rpc.system.chain(),
     api.rpc.system.chainType
@@ -131,7 +134,7 @@ async function retrieve (api: ApiPromise, injectedPromise: Promise<InjectedExten
   };
 }
 
-async function loadOnReady (api: ApiPromise, endpoint: LinkOption | null, fork: Blockchain | null, injectedPromise: Promise<InjectedExtension[]>, store: KeyringStore | undefined, types: Record<string, Record<string, string>>, urlIsEthereum = false): Promise<ApiState> {
+async function loadOnReady(api: ApiPromise, endpoint: LinkOption | null, fork: Blockchain | null, injectedPromise: Promise<InjectedExtension[]>, store: KeyringStore | undefined, types: Record<string, Record<string, string>>, urlIsEthereum = false): Promise<ApiState> {
   statics.registry.register(types);
 
   const { injectedAccounts, properties, systemChain, systemChainType, systemName, systemVersion } = await retrieve(api, injectedPromise);
@@ -203,7 +206,7 @@ async function loadOnReady (api: ApiPromise, endpoint: LinkOption | null, fork: 
  * @internal
  * Creates a ScProvider from a <relay>[/parachain] string
  */
-async function getLightProvider (chain: string): Promise<ScProvider> {
+async function getLightProvider(chain: string): Promise<ScProvider> {
   const [sc, relayName, paraName] = chain.split('/');
 
   if (sc !== 'substrate-connect') {
@@ -228,7 +231,7 @@ async function getLightProvider (chain: string): Promise<ScProvider> {
 /**
  * @internal
  */
-async function createApi (apiUrl: string, signer: ApiSigner, isLocalFork: boolean, onError: (error: unknown) => void): Promise<CreateApiReturn> {
+async function createApi(apiUrl: string, signer: ApiSigner, isLocalFork: boolean, onError: (error: unknown) => void): Promise<CreateApiReturn> {
   const types = getDevTypes();
   const isLight = apiUrl.startsWith('light://');
   let provider;
@@ -287,7 +290,7 @@ async function createApi (apiUrl: string, signer: ApiSigner, isLocalFork: boolea
   return { fork: chopsticksFork, types };
 }
 
-export function ApiCtxRoot ({ apiUrl, children, isElectron, store: keyringStore }: Props): React.ReactElement<Props> | null {
+export function ApiCtxRoot({ apiUrl, children, isElectron, store: keyringStore }: Props): React.ReactElement<Props> | null {
   const { queuePayload, queueSetTxStatus } = useQueue();
   const [state, setState] = useState<ApiState>(EMPTY_STATE);
   const [isApiConnected, setIsApiConnected] = useState(false);
@@ -325,7 +328,6 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store: keyringStore 
   useEffect((): void => {
     const onError = (error: unknown): void => {
       console.error(error);
-
       setApiError((error as Error).message);
     };
 
@@ -335,21 +337,31 @@ export function ApiCtxRoot ({ apiUrl, children, isElectron, store: keyringStore 
         statics.api.on('disconnected', () => setIsApiConnected(false));
         statics.api.on('error', onError);
         statics.api.on('ready', (): void => {
-          const injectedPromise = web3Enable('polkadot-js/apps');
+          // Check if wallet was explicitly disconnected
+          const wasDisconnected = localStorage.getItem(DISCONNECT_KEY) === 'true';
+          
+          // Only attempt to connect wallet if not explicitly disconnected
+          if (!wasDisconnected) {
+            const injectedPromise = web3Enable(DAPP_NAME);
+            injectedPromise
+              .then(setExtensions)
+              .catch(console.error);
 
-          injectedPromise
-            .then(setExtensions)
-            .catch(console.error);
+            const urlIsEthereum = !!location.href.includes('keyring-type=ethereum');
 
-          const urlIsEthereum = !!location.href.includes('keyring-type=ethereum');
-
-          loadOnReady(statics.api, apiEndpoint, fork, injectedPromise, keyringStore, types, urlIsEthereum)
-            .then(setState)
-            .catch(onError);
+            loadOnReady(statics.api, apiEndpoint, fork, injectedPromise, keyringStore, types, urlIsEthereum)
+              .then(setState)
+              .catch(onError);
+          } else {
+            // If disconnected, initialize without wallet
+            const injectedPromise = Promise.resolve([]);
+            loadOnReady(statics.api, apiEndpoint, fork, injectedPromise, keyringStore, types, false)
+              .then(setState)
+              .catch(onError);
+          }
         });
 
         if (isLocalFork) {
-          // clear localFork from local storage onMount after api setup
           store.set('localFork', '');
           statics.api.connect()
             .catch(onError);
