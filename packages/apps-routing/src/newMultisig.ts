@@ -5,7 +5,7 @@ import type { Route, TFunction } from './types.js';
 
 import Component, { useCounter } from '@polkadot/app-newmultisig';
 
-export default function create(t: TFunction): Route {
+export default function create (t: TFunction): Route {
   return {
     Component,
     display: {

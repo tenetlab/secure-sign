@@ -30,7 +30,7 @@ const NOT_FOUND: Route = {
   text: 'Unknown'
 };
 
-function Content({ className }: Props): React.ReactElement<Props> {
+function Content ({ className }: Props): React.ReactElement<Props> {
   const location = useLocation();
   const { t } = useTranslation();
   const { api, isApiConnected, isApiReady, isDevelopment } = useApi();
@@ -104,7 +104,7 @@ const StyledDiv = styled.div`
   overflow: hidden auto;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   position: relative;
-  
+
   margin: 0;
   border-radius: 1rem;
   .connecting {

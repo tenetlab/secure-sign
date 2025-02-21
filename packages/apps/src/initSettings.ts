@@ -45,10 +45,10 @@ function getApiUrl (): string {
   const fallbackUrl = endpoints.find(({ value }) => !!value);
 
   return [stored.apiUrl, process.env.WS_URL].includes(settings.apiUrl)
-    ? settings.apiUrl 
+    ? settings.apiUrl
     : fallbackUrl
-      ? fallbackUrl.value 
-      : 'ws://127.0.0.1:9944'; 
+      ? fallbackUrl.value
+      : 'ws://127.0.0.1:9944';
 }
 
 const apiUrl = getApiUrl();

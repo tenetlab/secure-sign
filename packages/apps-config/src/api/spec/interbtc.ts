@@ -22,6 +22,7 @@ function balanceOf (number: number | string): U128 {
 }
 
 function defaultAccountBalance (): DeriveBalancesAll {
+
   return {
     accountNonce: new BN(1),
     additional: [],

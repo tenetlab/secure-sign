@@ -1,8 +1,8 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-
 import React, { useState } from 'react';
+
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
 
@@ -14,7 +14,7 @@ interface Props {
   className?: string;
 }
 
-function Menu({ className = '' }: Props): React.ReactElement<Props> {
+function Menu ({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
   const [logo, setLogo] = useState<boolean>(false);
 
@@ -25,8 +25,11 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
           <LogoInfo logo={logo} />
           <h1 className='menuItems'>SecureSign</h1>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', textAlign: 'left' }}>
-          <ThemeToggle setLogo={setLogo} logo={logo} />
+        <div style={{ alignItems: 'center', display: 'flex', textAlign: 'left' }}>
+          <ThemeToggle
+            logo={logo}
+            setLogo={setLogo}
+          />
           <ChainInfo />
         </div>
       </div>
@@ -96,8 +99,6 @@ const StyledDiv = styled.div`
       margin-right: 0.5rem;
     }
   }
-
-  
 
   .ui--NodeInfo {
     align-self: center;

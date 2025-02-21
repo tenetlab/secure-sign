@@ -14,7 +14,7 @@ function WarmUp (): React.ReactElement {
 
   useEffect((): void => {
     setHasValues(!!indexes || !!issuance || !!registrars);
-  }, []);
+  }, [indexes, issuance, registrars]);
 
   return (
     <div className={`apps--api-warm ${hasValues.toString()}`} />

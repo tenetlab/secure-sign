@@ -18,20 +18,19 @@ const SHA_COL = 'rgba(34, 36, 38, 0.12)';
 const SHA_OFF = '5px';
 
 function Grouping ({ isActive, routes }: Props): React.ReactElement<Props> {
-  
   return (
     <StyledLi className={`${isActive ? 'isActive' : ''}`}>
-        {routes.map((route): React.ReactNode => (
-          <Item
-            className={isActive ? 'isActive' : ''}
-            key={route.name}
-            route={route}
-            isActive={isActive}
-            classNameText='smallHide'
-            isToplevel
-          />
-        ))}
-      </StyledLi>
+      {routes.map((route): React.ReactNode => (
+        <Item
+          className={isActive ? 'isActive' : ''}
+          classNameText='smallHide'
+          isActive={isActive}
+          isToplevel
+          key={route.name}
+          route={route}
+        />
+      ))}
+    </StyledLi>
   );
 }
 
@@ -42,7 +41,7 @@ const StyledLi = styled.li`
     border-radius: 0.25rem;
     padding: 0.857rem 1.375rem;
     font-weight: var(--font-weight-normal);
-    
+
 
     > .ui--Icon {
       margin-left: 0.75rem;
