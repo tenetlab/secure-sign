@@ -158,7 +158,7 @@ function Create ({ onClose, onStatusChange }: Props): React.ReactElement<Props> 
 
 const StyledModal = styled(Modal)`
   .ui--Modal-content-body {
-    width: 100% !important;
+    width: 100%;
 
   }
   .full  {
@@ -184,4 +184,5 @@ const StyledModal = styled(Modal)`
     margin: 3rem 0 0 0!important
   }
 `;
+
 export default React.memo(Create);

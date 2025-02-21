@@ -53,10 +53,7 @@ function ModalBase ({ children, className = '', header, onClose, size = 'medium'
         onClick={onClose}
       />
       <div className='ui--Modal__body'>
-        <Header
-          // header={header}
-          onClose={onClose}
-        />
+        <Header onClose={onClose} />
         <div className='ui--Modal_sub_body'>
           <div className='ui--Header-Flex'>
             {header && (
@@ -80,52 +77,57 @@ const DisableGlobalScroll = createGlobalStyle`
 `;
 
 const StyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  min-height: 100vh;
   z-index: 1000;
-  overflow-y: auto;
+  padding: var(--size-layout-gutter);
 
   .ui--Modal__overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(96, 96, 96, 0.5);
+    background: var(--modal-backdrop-bkg);
   }
 
   .ui--Modal__body {
     background: var(--bg-modal);
     border-radius: 1rem;
     box-shadow: none;
-    padding: 2rem;
+    padding: var(--size-content-gutter);
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: 15%;
-    left: 50%;
-    transform: translate(-50%, 0);
+    position: relative;
 
-    width: calc(100% - 16px);
+    width: 100%;
     max-width: 80rem;
+    max-height: 100%;
 
     color: var(--color-text);
-    // font: var(--font-sans);
 
     h1 {
       border-bottom: 3px solid var(--border-input-hover);
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
+      margin-bottom: var(--size-content-gutter);
+      padding-bottom: var(--size-layout-gutter);
     }
+
     .ui--Modal_sub_body {
+      margin-top: var(--size-layout-gutter);
+      padding: 0 var(--size-content-gutter);
+      overflow-y: auto;
+      overflow-x: hidden;
+
       .ui--Header-Flex {
         display: flex;
       }
-      padding: 1rem 2rem 0 2rem;
     }
   }
 
@@ -134,7 +136,7 @@ const StyledDiv = styled.div`
   }
 
   &.largeSize .ui--Modal__body {
-    max-width: 80rem;
+    max-width: 80rem; // Fixme: This is the same as the default
   }
 `;
 
