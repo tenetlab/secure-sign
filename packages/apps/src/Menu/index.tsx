@@ -22,7 +22,7 @@ const DISCONNECT_KEY = 'walletDisconnected';
 function Menu({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
   const [logo, setLogo] = useState<boolean>(false);
-  const [isConnected, setIsConnected] = useState(() => 
+  const [isConnected, setIsConnected] = useState(() =>
     localStorage.getItem(DISCONNECT_KEY) !== 'true'
   );
 

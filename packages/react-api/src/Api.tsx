@@ -10,7 +10,7 @@ import type { ApiProps, ApiState, InjectedAccountExt } from './types.js';
 
 import { ChopsticksProvider, setStorage } from '@acala-network/chopsticks-core';
 import * as Sc from '@substrate/connect';
-import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import store from 'store';
 
 import { ApiPromise, ScProvider, WsProvider } from '@polkadot/api';
@@ -339,7 +339,7 @@ export function ApiCtxRoot({ apiUrl, children, isElectron, store: keyringStore }
         statics.api.on('ready', (): void => {
           // Check if wallet was explicitly disconnected
           const wasDisconnected = localStorage.getItem(DISCONNECT_KEY) === 'true';
-          
+
           // Only attempt to connect wallet if not explicitly disconnected
           if (!wasDisconnected) {
             const injectedPromise = web3Enable(DAPP_NAME);
