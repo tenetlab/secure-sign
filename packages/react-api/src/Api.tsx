@@ -339,7 +339,7 @@ export function ApiCtxRoot({ apiUrl, children, isElectron, store: keyringStore }
         statics.api.on('ready', (): void => {
           // Check if wallet was explicitly disconnected
           const wasDisconnected = localStorage.getItem(DISCONNECT_KEY) === 'true';
-
+          
           // Only attempt to connect wallet if not explicitly disconnected
           if (!wasDisconnected) {
             const injectedPromise = web3Enable(DAPP_NAME);

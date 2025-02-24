@@ -1,13 +1,14 @@
 // Copyright 2017-2025 @polkadot/apps authors & contributors
 // SPDX-License-Identifier: Apache-2.0
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import { styled } from '@polkadot/react-components';
 import { useApi } from '@polkadot/react-hooks';
-import { web3Enable } from '@polkadot/extension-dapp';
+import { web3Enable, web3AccountsSubscribe } from '@polkadot/extension-dapp';
 import { keyring } from '@polkadot/ui-keyring';
 import { Button } from '@polkadot/react-components';
+import { useToggle } from '@polkadot/react-hooks';
 
 import ChainInfo from './ChainInfo.js';
 import LogoInfo from './LogoInfo.js';
@@ -22,39 +23,87 @@ const DISCONNECT_KEY = 'walletDisconnected';
 function Menu({ className = '' }: Props): React.ReactElement<Props> {
   const apiProps = useApi();
   const [logo, setLogo] = useState<boolean>(false);
-  const [isConnected, setIsConnected] = useState(() =>
+  const [isConnected, setIsConnected] = useState(() => 
     localStorage.getItem(DISCONNECT_KEY) !== 'true'
   );
+  const [isConnecting, toggleIsConnecting] = useToggle(false);
+
+  // Subscribe to account changes
+  useEffect(() => {
+    let unsubscribe: null | (() => void) = null;
+
+    if (isConnected && !localStorage.getItem(DISCONNECT_KEY)) {
+      web3AccountsSubscribe((accounts) => {
+        if (accounts.length > 0) {
+          // Update keyring with the latest accounts
+          accounts.forEach((account) => {
+            if (!keyring.getAccount(account.address)) {
+              keyring.addExternal(account.address, {
+                ...account.meta,
+                name: account.meta.name || `${account.meta.source} ${account.address.slice(0, 8)}`
+              });
+            }
+          });
+        }
+      }).then((unsub) => {
+        unsubscribe = unsub;
+      }).catch(console.error);
+    }
+
+    return () => {
+      unsubscribe && unsubscribe();
+    };
+  }, [isConnected]);
 
   const handleConnect = useCallback(() => {
+    toggleIsConnecting(true);
+    
     web3Enable('polkadot-js/apps')
       .then((injected) => {
         if (injected.length > 0) {
-          setIsConnected(true);
-          localStorage.removeItem(DISCONNECT_KEY);
-          // Reload page to reinitialize with wallet
-          window.location.reload();
+          // Get accounts and add them to keyring
+          web3AccountsSubscribe((accounts) => {
+            if (accounts.length > 0) {
+              accounts.forEach((account) => {
+                try {
+                  keyring.addExternal(account.address, {
+                    ...account.meta,
+                    name: account.meta.name || `${account.meta.source} ${account.address.slice(0, 8)}`
+                  });
+                } catch (e) {
+                  // Account might already exist
+                  console.log('Account may already exist:', e);
+                }
+              });
+              
+              setIsConnected(true);
+              localStorage.removeItem(DISCONNECT_KEY);
+            }
+          }).catch(console.error);
         }
+        toggleIsConnecting(false);
       })
-      .catch(console.error);
-  }, []);
+      .catch((error) => {
+        console.error(error);
+        toggleIsConnecting(false);
+      });
+  }, [toggleIsConnecting]);
 
   const handleDisconnect = useCallback(() => {
-    // Clear all accounts from keyring
+    // Clear all external accounts from keyring
     keyring.getAccounts().forEach((account) => {
-      try {
-        keyring.forgetAccount(account.address);
-      } catch (e) {
-        console.error('Error removing account:', e);
+      if (account.meta.isExternal) {
+        try {
+          keyring.forgetAccount(account.address);
+        } catch (e) {
+          console.error('Error removing account:', e);
+        }
       }
     });
 
     // Update connection state
     setIsConnected(false);
     localStorage.setItem(DISCONNECT_KEY, 'true');
-
-    // Force a page reload to clear any cached account data
-    window.location.reload();
   }, []);
 
   return (
@@ -64,8 +113,11 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
           <LogoInfo logo={logo} />
           <h1 className='menuItems'>SecureSign</h1>
         </div>
-        <div style={{ alignItems: 'center', display: 'flex', textAlign: 'left' }}>
+        <div className='menuControls'>
           <Button
+            className='walletButton'
+            isDisabled={isConnecting}
+            isLoading={isConnecting}
             onClick={isConnected ? handleDisconnect : handleConnect}
           >
             {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
@@ -100,6 +152,17 @@ const StyledDiv = styled.div`
     width: 100%;
     border-radius: 1rem;
     background-color: var(--bg-menubar);
+  }
+
+  .menuControls {
+    align-items: center;
+    display: flex;
+    gap: 0.75rem;
+    text-align: left;
+  }
+
+  .walletButton {
+    margin-right: 0.5rem;
   }
 
   &.isLoading {
@@ -149,7 +212,6 @@ const StyledDiv = styled.div`
   }
 
   @media only screen and (max-width: 800px) {
-
     .smallShow {
       display: initial;
     }
