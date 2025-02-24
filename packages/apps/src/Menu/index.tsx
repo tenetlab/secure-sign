@@ -8,7 +8,6 @@ import { useApi } from '@polkadot/react-hooks';
 import { web3Enable, web3AccountsSubscribe } from '@polkadot/extension-dapp';
 import { keyring } from '@polkadot/ui-keyring';
 import { Button } from '@polkadot/react-components';
-import { useToggle } from '@polkadot/react-hooks';
 
 import ChainInfo from './ChainInfo.js';
 import LogoInfo from './LogoInfo.js';
@@ -26,7 +25,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
   const [isConnected, setIsConnected] = useState(() => 
     localStorage.getItem(DISCONNECT_KEY) !== 'true'
   );
-  const [isConnecting, toggleIsConnecting] = useToggle(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
   // Subscribe to account changes
   useEffect(() => {
@@ -38,10 +37,21 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
           // Update keyring with the latest accounts
           accounts.forEach((account) => {
             if (!keyring.getAccount(account.address)) {
-              keyring.addExternal(account.address, {
-                ...account.meta,
-                name: account.meta.name || `${account.meta.source} ${account.address.slice(0, 8)}`
-              });
+              try {
+                // Fix the genesisHash type issue with proper type assertion
+                const genesisHash = account.meta.genesisHash && 
+                  account.meta.genesisHash.startsWith('0x') 
+                    ? (account.meta.genesisHash as `0x${string}`) 
+                    : null;
+                
+                keyring.addExternal(account.address, {
+                  ...account.meta,
+                  genesisHash,
+                  name: account.meta.name || `${account.meta.source} ${account.address.slice(0, 8)}`
+                });
+              } catch (e) {
+                console.error('Error adding account:', e);
+              }
             }
           });
         }
@@ -56,7 +66,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
   }, [isConnected]);
 
   const handleConnect = useCallback(() => {
-    toggleIsConnecting(true);
+    setIsConnecting(true);
     
     web3Enable('polkadot-js/apps')
       .then((injected) => {
@@ -66,8 +76,15 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
             if (accounts.length > 0) {
               accounts.forEach((account) => {
                 try {
+                  // Fix the genesisHash type issue with proper type assertion
+                  const genesisHash = account.meta.genesisHash && 
+                    account.meta.genesisHash.startsWith('0x') 
+                      ? (account.meta.genesisHash as `0x${string}`) 
+                      : null;
+                  
                   keyring.addExternal(account.address, {
                     ...account.meta,
+                    genesisHash,
                     name: account.meta.name || `${account.meta.source} ${account.address.slice(0, 8)}`
                   });
                 } catch (e) {
@@ -81,13 +98,13 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
             }
           }).catch(console.error);
         }
-        toggleIsConnecting(false);
+        setIsConnecting(false);
       })
       .catch((error) => {
         console.error(error);
-        toggleIsConnecting(false);
+        setIsConnecting(false);
       });
-  }, [toggleIsConnecting]);
+  }, []);
 
   const handleDisconnect = useCallback(() => {
     // Clear all external accounts from keyring
@@ -117,7 +134,7 @@ function Menu({ className = '' }: Props): React.ReactElement<Props> {
           <Button
             className='walletButton'
             isDisabled={isConnecting}
-            isLoading={isConnecting}
+            isBusy={isConnecting}
             onClick={isConnected ? handleDisconnect : handleConnect}
           >
             {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
