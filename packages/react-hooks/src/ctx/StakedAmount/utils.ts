@@ -150,49 +150,12 @@ export async function get_all_stake_out(api: ApiPromise) {
   };
 }
 
-// export async function get_user_total_stake(
-//   api: ApiPromise,
-//   address: string,
-// ): Promise<number> {
-//   const { api_at_block } = await use_last_block(api);
-//   var stake: number = 0;
-
-//   if (api.runtimeChain.toString() == 'commune') {
-//     if (!api_at_block.query?.subspaceModule?.stakeTo) {
-//       throw new Error("StakeTo query not available");
-//     }
-//   }
-//   else if (api.runtimeChain.toString() == 'Bittensor') {
-//     if (!api_at_block.query?.subtensorModule?.totalColdkeyStake) {
-//       throw new Error("Stake query not available");
-//     }
-//   }
-
-//   switch (api.runtimeChain.toString()) {
-//     case 'commune':
-//       const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
-//       stake = stakeEntries.reduce((acc, [, value]) => {
-//         return acc + parseInt(value.toString());
-//       }, 0)
-//       break;
-
-//     case 'Bittensor':
-//       stake = parseInt((await api.query?.subtensorModule?.totalColdkeyStake(address)).toString());
-//       break;
-
-//     default:
-//       break;
-//   }
-
-//   return stake;
-// }
-
 export async function get_user_total_stake(
   api: ApiPromise,
   address: string,
-): Promise<bigint> {
+): Promise<number> {
   const { api_at_block } = await use_last_block(api);
-  var stake: bigint = 0n;
+  var stake: number = 0;
 
   if (api.runtimeChain.toString() == 'commune') {
     if (!api_at_block.query?.subspaceModule?.stakeTo) {
@@ -204,13 +167,12 @@ export async function get_user_total_stake(
     case 'commune':
       const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
       stake = stakeEntries.reduce((acc, [, value]) => {
-        return acc + BigInt(value.toString());
-      }, BigInt(0))
+        return acc + parseInt(value.toString());
+      }, 0)
       break;
 
     case 'bittensor':
       const delegates = await api.call.delegateInfoRuntimeApi.getDelegated(address).then(res => res.toJSON());
-
       let stakeAmount = 0;
     
       if (!Array.isArray(delegates)) {
@@ -227,7 +189,7 @@ export async function get_user_total_stake(
         }
       }
 
-      stake = BigInt(Math.floor(stakeAmount));
+      stake = Math.floor(stakeAmount);
       break;
 
     default:

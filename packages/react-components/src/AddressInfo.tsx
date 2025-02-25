@@ -603,7 +603,7 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
       const bondedAmount = await get_user_total_stake(api, props.address);
 
       if (bondedAmount !== undefined) {
-        setStakedAmount(bondedAmount);
+        setStakedAmount(BigInt(bondedAmount));
       }
       // if (apiEndpoint.runtimeChain.toString() == 'commune') {
       //   const bondedAmount = await get_user_total_stake(api, props.address);
