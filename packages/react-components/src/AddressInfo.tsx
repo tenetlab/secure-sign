@@ -596,14 +596,14 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
     'vesting ': t('via Vesting')
   });
 
-  const { api, get_user_stake_on_dtao } = usePolkadot();
+  const { api, get_user_total_stake } = usePolkadot();
 
   async function setBondedAmount () {
     if (api) {
-      const bondedAmount = await get_user_stake_on_dtao(api, props.address);
+      const bondedAmount = await get_user_total_stake(api, props.address);
 
       if (bondedAmount !== undefined) {
-        setStakedAmount(BigInt(bondedAmount));
+        setStakedAmount(bondedAmount);
       }
       // if (apiEndpoint.runtimeChain.toString() == 'commune') {
       //   const bondedAmount = await get_user_total_stake(api, props.address);

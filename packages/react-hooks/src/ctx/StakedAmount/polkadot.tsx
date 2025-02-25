@@ -9,7 +9,7 @@ import { type InjectedAccountWithMeta } from '@polkadot/extension-inject/types';
 import { type DispatchError } from '@polkadot/types/interfaces';
 
 import { type PolkadotApiState, type PolkadotProviderProps, type Staking, type Transfer, type TransferStake } from './types.js';
-import { calculate_amount, get_balance, get_user_total_stake, get_user_stake_on_dtao } from './utils.js';
+import { calculate_amount, get_balance, get_user_total_stake } from './utils.js';
 
 interface PolkadotContextType {
   api: ApiPromise | null;
@@ -24,11 +24,10 @@ interface PolkadotContextType {
 
   blockNumber: number;
   // stakeData: StakeData | null;
-  userTotalStake: number;
+  userTotalStake: bigint;
 
   // handleConnect: () => void;
-  get_user_total_stake: (api: ApiPromise, address: string) => Promise<number>
-  get_user_stake_on_dtao: (api: ApiPromise, address: string) => Promise<number>
+  get_user_total_stake: (api: ApiPromise, address: string) => Promise<bigint>
 
   transfer: (args: Transfer) => void;
   transferStake: (args: TransferStake) => void;
@@ -64,7 +63,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({ children,
 
   // const [stakeData, setStakeData] = useState<StakeData | null>(null);
   const [blockNumber, setBlockNumber] = useState(0);
-  const [userTotalStake, setUserTotalStake] = useState<number>(0);
+  const [userTotalStake, setUserTotalStake] = useState<bigint>(0n);
 
   async function loadPolkadotApi () {
     const { web3Accounts, web3Enable, web3FromAddress } = await import(
@@ -455,7 +454,6 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({ children,
         userTotalStake,
 
         get_user_total_stake,
-        get_user_stake_on_dtao,
 
         transfer,
         transferStake,
