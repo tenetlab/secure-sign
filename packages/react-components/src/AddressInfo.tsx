@@ -596,8 +596,7 @@ function AddressInfo (props: Props): React.ReactElement<Props> {
     'vesting ': t('via Vesting')
   });
 
-  const { api,
-    get_user_total_stake } = usePolkadot();
+  const { api, get_user_total_stake } = usePolkadot();
 
   async function setBondedAmount () {
     if (api) {

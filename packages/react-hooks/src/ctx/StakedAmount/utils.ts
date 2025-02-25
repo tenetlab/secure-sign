@@ -157,27 +157,41 @@ export async function get_user_total_stake(
   const { api_at_block } = await use_last_block(api);
   var stake: number = 0;
 
-  if (api.runtimeChain.toString() == 'commune') {
-    if (!api_at_block.query?.subspaceModule?.stakeTo) {
-      throw new Error("StakeTo query not available");
-    }
-  }
-  else if (api.runtimeChain.toString() == 'Bittensor') {
-    if (!api_at_block.query?.subtensorModule?.totalColdkeyStake) {
-      throw new Error("Stake query not available");
-    }
-  }
-
-  switch (api.runtimeChain.toString()) {
+  switch (api.runtimeChain.toString().toLowerCase()) {
     case 'commune':
+      if (!api_at_block.query?.subspaceModule?.stakeTo) {
+        throw new Error("StakeTo query not available");
+      }
+    
       const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
       stake = stakeEntries.reduce((acc, [, value]) => {
         return acc + parseInt(value.toString());
       }, 0)
       break;
 
-    case 'Bittensor':
-      stake = parseInt((await api.query?.subtensorModule?.totalColdkeyStake(address)).toString());
+    case 'bittensor':
+      if (!api_at_block.call?.delegateInfoRuntimeApi?.getDelegated) {
+        throw new Error("GetDelegated query not available");
+      }
+
+      const delegates = await api_at_block.call.delegateInfoRuntimeApi.getDelegated(address).then(res => res.toJSON());
+      let stakeAmount = 0;
+    
+      if (!Array.isArray(delegates)) {
+        throw new Error("Expected Delegates to be an array");
+      }
+    
+      for ( const delegate of delegates ) {
+        if (Array.isArray(delegate) && delegate.length > 1 && Array.isArray(delegate[1]) && delegate[1].length > 1) {
+          const value = delegate[1][1];
+          if ( value !== null && value !== undefined )
+            stakeAmount += Number(value);
+        } else {
+          throw new Error("Delegate is not in the expected format");
+        }
+      }
+
+      stake = Math.floor(stakeAmount);
       break;
 
     default:
