@@ -3,8 +3,7 @@
 
 import type { EndpointOption } from './types.js';
 
-import { chainsBittensorPNG, chainsCommuneaiPNG } from '../ui/logos/chains/index.js';
-import { nodesCompetitorsClubPNG } from '../ui/logos/nodes/index.js';
+import { chainsBittensorPNG, chainsCommuneaiPNG, chainsTorusPNG } from '../ui/logos/chains/index.js';
 
 export * from './productionRelayKusama.js';
 export * from './productionRelayPolkadot.js';
@@ -42,13 +41,14 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
     }
   },
   {
-    info: 'competitors-club',
+    info: 'torus',
     providers: {
+      mainnet: 'wss://api.torus.network'
     },
-    text: 'Competitors Club',
+    text: 'Torus',
     ui: {
-      color: '#213830',
-      logo: nodesCompetitorsClubPNG
+      color: '#070A0E',
+      logo: chainsTorusPNG
     }
   }
 ];
