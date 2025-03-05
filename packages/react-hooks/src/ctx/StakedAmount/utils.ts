@@ -153,9 +153,9 @@ export async function get_all_stake_out(api: ApiPromise) {
 export async function get_user_total_stake(
   api: ApiPromise,
   address: string,
-): Promise<number> {
+): Promise<bigint> {
   const { api_at_block } = await use_last_block(api);
-  var stake: number = 0;
+  var stake: bigint = 0n;
 
   switch (api.runtimeChain.toString().toLowerCase()) {
     case 'commune':
@@ -165,8 +165,8 @@ export async function get_user_total_stake(
     
       const stakeEntries = await api_at_block.query?.subspaceModule?.stakeTo?.entries(address)
       stake = stakeEntries.reduce((acc, [, value]) => {
-        return acc + parseInt(value.toString());
-      }, 0)
+        return acc + BigInt(value.toString());
+      }, BigInt(0))
       break;
 
     case 'bittensor':
@@ -191,7 +191,7 @@ export async function get_user_total_stake(
         }
       }
 
-      stake = Math.floor(stakeAmount);
+      stake = BigInt(Math.floor(stakeAmount));
       break;
 
     default:

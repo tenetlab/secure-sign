@@ -24,10 +24,10 @@ interface PolkadotContextType {
 
   blockNumber: number;
   // stakeData: StakeData | null;
-  userTotalStake: number;
+  userTotalStake: bigint;
 
   // handleConnect: () => void;
-  get_user_total_stake: (api: ApiPromise, address: string) => Promise<number>
+  get_user_total_stake: (api: ApiPromise, address: string) => Promise<bigint>
 
   transfer: (args: Transfer) => void;
   transferStake: (args: TransferStake) => void;
@@ -63,7 +63,7 @@ export const PolkadotProvider: React.FC<PolkadotProviderProps> = ({ children,
 
   // const [stakeData, setStakeData] = useState<StakeData | null>(null);
   const [blockNumber, setBlockNumber] = useState(0);
-  const [userTotalStake, setUserTotalStake] = useState<number>(0);
+  const [userTotalStake, setUserTotalStake] = useState<bigint>(0n);
 
   async function loadPolkadotApi () {
     const { web3Accounts, web3Enable, web3FromAddress } = await import(
