@@ -1,5 +1,4 @@
 import {
-    numberToBigInt,
     bigIntToNumber,
     numberToString,
     stringToNumber,
@@ -8,14 +7,6 @@ import {
 } from './conversionUtils';
 
 describe('Conversion Utilities', () => {
-    test('numberToBigInt converts safe integer to BigInt', () => {
-        expect(numberToBigInt(10)).toBe(BigInt(10));
-    });
-
-    test('numberToBigInt throws error for unsafe integer', () => {
-        expect(() => numberToBigInt(Number.MAX_SAFE_INTEGER + 1)).toThrow("Number is not a safe integer and may lose precision.");
-    });
-
     test('bigIntToNumber converts BigInt to number', () => {
         expect(bigIntToNumber(BigInt(10))).toBe(10);
     });

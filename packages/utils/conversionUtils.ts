@@ -1,17 +1,4 @@
 /**
- * Converts a number to BigInt safely.
- * @param num The number to convert.
- * @returns A BigInt representation of the number.
- * @throws Error if the number is not a safe integer.
- */
-export function numberToBigInt(num: number): bigint {
-    if (!Number.isSafeInteger(num)) {
-      throw new Error("Number is not a safe integer and may lose precision.");
-    }
-    return BigInt(num);
-}
-
-/**
  * Converts a BigInt to number safely.
  * @param bigIntValue The BigInt to convert.
  * @returns A number representation of the BigInt.
